@@ -1,0 +1,53 @@
+\documentclass[12pt, oneside]{article}
+\usepackage{amsmath}
+\usepackage{datetime}
+\usepackage{todonotes}
+\usepackage{subfiles}
+\usepackage[toc, page]{appendix}
+\usepackage{tikz,fullpage}
+\usepackage[export]{adjustbox}
+\usetikzlibrary{tikzmark}
+\usepackage[backend=biber, style=bibstyle/lncs]{biblatex}
+\addbibresource{sources.bib}
+\renewcommand{\familydefault}{\sfdefault}
+
+
+\title{FPGA-on-FPGA emulation}
+\author{Pim van Leeuwen}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+
+\begin{abstract}
+FPGAs allow reconfiguration of its logic at any point after production. The result is that they are effective at prototyping application-specific integrated circuits, updating the internal logic while in the field and at low-cost low-quantity use cases. To optimise these processes, it is crucial to properly educate engineers in the implementation of FPGA programs and the FPGA compilation process. Traditional FPGA programming pipelines involve a computationally expensive (NP-hard) place \& route process that slows down iterations of FPGA programs and hinders the educational process. We propose a virtual environment in which place \& route is performed manually in which the student learns about the intricacies of place \& route and in which compilation is linear. To this end, we require emulation of a virtual FPGA on a physical, concrete FPGA. In the proposed research, we find such an emulation using an algorithm that solves a variant of subgraph isomorphism. This algorithm aims to find emulations in as many cases as possible and to exploit the hierarchy of FPGAs to speed up computation. The expected result is a software package that computes emulators which each output a program for a concrete FPGA provided with a program for a virtual FPGA.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\include{sections/Introduction/Introduction}
+\include{sections/Background/Background}
+\include{sections/Models/Models}
+\include{sections/Preliminaries/Preliminaries}
+\include{sections/Algorithm/Algorithm}
+\include{sections/Experiments/Experiments}
+\include{sections/Software/Software}
+\include{sections/Conclusion/Conclusion}
+\include{sections/Discussion/Discussion}
+\include{sections/FutureResearch/FutureResearch}
+
+
+\begin{appendices}
+\section{History of subgraph isomorphism algorithms}
+\label{app:algorithmHistory}
+\adjincludegraphics[width=\textwidth, trim={0 {.555\height} 0 0},clip]{images/algorithmhistory.png}
+\adjincludegraphics[width=\textwidth, trim={0 0 0 {.445\height}},clip]{images/algorithmhistory.png}
+\end{appendices}
+
+\newpage
+\printbibliography
+
+\end{document}

@@ -1,0 +1,56 @@
+\section{Models}
+\subsection{FPGA}
+Our algorithm will generate an emulation using path subgraph isomorphism. To this end, we will model FPGA designs as graphs. For this purpose, let us define the type $hierarchygraph : (V, E, L, H)$ where $V$ is a set of vertices, $E\subseteq (V \times V)$ is a set of undirected edges, $L$ is a vertex labeling function $V \to \lambda$ where $\lambda$ is a finite set of labels and $H$ describes the hierarchy with a relation $V \to hierarchygraph$. We restrict ourselves to graphs without loops, i.e. $\not \exists v \in V . (v, v) \in E$. Let $model(B)$ be the $hierarchygraph$ model of (a subset of) an FPGA layout $B$. Then:
+
+\begin{itemize}
+\item Whenever $B$ has a connection to external hardware (e.g. a pin) with an optional identifier $k$ where order is relevant, $model(B)$ has an edge to a distinct vertex $v$ and $L(v)=``port\_out_k"$.
+
+\item Each component that is one step lower than $B$ in the FPGA hierarchy (e.g. CLBs) corresponds to a distinct vertex $v$ such that $L(v)=``component"$ and with a set of vertices $S$ with optional identifiers such that $\forall s \in S . L(s)=``port\_in_{id(s)}" \land (s,v) \in E$. Furthermore, the contents of this component are recursively defined in $H(v)$.
+
+\item Whenever $B$ has a routing switch, $model(B)$ has a distinct vertex $v$ and $L(v)=``switch"$.
+
+\item Whenever $B$ has a mux with $n$ wires for each input and for its output, $model(B)$ has distinct vertices $\{v_{left, 1} \dots v_{left, n}\} \cup \{v_{right, 1} \dots v_{right, n}\} \cup \{v_{out, 1} \dots v_{out, n}\} \cup \{v_{select}\}$ where:
+
+\begingroup
+\setlength{\tabcolsep}{2pt} % Default value: 6pt
+\begin{tabular}{llllll}
+$\forall v_{left, i}$ & $\in \{v_{left, 1} \dots v_{left, n}\}$ & $. L(v_{left, i}$&$= ``mux\_left_i"$&$\land (v_{left, i}$&$, v_{select}) \in E$,\\
+$\forall v_{right, i}$ & $\in \{v_{right, 1} \dots v_{right, n}\}$ & $. L(v_{right, i})$&$= ``mux\_right_i"$&$\land (v_{right, i}$&$, v_{select}) \in E$,\\
+$\forall v_{out, i}$ & $\in \{v_{out, 1} \dots v_{out, n}\}$ & $. L(v_{out, i}) $&$= ``mux\_out_i"$&$\land (v_{out, i}$&$, v_{select}) \in E$ and
+\end{tabular}
+\endgroup
+
+$L(v_{select})=``mux\_select"$
+
+Whenever something is connected to input or output of the mux in $B$, $model(B)$ has an edge to the corresponding vertex $v \in \{v_{left, 1} \dots v_{left, n}\} \cup \{v_{right, 1} \dots v_{right, n}\} \cup \{v_{out, 1} \dots v_{out, n}\}$. Furthermore, if $B$ has a wire to the selection input, $model(B)$ has an edge to the vertex $v_{select}$.
+
+\item Each LUT that has $n$ inputs and $m$ outputs corresponds to\todo{change to $model(B)$} unique vertices $v_{in}$ and $v_{out}$ such that $L(v_{in})=``lut_{in}"$, $L(v_{out})=``lut_{out}"$ and $(v_{in}, v_{out}) \in E$. Wires to the input of the LUT correspond with edges to $v_{in}$ whilst wires from the output of the LUT correspond with edges from $v_{out}$.
+
+\item Each register that has $n$ inputs corresponds\todo{change to $model(B)$} to:
+
+$\{v_{in, 1} \dots v_{in, n}\} \cup \{v_{out, 1} \dots v_{out, n}\} \cup \{v_{set}, v_{resetsync}, v_{resetasync}\}$ where
+
+\begingroup
+\setlength{\tabcolsep}{2pt} % Default value: 6pt
+\begin{tabular}{llllll}
+$\forall v_{in, i}$ & $\in \{v_{in, 1} \dots v_{in, n}\}$ & $. L(v_{in, i})$&$=``register\_in_i"$&$\land (v_{in, i}, v_{set})$&$\in E$, \\
+$\forall v_{out, i}$ & $\in \{v_{out, 1} \dots v_{out, n}\}$ & $. L(v_{out, i})$&$=``register\_out_i"$&$\land (v_{out, i}, v_{set})$&$\in E$, \\
+\end{tabular}
+\endgroup
+
+$L(v_{set})=``register\_set"$,
+
+\begingroup
+\setlength{\tabcolsep}{2pt} % Default value: 6pt
+\begin{tabular}{llll}
+$L(v_{resetsync})$&$=``register\_reset\_sync"$&$\land (v_{set}, v_{resetsync}) $&$\in E$ and\\
+$L(v_{resetasync})$&$=``register\_resFet\_async"$&$\land (v_{set}, v_{resetasync}) $&$\in E$.
+\end{tabular}
+\endgroup
+
+A connection to an input of the register at wire position $x$ corresponds with\todo{change to $model(B)$} an edge to $v_{in, x}$. Similarly, a connection to an output of the register at wire position $x$ corresponds with\todo{change to $model(B)$} an edge to $v_{out, x}$. Connections to the set-, synchronous reset and asynchronous reset gates in the FPGA correspond to\todo{change to $model(B)$} edges to the respective vertex in $\{v_{set}, v_{resetsync}, v_{resetasync}\}$.
+ 
+
+\item Each connection by wire corresponds to\todo{change to $model(B)$} an edge.
+\end{itemize}
+\subsection{FPGA program}

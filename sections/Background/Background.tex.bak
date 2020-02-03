@@ -1,0 +1,9 @@
+\section{Background}
+\subsection{Field Programmable Gate Arrays}
+\subsubsection{Lookup tables}
+\subsubsection{Registers}
+\subsubsection{Logic Cells}
+\subsubsection{Routing}
+\subsubsection{Compilation}
+\subsection{Simulation versus Emulation}
+\subsection{Path subgraph isomorphism}
