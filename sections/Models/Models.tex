@@ -1,56 +1,382 @@
 \section{Models}
 \subsection{FPGA}
-Our algorithm will generate an emulation using path subgraph isomorphism. To this end, we will model FPGA designs as graphs. For this purpose, let us define the type $hierarchygraph : (V, E, L, H)$ where $V$ is a set of vertices, $E\subseteq (V \times V)$ is a set of undirected edges, $L$ is a vertex labeling function $V \to \lambda$ where $\lambda$ is a finite set of labels and $H$ describes the hierarchy with a relation $V \to hierarchygraph$. We restrict ourselves to graphs without loops, i.e. $\not \exists v \in V . (v, v) \in E$. Let $model(B)$ be the $hierarchygraph$ model of (a subset of) an FPGA layout $B$. Then:
+Our algorithm will generate an emulation using path subgraph isomorphism. To this end, we will model FPGA designs as graphs. For this purpose, let us define the type $hierarchygraph$.
+
+
+\begin{defn}
+A $hierarchygraph$ is a structure $\subseteq (V, E, L, H, C)$ where:
 
 \begin{itemize}
-\item Whenever $B$ has a connection to external hardware (e.g. a pin) with an optional identifier $k$ where order is relevant, $model(B)$ has an edge to a distinct vertex $v$ and $L(v)=``port\_out_k"$.
-
-\item Each component that is one step lower than $B$ in the FPGA hierarchy (e.g. CLBs) corresponds to a distinct vertex $v$ such that $L(v)=``component"$ and with a set of vertices $S$ with optional identifiers such that $\forall s \in S . L(s)=``port\_in_{id(s)}" \land (s,v) \in E$. Furthermore, the contents of this component are recursively defined in $H(v)$.
-
-\item Whenever $B$ has a routing switch, $model(B)$ has a distinct vertex $v$ and $L(v)=``switch"$.
-
-\item Whenever $B$ has a mux with $n$ wires for each input and for its output, $model(B)$ has distinct vertices $\{v_{left, 1} \dots v_{left, n}\} \cup \{v_{right, 1} \dots v_{right, n}\} \cup \{v_{out, 1} \dots v_{out, n}\} \cup \{v_{select}\}$ where:
-
-\begingroup
-\setlength{\tabcolsep}{2pt} % Default value: 6pt
-\begin{tabular}{llllll}
-$\forall v_{left, i}$ & $\in \{v_{left, 1} \dots v_{left, n}\}$ & $. L(v_{left, i}$&$= ``mux\_left_i"$&$\land (v_{left, i}$&$, v_{select}) \in E$,\\
-$\forall v_{right, i}$ & $\in \{v_{right, 1} \dots v_{right, n}\}$ & $. L(v_{right, i})$&$= ``mux\_right_i"$&$\land (v_{right, i}$&$, v_{select}) \in E$,\\
-$\forall v_{out, i}$ & $\in \{v_{out, 1} \dots v_{out, n}\}$ & $. L(v_{out, i}) $&$= ``mux\_out_i"$&$\land (v_{out, i}$&$, v_{select}) \in E$ and
-\end{tabular}
-\endgroup
-
-$L(v_{select})=``mux\_select"$
-
-Whenever something is connected to input or output of the mux in $B$, $model(B)$ has an edge to the corresponding vertex $v \in \{v_{left, 1} \dots v_{left, n}\} \cup \{v_{right, 1} \dots v_{right, n}\} \cup \{v_{out, 1} \dots v_{out, n}\}$. Furthermore, if $B$ has a wire to the selection input, $model(B)$ has an edge to the vertex $v_{select}$.
-
-\item Each LUT that has $n$ inputs and $m$ outputs corresponds to\todo{change to $model(B)$} unique vertices $v_{in}$ and $v_{out}$ such that $L(v_{in})=``lut_{in}"$, $L(v_{out})=``lut_{out}"$ and $(v_{in}, v_{out}) \in E$. Wires to the input of the LUT correspond with edges to $v_{in}$ whilst wires from the output of the LUT correspond with edges from $v_{out}$.
-
-\item Each register that has $n$ inputs corresponds\todo{change to $model(B)$} to:
-
-$\{v_{in, 1} \dots v_{in, n}\} \cup \{v_{out, 1} \dots v_{out, n}\} \cup \{v_{set}, v_{resetsync}, v_{resetasync}\}$ where
-
-\begingroup
-\setlength{\tabcolsep}{2pt} % Default value: 6pt
-\begin{tabular}{llllll}
-$\forall v_{in, i}$ & $\in \{v_{in, 1} \dots v_{in, n}\}$ & $. L(v_{in, i})$&$=``register\_in_i"$&$\land (v_{in, i}, v_{set})$&$\in E$, \\
-$\forall v_{out, i}$ & $\in \{v_{out, 1} \dots v_{out, n}\}$ & $. L(v_{out, i})$&$=``register\_out_i"$&$\land (v_{out, i}, v_{set})$&$\in E$, \\
-\end{tabular}
-\endgroup
-
-$L(v_{set})=``register\_set"$,
-
-\begingroup
-\setlength{\tabcolsep}{2pt} % Default value: 6pt
-\begin{tabular}{llll}
-$L(v_{resetsync})$&$=``register\_reset\_sync"$&$\land (v_{set}, v_{resetsync}) $&$\in E$ and\\
-$L(v_{resetasync})$&$=``register\_resFet\_async"$&$\land (v_{set}, v_{resetasync}) $&$\in E$.
-\end{tabular}
-\endgroup
-
-A connection to an input of the register at wire position $x$ corresponds with\todo{change to $model(B)$} an edge to $v_{in, x}$. Similarly, a connection to an output of the register at wire position $x$ corresponds with\todo{change to $model(B)$} an edge to $v_{out, x}$. Connections to the set-, synchronous reset and asynchronous reset gates in the FPGA correspond to\todo{change to $model(B)$} edges to the respective vertex in $\{v_{set}, v_{resetsync}, v_{resetasync}\}$.
- 
-
-\item Each connection by wire corresponds to\todo{change to $model(B)$} an edge.
+\item $V$ is a set of vertices.
+\item $E\subseteq (V \times V)$ is a set of undirected edges without loops, i.e. $\not \exists v \in V . (v, v) \in E$.
+\item $L$ is a vertex multilabeling function $V \to P(\lambda)$ where $P(\lambda)$ is the power set of a finite set of labels $\lambda$.
+\item $H \subseteq(V \times G)$ where $G$ is the set of all $hierarchygraphs$. This describes the hierarchy of an FPGA.
+\item $C \subseteq (V \times V_H)$ where $V_H$ is the union of the vertex sets of $hierarchygraphs$ in $H$. This allows us to separate different wires coming out of a hierarchical component of the FPGA by linking them with vertices in the $hierarchygraph$ definition of that component.
 \end{itemize}
+\end{defn}
+
+
+\begin{defn}
+Let $model(B)$ be a $hierarchygraph$ model of (a subset of) an FPGA layout $B$ such that:
+
+\begin{itemize}
+\item For each pin in $B$, $model(B)$ has a vertex $v$ such that $L(v)=\{``pin"\}$.
+
+\item For each routing switch in $B$, $model(B)$ has a vertex $v$ such that $L(v)=\{``switch"\}$.
+
+\item For each component in $B$ that is one step lower than $B$ in the FPGA hierarchy (e.g. CLBs), $model(B)$ has a distinct vertex $v$ such that $L(v)=\{``component"\}$ and a set of vertices $S$ such that $\forall s \in S . L(s) = \{``port"\} \land (s,v) \in E$. Furthermore, the contents of this component are recursively defined in $H(v)$ such that ports are linked:
+
+ $\forall s \in S . \exists w \in (H(v).V) . (s, w) \in C$.
+ 
+ Furthermore, this link is unique, i.e.:
+ 
+ %$\forall s_1, s_2 \in S. \forall w \in (H(w).V). ((s_1,w) \in C \land (s_2, w) \in C) \to s_1=s_2$ Not this, since a component may be used multiple times
+ 
+  $\forall w_1, w_2 \in (H(w).V). \forall s \in S . ((s,w_1) \in C \land (s, w_2) \in C) \to w_1=w_2$
+
+%---------------------------
+%---------------------------
+%         MUX
+%---------------------------
+%---------------------------
+\item For each mux with $n$ wires for each input and for its output in $B$, $model(B)$ has a distinct vertex $v$ such that $L(v)=\{``component"\}$ and a set of vertices $S$ such that $|S|=3n+1$.
+
+
+$\forall s_i \in S. L(s_i)=\{``port"\} \land (v, s_i) \in E$
+
+$H(v) = (V_{mux}, E_{mux}, L_{mux}, \emptyset, \emptyset)$ where:
+
+\begin{tabular}{lllll}
+$V_{mux} = $ &  \multicolumn{4}{l}{$\{v_{left, 1} \dots v_{left, n}\} \cup \{v_{right, 1} \dots v_{right, n}\} \cup \{v_{out, 1} \dots v_{out, n}\} \cup \{v_{left}, v_{right}\}$}\\
+
+$E_{mux} = $ & $\{(v_{left, i}, v_{left})$&$: v_{left, i}$&$\in \{v_{left, 1} \dots v_{left, n}\}\}$ & $\cup$\\
+
+& $\{(v_{right, i}, v_{right})$&$: v_{right, i}$&$\in \{v_{right, 1} \dots v_{right, n}\}\}$ & $\cup$\\
+& $\{(v_{left, i}, v_{out, i})$&$: v_{left, i}$&$\in \{v_{left, 1} \dots v_{left, n}\}\}$ & $\cup$\\
+& $\{(v_{right, i}, v_{out, i})$&$: v_{right, i}$&$\in \{v_{right, 1} \dots v_{right, n}\}\}$ &\\
+\end{tabular}
+
+\begin{tabular}{llllll}
+$L_{mux} = $ & $\{(v_{left, i}$&$, \{``in"\})$&$: v_{left, i}$&$\in \{v_{left, 1} \dots v_{left, n}\}\}$ & $\cup$\\
+& $\{(v_{right, i}$&$, \{``in"\})$&$: v_{right, i}$&$\in \{v_{right, 1} \dots v_{right, n}\}\}$ & $\cup$\\
+& $\{(v_{out, i}$&$, \{``out"\}) $&$: v_{out, i}$&$\in \{v_{out, 1} \dots v_{out, n}\}\}$ & $\cup$\\
+& $\{(v_{left}$&\multicolumn{3}{l}{$, \{``mux"\}),  (v_{right} , \{``mux"\})\}$} &\\
+\end{tabular}
+
+\tikzstyle{graphnode} = [circle, minimum width=1.5cm, minimum height=1.5cm,text centered, draw=black]
+
+\begin{figure}
+\centering
+\begin{adjustbox}{width=0.8\textwidth}
+\begin{tikzpicture}
+\draw (-4, 4) node[graphnode] (in1){in};
+\draw (-4, 2) node[graphnode] (in2){in};
+\draw (-4, 0) node[graphnode] (select) {select};
+\draw (-4, -2) node[graphnode] (in3) {in};
+\draw (-4, -4) node[graphnode] (in4) {in};
+
+\draw (0, 4) node[graphnode, fill=gray!60] (mux1) {mux};
+\draw (0, -4) node[graphnode, fill=gray!60] (mux2) {mux};
+
+\draw (4, 1) node[graphnode] (out1) {out};
+\draw (4, -1) node[graphnode] (out2) {out};
+
+
+\draw (in1)--(mux1);
+\draw (in2)--(mux1);
+\draw (in1)--(out1);
+\draw (in2)--(out2);
+%\draw (mux1)--(out1);
+%\draw (mux1)--(out2);
+
+\draw (in3)--(mux2);
+\draw (in4)--(mux2);
+\draw (in3)--(out1);
+\draw (in4)--(out2);
+%\draw (mux2)--(out1);
+%\draw (mux2)--(out2);
+
+%\draw (select)--(mux1);
+%\draw (select)--(mux2);
+%\draw (mux1)--(mux2);
+%-------------------------------------
+\draw (-10,0)       node [graphnode, fill=gray!60] (component) {component};
+\draw (-7.5, 2.5)   node [graphnode] (p1) {port};
+\draw (-7.5, -2.5)  node [graphnode] (p2) {port};
+\draw (-10, 2.5)    node [graphnode] (p3) {port};
+\draw (-10, -2.5)    node [graphnode] (p4) {port};
+\draw (-12.5, 2.5)  node [graphnode] (p5) {port};
+\draw (-12.5, -2.5) node [graphnode] (p6) {port};
+\draw (-7.5, 0)     node [graphnode] (p7) {port};
+
+\draw (component)--(p1);
+\draw (component)--(p2);
+\draw (component)--(p3);
+\draw (component)--(p4);
+\draw (component)--(p5);
+\draw (component)--(p6);
+\draw (component)--(p7);
+
+%-------------------
+\draw (-5.75, 5)--(-5.75, -5);
+%-------------------
+\draw[dotted] (p5).. controls (  -10, 4)..(in1);
+\draw[dotted] (p1).. controls (-5.75, 3)..(in2);
+\draw[dotted] (p2).. controls (-5.75,-3)..(in3);
+\draw[dotted] (p6).. controls (  -10,-4)..(in4);
+\draw[dotted] (p7)--(select);
+\draw[dotted] (p3).. controls ( -7.5, 4)..(out1);
+\draw[dotted] (p4).. controls ( -7.5,-4)..(out2);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{How a 2-wire mux is represented in $model(B)$ (left) in terms of vertex $v$ with $L(v)=``component"$, port vertices and edges, and the $hierarchygraph$ $H(v)$ (right) storing the internal details of the mux. Dashed lines indicate the relation $C$ that links the vertices representing outgoing wires. Vertex labels are shown as text.}
+\label{fig:model:mux}
+\end{figure}
+Lastly, the relation $C$ contains a link from nodes in the FPGA $hierarchygraph$ to nodes in the mux $hierarchygraph$, i.e. $\forall s \in S . \exists w \in V_{mux} . (s, w) \in C$.
+The model of a mux is illustrated in Figure \ref{fig:model:mux}.
+
+%---------------------------
+%---------------------------
+%         LUT
+%---------------------------
+%---------------------------
+\item For each LUT in $B$ with $n$ inputs and $m$ outputs, $model(B)$ has a distinct vertex $v$ such that $L(v)=\{``component"\}$ and a set of vertices $S$ such that $|S|=n+m$.
+
+$\forall s \in S. L(s)=\{``port" : i \in \{1 \dots n\}\} \land (v, s) \in E$\\
+
+$H(v) = (V_{lut}, E_{lut}, L_{lut}, \emptyset, \emptyset)$ where:
+
+\begin{tabular}{l}
+$V_{lut}=\{v_{in, 1} \dots v_{in, n}\} \cup \{v_{out, 1} \dots v_{out, m}\} \cup \{v_{left}, v_{right}\}$\\
+\end{tabular}
+
+\begin{tabular}{lll}
+$E_{lut}=$&$\{(v_{in, i}, v_{left})$&$: v_{in, i} \in \{v_{in, 1} \dots v_{in, n}\}\} \cup$\\
+
+&$\{(v_{in, i}, v_{right})$&$: v_{in, i} \in \{v_{in, 1} \dots v_{in, n}\}\} \cup$\\
+
+&$\{(v_{in, i}, v_{out, j})$&$: v_{in, i} \in \{v_{in, 1} \dots v_{in, n}\}, v_{out, j} \in \{v_{out, 1} \dots v_{out, m}\}\}$\\
+
+\end{tabular}
+
+\begin{tabular}{llll}
+$L_{lut}=$&$\{(v_{in, i}, \{``in", ``select"\})$&$: v_{in, i} \in \{v_{in, 1} \dots v_{in, n}\}\}$&$\cup$\\
+&$\{(v_{out, i}, \{``out"\})$&$: v_{out, i} \in \{v_{out, 1} \dots v_{out, m}\}\}$&$\cup$\\
+&$\{(v_{left}, \{``in", ``select"\})\}$&$\cup$&\\
+&\multicolumn{2}{l}{$\{(v_{right}, \{``in", ``select"\})\}$}&\\
+\end{tabular}
+
+Lastly, the relation $C$ contains a link from nodes in the FPGA $hierarchygraph$ to nodes in the lut $hierarchygraph$, i.e. $\forall s \in S . \exists w \in V_{lut} . (s, w) \in C$.
+The model of a lut is illustrated in Figure \ref{fig:model:lut}.
+
+% distinct vertices $v_{in}$ and $v_{out}$ such that $L(v_{in})=``lut_{in}"$, $L(v_{out})=``lut_{out}"$ and $(v_{in}, v_{out}) \in E$. Wires to the input of the LUT in $B$ correspond with edges to $v_{in}$ in $model(B)$ whilst wires from the output of the LUT in $B$ correspond with edges from $v_{out}$ in $model(B)$.
+ 
+ \begin{figure}
+\centering
+\begin{adjustbox}{width=0.8\textwidth}
+\begin{tikzpicture}
+\draw (-4, 4) node[graphnode, text width=1cm] (in1){in, select};
+\draw (-4, 2) node[graphnode, text width=1cm] (in2){in, select};
+\draw (-4, 0) node[graphnode, text width=1cm] (in3) {in, select};
+\draw (-4, -2) node[graphnode, text width=1cm] (in4) {in, select};
+\draw (-4, -4) node[graphnode, text width=1cm] (in5) {in, select};
+
+\draw (0, 4) node[graphnode, fill=gray!60, text width=1cm] (mux1) {mux, lut};
+\draw (0, -4) node[graphnode, fill=gray!60, text width=1cm] (mux2) {mux, lut};
+
+\draw (4, 1) node[graphnode] (out1) {out};
+\draw (4, -1) node[graphnode] (out2) {out};
+
+
+\draw (in1)--(mux1);
+\draw (in1)--(mux2);
+\draw (in1)--(out1);
+\draw (in1)--(out2);
+
+\draw (in2)--(mux1);
+\draw (in2)--(mux2);
+\draw (in2)--(out1);
+\draw (in2)--(out2);
+
+\draw (in3)--(mux1);
+\draw (in3)--(mux2);
+\draw (in3)--(out1);
+\draw (in3)--(out2);
+
+\draw (in4)--(mux1);
+\draw (in4)--(mux2);
+\draw (in4)--(out1);
+\draw (in4)--(out2);
+
+\draw (in5)--(mux1);
+\draw (in5)--(mux2);
+\draw (in5)--(out1);
+\draw (in5)--(out2);
+
+%\draw (mux1)--(out1);
+%\draw (mux1)--(out2);
+%\draw (mux2)--(out1);
+%\draw (mux2)--(out2);
+%\draw (mux1)--(mux2);
+
+%-------------------------------------
+\draw (-10,0)       node [graphnode, fill=gray!60] (component) {component};
+\draw (-7.5, 2.5)   node [graphnode] (p1) {port};
+\draw (-7.5, -2.5)  node [graphnode] (p2) {port};
+\draw (-10, 2.5)    node [graphnode] (p3) {port};
+\draw (-10, -2.5)    node [graphnode] (p4) {port};
+\draw (-12.5, 2.5)  node [graphnode] (p5) {port};
+\draw (-12.5, -2.5) node [graphnode] (p6) {port};
+\draw (-7.5, 0)     node [graphnode] (p7) {port};
+
+\draw (component)--(p1);
+\draw (component)--(p2);
+\draw (component)--(p3);
+\draw (component)--(p4);
+\draw (component)--(p5);
+\draw (component)--(p6);
+\draw (component)--(p7);
+
+%-------------------
+\draw (-5.75, 5)--(-5.75, -5);
+%-------------------
+\draw[dotted] (p5).. controls (  -10, 4)..(in1);
+\draw[dotted] (p1).. controls (-5.75, 3)..(in2);
+\draw[dotted] (p2).. controls (-5.75,-3)..(in4);
+\draw[dotted] (p6).. controls (  -10,-4)..(in5);
+\draw[dotted] (p7)--(in3);
+\draw[dotted] (p3).. controls ( -7.5, 4)..(out1);
+\draw[dotted] (p4).. controls ( -7.5,-4)..(out2);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{How a 5-input-2-output lut is represented in $model(B)$ (left) in terms of vertex $v$ with $L(v)=``component"$, port vertices and edges, and the $hierarchygraph$ $H(v)$ (right) storing the internal details of the lut. This $hierarchygraph$ representation contains subgraphs of muxes that this lut can emulate. Dashed lines indicate the relation $C$ that links the vertices representing outgoing wires. Vertex labels are shown as text.}
+\label{fig:model:lut}
+\end{figure}
+
+%---------------------------
+%---------------------------
+%         Register
+%---------------------------
+%---------------------------
+\item For each register in $B$ with $n$ inputs, $model(B)$ has a distinct vertex $v$ such that $L(v)=\{``component"\}$ and a set of vertices $S$ such that $|S|=2n+2$ if the register has synchronous- or asynchronous reset capabilities, $|S|=2n+3$ if it has both or $|S|=2n+1$ if it has neither.
+
+$\forall s \in S . L(s) = \{``port"\} \land (v,s) \in E$
+
+$H(v) = (V_{reg}, E_{reg}, L_{reg}, \emptyset, \emptyset)$ where:
+
+\begin{minipage*}{10cm}
+\begin{tabular}{l}
+$V_{reg}=\{v_{in, 1} \dots v_{in, n}\} \cup \{v_{out, 1} \dots v_{out, n}\} \cup \{v_{set}, v_{sync}\footnote{\label{foot:register}These vertices, their edges, their labels and mapping in $C$ are omitted if the register is incapable of synchronous- or asynchronous reset, respectively.}, v_{async}\footnotemark[\ref{foot:register}]\}$
+\end{tabular}
+\end{minipage*}
+
+\begin{minipage*}{10cm}
+\begin{tabular}{lll}
+$E_{reg}=$&$\{(v_{in, i}, v_{out, i})$&$: v_{in, i} \in \{v_{in, 1} \dots v_{in, n}\}\} \cup$\\
+
+&$\{(v_{in, i}, v_{set})$&$: v_{in, i} \in \{v_{in, 1} \dots v_{in, n}\}\} \cup$\\
+
+&$\{(v_{sync}\footnotemark[\ref{foot:register}], v_{set}), (v_{async}\footnotemark[\ref{foot:register}], v_{set})\}$\\
+\end{tabular}
+\end{minipage*}
+
+\begin{minipage*}{10cm}
+\begin{tabular}{lll}
+$L_{reg}=$&$\{(v_{in, i}, ``in")$&$: v_{in, i} \in \{v_{in, 1} \dots v_{in, n}\}\} \cup$\\
+
+&$\{(v_{out, i}, ``out")$&$: v_{out, i} \in \{v_{out, 1} \dots v_{out, n}\}\} \cup$\\
+
+&\multicolumn{2}{l}{$\{(v_{set}, ``set"), (v_{sync}\footnotemark[\ref{foot:register}], ``sync"), (v_{async}\footnotemark[\ref{foot:register}], ``async")\}$}
+\end{tabular}
+\end{minipage*}
+
+Lastly, the relation $C$ contains a link from nodes in the FPGA $hierarchygraph$ to nodes in the register $hierarchygraph$, i.e. $\forall s \in S . \exists w \in V_{reg} . (s, w) \in C$.
+The model of a mux is illustrated in Figure \ref{fig:model:mux}.
+
+%$\{v_{in, 1} \dots v_{in, n}\} \cup \{v_{out, 1} \dots v_{out, n}\} \cup \{v_{set}, v_{resetsync}\footnote{\label{foot:register}These vertices are omitted if the register is incapable of synchronous- or asynchronous resets, respectively.}, v_{resetasync}\footnotemark[\ref{foot:register}]\}$ where
+
+%\begingroup
+%\setlength{\tabcolsep}{2pt} % Default value: 6pt
+%\begin{tabular}{llllll}
+%$\forall v_{in, i}$ & $\in \{v_{in, 1} \dots v_{in, n}\}$ & $. L(v_{in, i})$&$=``register\_in_i"$&$\land (v_{in, i}, v_{set})$&$\in E$, \\
+%$\forall v_{out, i}$ & $\in \{v_{out, 1} \dots v_{out, n}\}$ & $. L(v_{out, i})$&$=``register\_out_i"$&$\land (v_{out, i}, v_{set})$&$\in E$, \\
+%\end{tabular}
+%\endgroup
+
+%$L(v_{set})=``register\_set"$,
+
+%\begingroup
+%\setlength{\tabcolsep}{2pt} % Default value: 6pt
+%\begin{tabular}{llll}
+%$L(v_{resetsync})$&$=``register\_reset\_sync"$&$\land (v_{set}, v_{resetsync}) $&$\in E$ and\\
+%$L(v_{resetasync})$&$=``register\_resFet\_async"$&$\land (v_{set}, v_{resetasync}) $&$\in E$.
+%\end{tabular}
+%\endgroup
+
+%A connection to an input of the register at wire position $x$ in $B$ corresponds with an edge to $v_{in, x}$ in $model(B)$. Similarly, a connection to an output of the register at wire position $x$ in $B$ corresponds with an edge to $v_{out, x}$ in $model(B)$. Connections to the set-, synchronous reset and asynchronous reset gates in $B$ correspond to edges to the respective vertex in $\{v_{set}, v_{resetsync}, v_{resetasync}\}$ in $model(B)$.
+ 
+ \begin{figure}
+\centering
+\begin{adjustbox}{width=0.8\textwidth}
+\begin{tikzpicture}
+\draw (0, 2) node[graphnode, text width=1cm] (in1){in};
+\draw (-2, 0) node[graphnode, text width=1cm] (set) {set};
+\draw (0, -2) node[graphnode, text width=1cm] (in2) {in};
+
+\draw (-4, 2) node[graphnode, text width=1cm] (sync) {reset sync};
+\draw (-4, -2) node[graphnode, text width=1cm] (async) {reset async};
+
+\draw (2, 2) node[graphnode] (out1) {out};
+\draw (2, -2) node[graphnode] (out2) {out};
+
+\draw (in1)--(out1);
+\draw (in2)--(out2);
+\draw (set)--(in1);
+\draw (set)--(in2);
+\draw (sync)--(set);
+\draw (async)--(set);
+
+
+
+
+%-------------------------------------
+\draw (-10,0)       node [graphnode, fill=gray!60] (component) {component};
+\draw (-7.5, 2.5)   node [graphnode] (p1) {port};
+\draw (-7.5, -2.5)  node [graphnode] (p2) {port};
+\draw (-10, 2.5)    node [graphnode] (p3) {port};
+\draw (-10, -2.5)    node [graphnode] (p4) {port};
+\draw (-12.5, 2.5)  node [graphnode] (p5) {port};
+\draw (-12.5, -2.5) node [graphnode] (p6) {port};
+\draw (-7.5, 0)     node [graphnode] (p7) {port};
+
+\draw (component)--(p1);
+\draw (component)--(p2);
+\draw (component)--(p3);
+\draw (component)--(p4);
+\draw (component)--(p5);
+\draw (component)--(p6);
+\draw (component)--(p7);
+
+%-------------------
+\draw (-5.75, 5)--(-5.75, -5);
+%-------------------
+\draw[dotted] (p1)..controls(-5.75,  2.5)..(sync);
+\draw[dotted] (p2)..controls(-5.75, -2.5)..(async);
+\draw[dotted] (p7)--(set);
+\draw[dotted] (p3)..controls(-7.5,   4)..(in1);
+\draw[dotted] (p4)..controls(-7.5,  -4)..(in2);
+\draw[dotted] (p5)..controls(-10, 4.5) and (0, 4.5)..(out1);
+\draw[dotted] (p6)..controls(-10,-4.5) and (0,-4.5)..(out2);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{How a 2-input register is represented in $model(B)$ (left) in terms of vertex $v$ with $L(v)=``component"$, port vertices and edges, and the $hierarchygraph$ $H(v)$ (right) storing the internal details of the register. Dashed lines indicate the relation $C$ that links the vertices representing outgoing wires. Vertex labels are shown as text.}
+\label{fig:model:register}
+\end{figure}
+
+\item Each connection by wire in $B$ corresponds to an edge in $model(B)$. For muxes, luts, registers and hierarchical components this means an edge to the ``port"-vertex $v$ for which $C(v)$ represents the appropriate input/output of the component.
+
+\item $model(B)$ contains nothing else.
+\end{itemize}
+\end{defn}
 \subsection{FPGA program}
+Let $model(B)$ be the hierarchygraph of an FPGA layout $B$. We then define the interpretation of $model(B)$ to 

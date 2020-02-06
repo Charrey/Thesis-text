@@ -6,11 +6,21 @@
 \usepackage[toc, page]{appendix}
 \usepackage{tikz,fullpage}
 \usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usepackage{footnote}
 \usetikzlibrary{tikzmark}
+\usepackage{amsthm}
+\usepackage{adjustbox}
 \usepackage[backend=biber, style=bibstyle/lncs]{biblatex}
 \addbibresource{sources.bib}
 \renewcommand{\familydefault}{\sfdefault}
+\interfootnotelinepenalty=10000
 
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
 
 \title{FPGA-on-FPGA emulation}
 \author{Pim van Leeuwen}
