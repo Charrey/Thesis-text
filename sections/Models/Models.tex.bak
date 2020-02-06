@@ -290,6 +290,9 @@ $L_{reg}=$&$\{(v_{in, i}, ``in")$&$: v_{in, i} \in \{v_{in, 1} \dots v_{in, n}\}
 \end{tabular}
 \end{minipage*}
 
+Lastly, the relation $C$ contains a link from nodes in the FPGA $hierarchygraph$ to nodes in the register $hierarchygraph$, i.e. $\forall s \in S . \exists w \in V_{reg} . (s, w) \in C$.
+The model of a mux is illustrated in Figure \ref{fig:model:mux}.
+
 %$\{v_{in, 1} \dots v_{in, n}\} \cup \{v_{out, 1} \dots v_{out, n}\} \cup \{v_{set}, v_{resetsync}\footnote{\label{foot:register}These vertices are omitted if the register is incapable of synchronous- or asynchronous resets, respectively.}, v_{resetasync}\footnotemark[\ref{foot:register}]\}$ where
 
 %\begingroup
@@ -370,10 +373,18 @@ $L_{reg}=$&$\{(v_{in, i}, ``in")$&$: v_{in, i} \in \{v_{in, 1} \dots v_{in, n}\}
 \label{fig:model:register}
 \end{figure}
 
-\item Each connection by wire in $B$ corresponds to an edge in $model(B)$.
+\item Each connection by wire in $B$ corresponds to an edge in $model(B)$. For muxes, luts, registers and hierarchical components this means an edge to the ``port"-vertex $v$ for which $C(v)$ represents the appropriate input/output of the component.
 
-\item $model(B)$ has no other vertices.
+\item $model(B)$ contains nothing else.
 \end{itemize}
 \end{defn}
 \subsection{FPGA program}
-Let $model(B)$ be the hierarchygraph of an FPGA layout $B$. We then define the interpretation of $model(B)$ to 
+Let $model(B)$ be the hierarchygraph of an FPGA layout $B$. We then define an interpretation of $model(B)$ as follows:
+
+\begin{defn}
+An \textbf{FPGA hierarchygraph} is a hierarchygraph $G$ such that an FPGA $B$ exists for which $G=model(B)$.
+\end{defn}
+
+\begin{defn}
+An interpretation $I$ of an FPGA hierarchygraph is a structure $$
+\end{defn}

@@ -26,32 +26,32 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.2}FPGA program}{8}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Preliminaries}{9}% 
+\contentsline {section}{\numberline {4}Preliminaries}{10}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Algorithm}{10}% 
+\contentsline {section}{\numberline {5}Algorithm}{11}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}State space storage}{10}% 
+\contentsline {subsection}{\numberline {5.1}State space storage}{11}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}State space exploration}{10}% 
+\contentsline {subsection}{\numberline {5.2}State space exploration}{11}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3}Hierarchy usage}{10}% 
+\contentsline {subsection}{\numberline {5.3}Hierarchy usage}{11}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4}Defining $f$}{10}% 
+\contentsline {subsection}{\numberline {5.4}Defining $f$}{11}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Performance experiments}{11}% 
+\contentsline {section}{\numberline {6}Performance experiments}{12}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Software design}{12}% 
+\contentsline {section}{\numberline {7}Software design}{13}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.1}Architecture}{12}% 
+\contentsline {subsection}{\numberline {7.1}Architecture}{13}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.2}Manual}{12}% 
+\contentsline {subsection}{\numberline {7.2}Manual}{13}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8}Conclusion}{13}% 
+\contentsline {section}{\numberline {8}Conclusion}{14}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9}Discussion}{14}% 
+\contentsline {section}{\numberline {9}Discussion}{15}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {10}Future Research}{15}% 
+\contentsline {section}{\numberline {10}Future Research}{16}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Appendices}{17}% 
+\contentsline {section}{Appendices}{18}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A}History of subgraph isomorphism algorithms}{17}% 
+\contentsline {section}{\numberline {A}History of subgraph isomorphism algorithms}{18}% 

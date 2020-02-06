@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.0 (MiKTeX 2.9.7050 64-bit)  (format=lualatex 2019.7.12)  6 FEB 2020 15:59
+This is LuaTeX, Version 1.10.0 (MiKTeX 2.9.7050 64-bit)  (format=lualatex 2019.7.12)  6 FEB 2020 16:06
  restricted system commands enabled.
 **Thesis.tex
 (./Thesis.tex
@@ -48,7 +48,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.668 seconds
+luaotfload | main : initialization completed in 0.680 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size12.clo"
@@ -1184,47 +1184,47 @@ Overfull \hbox (20.70421pt too wide) in paragraph at lines 284--291
 [][] 
  []
 
-) [8]
+[8]) [9]
 \openout2 = sections/Preliminaries/Preliminaries.aux
- (./sections/Preliminaries/Preliminaries.tex) [9
+ (./sections/Preliminaries/Preliminaries.tex) [10
 
 
 ]
 \openout2 = sections/Algorithm/Algorithm.aux
 
-(./sections/Algorithm/Algorithm.tex) [10
+(./sections/Algorithm/Algorithm.tex) [11
 
 
 ]
 \openout2 = sections/Experiments/Experiments.aux
 
-(./sections/Experiments/Experiments.tex) [11
+(./sections/Experiments/Experiments.tex) [12
 
 
 ]
 \openout2 = sections/Software/Software.aux
- (./sections/Software/Software.tex) [12
+ (./sections/Software/Software.tex) [13
 
 
 ]
 \openout2 = sections/Conclusion/Conclusion.aux
- (./sections/Conclusion/Conclusion.tex) [13
+ (./sections/Conclusion/Conclusion.tex) [14
 
 
 ]
 \openout2 = sections/Discussion/Discussion.aux
 
-(./sections/Discussion/Discussion.tex) [14
+(./sections/Discussion/Discussion.tex) [15
 
 
 ]
 \openout2 = sections/FutureResearch/FutureResearch.aux
 
-(./sections/FutureResearch/FutureResearch.tex) [15
+(./sections/FutureResearch/FutureResearch.tex) [16
 
 
 ]
-<images/algorithmhistory.png, id=86, 982.67125pt x 2149.02875pt>
+<images/algorithmhistory.png, id=89, 982.67125pt x 2149.02875pt>
 File: images/algorithmhistory.png Graphic file (type png)
 <use images/algorithmhistory.png>
 Package luatex.def Info: images/algorithmhistory.png  used on input line 56.
@@ -1238,13 +1238,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 56--59
 
  []
 
-[16
+[17
 
 ]
 Overfull \vbox (479.9596pt too high) has occurred while \output is active []
 
 
-[17<./images/algorithmhistory.png>] [18]
+[18<./images/algorithmhistory.png>] [19]
 
 LaTeX Warning: Empty bibliography on input line 61.
 
@@ -1255,19 +1255,23 @@ LaTeX Warning: Empty bibliography on input line 61.
 (./sections/Software/Software.aux) (./sections/Conclusion/Conclusion.aux)
 (./sections/Discussion/Discussion.aux)
 (./sections/FutureResearch/FutureResearch.aux))
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package logreq Info: Writing requests to 'Thesis.run.xml'.
 
 \openout1 = Thesis.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 32316 strings out of 494291
+ 32384 strings out of 494291
  125171,1144653 words of node,token memory allocated
- 1105 words of node memory still in use:
-   22 hlist, 2 vlist, 10 rule, 3 glue, 4 kern, 1 glyph, 58 attribute, 67 glue_sp
-ec, 58 attribute_list, 2 write, 16 pdf_literal, 16 pdf_colorstack nodes
-   avail lists: 2:2138,3:1644,4:36,5:349,6:29,7:4040,8:77,9:587,10:6,11:139
- 35308 multiletter control sequences out of 65536+200000
+ 2733 words of node memory still in use:
+   55 hlist, 5 vlist, 10 rule, 3 disc, 2 local_par, 55 glue, 4 kern, 5 penalty, 
+32 glyph, 169 attribute, 67 glue_spec, 169 attribute_list, 6 write, 2 save_pos, 
+83 pdf_literal, 16 pdf_colorstack nodes
+   avail lists: 2:1916,3:1566,4:36,5:349,6:27,7:3957,8:77,9:551,10:6,11:136
+ 35376 multiletter control sequences out of 65536+200000
  67 fonts using 9134207 bytes
  62i,17n,81p,1272b,1064s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/program files/miktex 2.9/fonts/opentype/public/lm/lmsans8-regular.otf><c:/pr
@@ -1280,9 +1284,9 @@ e1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
 /amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pf
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Thesis.pdf (18 pages, 200241 bytes).
+Output written on Thesis.pdf (19 pages, 202226 bytes).
 
-PDF statistics: 147 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 150 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  176 words of extra memory for PDF output out of 10000 (max. 100000000)
 

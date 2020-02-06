@@ -379,4 +379,14 @@ The model of a mux is illustrated in Figure \ref{fig:model:mux}.
 \end{itemize}
 \end{defn}
 \subsection{FPGA program}
-Let $model(B)$ be the hierarchygraph of an FPGA layout $B$. We then define the interpretation of $model(B)$ to 
+Let $model(B)$ be the hierarchygraph of an FPGA layout $B$. We then define an interpretation of $model(B)$ as follows:
+
+\begin{defn}
+An \textbf{FPGA hierarchygraph} is a hierarchygraph $G$ such that an FPGA $B$ exists for which $G=model(B)$.
+\end{defn}
+
+\todo{define the content of a LUT table}
+
+\begin{defn}
+An interpretation $I$ of an FPGA hierarchygraph $(V,E,L,H,C)$ is a structure $(I_{luts}, I_{switches})$ where $I \subseteq (V			)$
+\end{defn}
