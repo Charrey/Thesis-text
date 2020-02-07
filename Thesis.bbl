@@ -1,0 +1,178 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{Brandes04graphmarkup}{misc}{}
+      \name{author}{4}{}{%
+        {{hash=392b457d9bac1ed69366176e7857d7e9}{%
+           family={Brandes},
+           familyi={B\bibinitperiod},
+           given={Ulrik},
+           giveni={U\bibinitperiod}}}%
+        {{hash=e59f3e8cbee6f26cd7c1e6dd4cff11b6}{%
+           family={Eiglsperger},
+           familyi={E\bibinitperiod},
+           given={Markus},
+           giveni={M\bibinitperiod}}}%
+        {{hash=6c821a99262528abc7969f284cc021ac}{%
+           family={Lerner},
+           familyi={L\bibinitperiod},
+           given={Juergen},
+           giveni={J\bibinitperiod}}}%
+        {{hash=a633e9b2ba4eb65a4c99dd57ea8e6a2b}{%
+           family={Pich},
+           familyi={P\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{6938747f5f19c5b477a0cac31794d4dc}
+      \strng{fullhash}{947603906005092ab59e235a1bfbe4ab}
+      \strng{bibnamehash}{947603906005092ab59e235a1bfbe4ab}
+      \strng{authorbibnamehash}{947603906005092ab59e235a1bfbe4ab}
+      \strng{authornamehash}{6938747f5f19c5b477a0cac31794d4dc}
+      \strng{authorfullhash}{947603906005092ab59e235a1bfbe4ab}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Graph Markup Language (GraphML)}
+      \field{year}{2004}
+    \endentry
+    \entry{alhyari2019}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=fbeab58c27ad5e53740cbd018e35ecc9}{%
+           family={Al-Hyari},
+           familyi={A\bibinithyphendelim H\bibinitperiod},
+           given={Abeer},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{fbeab58c27ad5e53740cbd018e35ecc9}
+      \strng{fullhash}{fbeab58c27ad5e53740cbd018e35ecc9}
+      \strng{bibnamehash}{fbeab58c27ad5e53740cbd018e35ecc9}
+      \strng{authorbibnamehash}{fbeab58c27ad5e53740cbd018e35ecc9}
+      \strng{authornamehash}{fbeab58c27ad5e53740cbd018e35ecc9}
+      \strng{authorfullhash}{fbeab58c27ad5e53740cbd018e35ecc9}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{8}
+      \field{title}{Towards Smart FPGA Placement Using Machine Learning}
+      \field{type}{phdthesis}
+      \field{year}{2019}
+    \endentry
+    \entry{pistorius2007benchmarking}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=15eecbbb29d7ad7da4dbf898f90d1089}{%
+           family={Pistorius},
+           familyi={P\bibinitperiod},
+           given={Joachim},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e4d3114e8611a85a3b01dd455c14c571}{%
+           family={Hutton},
+           familyi={H\bibinitperiod},
+           given={Mike},
+           giveni={M\bibinitperiod}}}%
+        {{hash=627b3c463aae56575e34c339f60f510a}{%
+           family={Mishchenko},
+           familyi={M\bibinitperiod},
+           given={Alan},
+           giveni={A\bibinitperiod}}}%
+        {{hash=4fb487f81f57d4c6d7412fa6fec1b9d0}{%
+           family={Brayton},
+           familyi={B\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{571fcc208a68042b75c10706fa7c4b1b}
+      \strng{fullhash}{1adf01677645058f8a875e23080791dc}
+      \strng{bibnamehash}{1adf01677645058f8a875e23080791dc}
+      \strng{authorbibnamehash}{1adf01677645058f8a875e23080791dc}
+      \strng{authornamehash}{571fcc208a68042b75c10706fa7c4b1b}
+      \strng{authorfullhash}{1adf01677645058f8a875e23080791dc}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{International Workshop on Logic \& Synthesis}
+      \field{title}{Benchmarking method and designs targeting logic synthesis for FPGAs}
+      \field{volume}{7}
+      \field{year}{2007}
+      \field{pages}{230\bibrangedash 237}
+      \range{pages}{8}
+    \endentry
+    \entry{BDDSynthesis}{article}{}
+      \name{author}{3}{}{%
+        {{hash=36d7865e6117c4c6806f82c737aa5e4f}{%
+           family={Vemuri},
+           familyi={V\bibinitperiod},
+           given={Navin},
+           giveni={N\bibinitperiod}}}%
+        {{hash=42c961de70f0d86b355099897e375fbe}{%
+           family={Kalla},
+           familyi={K\bibinitperiod},
+           given={Priyank},
+           giveni={P\bibinitperiod}}}%
+        {{hash=e24e4f7fc07908365fdbe5b097a1e7ed}{%
+           family={Tessier},
+           familyi={T\bibinitperiod},
+           given={Russell},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, NY, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{bcd2542c3ccb35df6b92fcbff5c33971}
+      \strng{fullhash}{bcd2542c3ccb35df6b92fcbff5c33971}
+      \strng{bibnamehash}{bcd2542c3ccb35df6b92fcbff5c33971}
+      \strng{authorbibnamehash}{bcd2542c3ccb35df6b92fcbff5c33971}
+      \strng{authornamehash}{bcd2542c3ccb35df6b92fcbff5c33971}
+      \strng{authorfullhash}{bcd2542c3ccb35df6b92fcbff5c33971}
+      \field{sortinit}{V}
+      \field{sortinithash}{02432525618c08e2b03cac47c19764af}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1084-4309}
+      \field{journaltitle}{ACM Transactions on Design Automation of Electronic Systems}
+      \field{month}{10}
+      \field{number}{4}
+      \field{title}{BDD-Based Logic Synthesis for LUT-Based FPGAs}
+      \field{volume}{7}
+      \field{year}{2002}
+      \field{pages}{501\bibrangedash 525}
+      \range{pages}{25}
+      \verb{doi}
+      \verb 10.1145/605440.605442
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/605440.605442
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/605440.605442
+      \endverb
+      \keyw{FPGA,decomposition,logic synthesis,BDD}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.0 (MiKTeX 2.9.7050 64-bit)  (format=lualatex 2019.7.12)  6 FEB 2020 16:06
+This is LuaTeX, Version 1.10.0 (MiKTeX 2.9.7050 64-bit)  (format=lualatex 2019.7.12)  7 FEB 2020 15:15
  restricted system commands enabled.
 **Thesis.tex
 (./Thesis.tex
@@ -48,7 +48,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.680 seconds
+luaotfload | main : initialization completed in 0.660 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size12.clo"
@@ -531,6 +531,13 @@ LaTeX Info: Redefining \addtolength on input line 81.
 )
 \c@@todonotes@numberoftodonotes=\count151
 )
+("C:/Program Files/MiKTeX 2.9/tex/latex/amsfonts/amsfonts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
 ("C:/Program Files/MiKTeX 2.9/tex/latex/subfiles/subfiles.sty"
 Package: subfiles 2019/10/30 v1.5 Multi-file projects (package)
 
@@ -785,6 +792,31 @@ Package: amsthm 2017/10/31 v2.20.4
 \thm@headsep=\skip58
 \dth@everypar=\toks40
 )
+("C:/Program Files/MiKTeX 2.9/tex/latex/listings/listings.sty"
+\lst@mode=\count312
+\lst@gtempboxa=\box62
+\lst@token=\toks41
+\lst@length=\count313
+\lst@currlwidth=\dimen271
+\lst@column=\count314
+\lst@pos=\count315
+\lst@lostspace=\dimen272
+\lst@width=\dimen273
+\lst@newlines=\count316
+\lst@lineno=\count317
+\lst@maxwidth=\dimen274
+
+("C:/Program Files/MiKTeX 2.9/tex/latex/listings/lstmisc.sty"
+File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
+\c@lstnumber=\count318
+\lst@skipnumbers=\count319
+\lst@framebox=\box63
+)
+("C:/Program Files/MiKTeX 2.9/tex/latex/listings/listings.cfg"
+File: listings.cfg 2019/09/10 1.8c listings configuration
+))
+Package: listings 2019/09/10 1.8c (Carsten Heinz)
+
 ("C:/Program Files/MiKTeX 2.9/tex/latex/biblatex/biblatex.sty"
 Package: biblatex 2019/12/01 v3.14 programmable bibliographies (PK/MW)
 
@@ -808,7 +840,7 @@ Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-\pdftexcmds@toks=\toks41
+\pdftexcmds@toks=\toks42
 )
 ("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/kvoptions.sty"
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
@@ -821,7 +853,7 @@ Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
 )))
 ("C:/Program Files/MiKTeX 2.9/tex/latex/logreq/logreq.sty"
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count312
+\lrq@indent=\count320
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/logreq/logreq.def"
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
@@ -830,47 +862,47 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-\c@tabx@nest=\count313
-\c@listtotal=\count314
-\c@listcount=\count315
-\c@liststart=\count316
-\c@liststop=\count317
-\c@citecount=\count318
-\c@citetotal=\count319
-\c@multicitecount=\count320
-\c@multicitetotal=\count321
-\c@instcount=\count322
-\c@maxnames=\count323
-\c@minnames=\count324
-\c@maxitems=\count325
-\c@minitems=\count326
-\c@citecounter=\count327
-\c@maxcitecounter=\count328
-\c@savedcitecounter=\count329
-\c@uniquelist=\count330
-\c@uniquename=\count331
-\c@refsection=\count332
-\c@refsegment=\count333
-\c@maxextratitle=\count334
-\c@maxextratitleyear=\count335
-\c@maxextraname=\count336
-\c@maxextradate=\count337
-\c@maxextraalpha=\count338
-\c@abbrvpenalty=\count339
-\c@highnamepenalty=\count340
-\c@lownamepenalty=\count341
-\c@maxparens=\count342
-\c@parenlevel=\count343
-\blx@tempcnta=\count344
-\blx@tempcntb=\count345
-\blx@tempcntc=\count346
-\blx@maxsection=\count347
-\blx@maxsegment@0=\count348
-\blx@notetype=\count349
-\blx@parenlevel@text=\count350
-\blx@parenlevel@foot=\count351
-\blx@sectionciteorder@0=\count352
-\blx@entrysetcounter=\count353
+\c@tabx@nest=\count321
+\c@listtotal=\count322
+\c@listcount=\count323
+\c@liststart=\count324
+\c@liststop=\count325
+\c@citecount=\count326
+\c@citetotal=\count327
+\c@multicitecount=\count328
+\c@multicitetotal=\count329
+\c@instcount=\count330
+\c@maxnames=\count331
+\c@minnames=\count332
+\c@maxitems=\count333
+\c@minitems=\count334
+\c@citecounter=\count335
+\c@maxcitecounter=\count336
+\c@savedcitecounter=\count337
+\c@uniquelist=\count338
+\c@uniquename=\count339
+\c@refsection=\count340
+\c@refsegment=\count341
+\c@maxextratitle=\count342
+\c@maxextratitleyear=\count343
+\c@maxextraname=\count344
+\c@maxextradate=\count345
+\c@maxextraalpha=\count346
+\c@abbrvpenalty=\count347
+\c@highnamepenalty=\count348
+\c@lownamepenalty=\count349
+\c@maxparens=\count350
+\c@parenlevel=\count351
+\blx@tempcnta=\count352
+\blx@tempcntb=\count353
+\blx@tempcntc=\count354
+\blx@maxsection=\count355
+\blx@maxsegment@0=\count356
+\blx@notetype=\count357
+\blx@parenlevel@text=\count358
+\blx@parenlevel@foot=\count359
+\blx@sectionciteorder@0=\count360
+\blx@entrysetcounter=\count361
 \labelnumberwidth=\skip59
 \labelalphawidth=\skip60
 \biblabelsep=\skip61
@@ -882,9 +914,9 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \blx@bcfin=\read3
 \blx@bcfout=\write4
 \blx@langwohyphens=\language2
-\c@mincomprange=\count354
-\c@maxcomprange=\count355
-\c@mincompwidth=\count356
+\c@mincomprange=\count362
+\c@maxcomprange=\count363
+\c@mincompwidth=\count364
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
 
@@ -897,74 +929,74 @@ Package biblatex Info: ... file 'bibstyle/lncs.dbx' found.
 (./bibstyle/lncs.dbx)
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count357
-\c@savedafterword=\count358
-\c@annotator=\count359
-\c@savedannotator=\count360
-\c@author=\count361
-\c@savedauthor=\count362
-\c@bookauthor=\count363
-\c@savedbookauthor=\count364
-\c@commentator=\count365
-\c@savedcommentator=\count366
-\c@editor=\count367
-\c@savededitor=\count368
-\c@editora=\count369
-\c@savededitora=\count370
-\c@editorb=\count371
-\c@savededitorb=\count372
-\c@editorc=\count373
-\c@savededitorc=\count374
-\c@foreword=\count375
-\c@savedforeword=\count376
-\c@holder=\count377
-\c@savedholder=\count378
-\c@introduction=\count379
-\c@savedintroduction=\count380
-\c@namea=\count381
-\c@savednamea=\count382
-\c@nameb=\count383
-\c@savednameb=\count384
-\c@namec=\count385
-\c@savednamec=\count386
-\c@translator=\count387
-\c@savedtranslator=\count388
-\c@shortauthor=\count389
-\c@savedshortauthor=\count390
-\c@shorteditor=\count391
-\c@savedshorteditor=\count392
-\c@labelname=\count393
-\c@savedlabelname=\count394
-\c@institution=\count395
-\c@savedinstitution=\count396
-\c@lista=\count397
-\c@savedlista=\count398
-\c@listb=\count399
-\c@savedlistb=\count400
-\c@listc=\count401
-\c@savedlistc=\count402
-\c@listd=\count403
-\c@savedlistd=\count404
-\c@liste=\count405
-\c@savedliste=\count406
-\c@listf=\count407
-\c@savedlistf=\count408
-\c@location=\count409
-\c@savedlocation=\count410
-\c@organization=\count411
-\c@savedorganization=\count412
-\c@origlocation=\count413
-\c@savedoriglocation=\count414
-\c@origpublisher=\count415
-\c@savedorigpublisher=\count416
-\c@publisher=\count417
-\c@savedpublisher=\count418
-\c@language=\count419
-\c@savedlanguage=\count420
-\c@origlanguage=\count421
-\c@savedoriglanguage=\count422
-\c@pageref=\count423
-\c@savedpageref=\count424
+\c@afterword=\count365
+\c@savedafterword=\count366
+\c@annotator=\count367
+\c@savedannotator=\count368
+\c@author=\count369
+\c@savedauthor=\count370
+\c@bookauthor=\count371
+\c@savedbookauthor=\count372
+\c@commentator=\count373
+\c@savedcommentator=\count374
+\c@editor=\count375
+\c@savededitor=\count376
+\c@editora=\count377
+\c@savededitora=\count378
+\c@editorb=\count379
+\c@savededitorb=\count380
+\c@editorc=\count381
+\c@savededitorc=\count382
+\c@foreword=\count383
+\c@savedforeword=\count384
+\c@holder=\count385
+\c@savedholder=\count386
+\c@introduction=\count387
+\c@savedintroduction=\count388
+\c@namea=\count389
+\c@savednamea=\count390
+\c@nameb=\count391
+\c@savednameb=\count392
+\c@namec=\count393
+\c@savednamec=\count394
+\c@translator=\count395
+\c@savedtranslator=\count396
+\c@shortauthor=\count397
+\c@savedshortauthor=\count398
+\c@shorteditor=\count399
+\c@savedshorteditor=\count400
+\c@labelname=\count401
+\c@savedlabelname=\count402
+\c@institution=\count403
+\c@savedinstitution=\count404
+\c@lista=\count405
+\c@savedlista=\count406
+\c@listb=\count407
+\c@savedlistb=\count408
+\c@listc=\count409
+\c@savedlistc=\count410
+\c@listd=\count411
+\c@savedlistd=\count412
+\c@liste=\count413
+\c@savedliste=\count414
+\c@listf=\count415
+\c@savedlistf=\count416
+\c@location=\count417
+\c@savedlocation=\count418
+\c@organization=\count419
+\c@savedorganization=\count420
+\c@origlocation=\count421
+\c@savedoriglocation=\count422
+\c@origpublisher=\count423
+\c@savedorigpublisher=\count424
+\c@publisher=\count425
+\c@savedpublisher=\count426
+\c@language=\count427
+\c@savedlanguage=\count428
+\c@origlanguage=\count429
+\c@savedoriglanguage=\count430
+\c@pageref=\count431
+\c@savedpageref=\count432
 \shorthandwidth=\skip67
 \shortjournalwidth=\skip68
 \shortserieswidth=\skip69
@@ -994,19 +1026,19 @@ Package biblatex Info: ... file 'biblatex.def' found.
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/biblatex/biblatex.def"
 File: biblatex.def 2019/12/01 v3.14 biblatex compatibility (PK/MW)
-\c@textcitecount=\count425
-\c@textcitetotal=\count426
-\c@textcitemaxnames=\count427
-\c@biburlbigbreakpenalty=\count428
-\c@biburlbreakpenalty=\count429
-\c@biburlnumpenalty=\count430
-\c@biburlucpenalty=\count431
-\c@biburllcpenalty=\count432
+\c@textcitecount=\count433
+\c@textcitetotal=\count434
+\c@textcitemaxnames=\count435
+\c@biburlbigbreakpenalty=\count436
+\c@biburlbreakpenalty=\count437
+\c@biburlnumpenalty=\count438
+\c@biburlucpenalty=\count439
+\c@biburllcpenalty=\count440
 \biburlbigskip=\muskip18
 \biburlnumskip=\muskip19
 \biburlucskip=\muskip20
 \biburllcskip=\muskip21
-\c@smartand=\count433
+\c@smartand=\count441
 )
 Package biblatex Info: Trying to load bibliography style 'bibstyle/lncs'...
 Package biblatex Info: ... file 'bibstyle/lncs.bbx' found.
@@ -1023,8 +1055,8 @@ Package biblatex Info: ... file 'standard.bbx' found.
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/biblatex/bbx/standard.bbx"
 File: standard.bbx 2019/12/01 v3.14 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count434
-\c@bbx:relatedtotal=\count435
+\c@bbx:relatedcount=\count442
+\c@bbx:relatedtotal=\count443
 ))
 
 Package biblatex Warning: 'firstinits' option is deprecated.
@@ -1058,50 +1090,85 @@ Package biblatex Info: ... file 'biblatex.cfg' found.
 ("C:/Program Files/MiKTeX 2.9/tex/latex/biblatex/biblatex.cfg"
 File: biblatex.cfg 
 ))
-\c@thm=\count436
-\@quotelevel=\count437
-\@quotereset=\count438
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/libraries/pgflibraryarrows.meta.c
+ode.tex"
+File: pgflibraryarrows.meta.code.tex 2019/05/09 v3.1.3 (3.1.3)
+\pgfarrowinset=\dimen275
+\pgfarrowlength=\dimen276
+\pgfarrowwidth=\dimen277
+\pgfarrowlinewidth=\dimen278
+)
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/frontendlayer/tikz/libraries/tikz
+libraryarrows.code.tex"
+File: tikzlibraryarrows.code.tex 2019/05/09 v3.1.3 (3.1.3)
+
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/libraries/pgflibraryarrows.code.t
+ex"
+File: pgflibraryarrows.code.tex 2019/05/09 v3.1.3 (3.1.3)
+\arrowsize=\dimen279
+))
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/frontendlayer/tikz/libraries/tikz
+librarydecorations.markings.code.tex"
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/frontendlayer/tikz/libraries/tikz
+librarydecorations.code.tex"
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/modules/pgfmoduledecorations.code
+.tex"
+\pgfdecoratedcompleteddistance=\dimen280
+\pgfdecoratedremainingdistance=\dimen281
+\pgfdecoratedinputsegmentcompleteddistance=\dimen282
+\pgfdecoratedinputsegmentremainingdistance=\dimen283
+\pgf@decorate@distancetomove=\dimen284
+\pgf@decorate@repeatstate=\count444
+\pgfdecorationsegmentamplitude=\dimen285
+\pgfdecorationsegmentlength=\dimen286
+)
+\tikz@lib@dec@box=\box64
+)
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/libraries/decorations/pgflibraryd
+ecorations.markings.code.tex"))
+\c@thm=\count445
+\@quotelevel=\count446
+\@quotereset=\count447
  (./Thesis.aux
 (./sections/Introduction/Introduction.aux)
 (./sections/Background/Background.aux) (./sections/Models/Models.aux)
-(./sections/Preliminaries/Preliminaries.aux)
 (./sections/Algorithm/Algorithm.aux) (./sections/Experiments/Experiments.aux)
 (./sections/Software/Software.aux) (./sections/Conclusion/Conclusion.aux)
 (./sections/Discussion/Discussion.aux)
 (./sections/FutureResearch/FutureResearch.aux))
 \openout1 = Thesis.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/fmtcount/fc-english.def"
 File: fc-english.def 2016/01/12
 )
 ("C:/Program Files/MiKTeX 2.9/tex/context/base/mkii/supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count439
-\scratchdimen=\dimen271
-\scratchbox=\box62
-\nofMPsegments=\count440
-\nofMParguments=\count441
-\everyMPshowfont=\toks42
-\MPscratchCnt=\count442
-\MPscratchDim=\dimen272
-\MPnumerator=\count443
-\makeMPintoPDFobject=\count444
-\everyMPtoPDFconversion=\toks43
+\scratchcounter=\count448
+\scratchdimen=\dimen287
+\scratchbox=\box65
+\nofMPsegments=\count449
+\nofMParguments=\count450
+\everyMPshowfont=\toks43
+\MPscratchCnt=\count451
+\MPscratchDim=\dimen288
+\MPnumerator=\count452
+\makeMPintoPDFobject=\count453
+\everyMPtoPDFconversion=\toks44
 ) ("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -1123,8 +1190,9 @@ ABD: EveryShipout initializing macros
 Package todonotes Warning: The length marginparwidth is less than 2cm and will m
 ost likely cause issues with the appearance of inserted todonotes. The issue can
  be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loa
-ding the todonotes package. on input line 29.
+ding the todonotes package. on input line 41.
 
+\c@lstlisting=\count454
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
 ("C:/Program Files/MiKTeX 2.9/tex/latex/biblatex/lbx/english.lbx"
@@ -1137,156 +1205,216 @@ Package biblatex Info: Automatic encoding selection.
 
 \openout4 = Thesis.bcf
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'Thesis.bbl' not found.
+Package biblatex Info: ... file 'Thesis.bbl' found.
 
-No file Thesis.bbl.
-Package biblatex Info: Reference section=0 on input line 29.
-Package biblatex Info: Reference segment=0 on input line 29.
-[1
+(./Thesis.bbl)
+Package biblatex Info: Reference section=0 on input line 41.
+Package biblatex Info: Reference segment=0 on input line 41.
+LaTeX Font Info:    Try loading font information for U+msa on input line 43.
+ ("C:/Program Files/MiKTeX 2.9/tex/latex/amsfonts/umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 43.
+
+("C:/Program Files/MiKTeX 2.9/tex/latex/amsfonts/umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
 
 {C:/Users/Pim van Leeuwen/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] (./Thesis.toc)
 \tf@toc=\write5
 
 \openout5 = Thesis.toc
- [2]
+
+[2]
 \openout2 = sections/Introduction/Introduction.aux
  (./sections/Introduction/Introduction.tex) [3
 
 ]
 \openout2 = sections/Background/Background.aux
 
-(./sections/Background/Background.tex) [4
+(./sections/Background/Background.tex (./sections/Background/FPGAs/FPGAs.tex
+[4
 
 
-]
+] [5] [6]
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <12> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 184.
+) (./sections/Background/SimuEmu/SimuEmu.tex)
+(./sections/Background/PathSubIso/PathSubIso.tex)) [7] [8]
 \openout2 = sections/Models/Models.aux
- (./sections/Models/Models.tex
-[5
+
+(./sections/Models/Models.tex
+Overfull \hbox (34.87015pt too wide) in paragraph at lines 12--13
+\TU/lmss/m/n/12 la-bels $\OML/cmm/m/it/12  \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 
+f\OT1/cmr/m/n/12 \\OML/cmm/m/it/12 in\OT1/cmr/m/n/12 "\OML/cmm/m/it/12 ; \OT1/c
+mr/m/n/12 \\OML/cmm/m/it/12 out\OT1/cmr/m/n/12 "\OML/cmm/m/it/12 ; \OT1/cmr/m/n
+/12 \\OML/cmm/m/it/12 component\OT1/cmr/m/n/12 "\OML/cmm/m/it/12 ; \OT1/cmr/m/n
+/12 \\OML/cmm/m/it/12 port\OT1/cmr/m/n/12 "\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 \
+\OML/cmm/m/it/12 mux\OT1/cmr/m/n/12 "\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 \\OML/c
+mm/m/it/12 lut\OT1/cmr/m/n/12 "\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 \\OML/cmm/m/i
+t/12 select\OT1/cmr/m/n/12 "\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 \\OML/cmm/m/it/1
+2 set\OT1/cmr/m/n/12 "\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 \\OML/cmm/m/it/12 asyn
+c\OT1/cmr/m/n/12 "\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 \\OML/cmm/m/it/12 sync\OT1
+/cmr/m/n/12 "\OMS/cmsy/m/n/12 g$\TU/lmss/m/n/12 . 
+ []
+
+[9
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 145--146
+Underfull \hbox (badness 10000) in paragraph at lines 156--157
 
  []
 
-[6]
-Overfull \hbox (43.04643pt too wide) in paragraph at lines 268--271
+[10]
+Overfull \hbox (43.04643pt too wide) in paragraph at lines 279--282
+[][] 
+ []
+
+[11]
+Overfull \hbox (53.82965pt too wide) in paragraph at lines 285--292
 [][] 
  []
 
 
-Overfull \hbox (53.82965pt too wide) in paragraph at lines 274--281
+Overfull \hbox (20.70421pt too wide) in paragraph at lines 295--302
 [][] 
  []
 
-[7]
-Overfull \hbox (20.70421pt too wide) in paragraph at lines 284--291
-[][] 
+[12]
+Overfull \hbox (3.41304pt too wide) in paragraph at lines 393--394
+ []\TU/lmss/bx/n/12 Def-i-ni-tion 3.5 \TU/lmss/m/n/12 (LUT map-ping)\TU/lmss/bx
+/n/12 . []\TU/lmss/m/n/12 A \TU/lmss/bx/n/12 LUT map-ping \TU/lmss/m/n/12 of a 
+hi-er-ar-chy-graph $\OML/cmm/m/it/12 G \OT1/cmr/m/n/12 = (\OML/cmm/m/it/12 V; E
+; L; H; C\OT1/cmr/m/n/12 )$
  []
 
-[8]) [9]
-\openout2 = sections/Preliminaries/Preliminaries.aux
- (./sections/Preliminaries/Preliminaries.tex) [10
+
+Overfull \hbox (23.39578pt too wide) in paragraph at lines 419--420
+ []\TU/lmss/bx/n/12 Def-i-ni-tion 3.6 \TU/lmss/m/n/12 (Switch map-ping)\TU/lmss
+/bx/n/12 . []\TU/lmss/m/n/12 A \TU/lmss/bx/n/12 switch map-ping \TU/lmss/m/n/12
+ of a hi-er-ar-chy-graph $\OML/cmm/m/it/12 G \OT1/cmr/m/n/12 = (\OML/cmm/m/it/1
+2 V; E; L; H; C\OT1/cmr/m/n/12 )$
+ []
 
 
-]
+Overfull \hbox (22.91975pt too wide) in paragraph at lines 421--422
+ []$\OT1/cmr/m/n/12 (\OMS/cmsy/m/n/12 8\OML/cmm/m/it/12 v \OMS/cmsy/m/n/12 2 \O
+ML/cmm/m/it/12 V:L\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 v\OT1/cmr/m/n/12 ) \OMS/cms
+y/m/n/12 6\OT1/cmr/m/n/12 = \\OML/cmm/m/it/12 switch\OT1/cmr/m/n/12 " \OMS/cmsy
+/m/n/12 !6 9\OML/cmm/m/it/12 V[]:\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 v; V[]\OT1/c
+mr/m/n/12 ) \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 S[]\OT1/cmr/m/n/12 ) \OMS/cmsy/
+m/n/12 ^ \OT1/cmr/m/n/12 (\OMS/cmsy/m/n/12 8\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 v
+; V[]\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 S[]:V[] \OMS/cmsy/m/
+n/12  \OML/cmm/m/it/12 neighbours\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 v\OT1/cmr/m
+/n/12 ))$ 
+ []
+
+) [13]
 \openout2 = sections/Algorithm/Algorithm.aux
-
-(./sections/Algorithm/Algorithm.tex) [11
+ (./sections/Algorithm/Algorithm.tex) [14
 
 
 ]
 \openout2 = sections/Experiments/Experiments.aux
 
-(./sections/Experiments/Experiments.tex) [12
+(./sections/Experiments/Experiments.tex) [15
 
 
 ]
 \openout2 = sections/Software/Software.aux
- (./sections/Software/Software.tex) [13
+ (./sections/Software/Software.tex ("C:/Program Files/MiKTeX 2.9/tex/latex/lis
+tings/lstlang1.sty"
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+("C:/Program Files/MiKTeX 2.9/tex/latex/listings/lstmisc.sty"
+File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
+) [16
 
 
 ]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [17] [18] [19] [20]
 \openout2 = sections/Conclusion/Conclusion.aux
- (./sections/Conclusion/Conclusion.tex) [14
+ (./sections/Conclusion/Conclusion.tex) [21
 
 
 ]
 \openout2 = sections/Discussion/Discussion.aux
 
-(./sections/Discussion/Discussion.tex) [15
+(./sections/Discussion/Discussion.tex) [22
 
 
 ]
 \openout2 = sections/FutureResearch/FutureResearch.aux
 
-(./sections/FutureResearch/FutureResearch.tex) [16
+(./sections/FutureResearch/FutureResearch.tex) [23
 
 
 ]
-<images/algorithmhistory.png, id=89, 982.67125pt x 2149.02875pt>
+<images/algorithmhistory.png, id=117, 982.67125pt x 2149.02875pt>
 File: images/algorithmhistory.png Graphic file (type png)
 <use images/algorithmhistory.png>
-Package luatex.def Info: images/algorithmhistory.png  used on input line 56.
+Package luatex.def Info: images/algorithmhistory.png  used on input line 68.
 (luatex.def)             Requested size: 982.66885pt x 2149.02351pt.
 File: images/algorithmhistory.png Graphic file (type png)
 <use images/algorithmhistory.png>
-Package luatex.def Info: images/algorithmhistory.png  used on input line 57.
+Package luatex.def Info: images/algorithmhistory.png  used on input line 69.
 (luatex.def)             Requested size: 982.66885pt x 2149.02351pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 56--59
+Underfull \hbox (badness 10000) in paragraph at lines 68--71
 
  []
 
-[17
+[24
 
-]
-Overfull \vbox (479.9596pt too high) has occurred while \output is active []
-
-
-[18<./images/algorithmhistory.png>] [19]
-
-LaTeX Warning: Empty bibliography on input line 61.
-
-(./Thesis.aux (./sections/Introduction/Introduction.aux)
+<./images/algorithmhistory.png>] [25] [26] (./Thesis.aux
+(./sections/Introduction/Introduction.aux)
 (./sections/Background/Background.aux) (./sections/Models/Models.aux)
-(./sections/Preliminaries/Preliminaries.aux)
 (./sections/Algorithm/Algorithm.aux) (./sections/Experiments/Experiments.aux)
 (./sections/Software/Software.aux) (./sections/Conclusion/Conclusion.aux)
 (./sections/Discussion/Discussion.aux)
 (./sections/FutureResearch/FutureResearch.aux))
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package logreq Info: Writing requests to 'Thesis.run.xml'.
 
 \openout1 = Thesis.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 32384 strings out of 494291
- 125171,1144653 words of node,token memory allocated
- 2733 words of node memory still in use:
-   55 hlist, 5 vlist, 10 rule, 3 disc, 2 local_par, 55 glue, 4 kern, 5 penalty, 
-32 glyph, 169 attribute, 67 glue_spec, 169 attribute_list, 6 write, 2 save_pos, 
-83 pdf_literal, 16 pdf_colorstack nodes
-   avail lists: 2:1916,3:1566,4:36,5:349,6:27,7:3957,8:77,9:551,10:6,11:136
- 35376 multiletter control sequences out of 65536+200000
- 67 fonts using 9134207 bytes
- 62i,17n,81p,1272b,1064s stack positions out of 5000i,500n,10000p,200000b,50000s
-<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmsans8-regular.otf><c:/pr
-ogram files/miktex 2.9/fonts/opentype/public/lm/lmsans10-bold.otf><c:/program fi
-les/miktex 2.9/fonts/opentype/public/lm/lmsans10-regular.otf><c:/program files/m
-iktex 2.9/fonts/opentype/public/lm/lmsans12-regular.otf><c:/program files/miktex
- 2.9/fonts/opentype/public/lm/lmsans17-regular.otf><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Thesis.pdf (19 pages, 202226 bytes).
+ 35613 strings out of 494291
+ 156470,1373583 words of node,token memory allocated
+ 1129 words of node memory still in use:
+   22 hlist, 2 vlist, 10 rule, 4 glue, 4 kern, 1 glyph, 61 attribute, 68 glue_sp
+ec, 61 attribute_list, 2 write, 16 pdf_literal, 16 pdf_colorstack nodes
+   avail lists: 1:7,2:7467,3:1652,4:54,5:1769,6:119,7:9593,8:87,9:5392,10:20,11:
+277
+ 38470 multiletter control sequences out of 65536+200000
+ 86 fonts using 10652751 bytes
+ 62i,17n,81p,1272b,1507s stack positions out of 5000i,500n,10000p,200000b,50000s
+<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmmono12-regular.otf><c:/p
+rogram files/miktex 2.9/fonts/opentype/public/lm/lmsans8-regular.otf><c:/program
+ files/miktex 2.9/fonts/opentype/public/lm/lmsans12-oblique.otf><c:/program file
+s/miktex 2.9/fonts/opentype/public/lm/lmsans10-bold.otf><c:/program files/miktex
+ 2.9/fonts/opentype/public/lm/lmsans10-regular.otf><c:/program files/miktex 2.9/
+fonts/opentype/public/lm/lmsans12-regular.otf><c:/program files/miktex 2.9/fonts
+/opentype/public/lm/lmsans17-regular.otf><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/symbols/msbm10.pfb>
+Output written on Thesis.pdf (26 pages, 286273 bytes).
 
-PDF statistics: 150 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 202 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  176 words of extra memory for PDF output out of 10000 (max. 100000000)
 

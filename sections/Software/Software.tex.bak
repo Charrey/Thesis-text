@@ -1,3 +1,238 @@
 \section{Software design}
 \subsection{Architecture}
+\subsection{Formats}
+\subsubsection{FPGA layout input}
+When providing a hierarchygraph $G=(V, E, L, H, C)$ to our software package, you need to provide the graph $(V, E, L)$ in a file in a GraphML\cite{Brandes04graphmarkup} format. This file starts with a prefix:
+
+\lstset{
+  language=XML,
+  morekeywords={encoding, graphml, graph, node, edge, source, target, key, data, id}
+}
+\begin{lstlisting}[frame=single]
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation=
+    "http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="label"
+    for="node"
+    attr.name="label"
+    attr.type="string"/>
+  <key id="graphref"
+    for="node"
+    attr.name="is hierarchygraph"
+    attr.type="string"/>
+  <key id="noderef"
+    for="node"
+    attr.name="linked to"
+    attr.type="string"/>
+\end{lstlisting}
+
+
+Next, you have to create a \texttt{graph} XML element:
+
+\begin{lstlisting}[frame=single]
+<graph id="myfpga" edgedefault="undirected">
+\end{lstlisting}
+
+
+where \texttt{myfpga} should be replaced by any sensible identifier for this hierarchygraph. Next, for each vertex $v$ in $V$ with $L(v)=\{label_1 \dots label_n\}$ you must add a \texttt{node} XML-element within the \texttt{graph} XML element:
+
+
+\begin{lstlisting}[mathescape, frame=single]
+<node id="myNode">
+  <data key="label">$label_1$</data>
+  $\dots$
+  <data key="label">$label_n$</data>
+</node>
+\end{lstlisting}
+
+Where \texttt{myNode} should be replaced by any sensible identifier for this node. Next, each ``component" node $v \in V, L(v)=\{``component"\}$ should have a reference to a file with hierarchygraph $H(v)$: 
+
+\begin{lstlisting}[mathescape, frame=single]
+<node id="myComponentNode">
+  <data key="label">component</data>
+  <data key="graphref">myComponent.graphml</data>
+</node>
+\end{lstlisting}
+
+This file should be in the same directory as the file referencing to it. Next, each ``port" node $v \in V, L(v)=\{``port"\}$ should have a reference to a node identifier from another hierarchygraph:
+
+\begin{lstlisting}[mathescape, frame=single]
+<node id="myPortNode">
+  <data key="label">port</data>
+  <data key="noderef">referredNode</data>
+</node>
+\end{lstlisting}
+
+where \texttt{referredNode} is the \texttt{id} of a node in the hierarchygraph that the ``component" node of this ``port" node references.
+
+Next, for each edge $(v_1, v_2) \in E$ you must add an edge XML-element within the \texttt{graph} XML-element:
+
+\begin{lstlisting}[frame=single, mathescape]
+<edge id="myEdge" source="$id(v_1)$" target="$id(v_2)$"/>
+\end{lstlisting}
+
+where \texttt{myEdge} is replaced by a sensible identifier for this edge and $id(v_1)$ and $id(v_2)$ are the identifiers assigned to the nodes of this edge (i.e. the value of the id-attribute for \texttt{node} XML-elements). Lastly, you must close the \texttt{graph}- and \texttt{graphml} XML-elements to get a valid hierarchygraph document.
+
+\begin{lstlisting}[frame=single]
+</graph>
+</graphml>
+\end{lstlisting}
+
+A complete example of the input format of a simple FPGA hierarchygraph (shown in Figure \ref{fig:example:simplemux}) is shown in Figures \ref{fig:example:simplemuxListing1} and \ref{fig:example:simplemuxListing2}.
+
+\tikzstyle{graphnode} = [circle, minimum width=1.5cm, minimum height=1.5cm,text centered, draw=black]
+\begin{figure}
+\centering
+\begin{adjustbox}{width=	\textwidth}
+\begin{tikzpicture}
+\draw (0,0) node[graphnode] (pin1) {pin};
+\draw (2,0) node[graphnode] (port1) {port};
+\draw (0,2) node[graphnode] (pin2) {pin};
+\draw (2,2) node[graphnode] (port2) {port};
+\draw (8,0) node[graphnode] (pin3) {pin};
+\draw (6,0) node[graphnode] (port3) {port};
+\draw (8,2) node[graphnode] (pin4) {pin};
+\draw (6,2) node[graphnode] (port4) {port};
+\draw (4,1) node[graphnode] (component) {component};
+\draw (pin1)--(port1);
+\draw (pin2)--(port2);
+\draw (pin3)--(port3);
+\draw (pin4)--(port4);
+\draw (component)--(port1);
+\draw (component)--(port2);
+\draw (component)--(port3);
+\draw (component)--(port4);
+
+\draw(12, 1)  node[graphnode] (select) {select};
+\draw(12, -1) node[graphnode] (in1)    {in};
+\draw(12, 3)  node[graphnode] (in2)    {in};
+\draw(14, -1) node[graphnode] (mux1)   {mux};
+\draw(14, 3)  node[graphnode] (mux2)   {mux};
+\draw(16, 1)  node[graphnode] (out)    {out};
+
+\draw (in1)--(mux1);
+\draw (in2)--(mux2);
+\draw (in1)--(out);
+\draw (in2)--(out);
+\draw (select)--(mux1);
+\draw (select)--(mux2);
+
+\draw (10, 4)--(10,-2);
+\draw[dotted] (port2)..controls(3,3)..(in2);
+\draw[dotted] (port4)..controls(6,1)..(select);
+\draw[dotted] (port3)..controls(6,-1)..(in1);
+\draw[dotted] (port1)..controls(2,-3) and (12,0)..(out);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{An FPGA hierarchygraph with four pins and a 1-wire mux.}
+\label{fig:example:simplemux}
+\end{figure}
+
+\lstset{title={virtualFPGA.graphml}}
+\begin{figure}[h]
+\centering
+\begin{lstlisting}[frame=single,  basicstyle=\scriptsize]
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation=
+    "http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="label"
+    for="node"
+    attr.name="label"
+    attr.type="string"/>
+  <key id="graphref"
+    for="node"
+    attr.name="is hierarchygraph"
+    attr.type="string"/>
+  <key id="noderef"
+    for="node"
+    attr.name="linked to"
+    attr.type="string"/>
+  <graph id="virtualFPGA" edgedefault="undirected">
+    <node id="n0"><data key="label">pin</data></node>
+    <node id="n1"><data key="label">pin</data></node>
+    <node id="n2"><data key="label">pin</data></node>
+    <node id="n3"><data key="label">pin</data></node>
+    <node id="n4">
+      <data key="label">component</data>
+      <data key="graphref">mymux.graphml</data>
+    </node>
+    <node id="n5">
+      <data key="label">port</data>
+      <data key="noderef">in1</data>
+    </node>
+    <node id="n6">
+      <data key="label">port</data>
+      <data key="noderef">in2</data>
+    </node>
+    <node id="n7">
+      <data key="label">port</data>
+      <data key="noderef">select</data>
+    </node>
+    <node id="n8">
+      <data key="label">port</data>
+      <data key="noderef">out</data>
+    </node>
+    <edge id="e0" source="n0" target="n5"/>
+    <edge id="e1" source="n1" target="n6"/>
+    <edge id="e2" source="n2" target="n7"/>
+    <edge id="e3" source="n3" target="n8"/>
+    <edge id="e4" source="n4" target="n5"/>
+    <edge id="e5" source="n4" target="n6"/>
+    <edge id="e6" source="n4" target="n7"/>
+    <edge id="e7" source="n4" target="n8"/>
+  </graph>
+</graphml>
+\end{lstlisting}
+\caption{Hierarchygraph input of the left hierarchygraph in Figure \ref{fig:example:simplemux}}
+\label{fig:example:simplemuxListing1}
+\end{figure}
+
+\lstset{title={mymux.graphml}}
+\begin{figure}[h]
+\centering
+\begin{lstlisting}[frame=single,  basicstyle=\scriptsize]
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation=
+    "http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="label"
+    for="node"
+    attr.name="label"
+    attr.type="string"/>
+  <key id="graphref"
+    for="node"
+    attr.name="is hierarchygraph"
+    attr.type="string"/>
+  <key id="noderef"
+    for="node"
+    attr.name="linked to"
+    attr.type="string"/>
+  <graph id="1-wire mux" edgedefault="undirected">
+    <node id="in1"><data key="label">in</data></node>
+    <node id="in2"><data key="label">in</data></node>
+    <node id="select"><data key="label">select</data></node>
+    <node id="mux1"><data key="label">mux</data></node>
+    <node id="mux2"><data key="label">mux</data></node>
+    <node id="out"><data key="label">out</data></node>
+   
+    <edge id="e0" source="in1" target="out"/>
+    <edge id="e1" source="in1" target="mux1"/>
+    <edge id="e2" source="in2" target="out"/>
+    <edge id="e3" source="in2" target="mux2"/>
+    <edge id="e4" source="select" target="mux1"/>
+    <edge id="e5" source="select" target="mux2"/>
+  </graph>
+</graphml>
+\end{lstlisting}
+\caption{Hierarchygraph input of the right hierarchygraph in Figure \ref{fig:example:simplemux}}
+\label{fig:example:simplemuxListing2}
+\end{figure}
+\subsubsection{FPGA program input}
+\subsubsection{FPGA program output}
+
 \subsection{Manual}

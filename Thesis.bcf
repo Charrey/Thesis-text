@@ -2198,6 +2198,11 @@
     <bcf:datasource type="file" datatype="bibtex">sources.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
+    <bcf:citekey order="1">BDDSynthesis</bcf:citekey>
+    <bcf:citekey order="1">pistorius2007benchmarking</bcf:citekey>
+    <bcf:citekey order="2">alhyari2019</bcf:citekey>
+    <bcf:citekey order="3">alhyari2019</bcf:citekey>
+    <bcf:citekey order="4">Brandes04graphmarkup</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

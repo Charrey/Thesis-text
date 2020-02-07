@@ -7,12 +7,23 @@ Our algorithm will generate an emulation using path subgraph isomorphism. To thi
 A $hierarchygraph$ is a structure $\subseteq (V, E, L, H, C)$ where:
 
 \begin{itemize}
-\item $V$ is a set of vertices.
-\item $E\subseteq (V \times V)$ is a set of undirected edges without loops, i.e. $\not \exists v \in V . (v, v) \in E$.
-\item $L$ is a vertex multilabeling function $V \to P(\lambda)$ where $P(\lambda)$ is the power set of a finite set of labels $\lambda$.
+\item $V$ is a finite set of vertices.
+\item $E\subseteq (V \times V)$ is a finite set of undirected edges without loops, i.e. $\not \exists v \in V . (v, v) \in E$.
+\item $L$ is a vertex multilabeling function $V \to P(\lambda)$ where $P(\lambda)$ is the power set of a finite set of labels $\lambda=\{``in", ``out", ``component", ``port", ``mux", ``lut", ``select", ``set", ``async", ``sync"\}$.
 \item $H \subseteq(V \times G)$ where $G$ is the set of all $hierarchygraphs$. This describes the hierarchy of an FPGA.
-\item $C \subseteq (V \times V_H)$ where $V_H$ is the union of the vertex sets of $hierarchygraphs$ in $H$. This allows us to separate different wires coming out of a hierarchical component of the FPGA by linking them with vertices in the $hierarchygraph$ definition of that component.
+\item $C \subseteq (V \times V_H)$ where $V_H=\bigcup_{v_i, (V_i, E_i, L_i, H_i, C_i) \in H} V_i$. This allows us to separate different wires coming out of a hierarchical component of the FPGA by linking them with vertices in the $hierarchygraph$ definition of that component.
 \end{itemize}
+
+Furthermore, the hierarchy is \textit{finite}. I.e if we define a function $depth \in (G \times \mathbb{N})$:
+
+\[
+    depth((V, E, L, H, C)) = \left\{\begin{array}{lr}
+        0   & \text{for } H=\emptyset\\
+        1 + \sum\limits_{H_i \in H}depth(H_i)	 & \text{for } H\neq \emptyset\\
+\end{array}\right\}
+  \]
+  
+then $depth$ is defined for every hierarchygraph.
 \end{defn}
 
 
@@ -379,12 +390,59 @@ The model of a mux is illustrated in Figure \ref{fig:model:mux}.
 \end{itemize}
 \end{defn}
 \subsection{FPGA program}
-Let $model(B)$ be the hierarchygraph of an FPGA layout $B$. We then define an interpretation of $model(B)$ as follows:
+Let $model(B)$ be the hierarchygraph of an FPGA layout $B$. Before we can define what an interpretation of $model(B)$ is, we need to constrain ourselves to hierarchygraphs of FPGAs in Definition \ref{def:fpga_hierarchygraph}. Next, we define the semantics of the configuration of a lookup table in Definition \ref{def:LUT_mapping} and the semantics of the configuration of routing switches in Definition \ref{def:switch_mapping}.
 
-\begin{defn}
+
+\begin{defn}[FPGA hierarchygraph]
+\label{def:fpga_hierarchygraph}
 An \textbf{FPGA hierarchygraph} is a hierarchygraph $G$ such that an FPGA $B$ exists for which $G=model(B)$.
 \end{defn}
 
+
+\begin{defn}[Vertex union]
+Let $V^{\cup}$ be the vertex union of a hierarchygraph, i.e.:
+
+\[
+    V^{\cup}((V, E, L, H, C)) = \left\{\begin{array}{lr}
+        V   & \text{for } H=\emptyset\\
+        V \cup \bigcup_{(v_i, G_i)} V^{\cup}(G_i) & \text{for } H\neq \emptyset\\
+\end{array}\right\}
+  \]
+\end{defn}
+
+\begin{defn}[LUT mapping]
+\label{def:LUT_mapping}
+A \textbf{LUT mapping} of a hierarchygraph $G=(V, E, L, H, C)$ is a function $L_{map} \subseteq V \times P(V^{\cup}(G)) \times P(V^{\cup}(G))$. 
+
+It is a set such that:
+\vspace{10pt}
+
+$\forall v. (L(v) = ``component" \land \exists w \in (H(v).V). (H(v).L)(w)=``lut") \to$
+
+$\quad \forall V_{in}  \in P(H(v).V) . (\forall v_{in} \in V_{in} .(H(v).L)(v_{in})=``in") \to$
+
+$\quad \exists V_{out} \in P(H(v).V) . (\forall v_{out} \in V_{out} . (H(v).L)(v_{out})=``out") \land (v, V_{in}, V_{out}) \in L_{map}$
+
+\vspace{10pt}
+and:
+\vspace{10pt}
+
+$\forall v. (L(v) \neq ``component" \lor \not \exists w \in (H(v).V). (H(v).L)(w)=``lut") \to$
+$\quad \not \exists V_1, V_2 \in P(V^{\cup}(G)) . (v, V_1, V_2) \in L_{map}$
+\vspace{10pt}
+
+Furthermore, if $L_{map}$ is a LUT mapping for $G'$ and $\exists v \in V. (v,G') \in H$ then $L_{map}$ is a LUT mapping for $G$.
+\end{defn}
+
+Furthermore, we define the semantics of the routing configuration of an FPGA program.
+
+\begin{defn}[Switch mapping]
+\label{def:switch_mapping}
+A \textbf{switch mapping} of a hierarchygraph $G=(V, E, L, H, C)$ is a function $S_{map} \subseteq V \times P(V)$ that describes which connections are \textit{not} blocked in an FPGA configuration. It is a set such that:
+
+$(\forall v \in V. L(v) \neq ``switch" \to \not \exists V' . (v, V') \in S_{map}) \land (\forall (v, V') \in S_{map}. V' \subseteq neighbours(v))$
+\end{defn}
+
 \begin{defn}
-An interpretation $I$ of an FPGA hierarchygraph is a structure $$
+An interpretation $I$ of an FPGA hierarchygraph $G=(V,E,L,H,C)$ is a structure $(L_{map}, S_{map})$ where $L_{map}$ is a LUT mapping of $G$ and $S_{map}$ is a switch mapping of $G$. 
 \end{defn}

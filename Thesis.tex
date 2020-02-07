@@ -2,6 +2,7 @@
 \usepackage{amsmath}
 \usepackage{datetime}
 \usepackage{todonotes}
+\usepackage{amsfonts}
 \usepackage{subfiles}
 \usepackage[toc, page]{appendix}
 \usepackage{tikz,fullpage}
@@ -10,16 +11,27 @@
 \usepackage{footnote}
 \usetikzlibrary{tikzmark}
 \usepackage{amsthm}
+\usepackage{listings}
+
 \usepackage{adjustbox}
 \usepackage[backend=biber, style=bibstyle/lncs]{biblatex}
 \addbibresource{sources.bib}
 \renewcommand{\familydefault}{\sfdefault}
 \interfootnotelinepenalty=10000
-
-
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows, decorations.markings}
+\tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position
+   1 with {\arrow[semithick]{Triangle[open,length=3mm,width=5mm]}}},
+   double distance=2.4pt, shorten >= 8pt,
+   preaction = {decorate},
+   postaction = {draw,line width=2.4pt, white,shorten >= 5pt}]
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[section]
 \theoremstyle{definition}
+\newtheoremstyle{indented}{3pt}{3pt}{\addtolength{\leftskip}{2.5em}}{
+}{\bfseries}{.}{.5em}{}
+
+\theoremstyle{indented}
 \newtheorem{defn}[thm]{Definition}
 
 \title{FPGA-on-FPGA emulation}
@@ -41,7 +53,7 @@ FPGAs allow reconfiguration of its logic at any point after production. The resu
 \include{sections/Introduction/Introduction}
 \include{sections/Background/Background}
 \include{sections/Models/Models}
-\include{sections/Preliminaries/Preliminaries}
+%\include{sections/Preliminaries/Preliminaries}
 \include{sections/Algorithm/Algorithm}
 \include{sections/Experiments/Experiments}
 \include{sections/Software/Software}

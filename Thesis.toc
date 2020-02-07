@@ -8,50 +8,58 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.1.1}Lookup tables}{4}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.2}Registers}{4}% 
+\contentsline {subsubsection}{\numberline {2.1.2}Registers}{5}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.3}Logic Cells}{4}% 
+\contentsline {subsubsection}{\numberline {2.1.3}Logic Cells}{5}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.4}Routing}{4}% 
+\contentsline {subsubsection}{\numberline {2.1.4}Routing}{6}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.5}Compilation}{4}% 
+\contentsline {subsubsection}{\numberline {2.1.5}Pins}{6}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2}Simulation versus Emulation}{4}% 
+\contentsline {subsubsection}{\numberline {2.1.6}Compilation}{7}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3}Path subgraph isomorphism}{4}% 
+\contentsline {subsection}{\numberline {2.2}Simulation versus Emulation}{7}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Models}{5}% 
+\contentsline {subsection}{\numberline {2.3}Path subgraph isomorphism}{7}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}FPGA}{5}% 
+\contentsline {section}{\numberline {3}Models}{9}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2}FPGA program}{8}% 
+\contentsline {subsection}{\numberline {3.1}FPGA}{9}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Preliminaries}{10}% 
+\contentsline {subsection}{\numberline {3.2}FPGA program}{13}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Algorithm}{11}% 
+\contentsline {section}{\numberline {4}Algorithm}{14}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}State space storage}{11}% 
+\contentsline {subsection}{\numberline {4.1}State space storage}{14}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}State space exploration}{11}% 
+\contentsline {subsection}{\numberline {4.2}State space exploration}{14}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3}Hierarchy usage}{11}% 
+\contentsline {subsection}{\numberline {4.3}Hierarchy usage}{14}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4}Defining $f$}{11}% 
+\contentsline {subsection}{\numberline {4.4}Defining $f$}{14}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Performance experiments}{12}% 
+\contentsline {section}{\numberline {5}Performance experiments}{15}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Software design}{13}% 
+\contentsline {section}{\numberline {6}Software design}{16}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.1}Architecture}{13}% 
+\contentsline {subsection}{\numberline {6.1}Architecture}{16}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.2}Manual}{13}% 
+\contentsline {subsection}{\numberline {6.2}Formats}{16}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8}Conclusion}{14}% 
+\contentsline {subsubsection}{\numberline {6.2.1}FPGA layout input}{16}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9}Discussion}{15}% 
+\contentsline {subsubsection}{\numberline {6.2.2}FPGA program input}{17}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {10}Future Research}{16}% 
+\contentsline {subsubsection}{\numberline {6.2.3}FPGA program output}{17}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Appendices}{18}% 
+\contentsline {subsection}{\numberline {6.3}Manual}{17}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A}History of subgraph isomorphism algorithms}{18}% 
+\contentsline {section}{\numberline {7}Conclusion}{21}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8}Discussion}{22}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {9}Future Research}{23}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Appendices}{24}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A}History of subgraph isomorphism algorithms}{24}% 
