@@ -78,7 +78,7 @@ $L_{mux} = $ & $\{(v_{left, i}$&$, \{``in"\})$&$: v_{left, i}$&$\in \{v_{left, 1
 
 \begin{figure}
 \centering
-\begin{adjustbox}{width=0.8\textwidth}
+\begin{adjustbox}{width=0.7\textwidth}
 \begin{tikzpicture}
 \draw (-4, 4) node[graphnode] (in1){in};
 \draw (-4, 2) node[graphnode] (in2){in};
@@ -140,7 +140,7 @@ $L_{mux} = $ & $\{(v_{left, i}$&$, \{``in"\})$&$: v_{left, i}$&$\in \{v_{left, 1
 \draw[dotted] (p4).. controls ( -7.5,-4)..(out2);
 \end{tikzpicture}
 \end{adjustbox}
-\caption{How a 2-wire mux is represented in $model(B)$ (left) in terms of vertex $v$ with $L(v)=``component"$, port vertices and edges, and the $hierarchygraph$ $H(v)$ (right) storing the internal details of the mux. Dashed lines indicate the relation $C$ that links the vertices representing outgoing wires. Vertex labels are shown as text.}
+\caption{How a 2-wire mux is represented in $model(B)$ (left) in terms of vertex $v$ with $L(v)=``component"$, port vertices and edges, and the $hierarchygraph$ $H(v)$ (right) storing the internal details of the mux. Dashed lines indicate the relation $C$ that links the vertices representing outgoing wires. Vertex labels are shown as text. See Figure \ref{fig:example:simplemux} for an example where the mux is connected to other parts.}
 \label{fig:model:mux}
 \end{figure}
 Lastly, the relation $C$ contains a link from nodes in the FPGA $hierarchygraph$ to nodes in the mux $hierarchygraph$, i.e. $\forall s \in S . \exists w \in V_{mux} . (s, w) \in C$.
@@ -184,7 +184,7 @@ The model of a lut is illustrated in Figure \ref{fig:model:lut}.
  
  \begin{figure}
 \centering
-\begin{adjustbox}{width=0.8\textwidth}
+\begin{adjustbox}{width=0.7\textwidth}
 \begin{tikzpicture}
 \draw (-4, 4) node[graphnode, text width=1cm] (in1){in, select};
 \draw (-4, 2) node[graphnode, text width=1cm] (in2){in, select};
@@ -304,31 +304,9 @@ $L_{reg}=$&$\{(v_{in, i}, ``in")$&$: v_{in, i} \in \{v_{in, 1} \dots v_{in, n}\}
 Lastly, the relation $C$ contains a link from nodes in the FPGA $hierarchygraph$ to nodes in the register $hierarchygraph$, i.e. $\forall s \in S . \exists w \in V_{reg} . (s, w) \in C$.
 The model of a mux is illustrated in Figure \ref{fig:model:mux}.
 
-%$\{v_{in, 1} \dots v_{in, n}\} \cup \{v_{out, 1} \dots v_{out, n}\} \cup \{v_{set}, v_{resetsync}\footnote{\label{foot:register}These vertices are omitted if the register is incapable of synchronous- or asynchronous resets, respectively.}, v_{resetasync}\footnotemark[\ref{foot:register}]\}$ where
-
-%\begingroup
-%\setlength{\tabcolsep}{2pt} % Default value: 6pt
-%\begin{tabular}{llllll}
-%$\forall v_{in, i}$ & $\in \{v_{in, 1} \dots v_{in, n}\}$ & $. L(v_{in, i})$&$=``register\_in_i"$&$\land (v_{in, i}, v_{set})$&$\in E$, \\
-%$\forall v_{out, i}$ & $\in \{v_{out, 1} \dots v_{out, n}\}$ & $. L(v_{out, i})$&$=``register\_out_i"$&$\land (v_{out, i}, v_{set})$&$\in E$, \\
-%\end{tabular}
-%\endgroup
-
-%$L(v_{set})=``register\_set"$,
-
-%\begingroup
-%\setlength{\tabcolsep}{2pt} % Default value: 6pt
-%\begin{tabular}{llll}
-%$L(v_{resetsync})$&$=``register\_reset\_sync"$&$\land (v_{set}, v_{resetsync}) $&$\in E$ and\\
-%$L(v_{resetasync})$&$=``register\_resFet\_async"$&$\land (v_{set}, v_{resetasync}) $&$\in E$.
-%\end{tabular}
-%\endgroup
-
-%A connection to an input of the register at wire position $x$ in $B$ corresponds with an edge to $v_{in, x}$ in $model(B)$. Similarly, a connection to an output of the register at wire position $x$ in $B$ corresponds with an edge to $v_{out, x}$ in $model(B)$. Connections to the set-, synchronous reset and asynchronous reset gates in $B$ correspond to edges to the respective vertex in $\{v_{set}, v_{resetsync}, v_{resetasync}\}$ in $model(B)$.
- 
  \begin{figure}
 \centering
-\begin{adjustbox}{width=0.8\textwidth}
+\begin{adjustbox}{width=0.7\textwidth}
 \begin{tikzpicture}
 \draw (0, 2) node[graphnode, text width=1cm] (in1){in};
 \draw (-2, 0) node[graphnode, text width=1cm] (set) {set};
@@ -390,7 +368,7 @@ The model of a mux is illustrated in Figure \ref{fig:model:mux}.
 \end{itemize}
 \end{defn}
 \subsection{FPGA program}
-Let $model(B)$ be the hierarchygraph of an FPGA layout $B$. Before we can define what an interpretation of $model(B)$ is, we need to constrain ourselves to hierarchygraphs of FPGAs in Definition \ref{def:fpga_hierarchygraph}. Next, we define the semantics of the configuration of a lookup table in Definition \ref{def:LUT_mapping} and the semantics of the configuration of routing switches in Definition \ref{def:switch_mapping}.
+Let $model(B)$ be the hierarchygraph of an FPGA layout $B$. Before we can define what an interpretation of $model(B)$ is, we need to constrain ourselves to hierarchygraphs of FPGAs in Definition \ref{def:fpga_hierarchygraph}. Next, we define the semantics of the configuration of a lookup table in Definition \ref{def:LUT_mapping} and the semantics of the configuration of routing switches in Definition \ref{def:switch_mapping}. Finally, we define an interpretation of an FPGA hierarchygraph in Definition \ref{def:interpretation}. This interpretation is our model of an FPGA program for FPGA layout $B$.
 
 
 \begin{defn}[FPGA hierarchygraph]
@@ -400,12 +378,12 @@ An \textbf{FPGA hierarchygraph} is a hierarchygraph $G$ such that an FPGA $B$ ex
 
 
 \begin{defn}[Vertex union]
-Let $V^{\cup}$ be the vertex union of a hierarchygraph, i.e.:
+Let $V^{\cup}$ be the vertex union of a hierarchygraph, defined as:
 
 \[
     V^{\cup}((V, E, L, H, C)) = \left\{\begin{array}{lr}
         V   & \text{for } H=\emptyset\\
-        V \cup \bigcup_{(v_i, G_i)} V^{\cup}(G_i) & \text{for } H\neq \emptyset\\
+        V \cup \bigcup\limits_{(v_i, G_i)\in H} V^{\cup}(G_i) & \text{for } H\neq \emptyset\\
 \end{array}\right\}
   \]
 \end{defn}
@@ -443,6 +421,7 @@ A \textbf{switch mapping} of a hierarchygraph $G=(V, E, L, H, C)$ is a function 
 $(\forall v \in V. L(v) \neq ``switch" \to \not \exists V' . (v, V') \in S_{map}) \land (\forall (v, V') \in S_{map}. V' \subseteq neighbours(v))$
 \end{defn}
 
-\begin{defn}
+\begin{defn}[Interpretation]
+\label{def:interpretation}
 An interpretation $I$ of an FPGA hierarchygraph $G=(V,E,L,H,C)$ is a structure $(L_{map}, S_{map})$ where $L_{map}$ is a LUT mapping of $G$ and $S_{map}$ is a switch mapping of $G$. 
 \end{defn}
