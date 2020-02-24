@@ -4,32 +4,68 @@ import data.graph.HierarchyGraph;
 import data.graph.Label;
 import data.graph.Node;
 import data.graph.Patterns;
-import exceptions.ParseException;
 import org.eclipse.collections.impl.tuple.Tuples;
-import reader.Reader;
+import util.Util;
 import writer.Writer;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MakeTests {
 
-    public static void main(String[] args) throws IOException, ParserConfigurationException, ParseException {
-        makeSimpleLut();
-        makeSimpleRegister();
-        makeSimpleMux();
+    public static void main(String[] args) throws IOException {
+        makeLutAndRegister(3);
+        makeSimpleLut(2);
+        makeSimpleRegister(2);
+        makeSimpleMux(1);
         makeSimpleRoutingSwitch();
-        makeSimpleLogicCell();
+        makeSimpleLogicCell(3);
 
-        Path mainFile = Paths.get("src/test/resources/graphml/LogicCell");
-        HierarchyGraph graph = new Reader().read(mainFile.resolve("main.graphml"));
-        System.out.println(graph.flatten().toDOT(false));
     }
 
-    private static void makeSimpleRoutingSwitch() throws IOException {
+    public static HierarchyGraph makeLutAndRegister(int ins) throws IOException {
+        HierarchyGraph res = new HierarchyGraph();
+        Patterns.Register register = Patterns.Register(ins, false, false);
+        List<Node> pins = new LinkedList<>();
+        List<Node> ports = new LinkedList<>();
+        Node clock = res.addNode(Label.CLOCK);
+        Node component = res.addComponent(register.hierarchyGraph, "Register");
+        res.addEdge(clock, res.addPort(register.set, component));
+        for (int i = 0; i < ins; i++) {
+            pins.add(res.addNode(Label.PIN));
+            ports.add(res.addPort(register.inputs.get(i), component));
+        }
+        for (int i = 0; i < ins; i++) {
+            pins.add(res.addNode(Label.PIN));
+            ports.add(res.addPort(register.outputs.get(i), component));
+        }
+        for (int i = 0; i < pins.size(); i++) {
+            res.addEdge(pins.get(i), ports.get(i));
+        }
+
+        Patterns.LUT lut = Patterns.LUT(ins + 1, ins);
+        pins = new LinkedList<>();
+        ports = new LinkedList<>();
+        component = res.addComponent(lut.hierarchyGraph, "LUT");
+        res.addEdge(clock, res.addPort(lut.inputs.get(2), component));
+        for (int i = 0; i < ins; i++) {
+            pins.add(res.addNode(Label.PIN));
+            ports.add(res.addPort(lut.inputs.get(i), component));
+        }
+        for (int i = 0; i < ins; i++) {
+            pins.add(res.addNode(Label.PIN));
+            ports.add(res.addPort(lut.outputs.get(i), component));
+        }
+        for (int i = 0; i < pins.size(); i++) {
+            res.addEdge(pins.get(i), ports.get(i));
+        }
+        Writer.writeToDirectory(Writer.export(res, true), Paths.get("src/test/resources/graphml/LutAndRegister"));
+        return res;
+    }
+
+    public static HierarchyGraph makeSimpleRoutingSwitch() throws IOException {
         Patterns.Switch mySwitch = Patterns.Switch();
         mySwitch.addOption(Tuples.twin(0, 1), Tuples.twin(1, 0));
         mySwitch.addOption(Tuples.twin(0, 2), Tuples.twin(2, 0));
@@ -45,133 +81,98 @@ public class MakeTests {
         res.addPortMapping(ports.get(1), mySwitch.getByNumber(1));
         res.addPortMapping(ports.get(2), mySwitch.getByNumber(2));
         Writer.writeToDirectory(Writer.export(res, true), Paths.get("src/test/resources/graphml/Switch"));
+        return res;
     }
 
-    private static void makeSimpleMux() throws IOException {
-        Patterns.MUX mux = Patterns.MUX(1);
+    public static HierarchyGraph makeSimpleMux(int wireCount) throws IOException {
+        Patterns.MUX mux = Patterns.MUX(wireCount);
         HierarchyGraph res = new HierarchyGraph();
         Node component = res.addComponent(mux.hierarchyGraph, "MUX");
-        List<Node> pins = Patterns.addPins(res, 4);
-        List<Node> ports = Patterns.addPorts(res, 4);
+        List<Node> pins = Patterns.addPins(res, 3*wireCount + 1);
+        List<Node> ports = Patterns.addPorts(res, 3*wireCount + 1);
         for (int i = 0; i < ports.size(); i++) {
             res.addEdge(ports.get(i), component);
         }
         for (int i = 0; i < pins.size(); i++) {
             res.addEdge(pins.get(i), ports.get(i));
+        }
+        for (int i = 0; i < wireCount; i++) {
+            res.addPortMapping(ports.get(i), Util.concat(mux.in1, mux.in2, mux.out, List.of(mux.select)).get(i));
         }
         res.addPortMapping(ports.get(0), mux.in1.get(0));
         res.addPortMapping(ports.get(1), mux.in2.get(0));
         res.addPortMapping(ports.get(2), mux.out.get(0));
         res.addPortMapping(ports.get(3), mux.select);
         Writer.writeToDirectory(Writer.export(res, true), Paths.get("src/test/resources/graphml/MUX"));
+        return res;
     }
 
-    private static void makeSimpleLogicCell() throws IOException {
+    public static HierarchyGraph makeSimpleLogicCell(int wires) throws IOException {
         HierarchyGraph graph = new HierarchyGraph();
 
-        Node pin_in_1 = graph.addNode(Label.PIN);
-        Node pin_in_2 = graph.addNode(Label.PIN);
-        Node pin_out_1 = graph.addNode(Label.PIN);
-        Node pin_out_2 = graph.addNode(Label.PIN);
+        List<Node> pins = Patterns.addPins(graph, wires * 2);
         Node clock = graph.addNode(Label.CLOCK);
-        Node on = graph.addNode(Label.ALWAYS_ON);
+        Node on = graph.addNode(Label.EXTRA);
 
-        Patterns.Switch mySwitch1 = Patterns.Switch();
-        mySwitch1.addOption(Tuples.twin(0, 1), Tuples.twin(1, 0));
-        mySwitch1.addOption(Tuples.twin(0, 2), Tuples.twin(2, 0));
-        Node switch1Component = graph.addComponent(mySwitch1.getHierarchyGraph(), "Switch 1");
-        Node switch1Port1 = graph.addPort(mySwitch1.getByNumber(0), switch1Component);
-        Node switch1Port2 = graph.addPort(mySwitch1.getByNumber(1), switch1Component);
-        Node switch1Port3 = graph.addPort(mySwitch1.getByNumber(2), switch1Component);
+        Patterns.Switch mySwitch = Patterns.Switch();
+        mySwitch.addOption(Tuples.twin(0, 1), Tuples.twin(1, 0));
+        mySwitch.addOption(Tuples.twin(0, 2), Tuples.twin(2, 0));
 
-        graph.addEdge(pin_in_1, switch1Port1);
+        Patterns.LUT LUT = Patterns.LUT(wires, wires);
+        Patterns.Register register = Patterns.Register(wires, false, false);
+        Patterns.MUX MUX = Patterns.MUX(wires);
 
-        Node switch2Component = graph.addComponent(mySwitch1.getHierarchyGraph(), "Switch");
-        Node switch2Port1 = graph.addPort(mySwitch1.getByNumber(0), switch2Component);
-        assert graph.getPortMapping().get(switch1Port1).equals(graph.getPortMapping().get(switch2Port1));
-        Node switch2Port2 = graph.addPort(mySwitch1.getByNumber(1), switch2Component);
-        Node switch2Port3 = graph.addPort(mySwitch1.getByNumber(2), switch2Component);
-        graph.addEdge(pin_in_2, switch2Port1);
-
-        Patterns.LUT LUT = Patterns.LUT(2, 2);
         Node LUTComponent = graph.addComponent(LUT.hierarchyGraph, "LUT");
-        Node LUTPort1 = graph.addPort(LUT.inputs.get(0), LUTComponent);
-        Node LUTPort2 = graph.addPort(LUT.inputs.get(1), LUTComponent);
-        Node LUTPort3 = graph.addPort(LUT.outputs.get(0), LUTComponent);
-        Node LUTPort4 = graph.addPort(LUT.outputs.get(1), LUTComponent);
-
-        graph.addEdge(LUTPort1, switch1Port2);
-        graph.addEdge(LUTPort2, switch2Port2);
-
-        Patterns.Register register = Patterns.Register(2, false, false);
         Node registerComponent = graph.addComponent(register.hierarchyGraph, "Register");
-        Node RegisterPort1 = graph.addPort(register.inputs.get(0), registerComponent);
-        Node RegisterPort2 = graph.addPort(register.inputs.get(1), registerComponent);
-        Node RegisterPort3 = graph.addPort(register.outputs.get(0), registerComponent);
-        Node RegisterPort4 = graph.addPort(register.outputs.get(1), registerComponent);
-        Node RegisterPort5 = graph.addPort(register.set, registerComponent);
-        graph.addEdge(clock, RegisterPort5);
-        graph.addEdge(RegisterPort1, switch1Port3);
-        graph.addEdge(RegisterPort2, switch2Port3);
-
-        Patterns.MUX MUX = Patterns.MUX(2);
         Node muxComponent = graph.addComponent(MUX.hierarchyGraph, "MUX");
-        Node MUXPort1 = graph.addPort(MUX.in1.get(0), muxComponent);
-        Node MUXPort2 = graph.addPort(MUX.in1.get(1), muxComponent);
-        Node MUXPort3 = graph.addPort(MUX.in2.get(0), muxComponent);
-        Node MUXPort4 = graph.addPort(MUX.in2.get(1), muxComponent);
-        Node MUXPort5 = graph.addPort(MUX.out.get(0), muxComponent);
-        Node MUXPort6 = graph.addPort(MUX.out.get(1), muxComponent);
-        Node MUXPort7 = graph.addPort(MUX.select, muxComponent);
-        graph.addEdge(MUXPort1, LUTPort3);
-        graph.addEdge(MUXPort2, LUTPort4);
-        graph.addEdge(MUXPort3, RegisterPort3);
-        graph.addEdge(MUXPort4, RegisterPort4);
-        graph.addEdge(MUXPort5, pin_out_1);
-        graph.addEdge(MUXPort6, pin_out_2);
-        graph.addEdge(MUXPort7, on);
 
+
+        for (int i = 0; i < wires; i++) {
+            Node switch1Component = graph.addComponent(mySwitch.getHierarchyGraph(), "Switch 1");
+            graph.addEdge(pins.get(i),                                              graph.addPort(mySwitch.getByNumber(0), switch1Component));
+            graph.addEdge(graph.addPort(LUT.inputs.get(i), LUTComponent),           graph.addPort(mySwitch.getByNumber(1), switch1Component));
+            graph.addEdge(graph.addPort(register.inputs.get(i), registerComponent), graph.addPort(mySwitch.getByNumber(2), switch1Component));
+            graph.addEdge(graph.addPort(MUX.in1.get(i), muxComponent), graph.addPort(LUT.outputs.get(i), LUTComponent));
+            graph.addEdge(graph.addPort(MUX.in2.get(i), muxComponent), graph.addPort(register.outputs.get(i), registerComponent));
+            graph.addEdge(graph.addPort(MUX.out.get(i), muxComponent),      pins.get(i + wires));
+        }
+        graph.addEdge(clock, graph.addPort(register.set, registerComponent));
+        graph.addEdge(on, graph.addPort(MUX.select, muxComponent));
         Writer.writeToDirectory(Writer.export(graph, true), Paths.get("src/test/resources/graphml/LogicCell"));
+        return graph;
     }
 
-    private static void makeSimpleRegister() throws IOException {
-        Patterns.Register register = Patterns.Register(1, true, true);
+    public static HierarchyGraph makeSimpleRegister(int wireCount) throws IOException {
+        Patterns.Register register = Patterns.Register(wireCount, true, true);
         HierarchyGraph res = new HierarchyGraph();
 
         Node component = res.addComponent(register.hierarchyGraph, "Register");
-        List<Node> pins = Patterns.addPins(res, 5);
-        List<Node> ports = Patterns.addPorts(res, 5);
-        for (int i = 0; i < ports.size(); i++) {
+        List<Node> pins = Patterns.addPins(res, 2*wireCount + 3);
+        List<Node> ports = Patterns.addPorts(res, 2*wireCount + 3);
+        for (int i = 0; i < 2*wireCount + 3; i++) {
             res.addEdge(ports.get(i), component);
-        }
-        for (int i = 0; i < pins.size(); i++) {
             res.addEdge(pins.get(i), ports.get(i));
+            res.addPortMapping(ports.get(i), Util.concat(register.inputs, register.outputs, List.of(register.set), List.of(register.syncReset), List.of(register.asyncReset)).get(i));
         }
-        res.addPortMapping(ports.get(0), register.inputs.get(0));
-        res.addPortMapping(ports.get(1), register.outputs.get(0));
-        res.addPortMapping(ports.get(2), register.set);
-        res.addPortMapping(ports.get(3), register.syncReset);
-        res.addPortMapping(ports.get(4), register.asyncReset);
         Writer.writeToDirectory(Writer.export(res, true), Paths.get("src/test/resources/graphml/Register"));
+        return res;
     }
 
-    private static void makeSimpleLut() throws IOException {
-        Patterns.LUT lut = Patterns.LUT(2, 2);
+    public static HierarchyGraph makeSimpleLut(int ins) throws IOException {
+        Patterns.LUT lut = Patterns.LUT(ins, ins);
         HierarchyGraph res = new HierarchyGraph();
 
         Node component = res.addComponent(lut.hierarchyGraph, "LUT");
-        List<Node> pins = Patterns.addPins(res, 4);
-        List<Node> ports = Patterns.addPorts(res, 4);
+        List<Node> pins = Patterns.addPins(res, ins*2);
+        List<Node> ports = Patterns.addPorts(res, ins*2);
         for (int i = 0; i < pins.size(); i++) {
-            res.addEdge(pins.get(i), component);
+            res.addEdge(ports.get(i), component);
         }
         for (int i = 0; i < ports.size(); i++) {
             res.addEdge(ports.get(i), pins.get(i));
+            res.addPortMapping(ports.get(i), Util.concat(lut.inputs, lut.outputs).get(i));
         }
-        res.addPortMapping(ports.get(0), lut.inputs.get(0));
-        res.addPortMapping(ports.get(1), lut.inputs.get(1));
-        res.addPortMapping(ports.get(2), lut.outputs.get(0));
-        res.addPortMapping(ports.get(3), lut.outputs.get(1));
         Writer.writeToDirectory(Writer.export(res, true), Paths.get("src/test/resources/graphml/LUT"));
+        return res;
     }
 }

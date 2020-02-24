@@ -2,8 +2,6 @@ package util;
 
 import data.graph.Label;
 import exceptions.ParseException;
-import org.eclipse.collections.api.bimap.BiMap;
-import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
 import org.eclipse.collections.impl.tuple.Tuples;
 
@@ -31,7 +29,7 @@ public class Labels {
         map.add(Tuples.pair("flow_from", Label.FLOW_FROM));
         map.add(Tuples.pair("flow_to", Label.FLOW_TO));
         map.add(Tuples.pair("clock", Label.CLOCK));
-        map.add(Tuples.pair("always_on", Label.ALWAYS_ON));
+        map.add(Tuples.pair("always_on", Label.EXTRA));
 
     }
 

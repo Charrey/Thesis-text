@@ -1,0 +1,3 @@
+*.class
+Java/target/
+Java/src/test/resources/graphml/

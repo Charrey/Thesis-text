@@ -1,10 +1,15 @@
 package reader;
 
+import data.MappingFunction;
 import data.graph.HierarchyGraph;
+import exceptions.NoMappingException;
 import exceptions.ParseException;
+import iso.IsoFinder;
 import org.eclipse.collections.api.tuple.Pair;
 import org.junit.Test;
 import test.MyTestCase;
+import testMaker.MakeTests;
+import util.Util;
 import writer.Writer;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -16,63 +21,57 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TestSimple extends MyTestCase {
 
     @Test
-    public void testSimpleMux() throws IOException, ParserConfigurationException, ParseException {
-        Reader reader = new Reader();
-        Path mainFile =  resource("../graphml/manual/simpleMUX/main.graphml");
-        HierarchyGraph graph = reader.read(mainFile);
-        graph.shuffleIdentifiers();
-        System.out.println(graph.flatten().toDOT(true));
+    public void testLUT_test1() throws IOException, ParserConfigurationException, ParseException, NoMappingException {
+        MakeTests.makeSimpleLut(2);
+        Path mainFile =  resource("../graphml/LUT/main.graphml");
+        HierarchyGraph graph1 = new Reader().read(mainFile);
+        graph1.shuffleIdentifiers();
+        HierarchyGraph graph2 = graph1.deepCopy().getOne();
+        graph2.shuffleIdentifiers();
+        MappingFunction f = IsoFinder.getMapping(graph1, graph2);
+        assertTrue(Util.isCorrect(f.getPartialMapping()));
     }
 
     @Test
-    public void testMuxExport() throws IOException, ParserConfigurationException, ParseException {
-        Path mainFile =  resource("../graphml/manual/simpleMUX/main.graphml");
-        String contents = new String(Files.readAllBytes(mainFile), StandardCharsets.UTF_8);
-        HierarchyGraph graph = new Reader().read(contents, mainFile);
-        Writer.writeToDirectory(Writer.export(graph, true), Paths.get("export/MuxExport"));
-
-        contents = new String(Files.readAllBytes(Paths.get("export/MuxExport").resolve("main.graphml")), StandardCharsets.UTF_8);
-        graph = new Reader().read(contents, (Paths.get("export/MuxExport").resolve("main.graphml")));
-        System.out.println(graph.flatten().toDOT(false));
+    public void testRegister_test2() throws IOException, ParserConfigurationException, ParseException, NoMappingException {
+        MakeTests.makeSimpleRegister(2);
+        Path mainFile =  resource("../graphml/Register/main.graphml");
+        HierarchyGraph graph1 = new Reader().read(mainFile);
+        graph1.shuffleIdentifiers();
+        HierarchyGraph graph2 = graph1.deepCopy().getOne();
+        graph2.shuffleIdentifiers();
+        MappingFunction f = IsoFinder.getMapping(graph1, graph2);
+        assertTrue(Util.isCorrect(f.getPartialMapping()));
     }
 
     @Test
-    public void testSimpleLut() throws IOException, ParserConfigurationException, ParseException {
-        Reader reader = new Reader();
-        Path mainFile =  resource("../graphml/manual/simpleLUT/main.graphml");
-        HierarchyGraph graph = reader.read(mainFile);
-        graph.shuffleIdentifiers();
-        System.out.println(graph.flatten().toDOT(true));
+    public void testMux_test3() throws IOException, ParserConfigurationException, ParseException, NoMappingException {
+        MakeTests.makeSimpleMux(2);
+        Path mainFile =  resource("../graphml/MUX/main.graphml");
+        HierarchyGraph graph1 = new Reader().read(mainFile);
+        graph1.shuffleIdentifiers();
+        HierarchyGraph graph2 = graph1.deepCopy().getOne();
+        graph2.shuffleIdentifiers();
+        MappingFunction f = IsoFinder.getMapping(graph1, graph2);
+        assertTrue(Util.isCorrect(f.getPartialMapping()));
     }
 
     @Test
-    public void testSimpleRegister() throws IOException, ParserConfigurationException, ParseException {
-        Reader reader = new Reader();
-        Path mainFile =  resource("../graphml/manual/simpleRegister/main.graphml");
-        HierarchyGraph graph = reader.read(mainFile);
-        graph.shuffleIdentifiers();
-        System.out.println(graph.flatten().toDOT(true));
+    public void testLogicCell_test4() throws IOException, ParserConfigurationException, ParseException, NoMappingException {
+        MakeTests.makeSimpleLogicCell(2);
+        Path mainFile =  resource("../graphml/LogicCell/main.graphml");
+        HierarchyGraph graph1 = new Reader().read(mainFile);
+        graph1.shuffleIdentifiers();
+        HierarchyGraph graph2 = graph1.deepCopy().getOne();
+        graph2.shuffleIdentifiers();
+        MappingFunction f = IsoFinder.getMapping(graph1, graph2);
+        assertTrue(Util.isCorrect(f.getPartialMapping()));
     }
 
-    @Test
-    public void testSimpleSwitch() throws IOException, ParserConfigurationException, ParseException {
-        Reader reader = new Reader();
-        Path mainFile =  resource("../graphml/manual/simpleSwitch/main.graphml");
-        HierarchyGraph graph = reader.read(mainFile);
-        graph.shuffleIdentifiers();
-        System.out.println(graph.flatten().toDOT(true));
-    }
 
-    @Test
-    public void testSimpleCell() throws IOException, ParserConfigurationException, ParseException {
-        Reader reader = new Reader();
-        Path mainFile =  resource("../graphml/manual/simpleSwitch/main.graphml");
-        HierarchyGraph graph = reader.read(mainFile);
-        graph.shuffleIdentifiers();
-        System.out.println(graph.flatten().toDOT(true));
-    }
 }

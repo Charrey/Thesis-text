@@ -8,6 +8,7 @@ import org.eclipse.collections.impl.tuple.Tuples;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 import util.Labels;
+import util.Util;
 
 import javax.xml.parsers.*;
 import java.io.*;
@@ -39,6 +40,7 @@ public class Reader {
     }
 
 
+    private static int fileCounter = 0;
     public HierarchyGraph read(String contents, Path file) throws ParserConfigurationException, IOException,  ParseException {
         if (cache.containsKey(file)) {
             return cache.get(file);
@@ -60,7 +62,7 @@ public class Reader {
         if (graph == null) {
             throw new ParseException(file, "XML element \"graph\" not found.");
         }
-        graphIds.add(Tuples.pair(file.toAbsolutePath(), graph.getAttributes().getNamedItem("id").getTextContent()));
+        graphIds.put(file.toRealPath(), graph.getAttributes().getNamedItem("id").getTextContent() + fileCounter++);
         res.getNamesOfHierarchyGraphs().put(res, graph.getAttributes().getNamedItem("id").getTextContent());
         for (int i = 0; i < graph.getChildNodes().getLength(); i++) {
             Node child = graph.getChildNodes().item(i);

@@ -3,6 +3,7 @@ package data.graph;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.tuple.Tuples;
 import reader.Reader;
+import util.Util;
 
 import java.nio.file.Paths;
 import java.util.*;
@@ -21,7 +22,7 @@ public class HierarchyGraph {
 
     private Map<HierarchyGraph, String> namesOfHierarchyGraphs = new HashMap<>();
 
-    private List<Pair<String, Set<Node>>> subGraphLabeling = new LinkedList<>();
+    public List<Pair<String, Set<Node>>> subGraphLabeling = new LinkedList<>();
 
     public void lock() {
         if (locked) {
@@ -100,16 +101,18 @@ public class HierarchyGraph {
 
     private void addSubGraphs(List<String> lines) {
         for (Pair<String, Set<Node>> entry : subGraphLabeling) {
-            lines.add("subgraph cluster_" + subGraphCounter++ + " {");
-            lines.add("label = \"" + entry.getOne() +"\"");
-            for (Node node : entry.getTwo()) {
-                lines.add(node.getID() + ";");
+            if (V.containsAll(entry.getTwo())) {
+                lines.add("subgraph cluster_" + subGraphCounter++ + " {");
+                lines.add("label = \"" + entry.getOne() + "\"");
+                for (Node node : entry.getTwo()) {
+                    lines.add(node.getID() + ";");
+                }
+                lines.add("}");
             }
-            lines.add("}");
         }
     }
 
-    private Map<HierarchyGraph, HierarchyGraph> flattenedCache = new HashMap<>();
+    private static Map<HierarchyGraph, HierarchyGraph> flattenedCache = new HashMap<>();
     private HierarchyGraph getFlat(HierarchyGraph from) {
         if (flattenedCache.containsKey(from)) {
             return flattenedCache.get(from);
@@ -139,10 +142,8 @@ public class HierarchyGraph {
 
             String name = namesOfHierarchyGraphs.get(hierarchies.getValue());
             name = Reader.graphIds.getOrDefault(Paths.get(name), name);
-            subGraphLabeling.add(Tuples.pair(name, copy.getOne().getNodes()));
+            res.subGraphLabeling.add(Tuples.pair(name, copy.getOne().getNodes()));
         }
-        //Util.assertConnected(res);
-        res.subGraphLabeling = subGraphLabeling;
         return res;
     }
 
@@ -152,23 +153,25 @@ public class HierarchyGraph {
         return res;
     }
 
-    private Pair<HierarchyGraph, Map<Node, Node>> deepCopy() {
+    public Pair<HierarchyGraph, Map<Node, Node>> deepCopy() {
         Map<Node, Node> nodemap = new HashMap<>();
         HierarchyGraph res = new HierarchyGraph();
         for (Node replaced : V) {
-            Node replacedBy = res.addNode(new HashSet<>(replaced.getLabels()));
-            nodemap.put(replaced, replacedBy);
-        }
-        for (Map.Entry<Node, Set<Node>> entry : E.entrySet()) {
-            for (Node target : entry.getValue()) {
-                res.addEdge(nodemap.get(entry.getKey()), nodemap.get(target));
+            if (!H.containsKey(replaced)) {
+                Node replacedBy = res.addNode(new HashSet<>(replaced.getLabels()));
+                nodemap.put(replaced, replacedBy);
             }
         }
         Map<Node, Node> subCopyMapping = new HashMap<>();
         for (Map.Entry<Node, HierarchyGraph> entry : H.entrySet()) {
             Pair<HierarchyGraph, Map<Node, Node>> deepercopy = entry.getValue().deepCopy();
             subCopyMapping.putAll(deepercopy.getTwo());
-            res.addComponent(deepercopy.getOne(), namesOfHierarchyGraphs.get(entry.getValue()));
+            nodemap.put(entry.getKey(), res.addComponent(deepercopy.getOne(), namesOfHierarchyGraphs.get(entry.getValue())));
+        }
+        for (Map.Entry<Node, Set<Node>> entry : E.entrySet()) {
+            for (Node target : entry.getValue()) {
+                res.addEdge(nodemap.get(entry.getKey()), nodemap.get(target));
+            }
         }
         for (Map.Entry<Node, Node> entry : C.entrySet()) {
             res.addPortMapping(nodemap.get(entry.getKey()), subCopyMapping.get(entry.getValue()));
@@ -290,7 +293,7 @@ public class HierarchyGraph {
         for (int i = 0; i < from.size(); i++) {
             mapping.put(from.get(i), to.get(i));
         }
-
+        labelIndex = new HashMap<>();
         Map<Node, Set<Node>> E_new = new HashMap<>();
         Map<Node, HierarchyGraph> H_new = new HashMap<>();
         Map<Node, Node> C_new = new HashMap<>();
@@ -309,6 +312,10 @@ public class HierarchyGraph {
         }
         for (Node n : to) {
             n.setLabels(newLabels.get(n));
+            for (Label label : newLabels.get(n)) {
+                labelIndex.putIfAbsent(label, new HashSet<>());
+                labelIndex.get(label).add(n);
+            }
         }
         E = E_new;
         H = H_new;

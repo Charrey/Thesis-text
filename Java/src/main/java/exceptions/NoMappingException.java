@@ -1,4 +1,4 @@
 package exceptions;
 
-public class NoMappingException {
+public class NoMappingException extends Throwable {
 }
