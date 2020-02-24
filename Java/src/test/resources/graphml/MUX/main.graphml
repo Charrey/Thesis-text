@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema−instance"
+	xsi:schemaLocation=
+	"http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+	<key id="label" for="node" attr.name="label" attr.type="string"/>
+	<key id="graphref" for="node" attr.name="is hierarchygraph" attr.type="string"/>
+	<key id="noderef" for="node" attr.name="linked to" attr.type="string"/>
+	<graph id="exportedGraph" edgedefault="undirected">
+"		<node id="n37"><data key="label">component</data><data key="graphref">graph_0.graphml</data></node>
+		<node id="n42"><data key="label">port</data><data key="noderef">n33</data></node>
+		<node id="n43"><data key="label">port</data><data key="noderef">n34</data></node>
+		<node id="n44"><data key="label">port</data><data key="noderef">n35</data></node>
+		<node id="n45"><data key="label">port</data><data key="noderef">n36</data></node>
+		<node id="n38"><data key="label">pin</data></node>
+		<node id="n39"><data key="label">pin</data></node>
+		<node id="n40"><data key="label">pin</data></node>
+		<node id="n41"><data key="label">pin</data></node>
+		<edge id="37-42" source="n37" target="n42"/>
+		<edge id="37-43" source="n37" target="n43"/>
+		<edge id="37-44" source="n37" target="n44"/>
+		<edge id="37-45" source="n37" target="n45"/>
+		<edge id="38-42" source="n38" target="n42"/>
+		<edge id="39-43" source="n39" target="n43"/>
+		<edge id="40-44" source="n40" target="n44"/>
+		<edge id="41-45" source="n41" target="n45"/>
+	</graph>
+</graphml>

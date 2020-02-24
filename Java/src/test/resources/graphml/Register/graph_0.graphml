@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema−instance"
+	xsi:schemaLocation=
+	"http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+	<key id="label" for="node" attr.name="label" attr.type="string"/>
+	<key id="graphref" for="node" attr.name="is hierarchygraph" attr.type="string"/>
+	<key id="noderef" for="node" attr.name="linked to" attr.type="string"/>
+	<graph id="Register" edgedefault="undirected">
+"		<node id="n17"><data key="label">out</data></node>
+		<node id="n18"><data key="label">async</data></node>
+		<node id="n19"><data key="label">sync</data></node>
+		<node id="n15"><data key="label">set</data></node>
+		<node id="n16"><data key="label">in</data></node>
+		<edge id="15-18" source="n15" target="n18"/>
+		<edge id="15-19" source="n15" target="n19"/>
+		<edge id="15-16" source="n15" target="n16"/>
+		<edge id="16-17" source="n16" target="n17"/>
+	</graph>
+</graphml>

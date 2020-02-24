@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema−instance"
+	xsi:schemaLocation=
+	"http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+	<key id="label" for="node" attr.name="label" attr.type="string"/>
+	<key id="graphref" for="node" attr.name="is hierarchygraph" attr.type="string"/>
+	<key id="noderef" for="node" attr.name="linked to" attr.type="string"/>
+	<graph id="exportedGraph" edgedefault="undirected">
+"		<node id="n59"><data key="label">component</data><data key="graphref">graph_0.graphml</data></node>
+		<node id="n65"><data key="label">port</data><data key="noderef">n53</data></node>
+		<node id="n63"><data key="label">port</data><data key="noderef">n46</data></node>
+		<node id="n64"><data key="label">port</data><data key="noderef">n47</data></node>
+		<node id="n60"><data key="label">pin</data></node>
+		<node id="n61"><data key="label">pin</data></node>
+		<node id="n62"><data key="label">pin</data></node>
+		<edge id="59-65" source="n59" target="n65"/>
+		<edge id="59-63" source="n59" target="n63"/>
+		<edge id="59-64" source="n59" target="n64"/>
+		<edge id="60-63" source="n60" target="n63"/>
+		<edge id="61-64" source="n61" target="n64"/>
+		<edge id="62-65" source="n62" target="n65"/>
+	</graph>
+</graphml>

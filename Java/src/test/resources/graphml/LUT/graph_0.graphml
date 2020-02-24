@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema−instance"
+	xsi:schemaLocation=
+	"http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+	<key id="label" for="node" attr.name="label" attr.type="string"/>
+	<key id="graphref" for="node" attr.name="is hierarchygraph" attr.type="string"/>
+	<key id="noderef" for="node" attr.name="linked to" attr.type="string"/>
+	<graph id="LUT" edgedefault="undirected">
+"		<node id="n1"><data key="label">mux</data><data key="label">lut</data></node>
+		<node id="n2"><data key="label">in</data><data key="label">select</data></node>
+		<node id="n3"><data key="label">in</data><data key="label">select</data></node>
+		<node id="n4"><data key="label">out</data></node>
+		<node id="n5"><data key="label">out</data></node>
+		<node id="n0"><data key="label">mux</data><data key="label">lut</data></node>
+		<edge id="1-2" source="n1" target="n2"/>
+		<edge id="1-3" source="n1" target="n3"/>
+		<edge id="2-4" source="n2" target="n4"/>
+		<edge id="2-5" source="n2" target="n5"/>
+		<edge id="3-4" source="n3" target="n4"/>
+		<edge id="3-5" source="n3" target="n5"/>
+		<edge id="0-2" source="n0" target="n2"/>
+		<edge id="0-3" source="n0" target="n3"/>
+	</graph>
+</graphml>

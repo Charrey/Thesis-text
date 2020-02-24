@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema−instance"
+	xsi:schemaLocation=
+	"http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+	<key id="label" for="node" attr.name="label" attr.type="string"/>
+	<key id="graphref" for="node" attr.name="is hierarchygraph" attr.type="string"/>
+	<key id="noderef" for="node" attr.name="linked to" attr.type="string"/>
+	<graph id="switch" edgedefault="undirected">
+"		<node id="n46"><data key="label">switch</data></node>
+		<node id="n47"><data key="label">switch</data></node>
+		<node id="n48"><data key="label">option</data></node>
+		<node id="n49"><data key="label">flow_from</data></node>
+		<node id="n50"><data key="label">flow_to</data></node>
+		<node id="n51"><data key="label">flow_from</data></node>
+		<node id="n52"><data key="label">flow_to</data></node>
+		<node id="n53"><data key="label">switch</data></node>
+		<node id="n54"><data key="label">option</data></node>
+		<node id="n55"><data key="label">flow_from</data></node>
+		<node id="n56"><data key="label">flow_to</data></node>
+		<node id="n57"><data key="label">flow_from</data></node>
+		<node id="n58"><data key="label">flow_to</data></node>
+		<edge id="46-50" source="n46" target="n50"/>
+		<edge id="46-51" source="n46" target="n51"/>
+		<edge id="46-56" source="n46" target="n56"/>
+		<edge id="46-57" source="n46" target="n57"/>
+		<edge id="47-49" source="n47" target="n49"/>
+		<edge id="47-52" source="n47" target="n52"/>
+		<edge id="48-50" source="n48" target="n50"/>
+		<edge id="48-52" source="n48" target="n52"/>
+		<edge id="49-50" source="n49" target="n50"/>
+		<edge id="51-52" source="n51" target="n52"/>
+		<edge id="53-55" source="n53" target="n55"/>
+		<edge id="53-58" source="n53" target="n58"/>
+		<edge id="54-56" source="n54" target="n56"/>
+		<edge id="54-58" source="n54" target="n58"/>
+		<edge id="55-56" source="n55" target="n56"/>
+		<edge id="57-58" source="n57" target="n58"/>
+	</graph>
+</graphml>

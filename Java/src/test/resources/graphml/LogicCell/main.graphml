@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema−instance"
+	xsi:schemaLocation=
+	"http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+	<key id="label" for="node" attr.name="label" attr.type="string"/>
+	<key id="graphref" for="node" attr.name="is hierarchygraph" attr.type="string"/>
+	<key id="noderef" for="node" attr.name="linked to" attr.type="string"/>
+	<graph id="exportedGraph" edgedefault="undirected">
+"		<node id="n99"><data key="label">component</data><data key="graphref">graph_0.graphml</data></node>
+		<node id="n85"><data key="label">component</data><data key="graphref">graph_1.graphml</data></node>
+		<node id="n89"><data key="label">component</data><data key="graphref">graph_1.graphml</data></node>
+		<node id="n124"><data key="label">component</data><data key="graphref">graph_2.graphml</data></node>
+		<node id="n109"><data key="label">component</data><data key="graphref">graph_3.graphml</data></node>
+		<node id="n129"><data key="label">port</data><data key="noderef">n119</data></node>
+		<node id="n130"><data key="label">port</data><data key="noderef">n122</data></node>
+		<node id="n131"><data key="label">port</data><data key="noderef">n123</data></node>
+		<node id="n100"><data key="label">port</data><data key="noderef">n95</data></node>
+		<node id="n101"><data key="label">port</data><data key="noderef">n96</data></node>
+		<node id="n102"><data key="label">port</data><data key="noderef">n97</data></node>
+		<node id="n103"><data key="label">port</data><data key="noderef">n98</data></node>
+		<node id="n110"><data key="label">port</data><data key="noderef">n105</data></node>
+		<node id="n111"><data key="label">port</data><data key="noderef">n107</data></node>
+		<node id="n112"><data key="label">port</data><data key="noderef">n106</data></node>
+		<node id="n113"><data key="label">port</data><data key="noderef">n108</data></node>
+		<node id="n114"><data key="label">port</data><data key="noderef">n104</data></node>
+		<node id="n86"><data key="label">port</data><data key="noderef">n72</data></node>
+		<node id="n87"><data key="label">port</data><data key="noderef">n73</data></node>
+		<node id="n88"><data key="label">port</data><data key="noderef">n79</data></node>
+		<node id="n90"><data key="label">port</data><data key="noderef">n72</data></node>
+		<node id="n91"><data key="label">port</data><data key="noderef">n73</data></node>
+		<node id="n92"><data key="label">port</data><data key="noderef">n79</data></node>
+		<node id="n125"><data key="label">port</data><data key="noderef">n117</data></node>
+		<node id="n126"><data key="label">port</data><data key="noderef">n120</data></node>
+		<node id="n127"><data key="label">port</data><data key="noderef">n118</data></node>
+		<node id="n128"><data key="label">port</data><data key="noderef">n121</data></node>
+		<node id="n66"><data key="label">pin</data></node>
+		<node id="n67"><data key="label">pin</data></node>
+		<node id="n68"><data key="label">pin</data></node>
+		<node id="n69"><data key="label">pin</data></node>
+		<node id="n70"><data key="label">clock</data></node>
+		<node id="n71"><data key="label">always_on</data></node>
+		<edge id="99-100" source="n99" target="n100"/>
+		<edge id="99-101" source="n99" target="n101"/>
+		<edge id="99-102" source="n99" target="n102"/>
+		<edge id="99-103" source="n99" target="n103"/>
+		<edge id="102-125" source="n102" target="n125"/>
+		<edge id="103-126" source="n103" target="n126"/>
+		<edge id="109-113" source="n109" target="n113"/>
+		<edge id="109-114" source="n109" target="n114"/>
+		<edge id="109-110" source="n109" target="n110"/>
+		<edge id="109-111" source="n109" target="n111"/>
+		<edge id="109-112" source="n109" target="n112"/>
+		<edge id="112-127" source="n112" target="n127"/>
+		<edge id="113-128" source="n113" target="n128"/>
+		<edge id="124-129" source="n124" target="n129"/>
+		<edge id="124-130" source="n124" target="n130"/>
+		<edge id="124-131" source="n124" target="n131"/>
+		<edge id="124-125" source="n124" target="n125"/>
+		<edge id="124-126" source="n124" target="n126"/>
+		<edge id="124-127" source="n124" target="n127"/>
+		<edge id="124-128" source="n124" target="n128"/>
+		<edge id="66-86" source="n66" target="n86"/>
+		<edge id="67-90" source="n67" target="n90"/>
+		<edge id="68-129" source="n68" target="n129"/>
+		<edge id="69-130" source="n69" target="n130"/>
+		<edge id="70-114" source="n70" target="n114"/>
+		<edge id="71-131" source="n71" target="n131"/>
+		<edge id="85-86" source="n85" target="n86"/>
+		<edge id="85-87" source="n85" target="n87"/>
+		<edge id="85-88" source="n85" target="n88"/>
+		<edge id="87-100" source="n87" target="n100"/>
+		<edge id="88-110" source="n88" target="n110"/>
+		<edge id="89-90" source="n89" target="n90"/>
+		<edge id="89-91" source="n89" target="n91"/>
+		<edge id="89-92" source="n89" target="n92"/>
+		<edge id="91-101" source="n91" target="n101"/>
+		<edge id="92-111" source="n92" target="n111"/>
+	</graph>
+</graphml>

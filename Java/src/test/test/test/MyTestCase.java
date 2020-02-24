@@ -15,6 +15,8 @@ public abstract class MyTestCase {
             e.printStackTrace();
             System.exit(1);
             return null;
+        } catch (NullPointerException e) {
+            throw new RuntimeException("Could not find resource: \"" + path + "\"");
         }
     }
 

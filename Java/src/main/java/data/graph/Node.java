@@ -1,13 +1,18 @@
 package data.graph;
 
+import util.Labels;
+
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Node {
 
     private Set<Label> labels;
     private int ID;
     private static int IDCounter = 0;
+    private boolean locked = false;
 
     public Node(Label... labels) {
         this.labels = Set.of(labels);
@@ -28,11 +33,7 @@ public class Node {
     }
 
     public String getDOT() {
-        return ID + "[label=\"" + labels + "\"]";
-    }
-
-    public void setID(int i) {
-        ID = i;
+        return ID + "[label=\"" + labels.stream().map(Labels::write).collect(Collectors.toSet()) + "\"]";
     }
 
     @Override
@@ -53,6 +54,14 @@ public class Node {
     }
 
     public void setLabels(Set<Label> labels) {
-        this.labels = labels;
+        if (locked) {
+            throw new UnsupportedOperationException("Node is locked!");
+        } else {
+            this.labels = labels;
+        }
+    }
+
+    public void lock() {
+        locked = true;
     }
 }

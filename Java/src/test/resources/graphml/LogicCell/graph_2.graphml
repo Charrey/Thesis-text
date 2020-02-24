@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema−instance"
+	xsi:schemaLocation=
+	"http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+	<key id="label" for="node" attr.name="label" attr.type="string"/>
+	<key id="graphref" for="node" attr.name="is hierarchygraph" attr.type="string"/>
+	<key id="noderef" for="node" attr.name="linked to" attr.type="string"/>
+	<graph id="MUX" edgedefault="undirected">
+"		<node id="n115"><data key="label">mux</data></node>
+		<node id="n116"><data key="label">mux</data></node>
+		<node id="n117"><data key="label">in</data></node>
+		<node id="n118"><data key="label">in</data></node>
+		<node id="n119"><data key="label">out</data></node>
+		<node id="n120"><data key="label">in</data></node>
+		<node id="n121"><data key="label">in</data></node>
+		<node id="n122"><data key="label">out</data></node>
+		<node id="n123"><data key="label">select</data></node>
+		<edge id="115-117" source="n115" target="n117"/>
+		<edge id="115-120" source="n115" target="n120"/>
+		<edge id="115-123" source="n115" target="n123"/>
+		<edge id="116-118" source="n116" target="n118"/>
+		<edge id="116-121" source="n116" target="n121"/>
+		<edge id="116-123" source="n116" target="n123"/>
+		<edge id="117-119" source="n117" target="n119"/>
+		<edge id="118-119" source="n118" target="n119"/>
+		<edge id="120-122" source="n120" target="n122"/>
+		<edge id="121-122" source="n121" target="n122"/>
+	</graph>
+</graphml>

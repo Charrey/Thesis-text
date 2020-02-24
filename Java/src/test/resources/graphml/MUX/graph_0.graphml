@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema−instance"
+	xsi:schemaLocation=
+	"http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+	<key id="label" for="node" attr.name="label" attr.type="string"/>
+	<key id="graphref" for="node" attr.name="is hierarchygraph" attr.type="string"/>
+	<key id="noderef" for="node" attr.name="linked to" attr.type="string"/>
+	<graph id="MUX" edgedefault="undirected">
+"		<node id="n33"><data key="label">in</data></node>
+		<node id="n34"><data key="label">in</data></node>
+		<node id="n35"><data key="label">out</data></node>
+		<node id="n36"><data key="label">select</data></node>
+		<node id="n31"><data key="label">mux</data></node>
+		<node id="n32"><data key="label">mux</data></node>
+		<edge id="33-35" source="n33" target="n35"/>
+		<edge id="34-35" source="n34" target="n35"/>
+		<edge id="31-33" source="n31" target="n33"/>
+		<edge id="31-36" source="n31" target="n36"/>
+		<edge id="32-34" source="n32" target="n34"/>
+		<edge id="32-36" source="n32" target="n36"/>
+	</graph>
+</graphml>
