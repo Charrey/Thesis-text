@@ -3,75 +3,91 @@ package reader;
 import data.MappingFunction;
 import data.graph.HierarchyGraph;
 import exceptions.NoMappingException;
-import exceptions.ParseException;
 import iso.IsoFinder;
-import org.eclipse.collections.api.tuple.Pair;
 import org.junit.Test;
 import test.MyTestCase;
-import testMaker.MakeTests;
+import testMaker.FPGAModels;
 import util.Util;
-import writer.Writer;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TestSimple extends MyTestCase {
 
     @Test
-    public void testLUT_test1() throws IOException, ParserConfigurationException, ParseException, NoMappingException {
-        MakeTests.makeSimpleLut(2);
-        Path mainFile =  resource("../graphml/LUT/main.graphml");
-        HierarchyGraph graph1 = new Reader().read(mainFile);
+    public void testLUT_test1() throws IOException, NoMappingException {
+       HierarchyGraph graph1 =  FPGAModels.makeSimpleLut(2, false);
         graph1.shuffleIdentifiers();
-        HierarchyGraph graph2 = graph1.deepCopy().getOne();
+        HierarchyGraph graph2 = graph1.deepCopy().getGraph();
         graph2.shuffleIdentifiers();
         MappingFunction f = IsoFinder.getMapping(graph1, graph2);
         assertTrue(Util.isCorrect(f.getPartialMapping()));
     }
 
     @Test
-    public void testRegister_test2() throws IOException, ParserConfigurationException, ParseException, NoMappingException {
-        MakeTests.makeSimpleRegister(2);
-        Path mainFile =  resource("../graphml/Register/main.graphml");
-        HierarchyGraph graph1 = new Reader().read(mainFile);
+    public void testRegister_test2() throws IOException, NoMappingException {
+        long base = System.currentTimeMillis();
+        HierarchyGraph graph1 = FPGAModels.makeSimpleRegister(2, false);
         graph1.shuffleIdentifiers();
-        HierarchyGraph graph2 = graph1.deepCopy().getOne();
+        System.out.println(System.currentTimeMillis() - base);
+        HierarchyGraph graph2 = graph1.deepCopy().getGraph();
+        System.out.println(System.currentTimeMillis() - base);
+        graph2.shuffleIdentifiers();
+        System.out.println(System.currentTimeMillis() - base);
+        MappingFunction f = IsoFinder.getMapping(graph1, graph2);
+        assertTrue(Util.isCorrect(f.getPartialMapping()));
+    }
+
+    @Test
+    public void testMux_test3() throws IOException, NoMappingException {
+        HierarchyGraph graph1 = FPGAModels.makeSimpleMux(2, false);
+        graph1.shuffleIdentifiers();
+        HierarchyGraph graph2 = graph1.deepCopy().getGraph();
         graph2.shuffleIdentifiers();
         MappingFunction f = IsoFinder.getMapping(graph1, graph2);
         assertTrue(Util.isCorrect(f.getPartialMapping()));
     }
 
     @Test
-    public void testMux_test3() throws IOException, ParserConfigurationException, ParseException, NoMappingException {
-        MakeTests.makeSimpleMux(2);
-        Path mainFile =  resource("../graphml/MUX/main.graphml");
-        HierarchyGraph graph1 = new Reader().read(mainFile);
+    public void testLogicCell_test4() throws IOException, NoMappingException {
+        HierarchyGraph graph1 = FPGAModels.makeSimpleLogicCell(2, false);
         graph1.shuffleIdentifiers();
-        HierarchyGraph graph2 = graph1.deepCopy().getOne();
+        HierarchyGraph graph2 = graph1.deepCopy().getGraph();
         graph2.shuffleIdentifiers();
         MappingFunction f = IsoFinder.getMapping(graph1, graph2);
         assertTrue(Util.isCorrect(f.getPartialMapping()));
     }
 
     @Test
-    public void testLogicCell_test4() throws IOException, ParserConfigurationException, ParseException, NoMappingException {
-        MakeTests.makeSimpleLogicCell(2);
-        Path mainFile =  resource("../graphml/LogicCell/main.graphml");
-        HierarchyGraph graph1 = new Reader().read(mainFile);
+    public void testSubdivision_test5() throws IOException, NoMappingException {
+        HierarchyGraph graph1 = FPGAModels.makeSnake(30, 30, false);
+        Util.view(graph1);
         graph1.shuffleIdentifiers();
-        HierarchyGraph graph2 = graph1.deepCopy().getOne();
+        HierarchyGraph graph2 = FPGAModels.makeSnake(2, 3, false);
         graph2.shuffleIdentifiers();
         MappingFunction f = IsoFinder.getMapping(graph1, graph2);
         assertTrue(Util.isCorrect(f.getPartialMapping()));
     }
 
+    @Test
+    public void testLUTMUX_test6() throws IOException, NoMappingException {
+        HierarchyGraph graph1 = FPGAModels.makeSimpleLut(5, false);
+        graph1.shuffleIdentifiers();
+        HierarchyGraph graph2 = FPGAModels.makeSimpleMux(2, false);
+        graph2.shuffleIdentifiers();
+        MappingFunction f = IsoFinder.getMapping(graph2, graph1);
+        assertTrue(Util.isCorrect(f.getPartialMapping()));
+    }
 
+    @Test
+    public void testMUXLUT_test7() throws IOException, NoMappingException {
+        HierarchyGraph graph1 = FPGAModels.makeLutTree(3, 10, false);
+        Util.view(graph1);
+        graph1.shuffleIdentifiers();
+        HierarchyGraph graph2 = FPGAModels.makeSimpleLut(4, false);
+        graph2.shuffleIdentifiers();
+        MappingFunction f = IsoFinder.getMapping(graph2, graph1);
+        assertTrue(Util.isCorrect(f.getPartialMapping()));
+    }
 }

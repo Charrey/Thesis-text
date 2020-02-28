@@ -1,18 +1,14 @@
 package util;
 
-import data.MappingFunction;
 import data.PartialMapping;
 import data.graph.HierarchyGraph;
 import data.graph.Node;
 import org.apache.batik.swing.JSVGCanvas;
-import org.apache.commons.io.FileUtils;
-import org.eclipse.collections.api.bimap.BiMap;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
@@ -20,9 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
-import java.util.function.Predicate;
 
 public class Util {
     public static void makeDirectories(Path dir) {
@@ -62,7 +55,7 @@ public class Util {
         String line;
         while ((line = input.readLine()) != null) {
             sb.append(line).append("\n");
-            System.out.println("SDP output: " + line);
+            //System.out.println("SDP output: " + line);
         }
         Path svgFile = Paths.get(".temp/graph" + new Random().nextInt() +".svg");
         writeToFile(sb.toString(), svgFile);
@@ -156,12 +149,41 @@ public class Util {
 
         @Override
         public boolean contains(Object o) {
-            throw new UnsupportedOperationException();
+            return Arrays.stream(content).anyMatch(x -> x.contains(o));
         }
 
         @Override
         public Iterator<Node> iterator() {
-            throw new UnsupportedOperationException();        }
+            return  new Iterator<Node>() {
+                int listIndex = 0;
+                int item = 0;
+                @Override
+                public boolean hasNext() {
+                    if (content[listIndex].size() < item + 1) {
+                        return true;
+                    }
+                    for (int i = listIndex + 1; i < content.length; i++) {
+                        if (!content[i].isEmpty()) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
+                @Override
+                public Node next() {
+                    item++;
+                    if (item >= content[listIndex].size()) {
+                        item = 0;
+                        listIndex++;
+                        while (content[listIndex].isEmpty()) {
+                            listIndex++;
+                        }
+                    }
+                    return content[listIndex].get(item);
+                }
+            };
+        }
 
         @Override
         public Object[] toArray() {

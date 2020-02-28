@@ -1,12 +1,11 @@
 package data.graph;
 
-import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.tuple.Tuples;
 import reader.Reader;
-import util.Util;
 
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.function.IntBinaryOperator;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -22,7 +21,7 @@ public class HierarchyGraph {
 
     private Map<HierarchyGraph, String> namesOfHierarchyGraphs = new HashMap<>();
 
-    public List<Pair<String, Set<Node>>> subGraphLabeling = new LinkedList<>();
+    public List<Subgraph> subGraphLabeling = new LinkedList<>();
 
     public void lock() {
         if (locked) {
@@ -46,6 +45,8 @@ public class HierarchyGraph {
 
 
     public void addEdge(Node a, Node b) {
+        assert a != null;
+        assert b != null;
         assert V.contains(a);
         assert V.contains(b);
         E.computeIfAbsent(a, x -> new HashSet<>());
@@ -100,11 +101,11 @@ public class HierarchyGraph {
     }
 
     private void addSubGraphs(List<String> lines) {
-        for (Pair<String, Set<Node>> entry : subGraphLabeling) {
-            if (V.containsAll(entry.getTwo())) {
+        for (Subgraph subgraph : subGraphLabeling) {
+            if (V.containsAll(subgraph.getNodes())) {
                 lines.add("subgraph cluster_" + subGraphCounter++ + " {");
-                lines.add("label = \"" + entry.getOne() + "\"");
-                for (Node node : entry.getTwo()) {
+                lines.add("label = \"" + subgraph.getName() + "\"");
+                for (Node node : subgraph.getNodes()) {
                     lines.add(node.getID() + ";");
                 }
                 lines.add("}");
@@ -123,37 +124,47 @@ public class HierarchyGraph {
         }
     }
 
+
+
     public HierarchyGraph flatten() {
         HierarchyGraph res = new HierarchyGraph();
         res.addNodes(V);
         res.addEdges(E);
+        assert V.containsAll(H.keySet());
         for (Map.Entry<Node, HierarchyGraph> hierarchies : H.entrySet()) { //For every subgraph
             Set<Node> ports = getPorts(hierarchies.getKey());
+            assert ports.stream().allMatch(x -> hierarchies.getValue().getNodes().contains(C.get(x)));
             res.removeNode(hierarchies.getKey());                          //remove component
-            HierarchyGraph value = getFlat(hierarchies.getValue());        //get a flattened version
-            Pair<HierarchyGraph, Map<Node, Node>> copy = value.deepCopy(); //make a copy of it
-
+            HierarchyGraph subGraph = getFlat(hierarchies.getValue());        //get a flattened version
+            CopyInfo copy = subGraph.deepCopy(); //make a copy of it
             for (Node port : ports) {
-                res.replaceNode(port, copy.getTwo().get(C.get(port)));
+                assert subGraph.getNodes().contains(C.get(port));
+                assert copy.map.containsKey(C.get(port));
+                res.replaceNode(port, copy.getMap().get(C.get(port)));
             }
 
-            res.addNodes(copy.getOne().getNodes());
-            res.addEdges(copy.getOne().getEdges());
+            res.addNodes(copy.getGraph().getNodes());
+            res.addEdges(copy.getGraph().getEdges());
 
             String name = namesOfHierarchyGraphs.get(hierarchies.getValue());
             name = Reader.graphIds.getOrDefault(Paths.get(name), name);
-            res.subGraphLabeling.add(Tuples.pair(name, copy.getOne().getNodes()));
+            res.subGraphLabeling.add(new Subgraph(name, copy.getGraph().getNodes()));
         }
         return res;
     }
 
     private Set<Node> getPorts(Node component) {
+        if (!E.containsKey(component)) {
+            return Collections.emptySet();
+        }
         Set<Node> res = new HashSet<>(E.get(component));
         assert !res.retainAll(getNodesByLabel(Label.PORT));
+        assert res.stream().noneMatch(node1 -> E.get(node1).stream().anyMatch(node2 -> node2.getLabels().contains(Label.COMPONENT) && node2 != component));
+        assert res.stream().allMatch(x -> C.containsKey(x));
         return res;
     }
 
-    public Pair<HierarchyGraph, Map<Node, Node>> deepCopy() {
+    public CopyInfo deepCopy() {
         Map<Node, Node> nodemap = new HashMap<>();
         HierarchyGraph res = new HierarchyGraph();
         for (Node replaced : V) {
@@ -164,15 +175,18 @@ public class HierarchyGraph {
         }
         Map<Node, Node> subCopyMapping = new HashMap<>();
         for (Map.Entry<Node, HierarchyGraph> entry : H.entrySet()) {
-            Pair<HierarchyGraph, Map<Node, Node>> deepercopy = entry.getValue().deepCopy();
-            subCopyMapping.putAll(deepercopy.getTwo());
-            nodemap.put(entry.getKey(), res.addComponent(deepercopy.getOne(), namesOfHierarchyGraphs.get(entry.getValue())));
+            CopyInfo deepercopy = entry.getValue().deepCopy();
+            subCopyMapping.putAll(deepercopy.getMap());
+            nodemap.put(entry.getKey(), res.addComponent(deepercopy.getGraph(), namesOfHierarchyGraphs.get(entry.getValue())));
         }
         for (Map.Entry<Node, Set<Node>> entry : E.entrySet()) {
             for (Node target : entry.getValue()) {
                 res.addEdge(nodemap.get(entry.getKey()), nodemap.get(target));
             }
         }
+        System.out.println(E.size());
+        System.out.println(res.getEdges().size());
+        assert E.size() == res.getEdges().size();
         for (Map.Entry<Node, Node> entry : C.entrySet()) {
             res.addPortMapping(nodemap.get(entry.getKey()), subCopyMapping.get(entry.getValue()));
         }
@@ -180,7 +194,6 @@ public class HierarchyGraph {
         for (Node i : V) {
             assert res.V.contains(nodemap.get(i));
         }
-        assert E.size() == res.getEdges().size();
         for (Node i : E.keySet()) {
             assert res.E.get(nodemap.get(i)).size() == E.get(i).size();
             for (Node j : E.get(i)) {
@@ -193,10 +206,11 @@ public class HierarchyGraph {
         }
         assert H.size() == res.getHierarchy().size();
         assert nodemap.size() == V.size();
-        return Tuples.pair(res, nodemap);
+        return new CopyInfo(res, nodemap);
     }
 
     private void replaceNode(Node key, Node value) {
+        assert key != null;
         assert value != null;
         V.remove(key);
         for (Label label : key.getLabels()) {
@@ -336,5 +350,41 @@ public class HierarchyGraph {
 
     public Map<HierarchyGraph, String> getNamesOfHierarchyGraphs() {
         return namesOfHierarchyGraphs;
+    }
+
+    public class CopyInfo {
+        private final HierarchyGraph graph;
+        private final Map<Node, Node> map;
+
+        public CopyInfo(HierarchyGraph graph, Map<Node, Node> map) {
+            this.graph = graph;
+            this.map = map;
+        }
+
+        public Map<Node, Node> getMap() {
+            return map;
+        }
+
+        public HierarchyGraph getGraph() {
+            return graph;
+        }
+    }
+
+    private class Subgraph {
+        private final Set<Node> nodes;
+        private final String name;
+
+        public Subgraph(String name, Set<Node> nodes) {
+            this.name = name;
+            this.nodes = nodes;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public Set<Node> getNodes() {
+            return nodes;
+        }
     }
 }

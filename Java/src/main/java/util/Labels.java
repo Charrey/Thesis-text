@@ -2,34 +2,32 @@ package util;
 
 import data.graph.Label;
 import exceptions.ParseException;
-import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
-import org.eclipse.collections.impl.tuple.Tuples;
 
 import java.nio.file.Path;
 
 public class Labels {
 
-    private static HashBiMap<String, Label> map = new HashBiMap<>();
+    private static BiMap<String, Label> map = new BiMap<>();
 
     static {
-        map.add(Tuples.pair("port", Label.PORT));
-        map.add(Tuples.pair("pin", Label.PIN));
-        map.add(Tuples.pair("component", Label.COMPONENT));
-        map.add(Tuples.pair("in", Label.IN));
-        map.add(Tuples.pair("select", Label.SELECT));
-        map.add(Tuples.pair("mux", Label.MUX));
-        map.add(Tuples.pair("out", Label.OUT));
-        map.add(Tuples.pair("lut", Label.LUT));
-        map.add(Tuples.pair("sync", Label.SYNC_RESET));
-        map.add(Tuples.pair("async", Label.ASYNC_RESET));
-        map.add(Tuples.pair("set", Label.SET));
-        map.add(Tuples.pair("gate", Label.GATE));
-        map.add(Tuples.pair("option", Label.OPTION));
-        map.add(Tuples.pair("switch", Label.SWITCH));
-        map.add(Tuples.pair("flow_from", Label.FLOW_FROM));
-        map.add(Tuples.pair("flow_to", Label.FLOW_TO));
-        map.add(Tuples.pair("clock", Label.CLOCK));
-        map.add(Tuples.pair("always_on", Label.EXTRA));
+        map.put("port", Label.PORT);
+        map.put("pin", Label.PIN);
+        map.put("component", Label.COMPONENT);
+        map.put("in", Label.IN);
+        map.put("select", Label.SELECT);
+        map.put("mux", Label.MUX);
+        map.put("out", Label.OUT);
+        map.put("lut", Label.LUT);
+        map.put("sync", Label.SYNC_RESET);
+        map.put("async", Label.ASYNC_RESET);
+        map.put("set", Label.SET);
+        map.put("gate", Label.GATE);
+        map.put("option", Label.OPTION);
+        map.put("switch", Label.SWITCH);
+        map.put("flow_from", Label.FLOW_FROM);
+        map.put("flow_to", Label.FLOW_TO);
+        map.put("clock", Label.CLOCK);
+        map.put("always_on", Label.EXTRA);
 
     }
 
@@ -43,7 +41,7 @@ public class Labels {
 
     public static String write(Label label) {
         if (map.containsValue(label)) {
-            return map.flip().get(label).getAny();
+            return map.getByValue(label).iterator().next();
         } else {
             throw new RuntimeException("Unaccounted enum value \"" + label + "\"");
         }

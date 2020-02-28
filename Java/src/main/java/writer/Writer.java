@@ -3,22 +3,18 @@ package writer;
 import data.graph.HierarchyGraph;
 import data.graph.Label;
 import data.graph.Node;
+import util.Labels;
+import util.Util;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.BiFunction;
-
-import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.tuple.Tuples;
-import reader.Reader;
-import util.Labels;
-import util.Util;
 
 
 public class Writer {
@@ -50,7 +46,7 @@ public class Writer {
      */
     private static Map<HierarchyGraph, String> seen = new HashMap<>();
     private static Map<HierarchyGraph, String> globalNameMap = new HashMap<>();
-    public static Pair<String, Map<String, String>> export(HierarchyGraph graph, boolean isMain) {
+    public static Export export(HierarchyGraph graph, boolean isMain) {
         globalNameMap.putAll(graph.getNamesOfHierarchyGraphs());
         Map<String, String> res = new HashMap<>();
         StringBuilder sb = new StringBuilder(getPrefix(globalNameMap.getOrDefault(graph, "exportedGraph")));
@@ -58,10 +54,10 @@ public class Writer {
             if (seen.containsKey(entry.getValue())) {
                 sb.append("\t\t<node id=\"n" + entry.getKey().getID() + "\">" + getLabels(entry.getKey()) + "<data key=\"graphref\">" + seen.get(entry.getValue()) + "</data></node>\n");
             } else {
-                Pair<String, Map<String, String>> subExport = export(entry.getValue(), false);
-                res.putAll(subExport.getTwo());
-                seen.put(entry.getValue(), subExport.getOne());
-                sb.append("\t\t<node id=\"n" + entry.getKey().getID() + "\">" + getLabels(entry.getKey()) + "<data key=\"graphref\">" + subExport.getOne()+ "</data></node>\n");
+                Export subExport = export(entry.getValue(), false);
+                res.putAll(subExport.subFiles);
+                seen.put(entry.getValue(), subExport.mainFile);
+                sb.append("\t\t<node id=\"n" + entry.getKey().getID() + "\">" + getLabels(entry.getKey()) + "<data key=\"graphref\">" + subExport.mainFile + "</data></node>\n");
             }
 
         }
@@ -85,7 +81,7 @@ public class Writer {
 
         String myFileName = isMain ? "main.graphml" : getNextFileName();
         res.put(myFileName, sb.append(SUFFIX).toString());
-        return Tuples.pair(myFileName, res);
+        return new Export(myFileName, res);
     }
 
     private static String getLabels(Node key) {
@@ -96,10 +92,10 @@ public class Writer {
         return sb.toString();
     }
 
-    public static void writeToDirectory(Pair<String, Map<String, String>> content, Path path) throws IOException {
+    public static void writeToDirectory(Export export, Path path) throws IOException {
         filenameCounter = 0;
         Util.makeDirectories(path);
-        for (Map.Entry<String, String> entry : content.getTwo().entrySet()) {
+        for (Map.Entry<String, String> entry : export.subFiles.entrySet()) {
             java.io.Writer writer = null;
             try {
                 writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path.resolve(entry.getKey()).toAbsolutePath().toString()), "utf-8"));
@@ -111,4 +107,13 @@ public class Writer {
         }
 
 
+    private static class Export {
+
+        public final String mainFile;
+        public final Map<String, String> subFiles;
+        public Export(String mainFile, Map<String, String> subFiles) {
+            this.mainFile = mainFile;
+            this.subFiles = Collections.unmodifiableMap(subFiles);
+        }
+    }
 }

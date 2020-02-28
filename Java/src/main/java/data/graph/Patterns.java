@@ -1,7 +1,6 @@
 package data.graph;
 
-import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.tuple.Tuples;
+import data.patterns.*;
 
 import java.util.*;
 import java.util.function.Function;
@@ -9,7 +8,11 @@ import java.util.stream.Collectors;
 
 public final class Patterns {
 
+    private static Map<Integer, MUX> muxMap = new HashMap<>();
     public static MUX MUX(int inCount) {
+        if (muxMap.containsKey(inCount)) {
+            return muxMap.get(inCount);
+        }
         HierarchyGraph res = new HierarchyGraph();
         Node mux1 = res.addNode(Label.MUX);
         Node mux2 = res.addNode(Label.MUX);
@@ -31,10 +34,16 @@ public final class Patterns {
         Node select = res.addNode(Label.SELECT);
         res.addEdge(select, mux1);
         res.addEdge(select, mux2);
-        return new MUX(res, topInputs, bottomInputs, outputs, select);
+        MUX result = new MUX(res, topInputs, bottomInputs, outputs, select);
+        muxMap.put(inCount, result);
+        return result;
     }
 
+    private static Map<Integer, Map<Integer, LUT>> LUTMap = new HashMap<>();
     public static LUT LUT(int inCount, int outCount) {
+        if (LUTMap.containsKey(inCount) && LUTMap.get(inCount).containsKey(outCount)) {
+            return LUTMap.get(inCount).get(outCount);
+        }
         HierarchyGraph res = new HierarchyGraph();
         Node mux1 = res.addNode(Label.MUX, Label.LUT);
         Node mux2 = res.addNode(Label.MUX, Label.LUT);
@@ -53,10 +62,17 @@ public final class Patterns {
                 res.addEdge(input, out);
             }
         }
-        return new LUT(res, inputs, outputs);
+        LUT result = new LeafLUT(res, inputs, outputs);
+        LUTMap.putIfAbsent(inCount, new HashMap<>());
+        LUTMap.get(inCount).put(outCount, result);
+        return result;
     }
 
+    private static Map<Integer, Map<Boolean, Map<Boolean, Register>>> registerMap = new HashMap<>();
     public static Register Register(int wirecount, boolean syncReset, boolean asyncReset) {
+        if (registerMap.containsKey(wirecount) && registerMap.get(wirecount).containsKey(syncReset) && registerMap.get(wirecount).get(syncReset).containsKey(asyncReset)) {
+            return registerMap.get(wirecount).get(syncReset).get(asyncReset);
+        }
         HierarchyGraph res = new HierarchyGraph();
         List<Node> ins = new ArrayList<>(wirecount);
         List<Node> outs = new ArrayList<>(wirecount);
@@ -79,7 +95,11 @@ public final class Patterns {
             syncResetNode = res.addNode(Label.SYNC_RESET);
             res.addEdge(syncResetNode, set);
         }
-        return new Patterns.Register(res, ins, outs, set, syncResetNode, asyncResetNode);
+        Register result = new Register(res, ins, outs, set, syncResetNode, asyncResetNode);
+        registerMap.putIfAbsent(wirecount, new HashMap<>());
+        registerMap.get(wirecount).putIfAbsent(syncReset, new HashMap<>());
+        registerMap.get(wirecount).get(syncReset).putIfAbsent(asyncReset, result);
+        return result;
     }
 
     public static List<Node> addPins(HierarchyGraph graph, int count) {
@@ -103,92 +123,25 @@ public final class Patterns {
     }
 
 
+    public static class IntConnection {
 
-    public static class MUX {
-        public final HierarchyGraph hierarchyGraph;
-        public final List<Node> in1;
-        public final List<Node> in2;
-        public final Node select;
-        public final List<Node> out;
+        public final int from;
+        public final int to;
 
-        private MUX(HierarchyGraph hg, List<Node> in1, List<Node> in2, List<Node> out, Node select) {
-            this.hierarchyGraph = hg;
-            this.hierarchyGraph.lock();
-            this.in1 = Collections.unmodifiableList(in1);
-            this.in2 = Collections.unmodifiableList(in2);
-            this.out = Collections.unmodifiableList(out);
-            this.select = select;
+        public IntConnection(int from, int to) {
+            this.from = from;
+            this.to = to;
         }
     }
 
-    public static class LUT {
-        public final HierarchyGraph hierarchyGraph;
-        public final List<Node> outputs;
-        public final List<Node> inputs;
+    public static class NodeConnection {
 
-        public LUT(HierarchyGraph hierarchyGraph, List<Node> inputs, List<Node> outputs) {
-            this.hierarchyGraph = hierarchyGraph;
-            this.hierarchyGraph.lock();
-            this.inputs = Collections.unmodifiableList(inputs);
-            this.outputs = Collections.unmodifiableList(outputs);
-        }
-    }
+        public final Node to;
+        public final Node from;
 
-    public static class Register {
-        public final HierarchyGraph hierarchyGraph;
-        public final List<Node> inputs;
-        public final List<Node> outputs;
-        public final Node set;
-        public final Node syncReset;
-        public final Node asyncReset;
-
-        public Register(HierarchyGraph hierarchyGraph, List<Node> inputs, List<Node> outputs, Node set, Node syncReset, Node asyncReset) {
-            this.hierarchyGraph = hierarchyGraph;
-            this.hierarchyGraph.lock();
-            this.inputs = Collections.unmodifiableList(inputs);
-            this.outputs = Collections.unmodifiableList(outputs);
-            this.set = set;
-            this.syncReset = syncReset;
-            this.asyncReset = asyncReset;
-        }
-    }
-
-    public static class Switch {
-        private Map<Integer, Node> ports = new HashMap<>();
-        private HierarchyGraph graph = new HierarchyGraph();
-
-        private Map<Node, Map<Node, Node>> connections = new HashMap<>();
-
-        public void addOption(Pair<Integer, Integer>... connections) {
-            Set<Pair<Node, Node>> option = Arrays.stream(connections)
-                    .map((Function<Pair<Integer, Integer>, Pair<Node, Node>>) x -> Tuples.twin(ports.computeIfAbsent(x.getOne(), y -> graph.addNode(Label.SWITCH)), ports.computeIfAbsent(x.getTwo(), y -> graph.addNode(Label.SWITCH))))
-                    .collect(Collectors.toSet());
-            Node optionNode = graph.addNode(Label.OPTION);
-            for (Pair<Node, Node> connection : option) {
-                this.connections.computeIfAbsent(connection.getOne(), x -> new HashMap<>());
-                Node flowTo;
-                if (!this.connections.get(connection.getOne()).containsKey(connection.getTwo())) {
-                    Node flowFrom = graph.addNode(Label.FLOW_FROM);
-                    flowTo = graph.addNode(Label.FLOW_TO);
-                    graph.addEdge(connection.getOne(), flowFrom);
-                    graph.addEdge(flowFrom, flowTo);
-                    graph.addEdge(flowTo, connection.getTwo());
-                    this.connections.computeIfAbsent(connection.getOne(), x -> new HashMap<>());
-                    this.connections.get(connection.getOne()).put(connection.getTwo(), flowTo);
-                } else {
-                    flowTo = this.connections.get(connection.getOne()).get(connection.getTwo());
-                }
-                graph.addEdge(optionNode, flowTo);
-            }
-        }
-
-        public HierarchyGraph getHierarchyGraph() {
-            graph.lock();
-            return graph;
-        }
-
-        public Node getByNumber(int number) {
-            return ports.get(number);
+        public NodeConnection(Node from, Node to) {
+            this.from = from;
+            this.to = to;
         }
     }
 }

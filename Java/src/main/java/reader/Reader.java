@@ -1,17 +1,21 @@
 package reader;
+
 import data.graph.HierarchyGraph;
 import data.graph.Label;
 import exceptions.ParseException;
-import org.eclipse.collections.api.bimap.BiMap;
-import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
-import org.eclipse.collections.impl.tuple.Tuples;
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import util.BiMap;
 import util.Labels;
-import util.Util;
 
-import javax.xml.parsers.*;
-import java.io.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,7 +30,8 @@ public class Reader {
 
     private Map<String, data.graph.Node> globalXMLIdentifiers;
     private Map<String, data.graph.Node> localXMLIdentifiers;
-    public static HashBiMap<Path, String> graphIds = new HashBiMap<>();
+
+    public static BiMap<Path, String> graphIds = new BiMap<>();
 
     private static Map<Path, HierarchyGraph> cache;
 

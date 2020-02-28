@@ -22,8 +22,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Maven: org.eclipse.collections:eclipse-collections:10.1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.eclipse.collections:eclipse-collections-api:10.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:batik-swing:1.12" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:batik-anim:1.12" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:batik-parser:1.12" level="project" />
