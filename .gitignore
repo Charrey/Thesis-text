@@ -1,3 +1,5 @@
 *.class
 Java/target/
 Java/src/test/resources/graphml/
+Java/.temp/
+Java/measurements/fdp.txt

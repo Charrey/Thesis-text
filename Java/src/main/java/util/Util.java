@@ -2,22 +2,45 @@ package util;
 
 import data.PartialMapping;
 import data.graph.HierarchyGraph;
+import data.graph.Label;
 import data.graph.Node;
 import org.apache.batik.swing.JSVGCanvas;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 
 public class Util {
+
+    public static Set<Node> fixedPoint(Node start, Function<Node, Set<Node>> expansion, Predicate<Node> condition) {
+        Set<Node> expanded = new HashSet<>();
+        Set<Node> notExpanded = new HashSet<>();
+        notExpanded.add(start);
+        while (!notExpanded.isEmpty()) {
+            for (Node node : new HashSet<>(notExpanded)) {
+                Set<Node> expandedNode = expansion.apply(node).stream().filter(condition).collect(Collectors.toSet());
+                for (Node outer : expandedNode) {
+                    if (!expanded.contains(outer)) {
+                        notExpanded.add(outer);
+                    }
+                }
+                notExpanded.remove(node);
+                expanded.add(node);
+            }
+        }
+        return expanded;
+    }
+
     public static void makeDirectories(Path dir) {
         if (!dir.toAbsolutePath().getParent().toFile().exists()) {
             makeDirectories(dir.toAbsolutePath().getParent());
@@ -41,13 +64,15 @@ public class Util {
 
     public static synchronized void view(HierarchyGraph res) throws IOException {
         System.out.println("Flattening...");
-        HierarchyGraph flattened = res.flatten();
+        HierarchyGraph.CopyInfo flattened = res.flatten();
         System.out.println("Exporting DOT...");
-        String dot = flattened.toDOT(true);
+        String dot = flattened.getGraph().toDOT(true);
         makeDirectories(Paths.get(".temp"));
         System.out.println("Writing to file...");
         writeToFile(dot, Paths.get(".temp/graph.dot"));
         System.out.println("Calling FDP...");
+        long baseTime = System.currentTimeMillis();
+        System.out.println("Estimated time: " + estimateTime(flattened.getGraph()));
         Runtime rt = Runtime.getRuntime();
         Process pr = rt.exec("fdp -Tsvg \".temp/graph.dot\"");
         BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
@@ -55,8 +80,9 @@ public class Util {
         String line;
         while ((line = input.readLine()) != null) {
             sb.append(line).append("\n");
-            //System.out.println("SDP output: " + line);
         }
+        pr.destroy();
+        writeFDP(flattened.getGraph().getNodes().size(), flattened.getGraph().getEdges().entrySet().stream().reduce(0, (u, nodeSetEntry) -> u + nodeSetEntry.getValue().size(), Integer::sum) / 2, System.currentTimeMillis()-baseTime);
         Path svgFile = Paths.get(".temp/graph" + new Random().nextInt() +".svg");
         writeToFile(sb.toString(), svgFile);
         Files.delete(Paths.get("./.temp/graph.dot"));
@@ -70,6 +96,33 @@ public class Util {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    private static void writeFDP(int nodes, int edges, long time) throws IOException {
+        File file = new File("./measurements/fdp.txt");
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+        try {
+            writer.write(nodes + "\t" + edges + "\t" + time + "\n");
+        } finally {
+            writer.close();
+        }
+    }
+
+    private static long estimateTime(HierarchyGraph res) throws IOException {
+        makeDirectories(Paths.get("./measurements"));
+        new File("./measurements/fdp.txt").createNewFile();
+        List<String> lines = Files.readAllLines(Paths.get("./measurements/fdp.txt"));
+        if (lines.isEmpty()) {
+            return -1;
+        }
+        else {
+            for (String line : lines) {
+                String[] splitted = line.split("\t");
+                System.out.println(splitted[0] + "\t" + splitted[1] + "\t" + splitted[2]);
+            }
+        }
+        return -1;
     }
 
 
@@ -96,6 +149,36 @@ public class Util {
 
     public static boolean isCorrect(PartialMapping f) {
         return false;
+    }
+
+    public static void checkConsistent(HierarchyGraph res) {
+        for (Map.Entry<Node, Set<Node>> a : res.getEdges().entrySet()) {
+            if (!res.getNodes().contains(a.getKey())) {
+                assert  false;
+            }
+            if (!res.getNodes().containsAll(a.getValue())) {
+                assert false;
+            }
+        }
+        for (Node node : res.getNodes()) {
+            for (Label label : node.getLabels()) {
+                if (!res.getNodesByLabel(label).contains(node)) {
+                    assert false;
+                }
+            }
+            if (node.getLabels().contains(Label.PORT) && !res.getPortMapping().containsKey(node)) {
+                //assert false;
+            }
+            if (node.getLabels().contains(Label.COMPONENT) && !res.getHierarchy().containsKey(node)) {
+                assert false;
+            }
+            if (node.getLabels().contains(Label.COMPONENT)) {
+                if (res.getEdges().get(node).stream().anyMatch(node1 -> !node1.getLabels().contains(Label.PORT))) {
+                    assert false;
+                }
+            }
+        }
+        return;
     }
 
 

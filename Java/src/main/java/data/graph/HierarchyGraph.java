@@ -1,12 +1,9 @@
 package data.graph;
 
-import reader.Reader;
+import util.BiMap;
+import util.Util;
 
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
 import java.util.*;
-import java.util.function.IntBinaryOperator;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class HierarchyGraph {
@@ -22,6 +19,9 @@ public class HierarchyGraph {
     private Map<HierarchyGraph, String> namesOfHierarchyGraphs = new HashMap<>();
 
     public List<Subgraph> subGraphLabeling = new LinkedList<>();
+    private int subGraphCounter = 0;
+
+
 
     public void lock() {
         if (locked) {
@@ -41,6 +41,7 @@ public class HierarchyGraph {
             entry.getValue().lock();
         }
         locked = true;
+        assert H.entrySet().stream().allMatch(x -> getPorts(x.getKey()).stream().allMatch(y -> x.getValue().getNodes().contains(C.get(y))));
     }
 
 
@@ -66,13 +67,14 @@ public class HierarchyGraph {
         namesOfHierarchyGraphs.put(graph, name);
     }
 
-    public void addPortMapping(Node higher, Node lower) {
+    private void addPortMapping(Node higher, Node lower) {
+        assert higher!= null;
+        assert lower != null;
         assert higher.getLabels().contains(Label.PORT);
         C.put(higher, lower);
     }
 
 
-    private int subGraphCounter = 0;
     public String toDOT(boolean scramble) {
         StringBuilder sb = new StringBuilder("graph G {\n");
         List<String> lines = new LinkedList<>();
@@ -113,44 +115,88 @@ public class HierarchyGraph {
         }
     }
 
-    private static Map<HierarchyGraph, HierarchyGraph> flattenedCache = new HashMap<>();
-    private HierarchyGraph getFlat(HierarchyGraph from) {
-        if (flattenedCache.containsKey(from)) {
-            return flattenedCache.get(from);
-        } else {
-            HierarchyGraph res = from.flatten();
-            flattenedCache.put(from, res);
-            return res;
+//    public static HierarchyGraph getFlat(HierarchyGraph from) {
+//        if (flattenedCache.containsKey(from)) {
+//            System.out.println("Cache hit!");
+//            return flattenedCache.get(from);
+//        } else {
+//            HierarchyGraph res = from.flatten();
+//            flattenedCache.put(from, res);
+//            return res;
+//        }
+//    }
+
+    public CopyInfo flatten() {
+        HierarchyGraph res = new HierarchyGraph();
+        BiMap<Node, Node> nodemap = new BiMap<>();
+        Set<HierarchyGraph> toAdd = new HashSet<>();
+        Map<Node, Node> CToUniqueHierarchyGraphs = new HashMap<>();
+
+        for (Map.Entry<Node, HierarchyGraph> subgraph : H.entrySet()) {
+            CopyInfo flattened = subgraph.getValue().flatten();
+            toAdd.add(flattened.graph);
+            for (Node port : E.get(subgraph.getKey())) {
+                CToUniqueHierarchyGraphs.put(port, flattened.getMap().get(C.get(port)));
+            }
+            res.subGraphLabeling.add(new Subgraph(namesOfHierarchyGraphs.get(subgraph.getValue()), flattened.graph.V));
         }
+        for (Node node : V) {
+            nodemap.put(node, new Node(node.getLabels()));
+        }
+        res.V = V.stream().filter(node -> !(node.getLabels().contains(Label.COMPONENT))).map(nodemap::get).collect(Collectors.toSet());
+        res.V.addAll(toAdd.stream().map(graph -> graph.V).reduce(new HashSet<>(), (nodes, nodes2) -> {
+            nodes.addAll(nodes2);
+            return nodes;
+        }));
+        res.E = E.entrySet()
+                .stream()
+                .filter(x -> res.V.contains(nodemap.get(x.getKey())))
+                .collect(Collectors.toMap(
+                        x -> nodemap.get(x.getKey()),
+                        y -> y.getValue()
+                                .stream()
+                                .filter(x -> res.V.contains(nodemap.get(x)))
+                                .map(nodemap::get)
+                                .collect(Collectors.toSet())));
+        res.rebuildLabelIndex();
+        //Util.checkConsistent(res);
+        for (Map<Node, Set<Node>> edgeSets : toAdd.stream().map(graph -> graph.E).collect(Collectors.toSet())) {
+            for (Map.Entry<Node, Set<Node>> entry : edgeSets.entrySet()) {
+                res.E.putIfAbsent(entry.getKey(), new HashSet<>());
+                res.E.get(entry.getKey()).addAll(new HashSet<>(entry.getValue()));
+            }
+        }
+        res.rebuildLabelIndex();
+        //Util.checkConsistent(res);
+        for (Map.Entry<Node, Node> portMapping : C.entrySet()) {
+            Node port = portMapping.getKey();
+            res.addEdge(nodemap.get(port), CToUniqueHierarchyGraphs.get(port));
+        }
+
+        while (res.getNodesByLabel(Label.PORT).stream().anyMatch(x -> CToUniqueHierarchyGraphs.containsKey(nodemap.getByValue(x).iterator().next()))) {
+            Node example = res.getNodesByLabel(Label.PORT).stream().filter(x -> CToUniqueHierarchyGraphs.containsKey(nodemap.getByValue(x).iterator().next())).findAny().get();
+            for (Node one : res.E.get(example)) {
+                for (Node two : res.E.get(example)) {
+                    if (two.getID() > one.getID()) {
+                        res.addEdge(one, two);
+                    }
+                }
+            }
+            res.removeNode(example);
+        }
+        res.rebuildLabelIndex();
+        res.subGraphCounter = 0;
+        return new CopyInfo(res, nodemap.getToMap());
     }
 
-
-
-    public HierarchyGraph flatten() {
-        HierarchyGraph res = new HierarchyGraph();
-        res.addNodes(V);
-        res.addEdges(E);
-        assert V.containsAll(H.keySet());
-        for (Map.Entry<Node, HierarchyGraph> hierarchies : H.entrySet()) { //For every subgraph
-            Set<Node> ports = getPorts(hierarchies.getKey());
-            assert ports.stream().allMatch(x -> hierarchies.getValue().getNodes().contains(C.get(x)));
-            res.removeNode(hierarchies.getKey());                          //remove component
-            HierarchyGraph subGraph = getFlat(hierarchies.getValue());        //get a flattened version
-            CopyInfo copy = subGraph.deepCopy(); //make a copy of it
-            for (Node port : ports) {
-                assert subGraph.getNodes().contains(C.get(port));
-                assert copy.map.containsKey(C.get(port));
-                res.replaceNode(port, copy.getMap().get(C.get(port)));
+    private void rebuildLabelIndex() {
+        labelIndex = new HashMap<>();
+        for (Node node : V) {
+            for (Label label : node.getLabels()) {
+                labelIndex.putIfAbsent(label, new HashSet<>());
+                labelIndex.get(label).add(node);
             }
-
-            res.addNodes(copy.getGraph().getNodes());
-            res.addEdges(copy.getGraph().getEdges());
-
-            String name = namesOfHierarchyGraphs.get(hierarchies.getValue());
-            name = Reader.graphIds.getOrDefault(Paths.get(name), name);
-            res.subGraphLabeling.add(new Subgraph(name, copy.getGraph().getNodes()));
         }
-        return res;
     }
 
     private Set<Node> getPorts(Node component) {
@@ -158,6 +204,7 @@ public class HierarchyGraph {
             return Collections.emptySet();
         }
         Set<Node> res = new HashSet<>(E.get(component));
+        Util.checkConsistent(this);
         assert !res.retainAll(getNodesByLabel(Label.PORT));
         assert res.stream().noneMatch(node1 -> E.get(node1).stream().anyMatch(node2 -> node2.getLabels().contains(Label.COMPONENT) && node2 != component));
         assert res.stream().allMatch(x -> C.containsKey(x));
@@ -165,51 +212,49 @@ public class HierarchyGraph {
     }
 
     public CopyInfo deepCopy() {
+        Util.checkConsistent(this);
         Map<Node, Node> nodemap = new HashMap<>();
+        Map<HierarchyGraph, HierarchyGraph> graphmap = new HashMap<>();
         HierarchyGraph res = new HierarchyGraph();
-        for (Node replaced : V) {
-            if (!H.containsKey(replaced)) {
-                Node replacedBy = res.addNode(new HashSet<>(replaced.getLabels()));
-                nodemap.put(replaced, replacedBy);
-            }
+        for (HierarchyGraph subgraph : H.values()) {
+            CopyInfo copyInfo = subgraph.deepCopy();
+            nodemap.putAll(copyInfo.getMap());
+            graphmap.put(subgraph, copyInfo.graph);
         }
-        Map<Node, Node> subCopyMapping = new HashMap<>();
-        for (Map.Entry<Node, HierarchyGraph> entry : H.entrySet()) {
-            CopyInfo deepercopy = entry.getValue().deepCopy();
-            subCopyMapping.putAll(deepercopy.getMap());
-            nodemap.put(entry.getKey(), res.addComponent(deepercopy.getGraph(), namesOfHierarchyGraphs.get(entry.getValue())));
+        for (Node node : V) {
+           nodemap.put(node, new Node(node.getLabels()));
         }
-        for (Map.Entry<Node, Set<Node>> entry : E.entrySet()) {
-            for (Node target : entry.getValue()) {
-                res.addEdge(nodemap.get(entry.getKey()), nodemap.get(target));
-            }
-        }
-        System.out.println(E.size());
-        System.out.println(res.getEdges().size());
-        assert E.size() == res.getEdges().size();
-        for (Map.Entry<Node, Node> entry : C.entrySet()) {
-            res.addPortMapping(nodemap.get(entry.getKey()), subCopyMapping.get(entry.getValue()));
-        }
-        assert V.size() == res.getNodes().size();
-        for (Node i : V) {
-            assert res.V.contains(nodemap.get(i));
-        }
-        for (Node i : E.keySet()) {
-            assert res.E.get(nodemap.get(i)).size() == E.get(i).size();
-            for (Node j : E.get(i)) {
-                assert res.E.get(nodemap.get(i)).contains(nodemap.get(j));
-            }
-        }
-        assert C.size() == res.getPortMapping().size();
-        for (Node i : C.keySet()) {
-            assert res.C.containsKey(nodemap.get(i)) && !res.C.get(nodemap.get(i)).equals(C.get(i));
-        }
-        assert H.size() == res.getHierarchy().size();
-        assert nodemap.size() == V.size();
+        res.V = V.stream().map(nodemap::get).collect(Collectors.toSet());
+        res.E = E.entrySet().stream()
+                .map(nodeSetEntry -> Map.entry(nodemap.get(nodeSetEntry.getKey()), nodeSetEntry.getValue().stream().map(nodemap::get).collect(Collectors.toSet())))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        res.H = H.entrySet().stream()
+                .map(nodeSetEntry -> Map.entry(nodemap.get(nodeSetEntry.getKey()), graphmap.get(nodeSetEntry.getValue())))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        res.C = C.entrySet().stream()
+                .collect(Collectors.toMap(nodeNodeEntry -> nodemap.get(nodeNodeEntry.getKey()), nodeNodeEntry -> nodemap.get(nodeNodeEntry.getValue())));
+        res.labelIndex = labelIndex.entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, labelSetEntry -> labelSetEntry.getValue().stream().map(nodemap::get).collect(Collectors.toSet())));
+        res.namesOfHierarchyGraphs = namesOfHierarchyGraphs.entrySet().stream()
+                .collect(Collectors.toMap(hierarchyGraphStringEntry -> graphmap.get(hierarchyGraphStringEntry.getKey()), Map.Entry::getValue));
+        res.subGraphLabeling = subGraphLabeling.stream().map(subgraph ->
+                new Subgraph(subgraph.name, subgraph.nodes.stream().map(nodemap::get).collect(Collectors.toSet())))
+                .collect(Collectors.toList());
+        res.subGraphCounter = subGraphCounter;
+        Util.checkConsistent(res);
         return new CopyInfo(res, nodemap);
     }
 
+    private Node getComponent(Node key) {
+        assert key.getLabels().contains(Label.PORT);
+        Set<Node> candidates = new HashSet<>(E.get(key));
+        candidates.retainAll(getNodesByLabel(Label.COMPONENT));
+        assert candidates.size() == 1;
+        return candidates.iterator().next();
+    }
+
     private void replaceNode(Node key, Node value) {
+        Util.checkConsistent(this);
         assert key != null;
         assert value != null;
         V.remove(key);
@@ -224,15 +269,20 @@ public class HierarchyGraph {
         E.computeIfAbsent(value, x -> new HashSet<>());
         E.get(value).addAll(E.get(key));
         E.remove(key);
+        Util.checkConsistent(this);
     }
 
-    private void removeNode(Node component) {
-        V.remove(component);
-        for (Node neighbour : E.getOrDefault(component, Collections.emptySet())) {
-            E.get(neighbour).remove(component);
+    public void removeNode(Node node) {
+        Util.checkConsistent(this);
+        V.remove(node);
+        for (Node neighbour : E.getOrDefault(node, Collections.emptySet())) {
+            E.get(neighbour).remove(node);
         }
-        E.remove(component);
-
+        for (Label label : node.getLabels()) {
+            labelIndex.get(label).remove(node);
+        }
+        E.remove(node);
+        Util.checkConsistent(this);
     }
 
     public Map<Node, Set<Node>> getEdges() {
@@ -244,6 +294,7 @@ public class HierarchyGraph {
     }
 
     private void addEdges(Map<Node, Set<Node>> e) {
+        Util.checkConsistent(this);
         for (Map.Entry<Node, Set<Node>> entry : e.entrySet()) {
             if (E.containsKey(entry.getKey())) {
                 E.get(entry.getKey()).addAll(entry.getValue());
@@ -251,6 +302,7 @@ public class HierarchyGraph {
                 E.put(entry.getKey(), new HashSet<>(entry.getValue()));
             }
         }
+        Util.checkConsistent(this);
     }
 
     private void addNodes(Set<Node> v) {
@@ -267,6 +319,8 @@ public class HierarchyGraph {
 
 
     private Node addNode(Node node) {
+        assert !V.contains(node);
+        E.put(node, new HashSet<>());
         V.add(node);
         for (Label label : node.getLabels()) {
             labelIndex.computeIfAbsent(label, x -> new HashSet<>());
@@ -281,17 +335,22 @@ public class HierarchyGraph {
     }
 
     public Node addComponent(HierarchyGraph hierarchyGraph, String name) {
+        Util.checkConsistent(this);
         Node res = addNode(Label.COMPONENT);
         addHierarchy(res, hierarchyGraph, name);
+        Util.checkConsistent(this);
         return res;
     }
 
     public Node addPort(Node linkTarget, Node component) {
+        Util.checkConsistent(this);
         Node res = addNode(Label.PORT);
+        assert H.containsKey(component);
         addPortMapping(res, linkTarget);
         if (component != null) {
             addEdge(res, component);
         }
+        Util.checkConsistent(this);
         return res;
     }
 
@@ -300,6 +359,7 @@ public class HierarchyGraph {
     }
 
     public void shuffleIdentifiers(long seed) {
+        Util.checkConsistent(this);
         List<Node> from = new ArrayList<>(V);
         List<Node> to = new ArrayList<>(from);
         Collections.shuffle(to, new Random(seed));
@@ -334,6 +394,7 @@ public class HierarchyGraph {
         E = E_new;
         H = H_new;
         C = C_new;
+        Util.checkConsistent(this);
     }
 
     public Map<Node, HierarchyGraph> getHierarchy() {

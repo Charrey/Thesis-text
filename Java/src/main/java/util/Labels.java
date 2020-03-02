@@ -28,6 +28,7 @@ public class Labels {
         map.put("flow_to", Label.FLOW_TO);
         map.put("clock", Label.CLOCK);
         map.put("always_on", Label.EXTRA);
+        map.put("ERROR", Label.REMOVE);
 
     }
 

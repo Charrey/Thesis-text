@@ -61,7 +61,7 @@ public class TestSimple extends MyTestCase {
 
     @Test
     public void testSubdivision_test5() throws IOException, NoMappingException {
-        HierarchyGraph graph1 = FPGAModels.makeSnake(30, 30, false);
+        HierarchyGraph graph1 = FPGAModels.makeSnake(3, 10, false);
         Util.view(graph1);
         graph1.shuffleIdentifiers();
         HierarchyGraph graph2 = FPGAModels.makeSnake(2, 3, false);
@@ -82,7 +82,7 @@ public class TestSimple extends MyTestCase {
 
     @Test
     public void testMUXLUT_test7() throws IOException, NoMappingException {
-        HierarchyGraph graph1 = FPGAModels.makeLutTree(3, 10, false);
+        HierarchyGraph graph1 = FPGAModels.makeLutTree(3, 6, false);
         Util.view(graph1);
         graph1.shuffleIdentifiers();
         HierarchyGraph graph2 = FPGAModels.makeSimpleLut(4, false);

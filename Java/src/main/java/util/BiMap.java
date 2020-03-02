@@ -1,7 +1,5 @@
 package util;
 
-import data.graph.Label;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -49,5 +47,9 @@ public class BiMap<P, S> {
 
     public Set<P> getByValue(S value) {
         return byValue.get(value);
+    }
+
+    public Map<P, S> getToMap() {
+        return byKey;
     }
 }

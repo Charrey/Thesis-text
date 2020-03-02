@@ -3,8 +3,6 @@ package data.graph;
 import data.patterns.*;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public final class Patterns {
 
@@ -106,14 +104,6 @@ public final class Patterns {
         List<Node> pins = new LinkedList<>();
         for (int i = 0; i < count; i++) {
             pins.add(graph.addNode(Label.PIN));
-        }
-        return pins;
-    }
-
-    public static List<Node> addPorts(HierarchyGraph graph, int count) {
-        List<Node> pins = new LinkedList<>();
-        for (int i = 0; i < count; i++) {
-            pins.add(graph.addNode(Label.PORT));
         }
         return pins;
     }

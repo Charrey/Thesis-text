@@ -2,9 +2,9 @@ package data.graph;
 
 import util.Labels;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Node {
@@ -13,6 +13,7 @@ public class Node {
     private int ID;
     private static int IDCounter = 0;
     private boolean locked = false;
+    private HierarchyGraph graph;
 
     public Node(Label... labels) {
         this.labels = Set.of(labels);
@@ -20,7 +21,7 @@ public class Node {
     }
 
     public Node(Set<Label> labels) {
-        this.labels = labels;
+        this.labels = new HashSet<>(labels);
         ID = IDCounter++;
     }
 
@@ -63,5 +64,12 @@ public class Node {
 
     public void lock() {
         locked = true;
+    }
+
+    public HierarchyGraph getGraph() {
+        if (graph == null) {
+            throw new UnsupportedOperationException();
+        }
+        return this.graph;
     }
 }
