@@ -6,23 +6,31 @@ import util.Util;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * A hierarchical Graph that may contain inner graphs.
+ */
 public class HierarchyGraph {
 
-    private Set<Node> V = new HashSet<>();
+    private Set<Vertex> V = new HashSet<>();
 
-    private Map<Node, Set<Node>> E = new HashMap<>();
-    private Map<Node, HierarchyGraph> H = new HashMap<>();
-    private Map<Node, Node> C = new HashMap<>();
-    private Map<Label, Set<Node>> labelIndex = new HashMap<>();
+    private Map<Vertex, Set<Vertex>> E = new HashMap<>();
+    private Map<Vertex, HierarchyGraph> H = new HashMap<>();
+    private Map<Vertex, Vertex> C = new HashMap<>();
+    private Map<Label, Set<Vertex>> labelIndex = new HashMap<>();
     private boolean locked = false;
 
     private Map<HierarchyGraph, String> namesOfHierarchyGraphs = new HashMap<>();
 
+    /**
+     * A list of vertex sets that have names. This is used in visual representations of Hierarchygraphs to provide names to subgraphs.
+     */
     public List<Subgraph> subGraphLabeling = new LinkedList<>();
     private int subGraphCounter = 0;
 
 
-
+    /**
+     * Permanently prohibit modification of this Hierarchygraph.
+     */
     public void lock() {
         if (locked) {
             return;
@@ -30,26 +38,35 @@ public class HierarchyGraph {
         V = Collections.unmodifiableSet(V);
         H = Collections.unmodifiableMap(H);
         C = Collections.unmodifiableMap(C);
-        for (Map.Entry<Node, Set<Node>> entry : new HashSet<>(E.entrySet())) {
+        for (Map.Entry<Vertex, Set<Vertex>> entry : new HashSet<>(E.entrySet())) {
             E.put(entry.getKey(), Collections.unmodifiableSet(entry.getValue()));
         }
         E = Collections.unmodifiableMap(E);
-        for (Node node : V) {
-            node.lock();
+        for (Vertex vertex : V) {
+            vertex.lock();
         }
-        for (Map.Entry<Node, HierarchyGraph> entry : H.entrySet()) {
+        for (Map.Entry<Vertex, HierarchyGraph> entry : H.entrySet()) {
             entry.getValue().lock();
         }
+        namesOfHierarchyGraphs = Collections.unmodifiableMap(namesOfHierarchyGraphs);
+        labelIndex.replaceAll((k, v) -> Collections.unmodifiableSet(labelIndex.get(k)));
+        labelIndex = Collections.unmodifiableMap(labelIndex);
         locked = true;
-        assert H.entrySet().stream().allMatch(x -> getPorts(x.getKey()).stream().allMatch(y -> x.getValue().getNodes().contains(C.get(y))));
+        assert H.entrySet().stream().allMatch(x -> getPorts(x.getKey()).stream().allMatch(y -> x.getValue().getVertices().contains(C.get(y))));
     }
 
 
-    public void addEdge(Node a, Node b) {
+    /**
+     * Adds an undirected edge between two existing vertices.
+     *
+     * @param a One vertex to be connected
+     * @param b The other vertex to be connected
+     */
+    public void addEdge(Vertex a, Vertex b) {
         Util.assertOrElse(a != null, "Attempting to add an edge starting from NULL.");
         Util.assertOrElse(b != null, "Attempting to add an edge going to NULL.");
-        Util.assertOrElse(V.contains(a), "Attempting to add an edge starting from a node that is not in V.");
-        Util.assertOrElse(V.contains(b), "Attempting to add an edge going to a node that is not in V.");
+        Util.assertOrElse(V.contains(a), "Attempting to add an edge starting from a vertex that is not in V.");
+        Util.assertOrElse(V.contains(b), "Attempting to add an edge going to a vertex that is not in V.");
         E.computeIfAbsent(a, x -> new HashSet<>());
         E.computeIfAbsent(b, x -> new HashSet<>());
         E.get(a).add(b);
@@ -57,33 +74,40 @@ public class HierarchyGraph {
     }
 
 
-     @Override
-     public String toString() {
+    @Override
+    public String toString() {
         return (locked ? "LOCKED" : "") + "(" + V + "," + E + "," + H + "," + C + ")";
-     }
+    }
 
-    private void addHierarchy(Node component, HierarchyGraph graph, String name) {
+    private void addHierarchy(Vertex component, HierarchyGraph graph, String name) {
         H.put(component, graph);
         namesOfHierarchyGraphs.put(graph, name);
     }
 
-    private void addPortMapping(Node higher, Node lower) {
-        assert higher!= null;
+    private void addPortMapping(Vertex higher, Vertex lower) {
+        assert higher != null;
         assert lower != null;
         assert higher.getLabels().contains(Label.PORT);
         C.put(higher, lower);
     }
 
 
+    /**
+     * Returns a String in DOT format giving an accurate visualisation of this Hierarchygraph.
+     *
+     * @param scramble whether to scramble the lines of the resulting String. Scrambling
+     *                 may influence the way graphs are displayed.
+     * @return A valid graph in DOT-format representative of this Hierarchygraph.
+     */
     public String toDOT(boolean scramble) {
         StringBuilder sb = new StringBuilder("graph G {\n");
         List<String> lines = new LinkedList<>();
-        for (Node n : V) {
+        for (Vertex n : V) {
             lines.add(n.getDOT());
         }
-        Set<Node> seen = new HashSet<>();
-        for (Node n : E.keySet()) {
-            for (Node m : E.get(n)) {
+        Set<Vertex> seen = new HashSet<>();
+        for (Vertex n : E.keySet()) {
+            for (Vertex m : E.get(n)) {
                 if (seen.contains(m)) {
                     continue;
                 }
@@ -104,11 +128,11 @@ public class HierarchyGraph {
 
     private void addSubGraphs(List<String> lines) {
         for (Subgraph subgraph : subGraphLabeling) {
-            if (V.containsAll(subgraph.getNodes())) {
+            if (V.containsAll(subgraph.getVertices())) {
                 lines.add("subgraph cluster_" + subGraphCounter++ + " {");
                 lines.add("label = \"" + subgraph.getName() + "\"");
-                for (Node node : subgraph.getNodes()) {
-                    lines.add(node.getID() + ";");
+                for (Vertex vertex : subgraph.getVertices()) {
+                    lines.add(vertex.getID() + ";");
                 }
                 lines.add("}");
             }
@@ -126,185 +150,230 @@ public class HierarchyGraph {
 //        }
 //    }
 
+    /**
+     * Returns a Hierarchygraph in which each subgraph is merged in to the top-level one. This graph contains the same
+     * information as thís one, but has no more hierarchy.
+     *
+     * @return Both a flattened graph of this one, and a mapping that maps vertices from this graph to their equivalent in
+     * the resulting graph.
+     */
     public CopyInfo flatten() {
         HierarchyGraph res = new HierarchyGraph();
-        BiMap<Node, Node> nodemap = new BiMap<>();
+        BiMap<Vertex, Vertex> vertexMap = new BiMap<>();
         Set<HierarchyGraph> toAdd = new HashSet<>();
-        Map<Node, Node> CToUniqueHierarchyGraphs = new HashMap<>();
+        Map<Vertex, Vertex> CToUniqueHierarchyGraphs = new HashMap<>();
 
-        for (Map.Entry<Node, HierarchyGraph> hierarchies : H.entrySet()) {
+        for (Map.Entry<Vertex, HierarchyGraph> hierarchies : H.entrySet()) {
             CopyInfo flattened = hierarchies.getValue().flatten();
             toAdd.add(flattened.graph);
-            for (Node port : E.get(hierarchies.getKey())) {
+            for (Vertex port : E.get(hierarchies.getKey())) {
                 CToUniqueHierarchyGraphs.put(port, flattened.getMap().get(C.get(port)));
             }
-            nodemap.putAll(flattened.getMap());
+            vertexMap.putAll(flattened.getMap());
             res.subGraphLabeling.add(new Subgraph(namesOfHierarchyGraphs.get(hierarchies.getValue()), flattened.graph.V));
         }
-        for (Node node : V) {
-            nodemap.put(node, new Node(node.getLabels()));
+        for (Vertex vertex : V) {
+            vertexMap.put(vertex, new Vertex(vertex.getLabels()));
         }
-        res.V = V.stream().filter(node -> !(node.getLabels().contains(Label.COMPONENT))).map(nodemap::get).collect(Collectors.toSet());
-        res.V.addAll(toAdd.stream().map(graph -> graph.V).reduce(new HashSet<>(), (nodes, nodes2) -> {
-            nodes.addAll(nodes2);
-            return nodes;
+        res.V = V.stream().filter(vertex -> !(vertex.getLabels().contains(Label.COMPONENT))).map(vertexMap::get).collect(Collectors.toSet());
+        res.V.addAll(toAdd.stream().map(graph -> graph.V).reduce(new HashSet<>(), (vertices, vertices2) -> {
+            vertices.addAll(vertices2);
+            return vertices;
         }));
         res.E = E.entrySet()
                 .stream()
-                .filter(x -> res.V.contains(nodemap.get(x.getKey())))
+                .filter(x -> res.V.contains(vertexMap.get(x.getKey())))
                 .collect(Collectors.toMap(
-                        x -> nodemap.get(x.getKey()),
+                        x -> vertexMap.get(x.getKey()),
                         y -> y.getValue()
                                 .stream()
-                                .filter(x -> res.V.contains(nodemap.get(x)))
-                                .map(nodemap::get)
+                                .filter(x -> res.V.contains(vertexMap.get(x)))
+                                .map(vertexMap::get)
                                 .collect(Collectors.toSet())));
         res.rebuildLabelIndex();
         //Util.checkConsistent(res);
-        for (Map<Node, Set<Node>> edgeSets : toAdd.stream().map(graph -> graph.E).collect(Collectors.toSet())) {
-            for (Map.Entry<Node, Set<Node>> entry : edgeSets.entrySet()) {
+        for (Map<Vertex, Set<Vertex>> edgeSets : toAdd.stream().map(graph -> graph.E).collect(Collectors.toSet())) {
+            for (Map.Entry<Vertex, Set<Vertex>> entry : edgeSets.entrySet()) {
                 res.E.putIfAbsent(entry.getKey(), new HashSet<>());
                 res.E.get(entry.getKey()).addAll(new HashSet<>(entry.getValue()));
             }
         }
         res.rebuildLabelIndex();
         //Util.checkConsistent(res);
-        for (Map.Entry<Node, Node> portMapping : C.entrySet()) {
-            Node port = portMapping.getKey();
-            res.addEdge(nodemap.get(port), CToUniqueHierarchyGraphs.get(port));
+        for (Map.Entry<Vertex, Vertex> portMapping : C.entrySet()) {
+            Vertex port = portMapping.getKey();
+            res.addEdge(vertexMap.get(port), CToUniqueHierarchyGraphs.get(port));
         }
 
-        while (res.getNodesByLabel(Label.PORT).stream().anyMatch(x -> CToUniqueHierarchyGraphs.containsKey(nodemap.getByValue(x).iterator().next()))) {
-            Node example = res.getNodesByLabel(Label.PORT).stream().filter(x -> CToUniqueHierarchyGraphs.containsKey(nodemap.getByValue(x).iterator().next())).findAny().get();
-            for (Node one : res.E.get(example)) {
-                for (Node two : res.E.get(example)) {
+        while (res.getVerticesByLabel(Label.PORT).stream().anyMatch(x -> CToUniqueHierarchyGraphs.containsKey(vertexMap.getByValue(x).iterator().next()))) {
+            Vertex example = res.getVerticesByLabel(Label.PORT).stream().filter(x -> CToUniqueHierarchyGraphs.containsKey(vertexMap.getByValue(x).iterator().next())).findAny().get();
+            for (Vertex one : res.E.get(example)) {
+                for (Vertex two : res.E.get(example)) {
                     if (two.getID() > one.getID()) {
                         res.addEdge(one, two);
                     }
                 }
             }
-            res.removeNode(example);
+            res.removeVertex(example);
         }
         res.rebuildLabelIndex();
         res.subGraphCounter = 0;
-        nodemap.removeValues(x -> !res.getNodes().contains(x) && H.values().stream().noneMatch(y -> y.getNodes().contains(x)));
-        return new CopyInfo(res, nodemap.getToMap());
+        vertexMap.removeValues(x -> !res.getVertices().contains(x) && H.values().stream().noneMatch(y -> y.getVertices().contains(x)));
+        return new CopyInfo(res, vertexMap.getToMap());
     }
 
     private void rebuildLabelIndex() {
         labelIndex = new HashMap<>();
-        for (Node node : V) {
-            for (Label label : node.getLabels()) {
+        for (Vertex vertex : V) {
+            for (Label label : vertex.getLabels()) {
                 labelIndex.putIfAbsent(label, new HashSet<>());
-                labelIndex.get(label).add(node);
+                labelIndex.get(label).add(vertex);
             }
         }
     }
 
-    private Set<Node> getPorts(Node component) {
+    private Set<Vertex> getPorts(Vertex component) {
         if (!E.containsKey(component)) {
             return Collections.emptySet();
         }
-        Set<Node> res = new HashSet<>(E.get(component));
+        Set<Vertex> res = new HashSet<>(E.get(component));
         Util.checkConsistent(this);
-        assert !res.retainAll(getNodesByLabel(Label.PORT));
-        assert res.stream().noneMatch(node1 -> E.get(node1).stream().anyMatch(node2 -> node2.getLabels().contains(Label.COMPONENT) && node2 != component));
+        assert !res.retainAll(getVerticesByLabel(Label.PORT));
+        assert res.stream().noneMatch(vertex -> E.get(vertex).stream().anyMatch(otherVertex -> otherVertex.getLabels().contains(Label.COMPONENT) && otherVertex != component));
         assert res.stream().allMatch(x -> C.containsKey(x));
         return res;
     }
 
+    /**
+     * Returns a structurally identical but independent copy of this graph as a new Object.
+     *
+     * @return Both the copy of this graph and a mapping that maps vertices from this graph to their copy in the resulting
+     * graph.
+     */
     public CopyInfo deepCopy() {
         Util.checkConsistent(this);
-        Map<Node, Node> nodemap = new HashMap<>();
+        Map<Vertex, Vertex> vertexMap = new HashMap<>();
         Map<HierarchyGraph, HierarchyGraph> graphmap = new HashMap<>();
         HierarchyGraph res = new HierarchyGraph();
         for (HierarchyGraph subgraph : H.values()) {
             CopyInfo copyInfo = subgraph.deepCopy();
-            nodemap.putAll(copyInfo.getMap());
+            vertexMap.putAll(copyInfo.getMap());
             graphmap.put(subgraph, copyInfo.graph);
         }
-        for (Node node : V) {
-           nodemap.put(node, new Node(node.getLabels()));
+        for (Vertex vertex : V) {
+            vertexMap.put(vertex, new Vertex(vertex.getLabels()));
         }
-        res.V = V.stream().map(nodemap::get).collect(Collectors.toSet());
+        res.V = V.stream().map(vertexMap::get).collect(Collectors.toSet());
         res.E = E.entrySet().stream()
-                .map(nodeSetEntry -> Map.entry(nodemap.get(nodeSetEntry.getKey()), nodeSetEntry.getValue().stream().map(nodemap::get).collect(Collectors.toSet())))
+                .map(entry -> Map.entry(vertexMap.get(entry.getKey()), entry.getValue().stream().map(vertexMap::get).collect(Collectors.toSet())))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         res.H = H.entrySet().stream()
-                .map(nodeSetEntry -> Map.entry(nodemap.get(nodeSetEntry.getKey()), graphmap.get(nodeSetEntry.getValue())))
+                .map(entry -> Map.entry(vertexMap.get(entry.getKey()), graphmap.get(entry.getValue())))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         res.C = C.entrySet().stream()
-                .collect(Collectors.toMap(nodeNodeEntry -> nodemap.get(nodeNodeEntry.getKey()), nodeNodeEntry -> nodemap.get(nodeNodeEntry.getValue())));
+                .collect(Collectors.toMap(entry -> vertexMap.get(entry.getKey()), entry -> vertexMap.get(entry.getValue())));
         res.labelIndex = labelIndex.entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, labelSetEntry -> labelSetEntry.getValue().stream().map(nodemap::get).collect(Collectors.toSet())));
+                .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().stream().map(vertexMap::get).collect(Collectors.toSet())));
         res.namesOfHierarchyGraphs = namesOfHierarchyGraphs.entrySet().stream()
-                .collect(Collectors.toMap(hierarchyGraphStringEntry -> graphmap.get(hierarchyGraphStringEntry.getKey()), Map.Entry::getValue));
+                .collect(Collectors.toMap(entry -> graphmap.get(entry.getKey()), Map.Entry::getValue));
         res.subGraphLabeling = subGraphLabeling.stream().map(subgraph ->
-                new Subgraph(subgraph.name, subgraph.nodes.stream().map(nodemap::get).collect(Collectors.toSet())))
+                new Subgraph(subgraph.name, subgraph.vertices.stream().map(vertexMap::get).collect(Collectors.toSet())))
                 .collect(Collectors.toList());
         res.subGraphCounter = subGraphCounter;
         Util.checkConsistent(res);
-        return new CopyInfo(res, nodemap);
+        return new CopyInfo(res, vertexMap);
     }
 
 
-    public void removeNode(Node node) {
+    /**
+     * Removes a vertex from this Hierarchygraph.
+     *
+     * @param vertex The vertex to be removed.
+     */
+    public void removeVertex(Vertex vertex) {
         Util.checkConsistent(this);
-        V.remove(node);
-        for (Node neighbour : E.getOrDefault(node, Collections.emptySet())) {
-            E.get(neighbour).remove(node);
+        V.remove(vertex);
+        for (Vertex neighbour : E.getOrDefault(vertex, Collections.emptySet())) {
+            E.get(neighbour).remove(vertex);
         }
-        for (Label label : node.getLabels()) {
-            labelIndex.get(label).remove(node);
+        for (Label label : vertex.getLabels()) {
+            labelIndex.get(label).remove(vertex);
         }
-        E.remove(node);
-        C.remove(node);
-        H.remove(node);
+        E.remove(vertex);
+        C.remove(vertex);
+        H.remove(vertex);
         Util.checkConsistent(this);
     }
 
-    public Map<Node, Set<Node>> getEdges() {
+    /**
+     * Gets the edges of the top hierarchy of this Hierarchygraph.
+     * @return A map that maps vertices to their neighbours.
+     */
+    public Map<Vertex, Set<Vertex>> getEdges() {
         return Collections.unmodifiableMap(E);
     }
 
-    public Set<Node> getNodes() {
+    /**
+     * Gets the vertices of the top hierarchy of this Hierarchygraph.
+     * @return Set of vertices.
+     */
+    public Set<Vertex> getVertices() {
         return Collections.unmodifiableSet(V);
     }
 
-    public Node addNode(Label... labels) {
-        return addNode(new Node(labels));
+    /**
+     * Add a vertex to the top hierarchy of this Hierarchygraph.
+     * @param labels The labels this vertex has.
+     * @return The vertex that was added.
+     */
+    public Vertex addVertex(Label... labels) {
+        return addVertex(new Vertex(labels));
     }
 
-    public Node addNode(Set<Label> labels) {
-        return addNode(new Node(labels));
+    /**
+     * Add a vertex to the top hierarchy of this Hierarchygraph.
+     * @param labels The labels this vertex has.
+     * @return The vertex that was added.
+     */
+    public Vertex addVertex(Set<Label> labels) {
+        return addVertex(new Vertex(labels));
     }
 
-    private Node addNode(Node node) {
-        assert !V.contains(node);
-        E.put(node, new HashSet<>());
-        V.add(node);
-        for (Label label : node.getLabels()) {
+    private Vertex addVertex(Vertex vertex) {
+        assert !V.contains(vertex);
+        E.put(vertex, new HashSet<>());
+        V.add(vertex);
+        for (Label label : vertex.getLabels()) {
             labelIndex.computeIfAbsent(label, x -> new HashSet<>());
-            labelIndex.get(label).add(node);
+            labelIndex.get(label).add(vertex);
         }
-        return node;
+        return vertex;
     }
 
 
-    public int vertexCount() {
-        return V.size();
-    }
-
-    public Node addComponent(HierarchyGraph hierarchyGraph, String name) {
-        Node res = addNode(Label.COMPONENT);
+    /**
+     * Adds hierarchy to this Hierarchygraph by embedding another Hierarchygraph into a node in this graph.
+     * @param hierarchyGraph The Hierarchygraph to be embedded in this one.
+     * @param name           Name of this hierarchygraph (for visualisation purposes only)
+     * @return The vertex that represents the subhierarchygraph.
+     */
+    public Vertex addComponent(HierarchyGraph hierarchyGraph, String name) {
+        Vertex res = addVertex(Label.COMPONENT);
         addHierarchy(res, hierarchyGraph, name);
         return res;
     }
 
-    public Node addPort(Node linkTarget, Node component) {
+
+    /**
+     * Adds a port to a vertex of lower hierarchy.
+     * @param linkTarget the vertex to link this port to.
+     * @param component  the component vertex that represents the hierarchygraph that contains the link target.
+     * @return The port vertex that was added.
+     */
+    public Vertex addPort(Vertex linkTarget, Vertex component) {
         Util.assertOrElse(linkTarget != null, "Cannot add port to a NULL link target.");
-        Util.assertOrElse(!linkTarget.getLabels().contains(Label.PORT), "Attempting to link a port to a node that is a port itself. This is a node that may disappear and is thus not allowed!");
-        Node res = addNode(Label.PORT);
+        Util.assertOrElse(!linkTarget.getLabels().contains(Label.PORT), "Attempting to link a port to a vertex that is a port itself. This is a vertex that may disappear and is thus not allowed!");
+        Vertex res = addVertex(Label.PORT);
         assert H.containsKey(component);
         addPortMapping(res, linkTarget);
         if (component != null) {
@@ -313,39 +382,47 @@ public class HierarchyGraph {
         return res;
     }
 
+    /**
+     * Replaces nodes in this graph by random other nodes, leaving the structure of this hierarchygraph intact.
+     * This may be used to ensure isomorphism algorithms do not rely on internal identifiers.
+     */
     public void shuffleIdentifiers() {
         shuffleIdentifiers(System.currentTimeMillis());
     }
 
+    /**
+     * Replaces nodes in this graph by random other nodes, leaving the structure of this hierarchygraph intact.
+     * This may be used to ensure isomorphism algorithms do not rely on internal identifiers.
+     * @param seed The seed used for randomisation.
+     */
     public void shuffleIdentifiers(long seed) {
-        List<Node> from = new ArrayList<>(V);
-        List<Node> to = new ArrayList<>(from);
+        List<Vertex> from = new ArrayList<>(V);
+        List<Vertex> to = new ArrayList<>(from);
         Collections.shuffle(to, new Random(seed));
-        Map<Node, Node> mapping = new HashMap<>();
+        Map<Vertex, Vertex> mapping = new HashMap<>();
         for (int i = 0; i < from.size(); i++) {
             mapping.put(from.get(i), to.get(i));
         }
 
 
-
         labelIndex = new HashMap<>();
-        Map<Node, Set<Node>>      E_new = new HashMap<>();
-        Map<Node, HierarchyGraph> H_new = new HashMap<>();
-        Map<Node, Node>           C_new = new HashMap<>();
-        for (Map.Entry<Node, Set<Node>> entry : E.entrySet()) {
+        Map<Vertex, Set<Vertex>> E_new = new HashMap<>();
+        Map<Vertex, HierarchyGraph> H_new = new HashMap<>();
+        Map<Vertex, Vertex> C_new = new HashMap<>();
+        for (Map.Entry<Vertex, Set<Vertex>> entry : E.entrySet()) {
             E_new.put(mapping.get(entry.getKey()), entry.getValue().stream().map(mapping::get).collect(Collectors.toSet()));
         }
-        for (Map.Entry<Node, HierarchyGraph> entry : H.entrySet()) {
+        for (Map.Entry<Vertex, HierarchyGraph> entry : H.entrySet()) {
             H_new.put(mapping.get(entry.getKey()), entry.getValue());
         }
-        for (Map.Entry<Node, Node> entry : C.entrySet()) {
+        for (Map.Entry<Vertex, Vertex> entry : C.entrySet()) {
             C_new.put(mapping.get(entry.getKey()), entry.getValue());
         }
-        Map<Node, Set<Label>> newLabels = new HashMap<>();
-        for (Node n : from) {
+        Map<Vertex, Set<Label>> newLabels = new HashMap<>();
+        for (Vertex n : from) {
             newLabels.put(mapping.get(n), n.getLabels());
         }
-        for (Node n : to) {
+        for (Vertex n : to) {
             n.setLabels(newLabels.get(n));
             for (Label label : newLabels.get(n)) {
                 labelIndex.putIfAbsent(label, new HashSet<>());
@@ -357,55 +434,90 @@ public class HierarchyGraph {
         C = C_new;
     }
 
-    public Map<Node, HierarchyGraph> getHierarchy() {
+    /**
+     * Returns a mapping describing which nodes describe which hierarchical subcomponents.
+     * @return A mapping where the keys are vertices describing subcomponents, and the values are the subcomponents being described.
+     */
+    public Map<Vertex, HierarchyGraph> getHierarchy() {
         return Collections.unmodifiableMap(H);
     }
 
-    public Set<Node> getNodesByLabel(Label label) {
-        return labelIndex.getOrDefault(label, Collections.emptySet());
+    /**
+     * Gets all vertices that have at least some given label
+     * @param label Label that each vertex should have,
+     * @return All vertices with that label.
+     */
+    public Set<Vertex> getVerticesByLabel(Label label) {
+        return Collections.unmodifiableSet(labelIndex.getOrDefault(label, Collections.emptySet()));
     }
 
-    public Map<Node, Node> getPortMapping() {
+    /**
+     * Returns a mapping that connects vertices to vertices of lower hierarchy.
+     * @return A mapping that connects vertices to vertices of lower hierarchy.
+     */
+    public Map<Vertex, Vertex> getPortMapping() {
         return Collections.unmodifiableMap(C);
     }
 
+    /**
+     * Gives a Map that maps hierarchygraphs to their names (for storage purposes)
+     * @return the Hierarchygraph-to-name map.
+     */
     public Map<HierarchyGraph, String> getNamesOfHierarchyGraphs() {
         return namesOfHierarchyGraphs;
     }
 
-    public class CopyInfo {
+    /**
+     * A class that contains both a new version of a Hierarchygraph via some process, and a mapping that describes
+     * which old vertices have been mapped to which new vertices.
+     */
+    public static class CopyInfo {
         private final HierarchyGraph graph;
-        private final Map<Node, Node> map;
+        private final Map<Vertex, Vertex> map;
 
-        public CopyInfo(HierarchyGraph graph, Map<Node, Node> map) {
+        /**
+         * Instantiates a new CopyInfo with the provided parameters.
+         *
+         * @param graph Hierarchygraph contained by this Object.
+         * @param map   Mapping contains by this Object.
+         */
+        public CopyInfo(HierarchyGraph graph, Map<Vertex, Vertex> map) {
             this.graph = graph;
             this.map = map;
         }
 
-        public Map<Node, Node> getMap() {
+        /**
+         * Returns the map of this Object.
+         * @return the map.
+         */
+        public Map<Vertex, Vertex> getMap() {
             return map;
         }
 
+        /**
+         * Returns the hierarchygraph of this Object.
+         * @return the hierarchygraph
+         */
         public HierarchyGraph getGraph() {
             return graph;
         }
     }
 
-    private class Subgraph {
-        private final Set<Node> nodes;
+    private static class Subgraph {
+        private final Set<Vertex> vertices;
         private final String name;
 
-        public Subgraph(String name, Set<Node> nodes) {
+        private Subgraph(String name, Set<Vertex> vertices) {
             this.name = name;
-            this.nodes = nodes;
+            this.vertices = vertices;
         }
 
-        public String getName() {
+        private String getName() {
             return name;
         }
 
-        public Set<Node> getNodes() {
-            return nodes;
+        private Set<Vertex> getVertices() {
+            return vertices;
         }
     }
 

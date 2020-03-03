@@ -2,7 +2,7 @@ package testMaker;
 
 import data.graph.HierarchyGraph;
 import data.graph.Label;
-import data.graph.Node;
+import data.graph.Vertex;
 import data.graph.Patterns;
 import data.patterns.*;
 import util.Util;
@@ -28,17 +28,17 @@ public class FPGAModels {
     public static HierarchyGraph makeLutAndRegister(int ins, boolean write) throws IOException {
         HierarchyGraph res = new HierarchyGraph();
         Register register = Patterns.Register(ins, true, false, false, false, false);
-        List<Node> pins = new LinkedList<>();
-        List<Node> ports = new LinkedList<>();
-        Node clock = res.addNode(Label.CLOCK);
-        Node component = res.addComponent(register.hierarchyGraph, "Register");
+        List<Vertex> pins = new LinkedList<>();
+        List<Vertex> ports = new LinkedList<>();
+        Vertex clock = res.addVertex(Label.CLOCK_FRAME);
+        Vertex component = res.addComponent(register.hierarchyGraph, "Register");
         res.addEdge(clock, res.addPort(register.syncSet, component));
         for (int i = 0; i < ins; i++) {
-            pins.add(res.addNode(Label.PIN));
+            pins.add(res.addVertex(Label.PIN));
             ports.add(res.addPort(register.inputs.get(i), component));
         }
         for (int i = 0; i < ins; i++) {
-            pins.add(res.addNode(Label.PIN));
+            pins.add(res.addVertex(Label.PIN));
             ports.add(res.addPort(register.outputs.get(i), component));
         }
         for (int i = 0; i < pins.size(); i++) {
@@ -51,18 +51,18 @@ public class FPGAModels {
         component = res.addComponent(lut.getHierarchyGraph(), "LUT");
         res.addEdge(clock, res.addPort(lut.getInputs().get(2), component));
         for (int i = 0; i < ins; i++) {
-            pins.add(res.addNode(Label.PIN));
+            pins.add(res.addVertex(Label.PIN));
             ports.add(res.addPort(lut.getInputs().get(i), component));
         }
         for (int i = 0; i < ins; i++) {
-            pins.add(res.addNode(Label.PIN));
+            pins.add(res.addVertex(Label.PIN));
             ports.add(res.addPort(lut.getOutputs().get(i), component));
         }
         for (int i = 0; i < pins.size(); i++) {
             res.addEdge(pins.get(i), ports.get(i));
         }
         if (write) {
-            Writer.writeToDirectory(Writer.export(res, true), Paths.get("src/test/resources/graphml/LutAndRegister"));
+            Writer.export(res, true, Paths.get("src/test/resources/graphml/LutAndRegister"));
         }
         return res;
     }
@@ -72,16 +72,16 @@ public class FPGAModels {
         mySwitch.addOption(new Patterns.IntConnection(0, 1), new Patterns.IntConnection(1, 0));
         mySwitch.addOption(new Patterns.IntConnection(0, 2), new Patterns.IntConnection(2, 0));
         HierarchyGraph res = new HierarchyGraph();
-        Node component = res.addComponent(mySwitch.getHierarchyGraph(), "switch");
-        List<Node> pins = Patterns.addPins(res, 3);
-        List<Node> ports = new LinkedList<>();//Patterns.addPorts(res, 3);
+        Vertex component = res.addComponent(mySwitch.getHierarchyGraph(), "switch");
+        List<Vertex> pins = Patterns.addPins(res, 3);
+        List<Vertex> ports = new LinkedList<>();//Patterns.addPorts(res, 3);
         for (int i = 0; i < pins.size(); i++) {
             ports.add(res.addPort(mySwitch.getByNumber(i), component));
             res.addEdge(ports.get(i), component);
             res.addEdge(pins.get(i), ports.get(i));
         }
         if (write) {
-            Writer.writeToDirectory(Writer.export(res, true), Paths.get("src/test/resources/graphml/Switch"));
+            Writer.export(res, true, Paths.get("src/test/resources/graphml/Switch"));
         }
         return res;
     }
@@ -89,9 +89,9 @@ public class FPGAModels {
     public static HierarchyGraph makeSimpleMux(int wireCount, boolean write) throws IOException {
         MUX mux = Patterns.MUX(wireCount);
         HierarchyGraph res = new HierarchyGraph();
-        Node component = res.addComponent(mux.hierarchyGraph, "MUX");
-        List<Node> pins = Patterns.addPins(res, 3*wireCount + 1);
-        List<Node> ports = new LinkedList<>();//Patterns.addPorts(res, 3*wireCount + 1);
+        Vertex component = res.addComponent(mux.hierarchyGraph, "MUX");
+        List<Vertex> pins = Patterns.addPins(res, 3*wireCount + 1);
+        List<Vertex> ports = new LinkedList<>();//Patterns.addPorts(res, 3*wireCount + 1);
         for (int i = 0; i < pins.size(); i++) {
             ports.add(res.addPort(Util.concat(mux.in1, mux.in2, mux.out, List.of(mux.select)).get(i), component));
         }
@@ -99,7 +99,7 @@ public class FPGAModels {
             res.addEdge(pins.get(i), ports.get(i));
         }
         if (write) {
-            Writer.writeToDirectory(Writer.export(res, true), Paths.get("src/test/resources/graphml/MUX"));
+            Writer.export(res, true, Paths.get("src/test/resources/graphml/MUX"));
         }
         return res;
     }
@@ -107,9 +107,9 @@ public class FPGAModels {
     public static HierarchyGraph makeSimpleLogicCell(int wires, boolean write) throws IOException {
         HierarchyGraph graph = new HierarchyGraph();
 
-        List<Node> pins = Patterns.addPins(graph, wires * 2);
-        Node clock = graph.addNode(Label.CLOCK);
-        Node on = graph.addNode(Label.EXTRA);
+        List<Vertex> pins = Patterns.addPins(graph, wires * 2);
+        Vertex clock = graph.addVertex(Label.CLOCK_FRAME);
+        Vertex on = graph.addVertex(Label.EXTRA);
 
         Switch mySwitch = Patterns.Switch();
         mySwitch.addOption(new Patterns.IntConnection(0, 1), new Patterns.IntConnection(1, 0));
@@ -119,13 +119,13 @@ public class FPGAModels {
         Register register = Patterns.Register(wires, true, false, false, false, false);
         MUX MUX = Patterns.MUX(wires);
 
-        Node LUTComponent = graph.addComponent(LUT.getHierarchyGraph(), "LUT");
-        Node registerComponent = graph.addComponent(register.hierarchyGraph, "Register");
-        Node muxComponent = graph.addComponent(MUX.hierarchyGraph, "MUX");
+        Vertex LUTComponent = graph.addComponent(LUT.getHierarchyGraph(), "LUT");
+        Vertex registerComponent = graph.addComponent(register.hierarchyGraph, "Register");
+        Vertex muxComponent = graph.addComponent(MUX.hierarchyGraph, "MUX");
 
 
         for (int i = 0; i < wires; i++) {
-            Node switch1Component = graph.addComponent(mySwitch.getHierarchyGraph(), "Switch 1");
+            Vertex switch1Component = graph.addComponent(mySwitch.getHierarchyGraph(), "Switch 1");
             graph.addEdge(pins.get(i),                                              graph.addPort(mySwitch.getByNumber(0), switch1Component));
             graph.addEdge(graph.addPort(LUT.getInputs().get(i), LUTComponent),           graph.addPort(mySwitch.getByNumber(1), switch1Component));
             graph.addEdge(graph.addPort(register.inputs.get(i), registerComponent), graph.addPort(mySwitch.getByNumber(2), switch1Component));
@@ -136,7 +136,7 @@ public class FPGAModels {
         graph.addEdge(clock, graph.addPort(register.syncSet, registerComponent));
         graph.addEdge(on, graph.addPort(MUX.select, muxComponent));
         if (write) {
-            Writer.writeToDirectory(Writer.export(graph, true), Paths.get("src/test/resources/graphml/LogicCell"));
+            Writer.export(graph, true, Paths.get("src/test/resources/graphml/LogicCell"));
         }
         return graph;
     }
@@ -145,16 +145,16 @@ public class FPGAModels {
         Register register = Patterns.Register(wireCount, true, true, true, false, false);
         HierarchyGraph res = new HierarchyGraph();
 
-        Node component = res.addComponent(register.hierarchyGraph, "Register");
-        List<Node> pins = Patterns.addPins(res, 2*wireCount + 3);
-        List<Node> ports = new LinkedList<>();
+        Vertex component = res.addComponent(register.hierarchyGraph, "Register");
+        List<Vertex> pins = Patterns.addPins(res, 2*wireCount + 3);
+        List<Vertex> ports = new LinkedList<>();
         for (int i = 0; i < 2*wireCount + 3; i++) {
             ports.add(res.addPort(Util.concat(register.inputs, register.outputs, Util.listOf(register.syncSet), Util.listOf(register.asyncSet), Util.listOf(register.syncReset), Util.listOf(register.asyncReset), Util.listOf(register.clockEnable)).get(i), component));
             res.addEdge(ports.get(i), component);
             res.addEdge(pins.get(i), ports.get(i));
         }
         if (write) {
-            Writer.writeToDirectory(Writer.export(res, true), Paths.get("src/test/resources/graphml/Register"));
+            Writer.export(res, true, Paths.get("src/test/resources/graphml/Register"));
         }
         return res;
     }
@@ -163,9 +163,9 @@ public class FPGAModels {
         LUT lut = Patterns.LUT(ins, ins);
         HierarchyGraph res = new HierarchyGraph();
 
-        Node component = res.addComponent(lut.getHierarchyGraph(), "LUT");
-        List<Node> pins = Patterns.addPins(res, ins*2);
-        List<Node> ports = new LinkedList<>();//Patterns.addPorts(res, ins*2);
+        Vertex component = res.addComponent(lut.getHierarchyGraph(), "LUT");
+        List<Vertex> pins = Patterns.addPins(res, ins*2);
+        List<Vertex> ports = new LinkedList<>();//Patterns.addPorts(res, ins*2);
         for (int i = 0; i < pins.size(); i++) {
             ports.add(res.addPort(Util.concat(lut.getInputs(), lut.getOutputs()).get(i), component));
             res.addEdge(ports.get(i), component);
@@ -174,7 +174,7 @@ public class FPGAModels {
             res.addEdge(ports.get(i), pins.get(i));
         }
         if (write) {
-            Writer.writeToDirectory(Writer.export(res, true), Paths.get("src/test/resources/graphml/LUT"));
+            Writer.export(res, true, Paths.get("src/test/resources/graphml/LUT"));
         }
         return res;
     }
@@ -182,15 +182,15 @@ public class FPGAModels {
     public static HierarchyGraph makeSnake(int width, int length, boolean write) throws IOException {
         assert width > 0;
         HierarchyGraph graph = new HierarchyGraph();
-        Node[][] components = new Node[width][length];
+        Vertex[][] components = new Vertex[width][length];
 
-        Node[][] leftPorts = new Node[width][length];
-        Node[][] rightPorts = new Node[width][length];
-        Node[][] upPorts = new Node[width - 1][length];
-        Node[][] downPorts = new Node[width - 1][length];
+        Vertex[][] leftPorts = new Vertex[width][length];
+        Vertex[][] rightPorts = new Vertex[width][length];
+        Vertex[][] upPorts = new Vertex[width - 1][length];
+        Vertex[][] downPorts = new Vertex[width - 1][length];
 
-        List<Node> inputPins = Patterns.addPins(graph, width);
-        List<Node> outputPins = Patterns.addPins(graph, width);
+        List<Vertex> inputPins = Patterns.addPins(graph, width);
+        List<Vertex> outputPins = Patterns.addPins(graph, width);
 
         Switch edgeSwitches = Patterns.Switch();
         edgeSwitches.addOption(new Patterns.IntConnection(0, 1), new Patterns.IntConnection(1, 0));
@@ -252,16 +252,16 @@ public class FPGAModels {
             }
         }
         if (write) {
-            Writer.writeToDirectory(Writer.export(graph, true), Paths.get("src/test/resources/graphml/LUT"));
+            Writer.export(graph, true, Paths.get("src/test/resources/graphml/LUT"));
         }
         return graph;
     }
 
     public static HierarchyGraph makeLutTree(int smallLutWires, int bigLutWires, boolean write) throws IOException {
         HierarchyGraph res =  getLutTree(smallLutWires, bigLutWires).getHierarchyGraph().flatten().getGraph();
-        for (Node node : res.getNodesByLabel(Label.REMOVE)) {
-            if (res.getEdges().get(node).size()==1) {
-                res.addEdge(node, res.addNode(Label.PIN));
+        for (Vertex vertex : res.getVerticesByLabel(Label.REMOVE)) {
+            if (res.getEdges().get(vertex).size()==1) {
+                res.addEdge(vertex, res.addVertex(Label.PIN));
             }
         }
         recursiveRemove(res, x -> x.getLabels().contains(Label.REMOVE));
@@ -269,17 +269,17 @@ public class FPGAModels {
 
     }
 
-    private static void recursiveRemove(HierarchyGraph res, Predicate<Node> predicate) {
-        while (res.getNodes().stream().anyMatch(predicate)) {
-            Node example = res.getNodes().stream().filter(predicate).findAny().get();
-            for (Node one : res.getEdges().get(example)) {
-                for (Node two : res.getEdges().get(example)) {
+    private static void recursiveRemove(HierarchyGraph res, Predicate<Vertex> predicate) {
+        while (res.getVertices().stream().anyMatch(predicate)) {
+            Vertex example = res.getVertices().stream().filter(predicate).findAny().get();
+            for (Vertex one : res.getEdges().get(example)) {
+                for (Vertex two : res.getEdges().get(example)) {
                     if (two.getID() > one.getID()) {
                         res.addEdge(one, two);
                     }
                 }
             }
-            res.removeNode(example);
+            res.removeVertex(example);
         }
         for (HierarchyGraph graph : res.getHierarchy().values()) {
             recursiveRemove(graph, predicate);
@@ -293,19 +293,19 @@ public class FPGAModels {
             HierarchyGraph res = new HierarchyGraph();
             LUT oneSmaller = getLutTree(smallLutWires, bigLutWires - 1);
             MUX mux = Patterns.MUX(smallLutWires);
-            Node LutComponent1 = res.addComponent(oneSmaller.getHierarchyGraph(), "LowerLut");
-            Node LutComponent2 = res.addComponent(oneSmaller.getHierarchyGraph(), "LowerLut");
-            Node MuxComponent = res.addComponent(mux.hierarchyGraph, "MUX");
-            List<Node> upperLutInPorts = new LinkedList<>();
-            List<Node> lowerLutInPorts = new LinkedList<>();
-            List<Node> upperLutOutPorts = new LinkedList<>();
-            List<Node> lowerLutOutPorts = new LinkedList<>();
-            List<Node> muxUpperInPorts = new LinkedList<>();
-            List<Node> muxLowerInPorts = new LinkedList<>();
-            List<Node> muxOutPorts = new LinkedList<>();
+            Vertex LutComponent1 = res.addComponent(oneSmaller.getHierarchyGraph(), "LowerLut");
+            Vertex LutComponent2 = res.addComponent(oneSmaller.getHierarchyGraph(), "LowerLut");
+            Vertex MuxComponent = res.addComponent(mux.hierarchyGraph, "MUX");
+            List<Vertex> upperLutInPorts = new LinkedList<>();
+            List<Vertex> lowerLutInPorts = new LinkedList<>();
+            List<Vertex> upperLutOutPorts = new LinkedList<>();
+            List<Vertex> lowerLutOutPorts = new LinkedList<>();
+            List<Vertex> muxUpperInPorts = new LinkedList<>();
+            List<Vertex> muxLowerInPorts = new LinkedList<>();
+            List<Vertex> muxOutPorts = new LinkedList<>();
 
-            List<Node> lutTreeOutPorts = new LinkedList<>();
-            List<Node> lutTreeInPorts = new LinkedList<>();
+            List<Vertex> lutTreeOutPorts = new LinkedList<>();
+            List<Vertex> lutTreeInPorts = new LinkedList<>();
             /*
                    /|---/\---
             ------| |---\/---
@@ -315,40 +315,40 @@ public class FPGAModels {
             -----/mux  luttreex2
              */
             //Connect outputs of LUTs to this FPGA
-            for (Node subNode : oneSmaller.getOutputs()) {
+            for (Vertex subNode : oneSmaller.getOutputs()) {
                 upperLutOutPorts.add(res.addPort(subNode, LutComponent1));
                 lowerLutOutPorts.add(res.addPort(subNode, LutComponent2));
             }
             //Connect inputs of LUTs to this FPGA
-            for (Node subNode : oneSmaller.getInputs()) {
+            for (Vertex subNode : oneSmaller.getInputs()) {
                 upperLutInPorts.add(res.addPort(subNode, LutComponent1));
                 lowerLutInPorts.add(res.addPort(subNode, LutComponent2));
             }
             //Connect upper input of mux to FPGA
-            for (Node subNode : mux.in1) {
+            for (Vertex subNode : mux.in1) {
                 muxUpperInPorts.add(res.addPort(subNode, MuxComponent));
             }
             //Connect lower input of mux to FPGA
-            for (Node subNode : mux.in2) {
+            for (Vertex subNode : mux.in2) {
                 muxLowerInPorts.add(res.addPort(subNode, MuxComponent));
             }
             //Connect outputs of mux to FPGA
-            for (Node subNode : mux.out) {
+            for (Vertex subNode : mux.out) {
                 muxOutPorts.add(res.addPort(subNode, MuxComponent));
             }
             //Connect selector of mux to FPGA
-            Node selectPort = res.addPort(mux.select, MuxComponent);
+            Vertex selectPort = res.addPort(mux.select, MuxComponent);
             for (int i = 0; i < smallLutWires; i++) {
                 res.addEdge(upperLutOutPorts.get(i), muxUpperInPorts.get(i));
                 res.addEdge(lowerLutOutPorts.get(i), muxLowerInPorts.get(i));
             }
-            for (Node inputPort : Util.concat(upperLutInPorts, lowerLutInPorts, List.of(selectPort))) {
-                Node toAdd = res.addNode(Label.REMOVE);
+            for (Vertex inputPort : Util.concat(upperLutInPorts, lowerLutInPorts, List.of(selectPort))) {
+                Vertex toAdd = res.addVertex(Label.REMOVE);
                 res.addEdge(toAdd, inputPort);
                 lutTreeInPorts.add(toAdd);
             }
-            for (Node outputPort : muxOutPorts) {
-                Node toAdd = res.addNode(Label.REMOVE);
+            for (Vertex outputPort : muxOutPorts) {
+                Vertex toAdd = res.addVertex(Label.REMOVE);
                 res.addEdge(toAdd, outputPort);
                 lutTreeOutPorts.add(toAdd);
             }

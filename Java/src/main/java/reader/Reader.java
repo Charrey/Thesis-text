@@ -2,6 +2,7 @@ package reader;
 
 import data.graph.HierarchyGraph;
 import data.graph.Label;
+import data.graph.Vertex;
 import exceptions.ParseException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -28,14 +29,14 @@ public class Reader {
         cache = new HashMap<>();
     }
 
-    private Map<String, data.graph.Node> globalXMLIdentifiers;
-    private Map<String, data.graph.Node> localXMLIdentifiers;
+    private Map<String, Vertex> globalXMLIdentifiers;
+    private Map<String, Vertex> localXMLIdentifiers;
 
     public static BiMap<Path, String> graphIds = new BiMap<>();
 
     private static Map<Path, HierarchyGraph> cache;
 
-    public Reader(Map<String, data.graph.Node> GlobalXMLIdentifiers) {
+    public Reader(Map<String, Vertex> GlobalXMLIdentifiers) {
         this.globalXMLIdentifiers = GlobalXMLIdentifiers;
         this.localXMLIdentifiers = new HashMap<>();
     }
@@ -92,17 +93,17 @@ public class Reader {
     private void addEdge(HierarchyGraph graph, Node node, Path file) throws ParseException {
         String sourceString = node.getAttributes().getNamedItem("source").getTextContent();
         String targetString = node.getAttributes().getNamedItem("target").getTextContent();
-        data.graph.Node source;
-        data.graph.Node target;
+        Vertex source;
+        Vertex target;
         if (localXMLIdentifiers.containsKey(sourceString)) {
             source = localXMLIdentifiers.get(sourceString);
         } else {
-            throw new ParseException(file, "Edge element references to unkown node identifier: \"" + sourceString + "\" in local context.");
+            throw new ParseException(file, "Edge element references to unkown vertex identifier: \"" + sourceString + "\" in local context.");
         }
         if (localXMLIdentifiers.containsKey(targetString)) {
             target = localXMLIdentifiers.get(targetString);
         } else {
-            throw new ParseException(file, "Edge element references to unkown node identifier: \"" + targetString + "\" in local context.");
+            throw new ParseException(file, "Edge element references to unkown vertex identifier: \"" + targetString + "\" in local context.");
         }
         graph.addEdge(source, target);
     }
@@ -132,7 +133,7 @@ public class Reader {
             } else {
                 subgraph = hierarchyGraphCache.get(pathToGraph);
             }
-            data.graph.Node toPut = graph.addComponent(subgraph, pathToGraph.toString());
+            Vertex toPut = graph.addComponent(subgraph, pathToGraph.toString());
             globalXMLIdentifiers.put(id, toPut);
             localXMLIdentifiers.put(id, toPut);
 
@@ -142,11 +143,11 @@ public class Reader {
             if (!globalXMLIdentifiers.containsKey(to)) {
                 throw new ParseException(file, "Port link made to unknown identifier: \"" + to + "\".");
             }
-            data.graph.Node toPut = graph.addPort(globalXMLIdentifiers.get(to), null);
+            Vertex toPut = graph.addPort(globalXMLIdentifiers.get(to), null);
             globalXMLIdentifiers.put(id, toPut);
             localXMLIdentifiers.put(id, toPut);
         } else {
-            data.graph.Node toPut = graph.addNode(labels);
+            Vertex toPut = graph.addVertex(labels);
             globalXMLIdentifiers.put(id, toPut);
             localXMLIdentifiers.put(id, toPut);
         }

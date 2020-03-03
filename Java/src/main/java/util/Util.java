@@ -3,7 +3,7 @@ package util;
 import data.PartialMapping;
 import data.graph.HierarchyGraph;
 import data.graph.Label;
-import data.graph.Node;
+import data.graph.Vertex;
 import org.apache.batik.swing.JSVGCanvas;
 
 import javax.swing.*;
@@ -15,34 +15,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 
+/**
+ * Provides several utility functions.
+ */
 public class Util {
 
-    public static Object assertOrElse;
 
-    public static Set<Node> fixedPoint(Node start, Function<Node, Set<Node>> expansion, Predicate<Node> condition) {
-        Set<Node> expanded = new HashSet<>();
-        Set<Node> notExpanded = new HashSet<>();
-        notExpanded.add(start);
-        while (!notExpanded.isEmpty()) {
-            for (Node node : new HashSet<>(notExpanded)) {
-                Set<Node> expandedNode = expansion.apply(node).stream().filter(condition).collect(Collectors.toSet());
-                for (Node outer : expandedNode) {
-                    if (!expanded.contains(outer)) {
-                        notExpanded.add(outer);
-                    }
-                }
-                notExpanded.remove(node);
-                expanded.add(node);
-            }
-        }
-        return expanded;
-    }
-
+    /**
+     * Makes all parent directories of a file if they do not exist.
+     *
+     * @param dir The file
+     */
     public static void makeDirectories(Path dir) {
         if (!dir.toAbsolutePath().getParent().toFile().exists()) {
             makeDirectories(dir.toAbsolutePath().getParent());
@@ -51,22 +36,15 @@ public class Util {
     }
 
 
-    public static void assertConnected(HierarchyGraph res) {
-        Set<Node> seen = new HashSet<>();
-        seen.add(res.getNodes().iterator().next());
-        int previoussize = -1;
-        while (seen.size() != previoussize) {
-            previoussize = seen.size();
-            for (Node node : new HashSet<>(seen)) {
-                seen.addAll(res.getEdges().get(node));
-            }
-        }
-        assert seen.size() == res.getNodes().size();
-    }
-
-    public static synchronized void view(HierarchyGraph res) throws IOException {
+    /**
+     * View a Hierarchygraph in a GUI (blocking method)
+     *
+     * @param graph the graph to be shown.
+     * @throws IOException Thrown when the temporary file directory is not available for reading or writing.
+     */
+    public static synchronized void view(HierarchyGraph graph) throws IOException {
         System.out.println("Flattening...");
-        HierarchyGraph.CopyInfo flattened = res.flatten();
+        HierarchyGraph.CopyInfo flattened = graph.flatten();
         System.out.println("Exporting DOT...");
         String dot = flattened.getGraph().toDOT(true);
         makeDirectories(Paths.get(".temp"));
@@ -86,7 +64,7 @@ public class Util {
             sb.append(line).append("\n");
         }
         pr.destroy();
-        writeFDP(flattened.getGraph().getNodes().size(), flattened.getGraph().getEdges().entrySet().stream().reduce(0, (u, nodeSetEntry) -> u + nodeSetEntry.getValue().size(), Integer::sum) / 2, System.currentTimeMillis()-baseTime);
+        writeFDP(flattened.getGraph().getVertices().size(), flattened.getGraph().getEdges().entrySet().stream().reduce(0, (u, nodeSetEntry) -> u + nodeSetEntry.getValue().size(), Integer::sum) / 2, System.currentTimeMillis()-baseTime);
         Path svgFile = Paths.get(".temp/graph" + new Random().nextInt() +".svg");
         svgFile.toFile().deleteOnExit();
         writeToFile(sb.toString(), svgFile);
@@ -133,50 +111,54 @@ public class Util {
         Files.write(path, dot.getBytes(Charset.defaultCharset()));
     }
 
-    public static boolean isRecursiveCall() {
-        StackTraceElement method = Thread.currentThread().getStackTrace()[2];
-        String className = method.getClassName();
-        String methodName = method.getMethodName();
-        for (int i = 3; i < Thread.currentThread().getStackTrace().length; i++) {
-            method = Thread.currentThread().getStackTrace()[i];
-            if (className.equals(method.getClassName()) && methodName.equals(method.getMethodName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static List<Node> concat(List<Node>... inputs) {
+    /**
+     * Provides a list view of a collection of several lists without modifying them.
+     *
+     * @param inputs A collection of lists
+     * @return A list view functioning as the concatenation of these lists.
+     */
+    public static ConcatList concat(List<Vertex>... inputs) {
         return new ConcatList(inputs);
     }
 
+    /**
+     * Returns whether a partial mapping upholds the Path Subgraph Isomorphism constraints.
+     *
+     * @param f The partial mapping to check
+     * @return Whether it satisfies the constraints.
+     */
     public static boolean isCorrect(PartialMapping f) {
-        return false;
+        return false;//TODO
     }
 
-    public static void checkConsistent(HierarchyGraph res) {
-        for (Map.Entry<Node, Set<Node>> a : res.getEdges().entrySet()) {
-            if (!res.getNodes().contains(a.getKey())) {
+    /**
+     * Checks several properties of Hierarchygraphs that should hold. Throws an AssertionError if a property fails to hold.
+     *
+     * @param graph the graph to check
+     */
+    public static void checkConsistent(HierarchyGraph graph) {
+        for (Map.Entry<Vertex, Set<Vertex>> a : graph.getEdges().entrySet()) {
+            if (!graph.getVertices().contains(a.getKey())) {
                 assert  false;
             }
-            if (!res.getNodes().containsAll(a.getValue())) {
+            if (!graph.getVertices().containsAll(a.getValue())) {
                 assert false;
             }
         }
-        for (Node node : res.getNodes()) {
-            for (Label label : node.getLabels()) {
-                if (!res.getNodesByLabel(label).contains(node)) {
+        for (Vertex vertex : graph.getVertices()) {
+            for (Label label : vertex.getLabels()) {
+                if (!graph.getVerticesByLabel(label).contains(vertex)) {
                     assert false;
                 }
             }
-            if (node.getLabels().contains(Label.PORT) && !res.getPortMapping().containsKey(node)) {
+            if (vertex.getLabels().contains(Label.PORT) && !graph.getPortMapping().containsKey(vertex)) {
                 //assert false;
             }
-            if (node.getLabels().contains(Label.COMPONENT) && !res.getHierarchy().containsKey(node)) {
+            if (vertex.getLabels().contains(Label.COMPONENT) && !graph.getHierarchy().containsKey(vertex)) {
                 assert false;
             }
-            if (node.getLabels().contains(Label.COMPONENT)) {
-                if (res.getEdges().get(node).stream().anyMatch(node1 -> !node1.getLabels().contains(Label.PORT))) {
+            if (vertex.getLabels().contains(Label.COMPONENT)) {
+                if (graph.getEdges().get(vertex).stream().anyMatch(node1 -> !node1.getLabels().contains(Label.PORT))) {
                     assert false;
                 }
             }
@@ -184,15 +166,27 @@ public class Util {
         return;
     }
 
+    /**
+     * Assert a condition or else display a specific message in a thrown AssertionError.
+     *
+     * @param assertion What is required to be true.
+     * @param message   The message to be shown when the assertion fails.
+     */
     public static void assertOrElse(boolean assertion, String message) {
         if (!assertion) {
             throw new AssertionError(message);
         }
     }
 
-    public static List<Node> listOf(Node node) {
-        if (node != null) {
-            return List.of(node);
+    /**
+     * Provides a List of only one element, or an empty list if the argument is null.
+     *
+     * @param vertex The vertex to add to an element or null.
+     * @return A list containing the given vertex or an empty list if it was null.
+     */
+    public static List<Vertex> listOf(Vertex vertex) {
+        if (vertex != null) {
+            return List.of(vertex);
         } else {
             return Collections.emptyList();
         }
@@ -200,21 +194,21 @@ public class Util {
 
 
     private static class SVGFrame extends JFrame {
-        public static boolean isVisible;
         private static final Object lock = new Object();
-        protected JSVGCanvas svgCanvas = new JSVGCanvas();
 
+        /**
+         * Instantiates a new SVGFrame that can display an SVG file.
+         *
+         * @param path The SVG file.
+         */
         public SVGFrame(Path path) {
-            isVisible = true;
+            JSVGCanvas svgCanvas = new JSVGCanvas();
             svgCanvas.setURI(path.toUri().toString());
             this.getContentPane().add(svgCanvas);
             addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e){
-                    //your code to be executed before window is closed.
-                    //not the place to opt out closing window
                     synchronized (lock) {
-                        isVisible = false;
                         setVisible(false);
                         lock.notify();
                     }
@@ -225,11 +219,20 @@ public class Util {
 
     }
 
-    private static class ConcatList implements List<Node> {
+    /**
+     * A List view of several concatenated Lists.
+     */
+    public static class ConcatList implements List<Vertex> {
 
-        private final List<Node>[] content;
+        private final List<Vertex>[] content;
 
-        public ConcatList(List<Node>[] content) {
+        private ConcatList(){content = null;}
+
+        /**
+         * Instantiates a new Concat list from the provided Lists.
+         * @param content The lists to concatenate.
+         */
+        public ConcatList(List<Vertex>[] content) {
             this.content = content;
         }
 
@@ -249,10 +252,11 @@ public class Util {
         }
 
         @Override
-        public Iterator<Node> iterator() {
-            return  new Iterator<Node>() {
+        public Iterator<Vertex> iterator() {
+            return new Iterator<>() {
                 int listIndex = 0;
                 int item = 0;
+
                 @Override
                 public boolean hasNext() {
                     if (content[listIndex].size() < item + 1) {
@@ -267,7 +271,7 @@ public class Util {
                 }
 
                 @Override
-                public Node next() {
+                public Vertex next() {
                     item++;
                     if (item >= content[listIndex].size()) {
                         item = 0;
@@ -290,7 +294,7 @@ public class Util {
             throw new UnsupportedOperationException();        }
 
         @Override
-        public boolean add(Node node) {
+        public boolean add(Vertex node) {
             throw new UnsupportedOperationException();        }
 
         @Override
@@ -302,11 +306,11 @@ public class Util {
             throw new UnsupportedOperationException();        }
 
         @Override
-        public boolean addAll(Collection<? extends Node> c) {
+        public boolean addAll(Collection<? extends Vertex> c) {
             throw new UnsupportedOperationException();        }
 
         @Override
-        public boolean addAll(int index, Collection<? extends Node> c) {
+        public boolean addAll(int index, Collection<? extends Vertex> c) {
             throw new UnsupportedOperationException();        }
 
         @Override
@@ -323,9 +327,9 @@ public class Util {
         }
 
         @Override
-        public Node get(int index) {
+        public Vertex get(int index) {
             int removeFromIndex = 0;
-            for (List<Node> list : content) {
+            for (List<Vertex> list : content) {
                 if (list.size() > index - removeFromIndex) {
                     return list.get(index - removeFromIndex);
                 } else {
@@ -336,16 +340,16 @@ public class Util {
         }
 
         @Override
-        public Node set(int index, Node element) {
+        public Vertex set(int index, Vertex element) {
             throw new UnsupportedOperationException();        }
 
         @Override
-        public void add(int index, Node element) {
+        public void add(int index, Vertex element) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public Node remove(int index) {
+        public Vertex remove(int index) {
             throw new UnsupportedOperationException();        }
 
         @Override
@@ -357,15 +361,15 @@ public class Util {
             throw new UnsupportedOperationException();        }
 
         @Override
-        public ListIterator<Node> listIterator() {
+        public ListIterator<Vertex> listIterator() {
             throw new UnsupportedOperationException();        }
 
         @Override
-        public ListIterator<Node> listIterator(int index) {
+        public ListIterator<Vertex> listIterator(int index) {
             throw new UnsupportedOperationException();        }
 
         @Override
-        public List<Node> subList(int fromIndex, int toIndex) {
+        public List<Vertex> subList(int fromIndex, int toIndex) {
             throw new UnsupportedOperationException();        }
 
     }

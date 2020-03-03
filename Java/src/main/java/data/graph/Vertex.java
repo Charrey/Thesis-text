@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Node implements Cloneable {
+public class Vertex implements Cloneable {
 
     private Set<Label> labels;
     private int ID;
@@ -15,12 +15,12 @@ public class Node implements Cloneable {
     private boolean locked = false;
     private HierarchyGraph graph;
 
-    public Node(Label... labels) {
+    public Vertex(Label... labels) {
         this.labels = Set.of(labels);
         ID = IDCounter++;
     }
 
-    public Node(Set<Label> labels) {
+    public Vertex(Set<Label> labels) {
         this.labels = new HashSet<>(labels);
         ID = IDCounter++;
     }
@@ -37,8 +37,8 @@ public class Node implements Cloneable {
         return ID + "[label=\"" + labels.stream().map(Labels::write).collect(Collectors.toSet()) + "\"]";
     }
 
-    public Node clone() {
-        Node next = new Node();
+    public Vertex clone() {
+        Vertex next = new Vertex();
         next.locked = locked;
         next.labels = new HashSet<>(labels);
         next.ID = ID;
@@ -49,9 +49,9 @@ public class Node implements Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Node node = (Node) o;
-        return ID == node.ID &&
-                labels.equals(node.labels);
+        Vertex vertex = (Vertex) o;
+        return ID == vertex.ID &&
+                labels.equals(vertex.labels);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class Node implements Cloneable {
 
     public void setLabels(Set<Label> labels) {
         if (locked) {
-            throw new UnsupportedOperationException("Node is locked!");
+            throw new UnsupportedOperationException("Vertex is locked!");
         } else {
             this.labels = labels;
         }

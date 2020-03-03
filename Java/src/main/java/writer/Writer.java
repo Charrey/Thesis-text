@@ -2,7 +2,7 @@ package writer;
 
 import data.graph.HierarchyGraph;
 import data.graph.Label;
-import data.graph.Node;
+import data.graph.Vertex;
 import util.Labels;
 import util.Util;
 
@@ -17,6 +17,9 @@ import java.util.Map;
 import java.util.Set;
 
 
+/**
+ * Class used to write Hierarchygraphs to files.
+ */
 public class Writer {
 
     private static String getPrefix(String name) {
@@ -38,40 +41,43 @@ public class Writer {
     }
 
 
-    /**
-     *
-     * @param graph
-     * @param isMain
-     * @return Map from filename to filecontent
-     */
+
     private static Map<HierarchyGraph, String> seen = new HashMap<>();
     private static Map<HierarchyGraph, String> globalNameMap = new HashMap<>();
-    public static Export export(HierarchyGraph graph, boolean isMain) {
+
+    /**
+     * Exports a Hierarchygraph to a set of DOT strings.
+     * @param graph The Hierarchygraph to export.
+     * @param isMain Whether this hierarchygraph is the hierarchical top.
+     * @param writeToDirectory If not null, refers to where the resultin DOT-files should be saved.
+     * @return An object containing Strings in DOT-format that can be read into the original graph.
+     */
+    public static Export export(HierarchyGraph graph, boolean isMain, Path writeToDirectory) throws IOException {
         globalNameMap.putAll(graph.getNamesOfHierarchyGraphs());
         Map<String, String> res = new HashMap<>();
         StringBuilder sb = new StringBuilder(getPrefix(globalNameMap.getOrDefault(graph, "exportedGraph")));
-        for (Map.Entry<Node, HierarchyGraph> entry : graph.getHierarchy().entrySet()) {
+        for (Map.Entry<Vertex, HierarchyGraph> entry : graph.getHierarchy().entrySet()) {
             if (seen.containsKey(entry.getValue())) {
                 sb.append("\t\t<node id=\"n" + entry.getKey().getID() + "\">" + getLabels(entry.getKey()) + "<data key=\"graphref\">" + seen.get(entry.getValue()) + "</data></node>\n");
             } else {
-                Export subExport = export(entry.getValue(), false);
+                Export subExport = export(entry.getValue(), false, null);
                 res.putAll(subExport.subFiles);
                 seen.put(entry.getValue(), subExport.mainFile);
                 sb.append("\t\t<node id=\"n" + entry.getKey().getID() + "\">" + getLabels(entry.getKey()) + "<data key=\"graphref\">" + subExport.mainFile + "</data></node>\n");
             }
 
         }
-        for (Map.Entry<Node, Node> entry : graph.getPortMapping().entrySet()) {
+        for (Map.Entry<Vertex, Vertex> entry : graph.getPortMapping().entrySet()) {
             sb.append("\t\t<node id=\"n" + entry.getKey().getID() + "\">" + getLabels(entry.getKey()) + "<data key=\"noderef\">n" + entry.getValue().getID() + "</data></node>\n");
         }
-        for (Node node : graph.getNodes()) {
-            if (graph.getPortMapping().containsKey(node) || graph.getHierarchy().containsKey(node)) {
+        for (Vertex vertex : graph.getVertices()) {
+            if (graph.getPortMapping().containsKey(vertex) || graph.getHierarchy().containsKey(vertex)) {
                 continue;
             }
-            sb.append("\t\t<node id=\"n" + node.getID() + "\">" + getLabels(node) + "</node>\n");
+            sb.append("\t\t<node id=\"n" + vertex.getID() + "\">" + getLabels(vertex) + "</node>\n");
         }
-        for (Map.Entry<Node, Set<Node>> edges : graph.getEdges().entrySet()) {
-            for (Node target : edges.getValue()) {
+        for (Map.Entry<Vertex, Set<Vertex>> edges : graph.getEdges().entrySet()) {
+            for (Vertex target : edges.getValue()) {
                 if (target.getID() < edges.getKey().getID()) {
                     continue;
                 }
@@ -81,10 +87,14 @@ public class Writer {
 
         String myFileName = isMain ? "main.graphml" : getNextFileName();
         res.put(myFileName, sb.append(SUFFIX).toString());
-        return new Export(myFileName, res);
+        Export toReturn = new Export(myFileName, res);
+        if (writeToDirectory != null) {
+            writeToDirectory(toReturn, writeToDirectory);
+        }
+        return toReturn;
     }
 
-    private static String getLabels(Node key) {
+    private static String getLabels(Vertex key) {
         StringBuilder sb = new StringBuilder();
         for (Label label : key.getLabels()) {
             sb.append("<data key=\"label\">" + Labels.write(label) + "</data>");
@@ -92,7 +102,7 @@ public class Writer {
         return sb.toString();
     }
 
-    public static void writeToDirectory(Export export, Path path) throws IOException {
+    private static void writeToDirectory(Export export, Path path) throws IOException {
         filenameCounter = 0;
         Util.makeDirectories(path);
         for (Map.Entry<String, String> entry : export.subFiles.entrySet()) {
@@ -109,8 +119,21 @@ public class Writer {
 
     private static class Export {
 
+        /**
+         * The Main file.
+         */
         public final String mainFile;
+        /**
+         * The Sub files.
+         */
         public final Map<String, String> subFiles;
+
+        /**
+         * Instantiates a new Export.
+         *
+         * @param mainFile the main file
+         * @param subFiles the sub files
+         */
         public Export(String mainFile, Map<String, String> subFiles) {
             this.mainFile = mainFile;
             this.subFiles = Collections.unmodifiableMap(subFiles);

@@ -2,7 +2,7 @@ package data.patterns;
 
 import data.graph.HierarchyGraph;
 import data.graph.Label;
-import data.graph.Node;
+import data.graph.Vertex;
 import data.graph.Patterns;
 
 import java.util.Arrays;
@@ -13,22 +13,22 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Switch {
-    private Map<Integer, Node> ports = new HashMap<>();
+    private Map<Integer, Vertex> ports = new HashMap<>();
     private HierarchyGraph graph = new HierarchyGraph();
 
-    private Map<Node, Map<Node, Node>> connections = new HashMap<>();
+    private Map<Vertex, Map<Vertex, Vertex>> connections = new HashMap<>();
 
     public void addOption(Patterns.IntConnection... connections) {
         Set<Patterns.NodeConnection> option = Arrays.stream(connections)
-                .map((Function<Patterns.IntConnection, Patterns.NodeConnection>) x -> new Patterns.NodeConnection(ports.computeIfAbsent(x.from, y -> graph.addNode(Label.SWITCH)), ports.computeIfAbsent(x.to, y -> graph.addNode(Label.SWITCH))))
+                .map((Function<Patterns.IntConnection, Patterns.NodeConnection>) x -> new Patterns.NodeConnection(ports.computeIfAbsent(x.from, y -> graph.addVertex(Label.SWITCH)), ports.computeIfAbsent(x.to, y -> graph.addVertex(Label.SWITCH))))
                 .collect(Collectors.toSet());
-        Node optionNode = graph.addNode(Label.OPTION);
+        Vertex optionNode = graph.addVertex(Label.OPTION);
         for (Patterns.NodeConnection connection : option) {
             this.connections.computeIfAbsent(connection.from, x -> new HashMap<>());
-            Node flowTo;
+            Vertex flowTo;
             if (!this.connections.get(connection.from).containsKey(connection.to)) {
-                Node flowFrom = graph.addNode(Label.FLOW_FROM);
-                flowTo = graph.addNode(Label.FLOW_TO);
+                Vertex flowFrom = graph.addVertex(Label.FLOW_FROM);
+                flowTo = graph.addVertex(Label.FLOW_TO);
                 graph.addEdge(connection.from, flowFrom);
                 graph.addEdge(flowFrom, flowTo);
                 graph.addEdge(flowTo, connection.to);
@@ -46,7 +46,7 @@ public class Switch {
         return graph;
     }
 
-    public Node getByNumber(int number) {
+    public Vertex getByNumber(int number) {
         return ports.get(number);
     }
 }

@@ -1,22 +1,22 @@
 package data.patterns;
 
 import data.graph.HierarchyGraph;
-import data.graph.Node;
+import data.graph.Vertex;
 
 import java.util.Collections;
 import java.util.List;
 
 public class LeafLUT implements LUT {
     public final HierarchyGraph hierarchyGraph;
-    public final List<Node> outputs;
-    public final List<Node> inputs;
+    public final List<Vertex> outputs;
+    public final List<Vertex> inputs;
 
-    public LeafLUT(HierarchyGraph hierarchyGraph, List<Node> inputs, List<Node> outputs) {
+    public LeafLUT(HierarchyGraph hierarchyGraph, List<Vertex> inputs, List<Vertex> outputs) {
         this.hierarchyGraph = hierarchyGraph;
         this.hierarchyGraph.lock();
 
-        assert hierarchyGraph.getNodes().containsAll(inputs);
-        assert hierarchyGraph.getNodes().containsAll(outputs);
+        assert hierarchyGraph.getVertices().containsAll(inputs);
+        assert hierarchyGraph.getVertices().containsAll(outputs);
         this.inputs = Collections.unmodifiableList(inputs);
         this.outputs = Collections.unmodifiableList(outputs);
     }
@@ -27,12 +27,12 @@ public class LeafLUT implements LUT {
     }
 
     @Override
-    public List<Node> getOutputs() {
+    public List<Vertex> getOutputs() {
         return outputs;
     }
 
     @Override
-    public List<Node> getInputs() {
+    public List<Vertex> getInputs() {
         return inputs;
     }
 }

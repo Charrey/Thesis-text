@@ -5,6 +5,9 @@ import exceptions.ParseException;
 
 import java.nio.file.Path;
 
+/**
+ * Class that provides functions for translating Label enum items back-and-forth to Strings.
+ */
 public class Labels {
 
     private static BiMap<String, Label> map = new BiMap<>();
@@ -24,18 +27,23 @@ public class Labels {
         map.put("async_set", Label.ASYNC_SET);
         map.put("clock_enable", Label.CLOCK_ENABLE);
         map.put("rising_or_falling_edge", Label.CLOCK_FRAME);
-        map.put("gate", Label.GATE);
         map.put("option", Label.OPTION);
         map.put("switch", Label.SWITCH);
         map.put("flow_from", Label.FLOW_FROM);
         map.put("flow_to", Label.FLOW_TO);
-        map.put("clock", Label.CLOCK);
         map.put("always_on", Label.EXTRA);
         map.put("ERROR", Label.REMOVE);
         map.put("register", Label.REGISTER);
 
     }
 
+    /**
+     * Reads a string (as stored in GraphML) into a Label object.
+     * @param file        File from which the String was read.
+     * @param textContent Text value of the label.
+     * @return The Label object associated with that text.
+     * @throws ParseException Thrown when the String is unknown.
+     */
     public static Label read(Path file, String textContent) throws ParseException {
        if (map.containsKey(textContent)) {
            return map.get(textContent);
@@ -44,6 +52,11 @@ public class Labels {
        }
     }
 
+    /**
+     * Writes a GraphML String based on a Label object.
+     * @param label The Label object to write
+     * @return A GraphML representation of that Label.
+     */
     public static String write(Label label) {
         if (map.containsValue(label)) {
             return map.getByValue(label).iterator().next();

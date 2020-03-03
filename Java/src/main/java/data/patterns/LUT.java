@@ -1,13 +1,13 @@
 package data.patterns;
 
 import data.graph.HierarchyGraph;
-import data.graph.Node;
+import data.graph.Vertex;
 
 import java.util.List;
 
 public interface LUT {
 
     HierarchyGraph getHierarchyGraph();
-    List<Node> getOutputs();
-    List<Node> getInputs();
+    List<Vertex> getOutputs();
+    List<Vertex> getInputs();
 }

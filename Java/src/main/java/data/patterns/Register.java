@@ -1,22 +1,22 @@
 package data.patterns;
 
 import data.graph.HierarchyGraph;
-import data.graph.Node;
+import data.graph.Vertex;
 
 import java.util.Collections;
 import java.util.List;
 
 public class Register {
     public final HierarchyGraph hierarchyGraph;
-    public final List<Node> inputs;
-    public final List<Node> outputs;
-    public final Node syncReset;
-    public final Node asyncReset;
-    public final Node syncSet;
-    public final Node asyncSet;
-    public final Node clockEnable;
+    public final List<Vertex> inputs;
+    public final List<Vertex> outputs;
+    public final Vertex syncReset;
+    public final Vertex asyncReset;
+    public final Vertex syncSet;
+    public final Vertex asyncSet;
+    public final Vertex clockEnable;
 
-    public Register(HierarchyGraph hierarchyGraph, List<Node> inputs, List<Node> outputs, Node syncSet, Node asyncSet, Node syncReset, Node asyncReset, Node clockEnable) {
+    public Register(HierarchyGraph hierarchyGraph, List<Vertex> inputs, List<Vertex> outputs, Vertex syncSet, Vertex asyncSet, Vertex syncReset, Vertex asyncReset, Vertex clockEnable) {
         this.hierarchyGraph = hierarchyGraph;
         this.hierarchyGraph.lock();
         this.inputs = Collections.unmodifiableList(inputs);

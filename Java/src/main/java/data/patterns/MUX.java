@@ -1,19 +1,19 @@
 package data.patterns;
 
 import data.graph.HierarchyGraph;
-import data.graph.Node;
+import data.graph.Vertex;
 
 import java.util.Collections;
 import java.util.List;
 
 public class MUX {
     public final HierarchyGraph hierarchyGraph;
-    public final List<Node> in1;
-    public final List<Node> in2;
-    public final Node select;
-    public final List<Node> out;
+    public final List<Vertex> in1;
+    public final List<Vertex> in2;
+    public final Vertex select;
+    public final List<Vertex> out;
 
-    public MUX(HierarchyGraph hg, List<Node> in1, List<Node> in2, List<Node> out, Node select) {
+    public MUX(HierarchyGraph hg, List<Vertex> in1, List<Vertex> in2, List<Vertex> out, Vertex select) {
         this.hierarchyGraph = hg;
         this.hierarchyGraph.lock();
         this.in1 = Collections.unmodifiableList(in1);
