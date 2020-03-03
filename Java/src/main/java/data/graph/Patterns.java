@@ -1,6 +1,7 @@
 package data.graph;
 
 import data.patterns.*;
+import util.Util;
 
 import java.util.*;
 
@@ -67,33 +68,51 @@ public final class Patterns {
     }
 
     private static Map<Integer, Map<Boolean, Map<Boolean, Register>>> registerMap = new HashMap<>();
-    public static Register Register(int wirecount, boolean syncReset, boolean asyncReset) {
+    public static Register Register(int wirecount, boolean syncSet, boolean asyncSet, boolean syncReset, boolean asyncReset, boolean clockEnable) {
         if (registerMap.containsKey(wirecount) && registerMap.get(wirecount).containsKey(syncReset) && registerMap.get(wirecount).get(syncReset).containsKey(asyncReset)) {
             return registerMap.get(wirecount).get(syncReset).get(asyncReset);
         }
         HierarchyGraph res = new HierarchyGraph();
         List<Node> ins = new ArrayList<>(wirecount);
         List<Node> outs = new ArrayList<>(wirecount);
-        Node set = res.addNode(Label.SET);
+        Util.assertOrElse(syncSet || asyncReset, "A register must have some set node.");
+        Node central = res.addNode(Label.REGISTER);
+        //Node set = syncReset ? res.addNode(Label.SYNC_SET) : null;
+
         for (int i = 0; i < wirecount; i++) {
             Node in = res.addNode(Label.IN);
             Node out = res.addNode(Label.OUT);
             ins.add(in);
             outs.add(out);
             res.addEdge(in, out);
-            res.addEdge(in, set);
+            res.addEdge(in, central);
         }
         Node syncResetNode = null;
         Node asyncResetNode = null;
+        Node syncSetNode = null;
+        Node asyncSetNode = null;
+        Node clockEnableNode = null;
         if (asyncReset) {
             asyncResetNode = res.addNode(Label.ASYNC_RESET);
-            res.addEdge(asyncResetNode, set);
+            res.addEdge(asyncResetNode, central);
         }
         if (syncReset) {
             syncResetNode = res.addNode(Label.SYNC_RESET);
-            res.addEdge(syncResetNode, set);
+            res.addEdge(syncResetNode, central);
         }
-        Register result = new Register(res, ins, outs, set, syncResetNode, asyncResetNode);
+        if (syncSet) {
+            syncSetNode = res.addNode(Label.SYNC_SET);
+            res.addEdge(syncSetNode, central);
+        }
+        if (asyncSet) {
+            clockEnableNode = res.addNode(Label.CLOCK_ENABLE);
+            res.addEdge(clockEnableNode, central);
+        }
+        if (clockEnable) {
+            asyncSetNode = res.addNode(Label.ASYNC_SET);
+            res.addEdge(asyncSetNode, central);
+        }
+        Register result = new Register(res, ins, outs, syncSetNode, asyncSetNode, syncResetNode, asyncResetNode, clockEnableNode);
         registerMap.putIfAbsent(wirecount, new HashMap<>());
         registerMap.get(wirecount).putIfAbsent(syncReset, new HashMap<>());
         registerMap.get(wirecount).get(syncReset).putIfAbsent(asyncReset, result);

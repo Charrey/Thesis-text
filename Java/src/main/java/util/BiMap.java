@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class BiMap<P, S> {
 
@@ -13,6 +15,16 @@ public class BiMap<P, S> {
     public BiMap() {
         byKey = new HashMap<>();
         byValue = new HashMap<>();
+    }
+
+    public void removeValues(Predicate<S> condition) {
+        Set<S> values = byValue.keySet().stream().filter(condition).collect(Collectors.toSet());
+        values.forEach(byValue::remove);
+        new HashSet<>(byKey.entrySet()).forEach(psEntry -> {
+            if (values.contains(psEntry.getValue())) {
+                byKey.remove(psEntry.getKey());
+            }
+        });
     }
 
     private BiMap(Map<P, S> byKey, Map<S, P> byValue) {
@@ -51,5 +63,11 @@ public class BiMap<P, S> {
 
     public Map<P, S> getToMap() {
         return byKey;
+    }
+
+    public void putAll(Map<P, S> map) {
+        for (Map.Entry<P, S> i : map.entrySet()) {
+            put(i.getKey(), i.getValue());
+        }
     }
 }

@@ -18,9 +18,12 @@ public class Labels {
         map.put("mux", Label.MUX);
         map.put("out", Label.OUT);
         map.put("lut", Label.LUT);
-        map.put("sync", Label.SYNC_RESET);
-        map.put("async", Label.ASYNC_RESET);
-        map.put("set", Label.SET);
+        map.put("sync_reset", Label.SYNC_RESET);
+        map.put("async_reset", Label.ASYNC_RESET);
+        map.put("sync_set", Label.SYNC_SET);
+        map.put("async_set", Label.ASYNC_SET);
+        map.put("clock_enable", Label.CLOCK_ENABLE);
+        map.put("rising_or_falling_edge", Label.CLOCK_FRAME);
         map.put("gate", Label.GATE);
         map.put("option", Label.OPTION);
         map.put("switch", Label.SWITCH);
@@ -29,6 +32,7 @@ public class Labels {
         map.put("clock", Label.CLOCK);
         map.put("always_on", Label.EXTRA);
         map.put("ERROR", Label.REMOVE);
+        map.put("register", Label.REGISTER);
 
     }
 

@@ -22,6 +22,8 @@ import java.util.stream.Collectors;
 
 public class Util {
 
+    public static Object assertOrElse;
+
     public static Set<Node> fixedPoint(Node start, Function<Node, Set<Node>> expansion, Predicate<Node> condition) {
         Set<Node> expanded = new HashSet<>();
         Set<Node> notExpanded = new HashSet<>();
@@ -68,13 +70,15 @@ public class Util {
         System.out.println("Exporting DOT...");
         String dot = flattened.getGraph().toDOT(true);
         makeDirectories(Paths.get(".temp"));
+        new File("./.temp").deleteOnExit();
         System.out.println("Writing to file...");
         writeToFile(dot, Paths.get(".temp/graph.dot"));
+        new File("./.temp/graph.dot").deleteOnExit();
         System.out.println("Calling FDP...");
         long baseTime = System.currentTimeMillis();
         System.out.println("Estimated time: " + estimateTime(flattened.getGraph()));
         Runtime rt = Runtime.getRuntime();
-        Process pr = rt.exec("fdp -Tsvg \".temp/graph.dot\"");
+        Process pr = rt.exec("sfdp -Tsvg \".temp/graph.dot\"");
         BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
         StringBuilder sb = new StringBuilder();
         String line;
@@ -84,9 +88,8 @@ public class Util {
         pr.destroy();
         writeFDP(flattened.getGraph().getNodes().size(), flattened.getGraph().getEdges().entrySet().stream().reduce(0, (u, nodeSetEntry) -> u + nodeSetEntry.getValue().size(), Integer::sum) / 2, System.currentTimeMillis()-baseTime);
         Path svgFile = Paths.get(".temp/graph" + new Random().nextInt() +".svg");
+        svgFile.toFile().deleteOnExit();
         writeToFile(sb.toString(), svgFile);
-        Files.delete(Paths.get("./.temp/graph.dot"));
-        //Files.delete(Paths.get("./.temp"));
         SVGFrame frame = new SVGFrame(svgFile);
         frame.setVisible(true);
         while (frame.isVisible()) {
@@ -181,6 +184,20 @@ public class Util {
         return;
     }
 
+    public static void assertOrElse(boolean assertion, String message) {
+        if (!assertion) {
+            throw new AssertionError(message);
+        }
+    }
+
+    public static List<Node> listOf(Node node) {
+        if (node != null) {
+            return List.of(node);
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
 
     private static class SVGFrame extends JFrame {
         public static boolean isVisible;
@@ -197,19 +214,15 @@ public class Util {
                     //your code to be executed before window is closed.
                     //not the place to opt out closing window
                     synchronized (lock) {
-                        try {
-                            isVisible = false;
-                            Files.delete(path);
-                            setVisible(false);
-                        } catch (IOException f) {
-                            System.err.println("Could not delete files...");
-                        }
+                        isVisible = false;
+                        setVisible(false);
                         lock.notify();
                     }
                 }
             });
             pack();
         }
+
     }
 
     private static class ConcatList implements List<Node> {

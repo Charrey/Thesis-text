@@ -30,11 +30,8 @@ public class TestSimple extends MyTestCase {
         long base = System.currentTimeMillis();
         HierarchyGraph graph1 = FPGAModels.makeSimpleRegister(2, false);
         graph1.shuffleIdentifiers();
-        System.out.println(System.currentTimeMillis() - base);
         HierarchyGraph graph2 = graph1.deepCopy().getGraph();
-        System.out.println(System.currentTimeMillis() - base);
         graph2.shuffleIdentifiers();
-        System.out.println(System.currentTimeMillis() - base);
         MappingFunction f = IsoFinder.getMapping(graph1, graph2);
         assertTrue(Util.isCorrect(f.getPartialMapping()));
     }
@@ -61,8 +58,7 @@ public class TestSimple extends MyTestCase {
 
     @Test
     public void testSubdivision_test5() throws IOException, NoMappingException {
-        HierarchyGraph graph1 = FPGAModels.makeSnake(3, 10, false);
-        Util.view(graph1);
+        HierarchyGraph graph1 = FPGAModels.makeSnake(100, 100, false);
         graph1.shuffleIdentifiers();
         HierarchyGraph graph2 = FPGAModels.makeSnake(2, 3, false);
         graph2.shuffleIdentifiers();
@@ -83,7 +79,6 @@ public class TestSimple extends MyTestCase {
     @Test
     public void testMUXLUT_test7() throws IOException, NoMappingException {
         HierarchyGraph graph1 = FPGAModels.makeLutTree(3, 6, false);
-        Util.view(graph1);
         graph1.shuffleIdentifiers();
         HierarchyGraph graph2 = FPGAModels.makeSimpleLut(4, false);
         graph2.shuffleIdentifiers();

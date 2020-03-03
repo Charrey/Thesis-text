@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Node {
+public class Node implements Cloneable {
 
     private Set<Label> labels;
     private int ID;
@@ -37,12 +37,21 @@ public class Node {
         return ID + "[label=\"" + labels.stream().map(Labels::write).collect(Collectors.toSet()) + "\"]";
     }
 
+    public Node clone() {
+        Node next = new Node();
+        next.locked = locked;
+        next.labels = new HashSet<>(labels);
+        next.ID = ID;
+        return next;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Node node = (Node) o;
-        return ID == node.ID;
+        return ID == node.ID &&
+                labels.equals(node.labels);
     }
 
     @Override
@@ -66,10 +75,4 @@ public class Node {
         locked = true;
     }
 
-    public HierarchyGraph getGraph() {
-        if (graph == null) {
-            throw new UnsupportedOperationException();
-        }
-        return this.graph;
-    }
 }
