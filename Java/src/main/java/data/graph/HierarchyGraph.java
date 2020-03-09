@@ -19,7 +19,7 @@ public class HierarchyGraph {
     private Map<Label, Set<Vertex>> labelIndex = new HashMap<>();
     private boolean locked = false;
 
-    private Map<HierarchyGraph, String> namesOfHierarchyGraphs = new HashMap<>();
+    public static Map<HierarchyGraph, String> namesOfHierarchyGraphs = new HashMap<>();
 
     /**
      * A list of vertex sets that have names. This is used in visual representations of Hierarchygraphs to provide names to subgraphs.
@@ -48,7 +48,6 @@ public class HierarchyGraph {
         for (Map.Entry<Vertex, HierarchyGraph> entry : H.entrySet()) {
             entry.getValue().lock();
         }
-        namesOfHierarchyGraphs = Collections.unmodifiableMap(namesOfHierarchyGraphs);
         labelIndex.replaceAll((k, v) -> Collections.unmodifiableSet(labelIndex.get(k)));
         labelIndex = Collections.unmodifiableMap(labelIndex);
         locked = true;
@@ -139,16 +138,17 @@ public class HierarchyGraph {
         }
     }
 
-//    public static HierarchyGraph getFlat(HierarchyGraph from) {
-//        if (flattenedCache.containsKey(from)) {
-//            System.out.println("Cache hit!");
-//            return flattenedCache.get(from);
-//        } else {
-//            HierarchyGraph res = from.flatten();
-//            flattenedCache.put(from, res);
-//            return res;
-//        }
-//    }
+    private static Map<HierarchyGraph, Map<Integer, HierarchyGraph>> flatCache = new HashMap<>();
+    public static HierarchyGraph getFlat(HierarchyGraph from, int flattenDepth, boolean copy) {
+        if (flatCache.containsKey(from) && flatCache.get(from).containsKey(flattenDepth)) {
+            return copy ? flatCache.get(from).get(flattenDepth).deepCopy().getGraph() : flatCache.get(from).get(flattenDepth);
+        } else {
+            HierarchyGraph res = from.flatten(flattenDepth).getGraph();
+            flatCache.putIfAbsent(from, new HashMap<>());
+            flatCache.get(from).put(flattenDepth, res);
+            return res;
+        }
+    }
 
     /**
      * Returns a Hierarchygraph in which each subgraph is merged in to the top-level one. This graph contains the same
@@ -156,15 +156,23 @@ public class HierarchyGraph {
      *
      * @return Both a flattened graph of this one, and a mapping that maps vertices from this graph to their equivalent in
      * the resulting graph.
+     * @param flattenDepth
      */
-    public CopyInfo flatten() {
+    private CopyInfo flatten(int flattenDepth) {
+        if (flattenDepth == 0) {
+            CopyInfo copy = deepCopy();
+            for (Map.Entry<Vertex, HierarchyGraph> unresolvedHierarchy : copy.getGraph().getHierarchy().entrySet()) {
+                copy.getGraph().subGraphLabeling.add(new Subgraph(namesOfHierarchyGraphs.get(unresolvedHierarchy.getValue()), Set.of(unresolvedHierarchy.getKey())));
+            }
+            return copy;
+        }
         HierarchyGraph res = new HierarchyGraph();
         BiMap<Vertex, Vertex> vertexMap = new BiMap<>();
         Set<HierarchyGraph> toAdd = new HashSet<>();
         Map<Vertex, Vertex> CToUniqueHierarchyGraphs = new HashMap<>();
 
         for (Map.Entry<Vertex, HierarchyGraph> hierarchies : H.entrySet()) {
-            CopyInfo flattened = hierarchies.getValue().flatten();
+            CopyInfo flattened = hierarchies.getValue().flatten(flattenDepth - 1);
             toAdd.add(flattened.graph);
             for (Vertex port : E.get(hierarchies.getKey())) {
                 CToUniqueHierarchyGraphs.put(port, flattened.getMap().get(C.get(port)));
@@ -205,17 +213,19 @@ public class HierarchyGraph {
             res.addEdge(vertexMap.get(port), CToUniqueHierarchyGraphs.get(port));
         }
 
-        while (res.getVerticesByLabel(Label.PORT).stream().anyMatch(x -> CToUniqueHierarchyGraphs.containsKey(vertexMap.getByValue(x).iterator().next()))) {
-            Vertex example = res.getVerticesByLabel(Label.PORT).stream().filter(x -> CToUniqueHierarchyGraphs.containsKey(vertexMap.getByValue(x).iterator().next())).findAny().get();
-            for (Vertex one : res.E.get(example)) {
-                for (Vertex two : res.E.get(example)) {
-                    if (two.getID() > one.getID()) {
-                        res.addEdge(one, two);
+        try {
+            while (res.getVerticesByLabel(Label.PORT).stream().anyMatch(x -> vertexMap.containsValue(x) && CToUniqueHierarchyGraphs.containsKey(vertexMap.getByValue(x).iterator().next()))) {
+                Vertex example = res.getVerticesByLabel(Label.PORT).stream().filter(x -> vertexMap.containsValue(x) && CToUniqueHierarchyGraphs.containsKey(vertexMap.getByValue(x).iterator().next())).findAny().get();
+                for (Vertex one : res.E.get(example)) {
+                    for (Vertex two : res.E.get(example)) {
+                        if (two.getID() > one.getID()) {
+                            res.addEdge(one, two);
+                        }
                     }
                 }
+                res.removeVertex(example);
             }
-            res.removeVertex(example);
-        }
+        } catch (NoSuchElementException e) {}
         res.rebuildLabelIndex();
         res.subGraphCounter = 0;
         vertexMap.removeValues(x -> !res.getVertices().contains(x) && H.values().stream().noneMatch(y -> y.getVertices().contains(x)));
@@ -274,8 +284,8 @@ public class HierarchyGraph {
                 .collect(Collectors.toMap(entry -> vertexMap.get(entry.getKey()), entry -> vertexMap.get(entry.getValue())));
         res.labelIndex = labelIndex.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().stream().map(vertexMap::get).collect(Collectors.toSet())));
-        res.namesOfHierarchyGraphs = namesOfHierarchyGraphs.entrySet().stream()
-                .collect(Collectors.toMap(entry -> graphmap.get(entry.getKey()), Map.Entry::getValue));
+        namesOfHierarchyGraphs.putAll(namesOfHierarchyGraphs.entrySet().stream().filter(x -> graphmap.containsKey(x.getKey()))
+                .collect(Collectors.toMap(entry -> graphmap.get(entry.getKey()), Map.Entry::getValue)));
         res.subGraphLabeling = subGraphLabeling.stream().map(subgraph ->
                 new Subgraph(subgraph.name, subgraph.vertices.stream().map(vertexMap::get).collect(Collectors.toSet())))
                 .collect(Collectors.toList());
@@ -291,7 +301,6 @@ public class HierarchyGraph {
      * @param vertex The vertex to be removed.
      */
     public void removeVertex(Vertex vertex) {
-        Util.checkConsistent(this);
         V.remove(vertex);
         for (Vertex neighbour : E.getOrDefault(vertex, Collections.emptySet())) {
             E.get(neighbour).remove(vertex);
@@ -302,7 +311,6 @@ public class HierarchyGraph {
         E.remove(vertex);
         C.remove(vertex);
         H.remove(vertex);
-        Util.checkConsistent(this);
     }
 
     /**
@@ -459,13 +467,13 @@ public class HierarchyGraph {
         return Collections.unmodifiableMap(C);
     }
 
-    /**
-     * Gives a Map that maps hierarchygraphs to their names (for storage purposes)
-     * @return the Hierarchygraph-to-name map.
-     */
-    public Map<HierarchyGraph, String> getNamesOfHierarchyGraphs() {
-        return namesOfHierarchyGraphs;
-    }
+   // /**
+    // * Gives a Map that maps hierarchygraphs to their names (for storage purposes)
+    // * @return the Hierarchygraph-to-name map.
+    // */
+    //public Map<HierarchyGraph, String> getNamesOfHierarchyGraphs() {
+    //    return namesOfHierarchyGraphs;
+    //}
 
     /**
      * A class that contains both a new version of a Hierarchygraph via some process, and a mapping that describes
@@ -538,6 +546,6 @@ public class HierarchyGraph {
 
     @Override
     public int hashCode() {
-        return Objects.hash(V, E, H, C, labelIndex, namesOfHierarchyGraphs, subGraphLabeling, subGraphCounter);
+        return Objects.hash(V, E, H, C, labelIndex, subGraphLabeling, subGraphCounter);
     }
 }

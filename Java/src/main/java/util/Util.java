@@ -7,6 +7,7 @@ import data.graph.Vertex;
 import org.apache.batik.swing.JSVGCanvas;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
@@ -14,6 +15,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.*;
 
 
@@ -42,11 +44,11 @@ public class Util {
      * @param graph the graph to be shown.
      * @throws IOException Thrown when the temporary file directory is not available for reading or writing.
      */
-    public static synchronized void view(HierarchyGraph graph) throws IOException {
+    public static synchronized void view(HierarchyGraph graph, int flattenDepth) throws IOException {
         System.out.println("Flattening...");
-        HierarchyGraph.CopyInfo flattened = graph.flatten();
+        HierarchyGraph flattened = HierarchyGraph.getFlat(graph, flattenDepth, false);
         System.out.println("Exporting DOT...");
-        String dot = flattened.getGraph().toDOT(true);
+        String dot = flattened.toDOT(true);
         makeDirectories(Paths.get(".temp"));
         new File("./.temp").deleteOnExit();
         System.out.println("Writing to file...");
@@ -54,9 +56,9 @@ public class Util {
         new File("./.temp/graph.dot").deleteOnExit();
         System.out.println("Calling FDP...");
         long baseTime = System.currentTimeMillis();
-        System.out.println("Estimated time: " + estimateTime(flattened.getGraph()));
+        System.out.println("Estimated time: " + estimateTime(flattened) / 1000. + " seconds.");
         Runtime rt = Runtime.getRuntime();
-        Process pr = rt.exec("sfdp -Tsvg \".temp/graph.dot\"");
+        Process pr = rt.exec("fdp -Tsvg \".temp/graph.dot\"");
         BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
         StringBuilder sb = new StringBuilder();
         String line;
@@ -64,18 +66,12 @@ public class Util {
             sb.append(line).append("\n");
         }
         pr.destroy();
-        writeFDP(flattened.getGraph().getVertices().size(), flattened.getGraph().getEdges().entrySet().stream().reduce(0, (u, nodeSetEntry) -> u + nodeSetEntry.getValue().size(), Integer::sum) / 2, System.currentTimeMillis()-baseTime);
+        writeFDP(flattened.getVertices().size(), flattened.getEdges().entrySet().stream().reduce(0, (u, nodeSetEntry) -> u + nodeSetEntry.getValue().size(), Integer::sum) / 2, System.currentTimeMillis()-baseTime);
         Path svgFile = Paths.get(".temp/graph" + new Random().nextInt() +".svg");
         svgFile.toFile().deleteOnExit();
         writeToFile(sb.toString(), svgFile);
-        SVGFrame frame = new SVGFrame(svgFile);
-        frame.setVisible(true);
-        while (frame.isVisible()) {
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            Desktop.getDesktop().browse(svgFile.toUri());
         }
     }
 
@@ -98,12 +94,20 @@ public class Util {
             return -1;
         }
         else {
-            for (String line : lines) {
-                String[] splitted = line.split("\t");
-                System.out.println(splitted[0] + "\t" + splitted[1] + "\t" + splitted[2]);
+            double[] vertices = new double[lines.size()];
+            double[] edges = new double[lines.size()];
+            double[] times = new double[lines.size()];
+            for (int i = 0; i < lines.size(); i++) {
+                String[] splitted = lines.get(i).split("\t");
+                vertices[i] = Double.parseDouble(splitted[0]);
+                edges[i] = Double.parseDouble(splitted[1]);
+                times[i] = Double.parseDouble(splitted[2]);
             }
+
+            double prediction1 =  new LinearRegression(vertices, times).predict(res.getVertices().size());
+            double prediction2 =  new LinearRegression(edges, times).predict(res.getEdges().entrySet().stream().reduce(0, (u, nodeSetEntry) -> u + nodeSetEntry.getValue().size(), Integer::sum) / 2.);
+            return Double.valueOf(0.5 * (prediction1 + prediction2)).longValue();
         }
-        return -1;
     }
 
 
@@ -119,6 +123,10 @@ public class Util {
      */
     public static ConcatList concat(List<Vertex>... inputs) {
         return new ConcatList(inputs);
+    }
+
+    public static List<Vertex> concat(List<List<Vertex>> inputs) {
+        return new ConcatList(inputs.toArray(List[]::new));
     }
 
     /**
@@ -152,7 +160,7 @@ public class Util {
                 }
             }
             if (vertex.getLabels().contains(Label.PORT) && !graph.getPortMapping().containsKey(vertex)) {
-                //assert false;
+                assert false;
             }
             if (vertex.getLabels().contains(Label.COMPONENT) && !graph.getHierarchy().containsKey(vertex)) {
                 assert false;
@@ -163,6 +171,11 @@ public class Util {
                 }
             }
         }
+        for (Map.Entry<Vertex, Vertex> entry : graph.getPortMapping().entrySet()) {
+            assert entry.getKey().getLabels().contains(Label.PORT);
+            assert graph.getEdges().get(entry.getKey()).stream().anyMatch(x -> x.getLabels().contains(Label.COMPONENT));
+        }
+
         return;
     }
 
@@ -190,6 +203,18 @@ public class Util {
         } else {
             return Collections.emptyList();
         }
+    }
+
+    public static boolean deepContains(Collection collection, Object object) {
+        if (collection.contains(object)) {
+            return true;
+        }
+        for (Object o : collection) {
+            if (o instanceof Collection && deepContains((Collection) o, object)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -336,7 +361,7 @@ public class Util {
                     removeFromIndex += list.size();
                 }
             }
-            return null;
+            throw new IndexOutOfBoundsException(index);
         }
 
         @Override

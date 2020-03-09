@@ -53,7 +53,7 @@ public class Writer {
      * @return An object containing Strings in DOT-format that can be read into the original graph.
      */
     public static Export export(HierarchyGraph graph, boolean isMain, Path writeToDirectory) throws IOException {
-        globalNameMap.putAll(graph.getNamesOfHierarchyGraphs());
+        globalNameMap.putAll(HierarchyGraph.namesOfHierarchyGraphs);
         Map<String, String> res = new HashMap<>();
         StringBuilder sb = new StringBuilder(getPrefix(globalNameMap.getOrDefault(graph, "exportedGraph")));
         for (Map.Entry<Vertex, HierarchyGraph> entry : graph.getHierarchy().entrySet()) {

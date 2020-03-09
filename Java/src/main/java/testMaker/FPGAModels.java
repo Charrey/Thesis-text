@@ -2,29 +2,33 @@ package testMaker;
 
 import data.graph.HierarchyGraph;
 import data.graph.Label;
-import data.graph.Vertex;
 import data.graph.Patterns;
+import data.graph.Vertex;
 import data.patterns.*;
+import util.BiMap;
 import util.Util;
 import writer.Writer;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
+/**
+ * The type Fpga models.
+ */
 public class FPGAModels {
 
-    public static void main(String[] args) throws IOException {
-        makeLutAndRegister(3, true);
-        makeSimpleLut(2, true);
-        makeSimpleRegister(2, true);
-        makeSimpleMux(1, true);
-        makeSimpleRoutingSwitch(true);
-        makeSimpleLogicCell(3, true);
-
-    }
-
+    /**
+     * Make lut and register hierarchy graph.
+     *
+     * @param ins   the ins
+     * @param write the write
+     * @return the hierarchy graph
+     * @throws IOException the io exception
+     */
     public static HierarchyGraph makeLutAndRegister(int ins, boolean write) throws IOException {
         HierarchyGraph res = new HierarchyGraph();
         Register register = Patterns.Register(ins, true, false, false, false, false);
@@ -67,6 +71,13 @@ public class FPGAModels {
         return res;
     }
 
+    /**
+     * Make simple routing switch hierarchy graph.
+     *
+     * @param write the write
+     * @return the hierarchy graph
+     * @throws IOException the io exception
+     */
     public static HierarchyGraph makeSimpleRoutingSwitch(boolean write) throws IOException {
         Switch mySwitch = Patterns.Switch();
         mySwitch.addOption(new Patterns.IntConnection(0, 1), new Patterns.IntConnection(1, 0));
@@ -86,6 +97,14 @@ public class FPGAModels {
         return res;
     }
 
+    /**
+     * Make simple mux hierarchy graph.
+     *
+     * @param wireCount the wire count
+     * @param write     the write
+     * @return the hierarchy graph
+     * @throws IOException the io exception
+     */
     public static HierarchyGraph makeSimpleMux(int wireCount, boolean write) throws IOException {
         MUX mux = Patterns.MUX(wireCount);
         HierarchyGraph res = new HierarchyGraph();
@@ -104,61 +123,68 @@ public class FPGAModels {
         return res;
     }
 
+    /**
+     * Make simple logic cell hierarchy graph.
+     *
+     * @param wires the wires
+     * @param write the write
+     * @return the hierarchy graph
+     * @throws IOException the io exception
+     */
     public static HierarchyGraph makeSimpleLogicCell(int wires, boolean write) throws IOException {
         HierarchyGraph graph = new HierarchyGraph();
 
         List<Vertex> pins = Patterns.addPins(graph, wires * 2);
-        Vertex clock = graph.addVertex(Label.CLOCK_FRAME);
-        Vertex on = graph.addVertex(Label.EXTRA);
-
-        Switch mySwitch = Patterns.Switch();
-        mySwitch.addOption(new Patterns.IntConnection(0, 1), new Patterns.IntConnection(1, 0));
-        mySwitch.addOption(new Patterns.IntConnection(0, 2), new Patterns.IntConnection(2, 0));
-
-        LUT LUT = Patterns.LUT(wires, wires);
-        Register register = Patterns.Register(wires, true, false, false, false, false);
-        MUX MUX = Patterns.MUX(wires);
-
-        Vertex LUTComponent = graph.addComponent(LUT.getHierarchyGraph(), "LUT");
-        Vertex registerComponent = graph.addComponent(register.hierarchyGraph, "Register");
-        Vertex muxComponent = graph.addComponent(MUX.hierarchyGraph, "MUX");
-
+        Vertex clock1 = graph.addVertex(Label.CLOCK_FRAME);
+        graph.addVertex(Label.CLOCK_FRAME);
+        LogicCell logicCell = Patterns.LogicCell(wires);
+        Vertex component = graph.addComponent(logicCell.graph, "Logic Cell");
 
         for (int i = 0; i < wires; i++) {
-            Vertex switch1Component = graph.addComponent(mySwitch.getHierarchyGraph(), "Switch 1");
-            graph.addEdge(pins.get(i),                                              graph.addPort(mySwitch.getByNumber(0), switch1Component));
-            graph.addEdge(graph.addPort(LUT.getInputs().get(i), LUTComponent),           graph.addPort(mySwitch.getByNumber(1), switch1Component));
-            graph.addEdge(graph.addPort(register.inputs.get(i), registerComponent), graph.addPort(mySwitch.getByNumber(2), switch1Component));
-            graph.addEdge(graph.addPort(MUX.in1.get(i), muxComponent), graph.addPort(LUT.getOutputs().get(i), LUTComponent));
-            graph.addEdge(graph.addPort(MUX.in2.get(i), muxComponent), graph.addPort(register.outputs.get(i), registerComponent));
-            graph.addEdge(graph.addPort(MUX.out.get(i), muxComponent),      pins.get(i + wires));
+            graph.addEdge(pins.get(i), graph.addPort(logicCell.inputs.get(i), component));
+            graph.addEdge(pins.get(i + wires), graph.addPort(logicCell.outputs.get(i), component));
         }
-        graph.addEdge(clock, graph.addPort(register.syncSet, registerComponent));
-        graph.addEdge(on, graph.addPort(MUX.select, muxComponent));
+        graph.addEdge(clock1, graph.addPort(logicCell.clockPort, component));
         if (write) {
             Writer.export(graph, true, Paths.get("src/test/resources/graphml/LogicCell"));
         }
         return graph;
     }
 
-    public static HierarchyGraph makeSimpleRegister(int wireCount, boolean write) throws IOException {
-        Register register = Patterns.Register(wireCount, true, true, true, false, false);
+    /**
+     * Make simple register hierarchy graph.
+     *
+     * @param wireCount the wire count
+     * @param write     the write
+     * @return the hierarchy graph
+     * @throws IOException the io exception
+     */
+    public static HierarchyGraph makeSimpleRegister(int wireCount, boolean asyncSet, boolean syncReset, boolean asyncReset, boolean clockEnable, boolean write) throws IOException {
+        Register register = Patterns.Register(wireCount, true, asyncSet, syncReset, asyncReset, clockEnable);
+        List<Vertex> lowerPorts = Util.concat(register.inputs, register.outputs, Util.listOf(register.asyncSet), Util.listOf(register.syncReset), Util.listOf(register.asyncReset), Util.listOf(register.clockEnable));
         HierarchyGraph res = new HierarchyGraph();
 
         Vertex component = res.addComponent(register.hierarchyGraph, "Register");
-        List<Vertex> pins = Patterns.addPins(res, 2*wireCount + 3);
-        List<Vertex> ports = new LinkedList<>();
-        for (int i = 0; i < 2*wireCount + 3; i++) {
-            ports.add(res.addPort(Util.concat(register.inputs, register.outputs, Util.listOf(register.syncSet), Util.listOf(register.asyncSet), Util.listOf(register.syncReset), Util.listOf(register.asyncReset), Util.listOf(register.clockEnable)).get(i), component));
-            res.addEdge(ports.get(i), component);
-            res.addEdge(pins.get(i), ports.get(i));
+        List<Vertex> pins = Patterns.addPins(res, lowerPorts.size());
+        for (int i = 0; i < lowerPorts.size(); i++) {
+            res.addEdge(pins.get(i), res.addPort(lowerPorts.get(i), component));
         }
+        res.addEdge(res.addVertex(Label.CLOCK_FRAME), res.addPort(register.syncSet, component));
+        res.addVertex(Label.CLOCK_FRAME);
         if (write) {
             Writer.export(res, true, Paths.get("src/test/resources/graphml/Register"));
         }
         return res;
     }
 
+    /**
+     * Make simple lut hierarchy graph.
+     *
+     * @param ins   the ins
+     * @param write the write
+     * @return the hierarchy graph
+     * @throws IOException the io exception
+     */
     public static HierarchyGraph makeSimpleLut(int ins, boolean write) throws IOException {
         LUT lut = Patterns.LUT(ins, ins);
         HierarchyGraph res = new HierarchyGraph();
@@ -179,6 +205,15 @@ public class FPGAModels {
         return res;
     }
 
+    /**
+     * Make snake hierarchy graph.
+     *
+     * @param width  the width
+     * @param length the length
+     * @param write  the write
+     * @return the hierarchy graph
+     * @throws IOException the io exception
+     */
     public static HierarchyGraph makeSnake(int width, int length, boolean write) throws IOException {
         assert width > 0;
         HierarchyGraph graph = new HierarchyGraph();
@@ -257,8 +292,17 @@ public class FPGAModels {
         return graph;
     }
 
+    /**
+     * Make lut tree hierarchy graph.
+     *
+     * @param smallLutWires the small lut wires
+     * @param bigLutWires   the big lut wires
+     * @param write         the write
+     * @return the hierarchy graph
+     * @throws IOException the io exception
+     */
     public static HierarchyGraph makeLutTree(int smallLutWires, int bigLutWires, boolean write) throws IOException {
-        HierarchyGraph res =  getLutTree(smallLutWires, bigLutWires).getHierarchyGraph().flatten().getGraph();
+        HierarchyGraph res =  HierarchyGraph.getFlat(getLutTree(smallLutWires, bigLutWires).getHierarchyGraph(), 999, false);
         for (Vertex vertex : res.getVerticesByLabel(Label.REMOVE)) {
             if (res.getEdges().get(vertex).size()==1) {
                 res.addEdge(vertex, res.addVertex(Label.PIN));
@@ -270,8 +314,11 @@ public class FPGAModels {
     }
 
     private static void recursiveRemove(HierarchyGraph res, Predicate<Vertex> predicate) {
-        while (res.getVertices().stream().anyMatch(predicate)) {
-            Vertex example = res.getVertices().stream().filter(predicate).findAny().get();
+        recursiveRemove(res, predicate, new BiMap<>());
+    }
+    private static void recursiveRemove(HierarchyGraph res, Predicate<Vertex> predicate, BiMap<Vertex, Vertex> dangerous) {
+        while (res.getVertices().stream().filter(x -> !dangerous.containsValue(x)).anyMatch(predicate)) {
+            Vertex example = res.getVertices().stream().filter(x -> predicate.test(x) && !dangerous.containsValue(x)).findAny().get();
             for (Vertex one : res.getEdges().get(example)) {
                 for (Vertex two : res.getEdges().get(example)) {
                     if (two.getID() > one.getID()) {
@@ -282,7 +329,7 @@ public class FPGAModels {
             res.removeVertex(example);
         }
         for (HierarchyGraph graph : res.getHierarchy().values()) {
-            recursiveRemove(graph, predicate);
+            recursiveRemove(graph, predicate, new BiMap<>(res.getPortMapping()));
         }
     }
 
@@ -355,5 +402,234 @@ public class FPGAModels {
             return new LeafLUT(res, lutTreeInPorts, lutTreeOutPorts);
         }
     }
+
+    public static HierarchyGraph makeRegisterEmulator(int wireCount) {
+        HierarchyGraph graph = new HierarchyGraph();
+        Register register = Patterns.Register(wireCount, true, false, false, false, false);
+        Vertex Registercomponent = graph.addComponent(register.hierarchyGraph, "register");
+        Vertex frame1 = graph.addVertex(Label.CLOCK_FRAME);
+        Vertex frame2 = graph.addVertex(Label.CLOCK_FRAME);
+        LUT lut = Patterns.LUT(2, 1);
+        Vertex LutComponent = graph.addComponent(lut.getHierarchyGraph(), "lut");
+        List<Vertex> pins = Patterns.addPins(graph, wireCount *2 + 1);
+        graph.addEdge(pins.get(0), graph.addPort(lut.getInputs().get(0), LutComponent));
+        graph.addEdge(frame1, graph.addPort(lut.getInputs().get(1), LutComponent));
+        graph.addEdge(graph.addPort(lut.getOutputs().get(0), LutComponent), graph.addPort(register.outputs.get(0), Registercomponent));
+
+        for (int i = 0; i < wireCount; i++) {
+            graph.addEdge(pins.get(i+1), graph.addPort(register.inputs.get(i), Registercomponent));
+            graph.addEdge(pins.get(i+wireCount+1), graph.addPort(register.outputs.get(i), Registercomponent));
+        }
+        return graph;
+
+    }
+
+    public static HierarchyGraph makeRectangleCLB(int logicCellCount, int wireCount, boolean write) throws IOException {
+        HierarchyGraph graph = new HierarchyGraph();
+        ConfigurableLogicBlock CLB = Patterns.getRectangleCLB(wireCount, logicCellCount);
+        Vertex component = graph.addComponent(CLB.graph, "CLB");
+        for (Vertex v : CLB.clocks) {
+            graph.addEdge(graph.addPort(v, component), graph.addVertex(Label.PIN));
+        }
+        graph = HierarchyGraph.getFlat(graph, 999, false);
+        recursiveRemove(graph, x -> x.getLabels().contains(Label.REMOVE));
+        if (write) {
+            Writer.export(graph, true, Paths.get("src/test/resources/graphml/RectangleCLB"));
+        }
+        return graph;
+
+    }
+
+    public static HierarchyGraph makeRectangleCLBFPGA(int wireCount, int logicCellsPerCLB, int clbWidth, int clbHeight, boolean write) throws IOException {
+        Util.assertOrElse(clbWidth >= 1, "Needs at least 1 column of CLBs.");
+        Util.assertOrElse(clbHeight >= 1, "Needs at least 1 row of CLBs.");
+        HierarchyGraph graph = new HierarchyGraph();
+
+        ConfigurableLogicBlock clb = Patterns.getRectangleCLB(wireCount, logicCellsPerCLB);
+        Switchblock switchblockMiddle = Patterns.getSwitchBlock(wireCount, false);
+        Switchblock switchblockEdge = Patterns.getSwitchBlock(wireCount, true);
+
+        Vertex risingEdge = graph.addVertex(Label.CLOCK_FRAME);
+        graph.addVertex(Label.CLOCK_FRAME);
+        Vertex[][] clbComponents = new Vertex[clbWidth][clbHeight];
+        for (int i = 0; i < clbWidth; i++) {
+            for (int j = 0; j < clbHeight; j++) {
+                clbComponents[i][j] = graph.addComponent(clb.graph, "CLB");
+                for (Vertex clock : clb.clocks) {
+                    graph.addEdge(risingEdge, graph.addPort(clock, clbComponents[i][j]));//todo:uncomment
+                }
+            }
+        }
+
+        List<List<List<Vertex>>> topConnections = new LinkedList<>(); //For each CLB row, for each CLB, for each vertex
+        List<List<List<Vertex>>> bottomConnections = new LinkedList<>();
+
+        for (int y = 0; y < clbHeight; y++) {
+            List<List<Vertex>> rowTopConnections = new LinkedList<>();
+            List<List<Vertex>> rowBottomConnections = new LinkedList<>();
+            makeLeftSide(graph, switchblockEdge, clb, logicCellsPerCLB, wireCount, clbComponents[0][y], rowTopConnections, rowBottomConnections);
+            for (int x = 1; x < clbWidth; x++) {
+                makeMiddle(graph, switchblockMiddle, clb, logicCellsPerCLB, wireCount, clbComponents[x-1][y], clbComponents[x][y], rowTopConnections, rowBottomConnections);
+            }
+            makeRightSide(graph, switchblockEdge, clb, logicCellsPerCLB, wireCount, clbComponents[clbComponents.length-1][y], rowTopConnections, rowBottomConnections);
+            topConnections.add(rowTopConnections);
+            bottomConnections.add(rowBottomConnections);
+        }
+        for (int y = 1; y < clbHeight; y++) {
+            for (int x = 0; x < Util.concat(topConnections.get(y)).size(); x++) {
+                graph.addEdge(Util.concat(topConnections.get(y)).get(x), Util.concat(bottomConnections.get(y - 1)).get(x));
+            }
+        }
+
+        Util.view(graph, 0);
+        makeTop(graph, switchblockEdge, topConnections);
+        Util.view(graph, 0);
+        makeBottom(graph, switchblockEdge, bottomConnections);
+        Util.view(graph, 0);
+        assert  clbWidth == bottomConnections.get(0).size() - 1;
+        assert  wireCount == bottomConnections.get(0).get(0).size();
+        if (write) {
+            Writer.export(graph, true, Paths.get("src/test/resources/graphml/CLBFPGA"));
+        }
+        HierarchyGraph toReturn = graph.deepCopy().getGraph();
+        FPGAModels.recursiveRemove(toReturn, x -> x.getLabels().contains(Label.REMOVE));
+        return toReturn;
+    }
+
+    private static void makeBottom(HierarchyGraph graph, Switchblock switchblockEdge, List<List<List<Vertex>>> bottomConnections) {
+        List<Vertex> previousBottomRight = null;
+        int clbWidth = bottomConnections.get(0).size() - 1;
+        int wireCount = bottomConnections.get(0).get(0).size();
+        for (int i = 1; i < clbWidth; i++) {//i is the index of the intermediate vertical channel
+            Vertex belowComponent = graph.addComponent(switchblockEdge.graph, "Switch edge");
+            List<Vertex> belowLeft = switchblockEdge.right.stream().map(x -> graph.addPort(x, belowComponent)).collect(Collectors.toList());
+            List<Vertex> belowRight = switchblockEdge.left.stream().map(x -> graph.addPort(x, belowComponent)).collect(Collectors.toList());
+            List<Vertex> belowTop = switchblockEdge.bottom.stream().map(x -> graph.addPort(x, belowComponent)).collect(Collectors.toList());
+            if (i == 1) {
+                for (int wire = 0; wire < wireCount; wire++) {
+                    graph.addEdge(belowLeft.get(wire), bottomConnections.get(bottomConnections.size()-1).get(0).get(wire));
+                }
+            }
+            if (i == clbWidth - 1) {
+                for (int wire = 0; wire < wireCount; wire++) {
+                    List<List<Vertex>> bottomrow = bottomConnections.get(bottomConnections.size()-1);
+                    graph.addEdge(belowRight.get(wire), bottomrow.get(bottomrow.size()-1).get(wire));
+                }
+            }
+            for (int wire = 0; wire < wireCount; wire++) {
+                graph.addEdge(belowTop.get(wire), bottomConnections.get(bottomConnections.size()-1).get(i).get(wire));
+            }
+            if (i > 1) {
+                for (int wire = 0; wire < wireCount; wire++) {
+                    graph.addEdge(previousBottomRight.get(wire), belowRight.get(wire));
+                }
+            }
+            previousBottomRight = belowRight;
+        }
+    }
+
+    private static void makeTop(HierarchyGraph graph, Switchblock switchblockEdge, List<List<List<Vertex>>> topConnections) {
+        List<Vertex> previousTopRight = null;
+        int clbWidth = topConnections.get(0).size() - 1;
+        int wireCount = topConnections.get(0).get(0).size();
+        for (int i = 1; i < clbWidth; i++) {//i is the index of the intermediate vertical channel
+            Vertex aboveComponent = graph.addComponent(switchblockEdge.graph, "Switch edge");
+            List<Vertex> aboveLeft = switchblockEdge.left.stream().map(x -> graph.addPort(x, aboveComponent)).collect(Collectors.toList());
+            List<Vertex> aboveRight = switchblockEdge.right.stream().map(x -> graph.addPort(x, aboveComponent)).collect(Collectors.toList());
+            List<Vertex> aboveBottom = switchblockEdge.bottom.stream().map(x -> graph.addPort(x, aboveComponent)).collect(Collectors.toList());
+            if (i == 1) {
+                for (int wire = 0; wire < wireCount; wire++) {
+                    graph.addEdge(aboveLeft.get(wire), topConnections.get(0).get(0).get(wire));
+                }
+            }
+            if (i == clbWidth - 1) {
+                for (int wire = 0; wire < wireCount; wire++) {
+                    graph.addEdge(aboveRight.get(wire), topConnections.get(0).get(topConnections.get(0).size()-1).get(wire));
+                }
+            }
+            for (int wire = 0; wire < wireCount; wire++) {
+                graph.addEdge(aboveBottom.get(wire), topConnections.get(0).get(i).get(wire));
+            }
+            if (i > 1) {
+                for (int wire = 0; wire < wireCount; wire++) {
+                    graph.addEdge(previousTopRight.get(wire), aboveRight.get(wire));
+                }
+            }
+            previousTopRight = aboveRight;
+        }
+
+    }
+
+    private static void makeRightSide(HierarchyGraph graph, Switchblock switchblockEdge, ConfigurableLogicBlock clb, int logicCellsPerCLB, int wireCount, Vertex clbComponent, List<List<Vertex>> rowTopConnections, List<List<Vertex>> rowBottomConnections) {
+        List<Vertex> bottomright = null;
+        for (int i = 0; i < logicCellsPerCLB; i++) {
+            Vertex component = graph.addComponent(switchblockEdge.graph, "Switch edge");
+            List<Vertex> leftPorts = switchblockEdge.bottom.stream().map(vertex -> graph.addPort(vertex, component)).collect(Collectors.toList());
+            List<Vertex> topPorts = switchblockEdge.left.stream().map(vertex -> graph.addPort(vertex, component)).collect(Collectors.toList());
+            List<Vertex> bottomPorts = switchblockEdge.right.stream().map(vertex -> graph.addPort(vertex, component)).collect(Collectors.toList());
+            for (int wire = 0; wire < wireCount; wire++) {
+                graph.addEdge(leftPorts.get(wire), graph.addPort(clb.outputs.get(i).get(wire), clbComponent));
+            }
+            if (i==0) {
+                rowTopConnections.add(topPorts);
+            } else {
+                for (int wire = 0; wire < wireCount; wire++) {
+                    graph.addEdge(topPorts.get(wire), bottomright.get(wire));
+                }
+            }
+            bottomright = bottomPorts;
+        }
+        rowBottomConnections.add(bottomright);
+    }
+
+    private static void makeMiddle(HierarchyGraph graph, Switchblock switchblockMiddle, ConfigurableLogicBlock clb, int logicCellsPerCLB, int wireCount, Vertex componentLeft, Vertex componentRight, List<List<Vertex>> rowTopConnections, List<List<Vertex>> rowBottomConnections) {
+        List<Vertex> bottom = null;
+        for (int i = 0; i < logicCellsPerCLB; i++) {
+            Vertex component = graph.addComponent(switchblockMiddle.graph, "Switch block");
+            List<Vertex> rightPorts = switchblockMiddle.right.stream().map(vertex -> graph.addPort(vertex, component)).collect(Collectors.toList());
+            List<Vertex> leftPorts = switchblockMiddle.left.stream().map(vertex -> graph.addPort(vertex, component)).collect(Collectors.toList());
+            List<Vertex> topPorts = switchblockMiddle.top.stream().map(vertex -> graph.addPort(vertex, component)).collect(Collectors.toList());
+            List<Vertex> bottomPorts = switchblockMiddle.bottom.stream().map(vertex -> graph.addPort(vertex, component)).collect(Collectors.toList());
+            for (int wire = 0; wire < wireCount; wire++) {
+                graph.addEdge(rightPorts.get(wire), graph.addPort(clb.inputs.get(i).get(wire), componentRight));
+                graph.addEdge(leftPorts.get(wire), graph.addPort(clb.outputs.get(i).get(wire), componentLeft));
+            }
+            if (i==0) {
+                rowTopConnections.add(topPorts);
+            } else {
+                for (int wire = 0; wire < wireCount; wire++) {
+                    graph.addEdge(topPorts.get(wire), bottom.get(wire));
+                }
+            }
+            bottom = bottomPorts;
+        }
+        rowBottomConnections.add(bottom);
+    }
+
+
+    private static void makeLeftSide(HierarchyGraph graph, Switchblock triJump, ConfigurableLogicBlock clb, int logicCellsPerCLB, int wireCount, Vertex clbComponent, List<List<Vertex>> topConnections, List<List<Vertex>> bottomConnections) {
+        List<Vertex> bottomleft = null;
+        for (int i = 0; i < logicCellsPerCLB; i++) {
+            Vertex component = graph.addComponent(triJump.graph, "Switch edge");
+            List<Vertex> rightPorts = triJump.bottom.stream().map(vertex -> graph.addPort(vertex, component)).collect(Collectors.toList());
+            List<Vertex> topPorts = triJump.right.stream().map(vertex -> graph.addPort(vertex, component)).collect(Collectors.toList());
+            List<Vertex> bottomPorts = triJump.left.stream().map(vertex -> graph.addPort(vertex, component)).collect(Collectors.toList());
+            for (int wire = 0; wire < wireCount; wire++) {
+                graph.addEdge(rightPorts.get(wire), graph.addPort(clb.inputs.get(i).get(wire), clbComponent));
+            }
+            if (i==0) {
+                topConnections.add(topPorts);
+            } else {
+                for (int wire = 0; wire < wireCount; wire++) {
+                    graph.addEdge(topPorts.get(wire), bottomleft.get(wire));
+                }
+            }
+            bottomleft = bottomPorts;
+        }
+        bottomConnections.add(bottomleft);
+    }
+
+
+
 
 }

@@ -23,6 +23,12 @@ public class BiMap<P, S> {
         byValue = new HashMap<>();
     }
 
+    public BiMap(Map<P, S> init) {
+        byKey = new HashMap<>();
+        byValue = new HashMap<>();
+        putAll(init);
+    }
+
     /**
      * Remove any entry from this BiMap where the value matches the condition.
      * @param condition which satisfied for values, results in the entry being removed.

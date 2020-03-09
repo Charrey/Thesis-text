@@ -1,6 +1,6 @@
 package reader;
 
-import data.MappingFunction;
+import data.PartialMapping;
 import data.graph.HierarchyGraph;
 import exceptions.NoMappingException;
 import iso.IsoFinder;
@@ -21,19 +21,19 @@ public class TestSimple extends MyTestCase {
         graph1.shuffleIdentifiers();
         HierarchyGraph graph2 = graph1.deepCopy().getGraph();
         graph2.shuffleIdentifiers();
-        MappingFunction f = IsoFinder.getMapping(graph1, graph2);
-        assertTrue(Util.isCorrect(f.getPartialMapping()));
+        PartialMapping f = IsoFinder.getMapping(graph1, graph2);
+        assertTrue(Util.isCorrect(f));
     }
 
     @Test
     public void testRegister_test2() throws IOException, NoMappingException {
         long base = System.currentTimeMillis();
-        HierarchyGraph graph1 = FPGAModels.makeSimpleRegister(2, false);
+        HierarchyGraph graph1 = FPGAModels.makeSimpleRegister(2, false,false,false,false, false);
         graph1.shuffleIdentifiers();
         HierarchyGraph graph2 = graph1.deepCopy().getGraph();
         graph2.shuffleIdentifiers();
-        MappingFunction f = IsoFinder.getMapping(graph1, graph2);
-        assertTrue(Util.isCorrect(f.getPartialMapping()));
+        PartialMapping f = IsoFinder.getMapping(graph1, graph2);
+        assertTrue(Util.isCorrect(f));
     }
 
     @Test
@@ -42,8 +42,8 @@ public class TestSimple extends MyTestCase {
         graph1.shuffleIdentifiers();
         HierarchyGraph graph2 = graph1.deepCopy().getGraph();
         graph2.shuffleIdentifiers();
-        MappingFunction f = IsoFinder.getMapping(graph1, graph2);
-        assertTrue(Util.isCorrect(f.getPartialMapping()));
+        PartialMapping f = IsoFinder.getMapping(graph1, graph2);
+        assertTrue(Util.isCorrect(f));
     }
 
     @Test
@@ -52,8 +52,8 @@ public class TestSimple extends MyTestCase {
         graph1.shuffleIdentifiers();
         HierarchyGraph graph2 = graph1.deepCopy().getGraph();
         graph2.shuffleIdentifiers();
-        MappingFunction f = IsoFinder.getMapping(graph1, graph2);
-        assertTrue(Util.isCorrect(f.getPartialMapping()));
+        PartialMapping f = IsoFinder.getMapping(graph1, graph2);
+        assertTrue(Util.isCorrect(f));
     }
 
     @Test
@@ -62,8 +62,8 @@ public class TestSimple extends MyTestCase {
         graph1.shuffleIdentifiers();
         HierarchyGraph graph2 = FPGAModels.makeSnake(2, 3, false);
         graph2.shuffleIdentifiers();
-        MappingFunction f = IsoFinder.getMapping(graph1, graph2);
-        assertTrue(Util.isCorrect(f.getPartialMapping()));
+        PartialMapping f = IsoFinder.getMapping(graph1, graph2);
+        assertTrue(Util.isCorrect(f));
     }
 
     @Test
@@ -72,8 +72,8 @@ public class TestSimple extends MyTestCase {
         graph1.shuffleIdentifiers();
         HierarchyGraph graph2 = FPGAModels.makeSimpleMux(2, false);
         graph2.shuffleIdentifiers();
-        MappingFunction f = IsoFinder.getMapping(graph2, graph1);
-        assertTrue(Util.isCorrect(f.getPartialMapping()));
+        PartialMapping f = IsoFinder.getMapping(graph2, graph1);
+        assertTrue(Util.isCorrect(f));
     }
 
     @Test
@@ -82,7 +82,27 @@ public class TestSimple extends MyTestCase {
         graph1.shuffleIdentifiers();
         HierarchyGraph graph2 = FPGAModels.makeSimpleLut(4, false);
         graph2.shuffleIdentifiers();
-        MappingFunction f = IsoFinder.getMapping(graph2, graph1);
-        assertTrue(Util.isCorrect(f.getPartialMapping()));
+        PartialMapping f = IsoFinder.getMapping(graph2, graph1);
+        assertTrue(Util.isCorrect(f));
+    }
+
+    @Test
+    public void testRegisterRegister_test8() throws IOException, NoMappingException {
+        HierarchyGraph graph1 = FPGAModels.makeSimpleRegister(2, true,true,true,true,false);
+        graph1.shuffleIdentifiers();
+        HierarchyGraph graph2 = FPGAModels.makeRegisterEmulator(20);
+        graph2.shuffleIdentifiers();
+        PartialMapping f = IsoFinder.getMapping(graph2, graph1);
+        assertTrue(Util.isCorrect(f));
+    }
+
+    @Test
+    public void testHierarchy_test9() throws NoMappingException, IOException {
+        HierarchyGraph graph1 = FPGAModels.makeRectangleCLBFPGA(1, 1, 2, 2, false);
+        graph1.shuffleIdentifiers();
+        HierarchyGraph graph2 = FPGAModels.makeRectangleCLB(6, 3, false);
+        graph2.shuffleIdentifiers();
+        PartialMapping f = IsoFinder.getMapping(graph2, graph1);
+        assertTrue(Util.isCorrect(f));
     }
 }

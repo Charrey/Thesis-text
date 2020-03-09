@@ -22,8 +22,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
+/**
+ * The type Reader.
+ */
 public class Reader {
 
+    /**
+     * Instantiates a new Reader.
+     */
     public Reader() {
         this(new HashMap<>());
         cache = new HashMap<>();
@@ -32,21 +38,49 @@ public class Reader {
     private Map<String, Vertex> globalXMLIdentifiers;
     private Map<String, Vertex> localXMLIdentifiers;
 
+    /**
+     * The constant graphIds.
+     */
     public static BiMap<Path, String> graphIds = new BiMap<>();
 
     private static Map<Path, HierarchyGraph> cache;
 
+    /**
+     * Instantiates a new Reader.
+     *
+     * @param GlobalXMLIdentifiers the global xml identifiers
+     */
     public Reader(Map<String, Vertex> GlobalXMLIdentifiers) {
         this.globalXMLIdentifiers = GlobalXMLIdentifiers;
         this.localXMLIdentifiers = new HashMap<>();
     }
 
+    /**
+     * Read hierarchy graph.
+     *
+     * @param location the location
+     * @return the hierarchy graph
+     * @throws ParserConfigurationException the parser configuration exception
+     * @throws IOException                  the io exception
+     * @throws ParseException               the parse exception
+     */
     public HierarchyGraph read(Path location) throws ParserConfigurationException, IOException,  ParseException {
         return read(new String(Files.readAllBytes(location), StandardCharsets.UTF_8), location);
     }
 
 
     private static int fileCounter = 0;
+
+    /**
+     * Read hierarchy graph.
+     *
+     * @param contents the contents
+     * @param file     the file
+     * @return the hierarchy graph
+     * @throws ParserConfigurationException the parser configuration exception
+     * @throws IOException                  the io exception
+     * @throws ParseException               the parse exception
+     */
     public HierarchyGraph read(String contents, Path file) throws ParserConfigurationException, IOException,  ParseException {
         if (cache.containsKey(file)) {
             return cache.get(file);
@@ -69,7 +103,7 @@ public class Reader {
             throw new ParseException(file, "XML element \"graph\" not found.");
         }
         graphIds.put(file.toRealPath(), graph.getAttributes().getNamedItem("id").getTextContent() + fileCounter++);
-        res.getNamesOfHierarchyGraphs().put(res, graph.getAttributes().getNamedItem("id").getTextContent());
+        HierarchyGraph.namesOfHierarchyGraphs.put(res, graph.getAttributes().getNamedItem("id").getTextContent());
         for (int i = 0; i < graph.getChildNodes().getLength(); i++) {
             Node child = graph.getChildNodes().item(i);
             if (child.getNodeType() != Node.ELEMENT_NODE) {

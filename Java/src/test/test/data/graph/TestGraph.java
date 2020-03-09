@@ -1,6 +1,6 @@
 package data.graph;
 
-import data.MappingFunction;
+import data.PartialMapping;
 import org.junit.Test;
 import test.MyTestCase;
 import util.Util;
@@ -70,12 +70,11 @@ public class TestGraph extends MyTestCase {
         Vertex middleComponent = top.addComponent(middle, "Middle");
         top.addPort(portToAbove, middleComponent);
 
-        HierarchyGraph.CopyInfo flattened = top.flatten();
-        assertEquals(Set.of(portToAbove, bottomNode), flattened.getMap().keySet());
-        assertEquals(2, flattened.getGraph().getVertices().size());
-        assertEquals(1, flattened.getGraph().getVerticesByLabel(Label.CLOCK_FRAME).size());
-        assertEquals(1, flattened.getGraph().getVerticesByLabel(Label.LUT).size());
-        assertEquals(2, flattened.getGraph().getEdges().size());
+        HierarchyGraph flattened = HierarchyGraph.getFlat(top, 999, false);
+        assertEquals(2, flattened.getVertices().size());
+        assertEquals(1, flattened.getVerticesByLabel(Label.CLOCK_FRAME).size());
+        assertEquals(1, flattened.getVerticesByLabel(Label.LUT).size());
+        assertEquals(2, flattened.getEdges().size());
     }
 
     @Test
@@ -94,8 +93,8 @@ public class TestGraph extends MyTestCase {
         top.addPort(portToAbove, middleComponent);
 
         HierarchyGraph.CopyInfo copy = top.deepCopy();
-        MappingFunction map = new MappingFunction(top, copy.getGraph(), copy.getMap());
-        assertTrue(Util.isCorrect(map.getPartialMapping()));
+        PartialMapping map = new PartialMapping(top, copy.getGraph(), copy.getMap());
+        assertTrue(Util.isCorrect(map));
     }
 
     @Test
