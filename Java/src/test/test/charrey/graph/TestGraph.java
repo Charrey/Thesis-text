@@ -1,15 +1,21 @@
-package data.graph;
+package charrey.data.graph;
 
-import data.PartialMapping;
+import charrey.data.PartialMapping;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import test.MyTestCase;
-import util.Util;
+import charrey.util.Util;
 
 import java.util.Set;
 
 import static org.junit.Assert.*;
 
 public class TestGraph extends MyTestCase {
+
+    @BeforeClass
+    public static void init() {
+        System.out.println();
+    }
 
     @Test
     public void testAddEdge() {

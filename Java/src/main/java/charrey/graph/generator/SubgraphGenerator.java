@@ -1,7 +1,7 @@
-package data.graph;
+package charrey.data.graph;
 
-import data.patterns.*;
-import util.Util;
+import charrey.data.patterns.*;
+import charrey.util.Util;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -13,8 +13,10 @@ public final class Patterns {
 
 
     private static Map<Integer, MUX> muxMap = new HashMap<>();
+
     /**
      * Creates a MUX Hierarchygraph.
+     *
      * @param inCount The number of wires each input has (and thus the number of wires the output has).
      * @return A MUX Object containing the created Hierarchygraph.
      */
@@ -48,10 +50,17 @@ public final class Patterns {
         return result;
     }
 
-    private static Map<Integer, LogicCell> LogicCellMap = new HashMap<>();
+    private static Map<Integer, LogicCell> logicCellMap = new HashMap<>();
+
+    /**
+     * Logic cell logic cell.
+     *
+     * @param wireCount the wire count
+     * @return the logic cell
+     */
     public static LogicCell LogicCell(int wireCount) {
-        if (LogicCellMap.containsKey(wireCount)) {
-            return LogicCellMap.get(wireCount);
+        if (logicCellMap.containsKey(wireCount)) {
+            return logicCellMap.get(wireCount);
         }
         HierarchyGraph graph = new HierarchyGraph();
 
@@ -90,20 +99,23 @@ public final class Patterns {
         Vertex clockPort = graph.addPort(register.syncSet, registerComponent);
         Vertex clockHelper = graph.addVertex(Label.REMOVE);
         graph.addEdge(clockHelper, clockPort);
-        return new LogicCell(graph, inputs, outputs, clockHelper);
+        logicCellMap.put(wireCount, new LogicCell(graph, inputs, outputs, clockHelper));
+        return logicCellMap.get(wireCount);
     }
 
 
-    private static Map<Integer, Map<Integer, LUT>> LUTMap = new HashMap<>();
+    private static Map<Integer, Map<Integer, LUT>> lutMap = new HashMap<>();
+
     /**
      * Creates a LUT Hierarchygraph.
+     *
      * @param inCount  The number of inputs of the LUT.
      * @param outCount The number of outputs of the LUT.
      * @return A LUT Object containing the created Hierarchygraph.
      */
     public static LUT LUT(int inCount, int outCount) {
-        if (LUTMap.containsKey(inCount) && LUTMap.get(inCount).containsKey(outCount)) {
-            return LUTMap.get(inCount).get(outCount);
+        if (lutMap.containsKey(inCount) && lutMap.get(inCount).containsKey(outCount)) {
+            return lutMap.get(inCount).get(outCount);
         }
         HierarchyGraph res = new HierarchyGraph();
         Vertex mux1 = res.addVertex(Label.MUX, Label.LUT);
@@ -124,8 +136,8 @@ public final class Patterns {
             }
         }
         LUT result = new LeafLUT(res, inputs, outputs);
-        LUTMap.putIfAbsent(inCount, new HashMap<>());
-        LUTMap.get(inCount).put(outCount, result);
+        lutMap.putIfAbsent(inCount, new HashMap<>());
+        lutMap.get(inCount).put(outCount, result);
         return result;
     }
 
@@ -217,6 +229,13 @@ public final class Patterns {
         return new Switch();
     }
 
+    /**
+     * Gets a CLB that consists of two columns of logic blocks, connected horizontally with wires shifted down by one.
+     *
+     * @param wireCount      The number of inputs and outputs of each logic cell
+     * @param logicCellCount The number of logic cells
+     * @return An object that contains the hierarchygraph of this CLB.
+     */
     public static ConfigurableLogicBlock getRectangleCLB(int wireCount, int logicCellCount) {
 
 
@@ -276,6 +295,13 @@ public final class Patterns {
         return new ConfigurableLogicBlock(graph, inputs, outputs, clocks);
     }
 
+    /**
+     * Gets switch block in which routing switches lay on the diagonal intersections and can be configured to bidirectionally
+     * connect two distinct pairs of wires simultaneously.
+     * @param wireCount The number of columns and rows of the routing switch block.
+     * @param tShape    Whether the block is in a T-shape. If so, there exists no top connections.
+     * @return The routing switch block.
+     */
     public static Switchblock getSwitchBlock(int wireCount, boolean tShape) {
         HierarchyGraph graph = new HierarchyGraph();
         Switch mySwitch = Switch();

@@ -1,7 +1,7 @@
-package data.graph;
+package charrey.data.graph;
 
-import util.BiMap;
-import util.Util;
+import charrey.util.BiMap;
+import charrey.util.Util;
 
 import java.util.*;
 import java.util.stream.Collectors;

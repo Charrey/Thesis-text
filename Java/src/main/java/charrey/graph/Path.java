@@ -1,4 +1,4 @@
-package data.graph;
+package charrey.data.graph;
 
 /**
  * A Path from one Vertex to another.

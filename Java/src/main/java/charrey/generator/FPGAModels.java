@@ -1,13 +1,13 @@
-package testMaker;
+package charrey.testMaker;
 
-import data.graph.HierarchyGraph;
-import data.graph.Label;
-import data.graph.Patterns;
-import data.graph.Vertex;
-import data.patterns.*;
-import util.BiMap;
-import util.Util;
-import writer.Writer;
+import charrey.data.graph.HierarchyGraph;
+import charrey.data.graph.Label;
+import charrey.data.graph.Patterns;
+import charrey.data.graph.Vertex;
+import charrey.data.patterns.*;
+import charrey.util.BiMap;
+import charrey.util.Util;
+import charrey.writer.Writer;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -154,8 +154,12 @@ public class FPGAModels {
     /**
      * Make simple register hierarchy graph.
      *
-     * @param wireCount the wire count
-     * @param write     the write
+     * @param wireCount   the wire count
+     * @param asyncSet    the async set
+     * @param syncReset   the sync reset
+     * @param asyncReset  the async reset
+     * @param clockEnable the clock enable
+     * @param write       the write
      * @return the hierarchy graph
      * @throws IOException the io exception
      */
@@ -403,6 +407,12 @@ public class FPGAModels {
         }
     }
 
+    /**
+     * Make register emulator hierarchy graph.
+     *
+     * @param wireCount the wire count
+     * @return the hierarchy graph
+     */
     public static HierarchyGraph makeRegisterEmulator(int wireCount) {
         HierarchyGraph graph = new HierarchyGraph();
         Register register = Patterns.Register(wireCount, true, false, false, false, false);
@@ -424,6 +434,15 @@ public class FPGAModels {
 
     }
 
+    /**
+     * Make rectangle clb hierarchy graph.
+     *
+     * @param logicCellCount the logic cell count
+     * @param wireCount      the wire count
+     * @param write          the write
+     * @return the hierarchy graph
+     * @throws IOException the io exception
+     */
     public static HierarchyGraph makeRectangleCLB(int logicCellCount, int wireCount, boolean write) throws IOException {
         HierarchyGraph graph = new HierarchyGraph();
         ConfigurableLogicBlock CLB = Patterns.getRectangleCLB(wireCount, logicCellCount);
@@ -440,6 +459,17 @@ public class FPGAModels {
 
     }
 
+    /**
+     * Make rectangle clbfpga hierarchy graph.
+     *
+     * @param wireCount        the wire count
+     * @param logicCellsPerCLB the logic cells per clb
+     * @param clbWidth         the clb width
+     * @param clbHeight        the clb height
+     * @param write            the write
+     * @return the hierarchy graph
+     * @throws IOException the io exception
+     */
     public static HierarchyGraph makeRectangleCLBFPGA(int wireCount, int logicCellsPerCLB, int clbWidth, int clbHeight, boolean write) throws IOException {
         Util.assertOrElse(clbWidth >= 1, "Needs at least 1 column of CLBs.");
         Util.assertOrElse(clbHeight >= 1, "Needs at least 1 row of CLBs.");
@@ -481,11 +511,8 @@ public class FPGAModels {
             }
         }
 
-        Util.view(graph, 0);
         makeTop(graph, switchblockEdge, topConnections);
-        Util.view(graph, 0);
         makeBottom(graph, switchblockEdge, bottomConnections);
-        Util.view(graph, 0);
         assert  clbWidth == bottomConnections.get(0).size() - 1;
         assert  wireCount == bottomConnections.get(0).get(0).size();
         if (write) {
