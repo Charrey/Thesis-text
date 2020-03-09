@@ -1,4 +1,4 @@
-package charrey.data.graph;
+package charrey.graph;
 
 import charrey.util.BiMap;
 import charrey.util.Util;
@@ -51,7 +51,6 @@ public class HierarchyGraph {
         labelIndex.replaceAll((k, v) -> Collections.unmodifiableSet(labelIndex.get(k)));
         labelIndex = Collections.unmodifiableMap(labelIndex);
         locked = true;
-        assert H.entrySet().stream().allMatch(x -> getPorts(x.getKey()).stream().allMatch(y -> x.getValue().getVertices().contains(C.get(y))));
     }
 
 
@@ -261,7 +260,6 @@ public class HierarchyGraph {
      * graph.
      */
     public CopyInfo deepCopy() {
-        Util.checkConsistent(this);
         Map<Vertex, Vertex> vertexMap = new HashMap<>();
         Map<HierarchyGraph, HierarchyGraph> graphmap = new HashMap<>();
         HierarchyGraph res = new HierarchyGraph();
@@ -273,25 +271,31 @@ public class HierarchyGraph {
         for (Vertex vertex : V) {
             vertexMap.put(vertex, new Vertex(vertex.getLabels()));
         }
-        res.V = V.stream().map(vertexMap::get).collect(Collectors.toSet());
+        res.V = applyMapForAll(vertexMap, V);
         res.E = E.entrySet().stream()
-                .map(entry -> Map.entry(vertexMap.get(entry.getKey()), entry.getValue().stream().map(vertexMap::get).collect(Collectors.toSet())))
+                .map(entry4 -> Map.entry(vertexMap.get(entry4.getKey()), applyMapForAll(vertexMap, entry4.getValue())))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         res.H = H.entrySet().stream()
-                .map(entry -> Map.entry(vertexMap.get(entry.getKey()), graphmap.get(entry.getValue())))
+                .map(entry3 -> Map.entry(vertexMap.get(entry3.getKey()), graphmap.get(entry3.getValue())))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         res.C = C.entrySet().stream()
-                .collect(Collectors.toMap(entry -> vertexMap.get(entry.getKey()), entry -> vertexMap.get(entry.getValue())));
+                .collect(Collectors.toMap(entry2 -> vertexMap.get(entry2.getKey()), entry2 -> vertexMap.get(entry2.getValue())));
         res.labelIndex = labelIndex.entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().stream().map(vertexMap::get).collect(Collectors.toSet())));
-        namesOfHierarchyGraphs.putAll(namesOfHierarchyGraphs.entrySet().stream().filter(x -> graphmap.containsKey(x.getKey()))
-                .collect(Collectors.toMap(entry -> graphmap.get(entry.getKey()), Map.Entry::getValue)));
+                .collect(Collectors.toMap(Map.Entry::getKey, entry1 -> applyMapForAll(vertexMap, entry1.getValue())));
+        for (Map.Entry<HierarchyGraph, HierarchyGraph> entry : graphmap.entrySet()) {
+            if (namesOfHierarchyGraphs.containsKey(entry.getKey())) {
+                namesOfHierarchyGraphs.put(graphmap.get(entry.getKey()), namesOfHierarchyGraphs.get(entry.getKey()));
+            }
+        }
         res.subGraphLabeling = subGraphLabeling.stream().map(subgraph ->
-                new Subgraph(subgraph.name, subgraph.vertices.stream().map(vertexMap::get).collect(Collectors.toSet())))
+                new Subgraph(subgraph.name, applyMapForAll(vertexMap, subgraph.vertices)))
                 .collect(Collectors.toList());
         res.subGraphCounter = subGraphCounter;
-        Util.checkConsistent(res);
         return new CopyInfo(res, vertexMap);
+    }
+
+    private Set<Vertex> applyMapForAll(Map<Vertex, Vertex> vertexMap, Set<Vertex> v) {
+        return v.stream().map(vertexMap::get).collect(Collectors.toSet());
     }
 
 
@@ -418,7 +422,7 @@ public class HierarchyGraph {
         Map<Vertex, HierarchyGraph> H_new = new HashMap<>();
         Map<Vertex, Vertex> C_new = new HashMap<>();
         for (Map.Entry<Vertex, Set<Vertex>> entry : E.entrySet()) {
-            E_new.put(mapping.get(entry.getKey()), entry.getValue().stream().map(mapping::get).collect(Collectors.toSet()));
+            E_new.put(mapping.get(entry.getKey()), applyMapForAll(mapping, entry.getValue()));
         }
         for (Map.Entry<Vertex, HierarchyGraph> entry : H.entrySet()) {
             H_new.put(mapping.get(entry.getKey()), entry.getValue());
@@ -467,13 +471,6 @@ public class HierarchyGraph {
         return Collections.unmodifiableMap(C);
     }
 
-   // /**
-    // * Gives a Map that maps hierarchygraphs to their names (for storage purposes)
-    // * @return the Hierarchygraph-to-name map.
-    // */
-    //public Map<HierarchyGraph, String> getNamesOfHierarchyGraphs() {
-    //    return namesOfHierarchyGraphs;
-    //}
 
     /**
      * A class that contains both a new version of a Hierarchygraph via some process, and a mapping that describes
@@ -540,7 +537,6 @@ public class HierarchyGraph {
                 H.equals(graph.H) &&
                 C.equals(graph.C) &&
                 labelIndex.equals(graph.labelIndex) &&
-                namesOfHierarchyGraphs.equals(graph.namesOfHierarchyGraphs) &&
                 subGraphLabeling.equals(graph.subGraphLabeling);
     }
 

@@ -1,9 +1,9 @@
-package data;
+package charrey.data;
 
 
-import data.graph.HierarchyGraph;
-import data.graph.Vertex;
-import data.graph.Path;
+import charrey.graph.HierarchyGraph;
+import charrey.graph.Vertex;
+import charrey.graph.Path;
 
 import java.util.Map;
 

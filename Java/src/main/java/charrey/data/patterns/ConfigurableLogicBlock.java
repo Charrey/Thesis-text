@@ -1,8 +1,8 @@
-package data.patterns;
+package charrey.data.patterns;
 
-import data.graph.HierarchyGraph;
-import data.graph.Vertex;
-import util.Util;
+import charrey.graph.HierarchyGraph;
+import charrey.graph.Vertex;
+import charrey.util.Util;
 
 import java.util.Collections;
 import java.util.List;

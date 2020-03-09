@@ -1,4 +1,4 @@
-package charrey.data.graph;
+package charrey.graph;
 
 import java.util.Arrays;
 import java.util.Iterator;

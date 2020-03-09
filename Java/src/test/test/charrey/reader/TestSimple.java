@@ -1,13 +1,14 @@
-package reader;
+package charrey.reader;
 
-import data.PartialMapping;
-import data.graph.HierarchyGraph;
-import exceptions.NoMappingException;
-import iso.IsoFinder;
+import charrey.data.PartialMapping;
+import charrey.graph.HierarchyGraph;
+import charrey.exceptions.NoMappingException;
+import charrey.iso.IsoFinder;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import test.MyTestCase;
-import testMaker.FPGAModels;
-import util.Util;
+import charrey.graph.generator.FPGAGenerator;
+import charrey.util.Util;
 
 import java.io.IOException;
 
@@ -15,9 +16,14 @@ import static org.junit.Assert.assertTrue;
 
 public class TestSimple extends MyTestCase {
 
+    @BeforeClass
+    public static void init() {
+        System.out.println();
+    }
+
     @Test
     public void testLUT_test1() throws IOException, NoMappingException {
-       HierarchyGraph virtual =  FPGAModels.makeSimpleLut(2, false);
+       HierarchyGraph virtual =  FPGAGenerator.makeSimpleLut(2, false);
         virtual.shuffleIdentifiers();
         HierarchyGraph concrete = virtual.deepCopy().getGraph();
         concrete.shuffleIdentifiers();
@@ -27,7 +33,7 @@ public class TestSimple extends MyTestCase {
 
     @Test
     public void testRegister_test2() throws IOException, NoMappingException {
-        HierarchyGraph virtual = FPGAModels.makeSimpleRegister(2, false,false,false,false, false);
+        HierarchyGraph virtual = FPGAGenerator.makeSimpleRegister(2, false,false,false,false, false);
         virtual.shuffleIdentifiers();
         HierarchyGraph concrete = virtual.deepCopy().getGraph();
         concrete.shuffleIdentifiers();
@@ -37,7 +43,7 @@ public class TestSimple extends MyTestCase {
 
     @Test
     public void testMux_test3() throws IOException, NoMappingException {
-        HierarchyGraph virtual = FPGAModels.makeSimpleMux(2, false);
+        HierarchyGraph virtual = FPGAGenerator.makeSimpleMux(2, false);
         virtual.shuffleIdentifiers();
         HierarchyGraph concrete = virtual.deepCopy().getGraph();
         concrete.shuffleIdentifiers();
@@ -47,7 +53,7 @@ public class TestSimple extends MyTestCase {
 
     @Test
     public void testLogicCell_test4() throws IOException, NoMappingException {
-        HierarchyGraph virtual = FPGAModels.makeSimpleLogicCell(2, false);
+        HierarchyGraph virtual = FPGAGenerator.makeSimpleLogicCell(2, false);
         virtual.shuffleIdentifiers();
         HierarchyGraph concrete = virtual.deepCopy().getGraph();
         concrete.shuffleIdentifiers();
@@ -57,9 +63,9 @@ public class TestSimple extends MyTestCase {
 
     @Test
     public void testSubdivision_test6() throws IOException, NoMappingException {
-        HierarchyGraph concrete = FPGAModels.makeSnake(20, 20, false);
+        HierarchyGraph concrete = FPGAGenerator.makeSnake(20, 20, false);
         concrete.shuffleIdentifiers();
-        HierarchyGraph virtual = FPGAModels.makeSnake(2, 3, false);
+        HierarchyGraph virtual = FPGAGenerator.makeSnake(2, 3, false);
         virtual.shuffleIdentifiers();
         PartialMapping f = IsoFinder.getMapping(virtual, concrete);
         assertTrue(Util.isCorrect(f));
@@ -67,9 +73,9 @@ public class TestSimple extends MyTestCase {
 
     @Test
     public void testLUTMUX_test7() throws IOException, NoMappingException {
-        HierarchyGraph concrete = FPGAModels.makeSimpleLut(5, false);
+        HierarchyGraph concrete = FPGAGenerator.makeSimpleLut(5, false);
         concrete.shuffleIdentifiers();
-        HierarchyGraph virtual = FPGAModels.makeSimpleMux(2, false);
+        HierarchyGraph virtual = FPGAGenerator.makeSimpleMux(2, false);
         virtual.shuffleIdentifiers();
         PartialMapping f = IsoFinder.getMapping(virtual, concrete);
         assertTrue(Util.isCorrect(f));
@@ -77,9 +83,9 @@ public class TestSimple extends MyTestCase {
 
     @Test
     public void testMUXLUT_test8() throws IOException, NoMappingException {
-        HierarchyGraph concrete = FPGAModels.makeLutTree(3, 6, false);
+        HierarchyGraph concrete = FPGAGenerator.makeLutTree(3, 6, false);
         concrete.shuffleIdentifiers();
-        HierarchyGraph virtual = FPGAModels.makeSimpleLut(4, false);
+        HierarchyGraph virtual = FPGAGenerator.makeSimpleLut(4, false);
         virtual.shuffleIdentifiers();
         PartialMapping f = IsoFinder.getMapping(virtual, concrete);
         assertTrue(Util.isCorrect(f));
@@ -87,9 +93,9 @@ public class TestSimple extends MyTestCase {
 
     @Test
     public void testRegisterRegister_test9() throws IOException, NoMappingException {
-        HierarchyGraph virtual = FPGAModels.makeSimpleRegister(2, true,true,true,true,false);
+        HierarchyGraph virtual = FPGAGenerator.makeSimpleRegister(2, true,true,true,true,false);
         virtual.shuffleIdentifiers();
-        HierarchyGraph concrete = FPGAModels.makeRegisterEmulator(20);
+        HierarchyGraph concrete = FPGAGenerator.makeRegisterEmulator(20);
         concrete.shuffleIdentifiers();
         PartialMapping f = IsoFinder.getMapping(virtual, concrete);
         assertTrue(Util.isCorrect(f));
@@ -97,9 +103,9 @@ public class TestSimple extends MyTestCase {
 
     @Test
     public void testHierarchy_test10() throws NoMappingException, IOException {
-        HierarchyGraph virtual = FPGAModels.makeRectangleCLBFPGA(1, 2, 2, 2, false);
+        HierarchyGraph virtual = FPGAGenerator.makeRectangleCLBFPGA(1, 2, 2, 2, false);
         virtual.shuffleIdentifiers();
-        HierarchyGraph concrete = FPGAModels.makeRectangleCLBFPGA(1, 2, 2, 2, false);
+        HierarchyGraph concrete = FPGAGenerator.makeRectangleCLBFPGA(1, 2, 2, 2, false);
         concrete.shuffleIdentifiers();
         PartialMapping f = IsoFinder.getMapping(virtual, concrete);
         assertTrue(Util.isCorrect(f));
@@ -107,9 +113,9 @@ public class TestSimple extends MyTestCase {
 
     @Test
     public void testHierarchy_test11() throws NoMappingException, IOException {
-        HierarchyGraph concrete = FPGAModels.makeRectangleCLBFPGA(1, 10, 2, 2, false);
+        HierarchyGraph concrete = FPGAGenerator.makeRectangleCLBFPGA(1, 10, 2, 2, false);
         concrete.shuffleIdentifiers();
-        HierarchyGraph virtual = FPGAModels.makeRectangleCLBFPGA(2, 2, 2, 2, false);
+        HierarchyGraph virtual = FPGAGenerator.makeRectangleCLBFPGA(2, 2, 2, 2, false);
         virtual.shuffleIdentifiers();
         PartialMapping f = IsoFinder.getMapping(virtual, concrete);
         assertTrue(Util.isCorrect(f));
@@ -117,9 +123,9 @@ public class TestSimple extends MyTestCase {
 
     @Test
     public void testHierarchy_test12() throws NoMappingException, IOException {
-        HierarchyGraph concrete = FPGAModels.makeRectangleCLBFPGA(1, 1, 7, 7, false);
+        HierarchyGraph concrete = FPGAGenerator.makeRectangleCLBFPGA(1, 1, 7, 7, false);
         concrete.shuffleIdentifiers();
-        HierarchyGraph virtual = FPGAModels.makeRectangleCLBFPGA(1, 2, 2, 2, false);
+        HierarchyGraph virtual = FPGAGenerator.makeRectangleCLBFPGA(1, 2, 2, 2, false);
         virtual.shuffleIdentifiers();
         PartialMapping f = IsoFinder.getMapping(virtual, concrete);
         assertTrue(Util.isCorrect(f));
@@ -127,9 +133,9 @@ public class TestSimple extends MyTestCase {
 
     @Test
     public void testHierarchy_test13() throws NoMappingException, IOException {
-        HierarchyGraph concrete = FPGAModels.makeRectangleCLBFPGA(1, 1, 7, 7, false);
+        HierarchyGraph concrete = FPGAGenerator.makeRectangleCLBFPGA(1, 1, 7, 7, false);
         concrete.shuffleIdentifiers();
-        HierarchyGraph virtual = FPGAModels.makeRectangleCLBFPGA(2, 2, 2, 2, false);
+        HierarchyGraph virtual = FPGAGenerator.makeRectangleCLBFPGA(2, 2, 2, 2, false);
         virtual.shuffleIdentifiers();
         PartialMapping f = IsoFinder.getMapping(virtual, concrete);
         assertTrue(Util.isCorrect(f));

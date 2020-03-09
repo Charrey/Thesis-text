@@ -1,4 +1,4 @@
-package util;
+package charrey.util;
 
 import java.util.*;
 import java.util.function.Predicate;

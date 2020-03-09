@@ -1,4 +1,4 @@
-package charrey.data.graph;
+package charrey.graph;
 
 import charrey.util.Labels;
 

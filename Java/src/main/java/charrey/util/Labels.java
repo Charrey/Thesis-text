@@ -1,7 +1,7 @@
-package util;
+package charrey.util;
 
-import data.graph.Label;
-import exceptions.ParseException;
+import charrey.graph.Label;
+import charrey.exceptions.ParseException;
 
 import java.nio.file.Path;
 

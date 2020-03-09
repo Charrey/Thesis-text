@@ -1,16 +1,16 @@
-package reader;
+package charrey.reader;
 
-import data.graph.HierarchyGraph;
-import data.graph.Label;
-import data.graph.Vertex;
-import exceptions.ParseException;
+import charrey.graph.HierarchyGraph;
+import charrey.graph.Label;
+import charrey.graph.Vertex;
+import charrey.exceptions.ParseException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import util.BiMap;
-import util.Labels;
+import charrey.util.BiMap;
+import charrey.util.Labels;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,12 +23,12 @@ import java.nio.file.Path;
 import java.util.*;
 
 /**
- * The type Reader.
+ * Class that can read Hierarchygraphs from collections of files.
  */
 public class Reader {
 
     /**
-     * Instantiates a new Reader.
+     * Instantiates a new Reader. Required for each file.
      */
     public Reader() {
         this(new HashMap<>());
@@ -39,16 +39,15 @@ public class Reader {
     private Map<String, Vertex> localXMLIdentifiers;
 
     /**
-     * The constant graphIds.
+     * Map that stores names/identifiers for each Hierarchygraph while loading.
      */
     public static BiMap<Path, String> graphIds = new BiMap<>();
 
     private static Map<Path, HierarchyGraph> cache;
 
     /**
-     * Instantiates a new Reader.
-     *
-     * @param GlobalXMLIdentifiers the global xml identifiers
+     * Instantiates a new Reader, and provide a set of vertex identifiers that may be used.
+     * @param GlobalXMLIdentifiers A Map that provides mappings for vertices from strings used in the file format.
      */
     public Reader(Map<String, Vertex> GlobalXMLIdentifiers) {
         this.globalXMLIdentifiers = GlobalXMLIdentifiers;
@@ -56,7 +55,7 @@ public class Reader {
     }
 
     /**
-     * Read hierarchy graph.
+     * Reads a hierarchy graph from a file.
      *
      * @param location the location
      * @return the hierarchy graph
@@ -64,29 +63,32 @@ public class Reader {
      * @throws IOException                  the io exception
      * @throws ParseException               the parse exception
      */
-    public HierarchyGraph read(Path location) throws ParserConfigurationException, IOException,  ParseException {
-        return read(new String(Files.readAllBytes(location), StandardCharsets.UTF_8), location);
+    public HierarchyGraph readFromString(Path location) throws IOException,  ParseException {
+        return readFromString(Files.readString(location), location);
     }
 
 
     private static int fileCounter = 0;
 
     /**
-     * Read hierarchy graph.
-     *
-     * @param contents the contents
-     * @param file     the file
-     * @return the hierarchy graph
-     * @throws ParserConfigurationException the parser configuration exception
-     * @throws IOException                  the io exception
-     * @throws ParseException               the parse exception
+     * Reads a hierarchygraph from a String.
+     * @param contents The GraphML string that describes this hierarchygraph.
+     * @param file     The file location of this hierarchygraph.
+     * @return The hierarchygraph read from this string.
+     * @throws IOException Thrown when a subgraph could not be read from a file.
+     * @throws ParseException Thrown when the string contains syntax- or semantical errors.
      */
-    public HierarchyGraph read(String contents, Path file) throws ParserConfigurationException, IOException,  ParseException {
+    public HierarchyGraph readFromString(String contents, Path file) throws IOException,  ParseException {
         if (cache.containsKey(file)) {
             return cache.get(file);
         }
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
+        DocumentBuilder builder = null;
+        try {
+            builder = factory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            throw new RuntimeException(e);
+        }
         HierarchyGraph res = new HierarchyGraph();
         Document doc;
         try {
@@ -143,7 +145,7 @@ public class Reader {
     }
 
     private Map<Path, HierarchyGraph> hierarchyGraphCache = new HashMap<>();
-    private void addNode(HierarchyGraph graph, Node child, Path file) throws IOException, ParserConfigurationException, ParseException {
+    private void addNode(HierarchyGraph graph, Node child, Path file) throws IOException, ParseException {
         Map<String, Set<String>> datamap = getDataMap(child);
         Set<Label> labels = new HashSet<>();
         if (datamap.containsKey("label")) {
@@ -162,7 +164,7 @@ public class Reader {
             HierarchyGraph subgraph;
             Path pathToGraph = file.resolve("..").resolve(datamap.get("graphref").iterator().next()).toRealPath();
             if (!hierarchyGraphCache.containsKey(pathToGraph)) {
-                subgraph = new Reader(globalXMLIdentifiers).read(pathToGraph);
+                subgraph = new Reader(globalXMLIdentifiers).readFromString(pathToGraph);
                 hierarchyGraphCache.put(pathToGraph, subgraph);
             } else {
                 subgraph = hierarchyGraphCache.get(pathToGraph);

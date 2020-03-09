@@ -1,5 +1,8 @@
-package charrey.data.graph;
+package charrey.graph.generator;
 
+import charrey.graph.HierarchyGraph;
+import charrey.graph.Label;
+import charrey.graph.Vertex;
 import charrey.data.patterns.*;
 import charrey.util.Util;
 
@@ -9,7 +12,7 @@ import java.util.stream.Collectors;
 /**
  * Class that creates graph patterns for subcomponents.
  */
-public final class Patterns {
+public final class SubgraphGenerator {
 
 
     private static Map<Integer, MUX> muxMap = new HashMap<>();
@@ -20,7 +23,7 @@ public final class Patterns {
      * @param inCount The number of wires each input has (and thus the number of wires the output has).
      * @return A MUX Object containing the created Hierarchygraph.
      */
-    public static MUX MUX(int inCount) {
+    public static MUX mux(int inCount) {
         if (muxMap.containsKey(inCount)) {
             return muxMap.get(inCount);
         }
@@ -58,7 +61,7 @@ public final class Patterns {
      * @param wireCount the wire count
      * @return the logic cell
      */
-    public static LogicCell LogicCell(int wireCount) {
+    public static LogicCell logicCell(int wireCount) {
         if (logicCellMap.containsKey(wireCount)) {
             return logicCellMap.get(wireCount);
         }
@@ -66,13 +69,13 @@ public final class Patterns {
 
         Vertex extra = graph.addVertex(Label.EXTRA);
 
-        Switch mySwitch = Patterns.Switch();
-        mySwitch.addOption(new Patterns.IntConnection(0, 1), new Patterns.IntConnection(1, 0));
-        mySwitch.addOption(new Patterns.IntConnection(0, 2), new Patterns.IntConnection(2, 0));
+        Switch mySwitch = SubgraphGenerator.zwitch();
+        mySwitch.addOption(new SubgraphGenerator.IntConnection(0, 1), new SubgraphGenerator.IntConnection(1, 0));
+        mySwitch.addOption(new SubgraphGenerator.IntConnection(0, 2), new SubgraphGenerator.IntConnection(2, 0));
 
-        LUT LUT = Patterns.LUT(wireCount, wireCount);
-        Register register = Patterns.Register(wireCount, true, false, false, false, false);
-        MUX MUX = Patterns.MUX(wireCount);
+        LUT LUT = SubgraphGenerator.lut(wireCount, wireCount);
+        Register register = SubgraphGenerator.register(wireCount, true, false, false, false, false);
+        MUX MUX = SubgraphGenerator.mux(wireCount);
 
         Vertex LUTComponent = graph.addComponent(LUT.getHierarchyGraph(), "LUT");
         Vertex registerComponent = graph.addComponent(register.hierarchyGraph, "Register");
@@ -113,7 +116,7 @@ public final class Patterns {
      * @param outCount The number of outputs of the LUT.
      * @return A LUT Object containing the created Hierarchygraph.
      */
-    public static LUT LUT(int inCount, int outCount) {
+    public static LUT lut(int inCount, int outCount) {
         if (lutMap.containsKey(inCount) && lutMap.get(inCount).containsKey(outCount)) {
             return lutMap.get(inCount).get(outCount);
         }
@@ -154,7 +157,7 @@ public final class Patterns {
      * @param clockEnable Whether the register has a clock-enable input.
      * @return The register hierarchygraph.
      */
-    public static Register Register(int wirecount, boolean syncSet, boolean asyncSet, boolean syncReset, boolean asyncReset, boolean clockEnable) {
+    public static Register register(int wirecount, boolean syncSet, boolean asyncSet, boolean syncReset, boolean asyncReset, boolean clockEnable) {
         if (registerMap.containsKey(wirecount) && registerMap.get(wirecount).containsKey(syncReset) && registerMap.get(wirecount).get(syncReset).containsKey(asyncReset)) {
             return registerMap.get(wirecount).get(syncReset).get(asyncReset);
         }
@@ -225,7 +228,7 @@ public final class Patterns {
      *
      * @return An object that can be configured to return a Hierarchygraph modeling any routing switch.
      */
-    public static Switch Switch() {
+    public static Switch zwitch() {
         return new Switch();
     }
 
@@ -240,7 +243,7 @@ public final class Patterns {
 
 
         HierarchyGraph graph = new HierarchyGraph();
-        LogicCell logicCell = Patterns.LogicCell(wireCount);
+        LogicCell logicCell = SubgraphGenerator.logicCell(wireCount);
 
         List<List<Vertex>> firstLayerInPorts = new LinkedList<>();
         List<Vertex> firstLayer = new LinkedList<>();
@@ -304,7 +307,7 @@ public final class Patterns {
      */
     public static Switchblock getSwitchBlock(int wireCount, boolean tShape) {
         HierarchyGraph graph = new HierarchyGraph();
-        Switch mySwitch = Switch();
+        Switch mySwitch = zwitch();
         if (tShape) {
             mySwitch.addOption(new IntConnection(0, 1), new IntConnection(1, 0));
             mySwitch.addOption(new IntConnection(0, 2), new IntConnection(2, 0));

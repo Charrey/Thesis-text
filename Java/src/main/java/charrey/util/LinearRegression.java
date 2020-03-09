@@ -1,4 +1,4 @@
-package util;
+package charrey.util;
 
 /******************************************************************************
  *  Compilation:  javac LinearRegression.java
@@ -13,7 +13,7 @@ package util;
 
 /**
  *  The {@code LinearRegression} class performs a simple linear regression
- *  on an set of <em>n</em> data points (<em>y<sub>i</sub></em>, <em>x<sub>i</sub></em>).
+ *  on an set of <em>n</em> charrey.data points (<em>y<sub>i</sub></em>, <em>x<sub>i</sub></em>).
  *  That is, it fits a straight line <em>y</em> = &alpha; + &beta; <em>x</em>,
  *  (where <em>y</em> is the response variable, <em>x</em> is the predictor variable,
  *  &alpha; is the <em>y-intercept</em>, and &beta; is the <em>slope</em>)
@@ -31,7 +31,7 @@ public class LinearRegression {
     private final double svar0, svar1;
 
     /**
-     * Performs a linear regression on the data points {@code (y[i], x[i])}.
+     * Performs a linear regression on the charrey.data points {@code (y[i], x[i])}.
      *
      * @param  x the values of the predictor variable
      * @param  y the corresponding values of the response variable

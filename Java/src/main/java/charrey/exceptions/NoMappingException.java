@@ -1,7 +1,7 @@
-package exceptions;
+package charrey.exceptions;
 
 /**
- * The type No mapping exception.
+ * Thrown when no isomorphism could be found.
  */
 public class NoMappingException extends Throwable {
 }

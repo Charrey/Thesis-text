@@ -1,9 +1,9 @@
-package util;
+package charrey.util;
 
-import data.PartialMapping;
-import data.graph.HierarchyGraph;
-import data.graph.Label;
-import data.graph.Vertex;
+import charrey.data.PartialMapping;
+import charrey.graph.HierarchyGraph;
+import charrey.graph.Label;
+import charrey.graph.Vertex;
 import org.apache.batik.swing.JSVGCanvas;
 
 import javax.swing.*;
@@ -72,6 +72,11 @@ public class Util {
         writeToFile(sb.toString(), svgFile);
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
             Desktop.getDesktop().browse(svgFile.toUri());
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -1,10 +1,10 @@
-package writer;
+package charrey.writer;
 
-import data.graph.HierarchyGraph;
-import data.graph.Label;
-import data.graph.Vertex;
-import util.Labels;
-import util.Util;
+import charrey.graph.HierarchyGraph;
+import charrey.graph.Label;
+import charrey.graph.Vertex;
+import charrey.util.Labels;
+import charrey.util.Util;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -40,8 +40,6 @@ public class Writer {
         return "graph_" + filenameCounter++ + ".graphml";
     }
 
-
-
     private static Map<HierarchyGraph, String> seen = new HashMap<>();
     private static Map<HierarchyGraph, String> globalNameMap = new HashMap<>();
 
@@ -58,17 +56,17 @@ public class Writer {
         StringBuilder sb = new StringBuilder(getPrefix(globalNameMap.getOrDefault(graph, "exportedGraph")));
         for (Map.Entry<Vertex, HierarchyGraph> entry : graph.getHierarchy().entrySet()) {
             if (seen.containsKey(entry.getValue())) {
-                sb.append("\t\t<node id=\"n" + entry.getKey().getID() + "\">" + getLabels(entry.getKey()) + "<data key=\"graphref\">" + seen.get(entry.getValue()) + "</data></node>\n");
+                sb.append("\t\t<node id=\"n" + entry.getKey().getID() + "\">" + getLabels(entry.getKey()) + "<charrey.data key=\"graphref\">" + seen.get(entry.getValue()) + "</charrey.data></node>\n");
             } else {
                 Export subExport = export(entry.getValue(), false, null);
                 res.putAll(subExport.subFiles);
                 seen.put(entry.getValue(), subExport.mainFile);
-                sb.append("\t\t<node id=\"n" + entry.getKey().getID() + "\">" + getLabels(entry.getKey()) + "<data key=\"graphref\">" + subExport.mainFile + "</data></node>\n");
+                sb.append("\t\t<node id=\"n" + entry.getKey().getID() + "\">" + getLabels(entry.getKey()) + "<charrey.data key=\"graphref\">" + subExport.mainFile + "</charrey.data></node>\n");
             }
 
         }
         for (Map.Entry<Vertex, Vertex> entry : graph.getPortMapping().entrySet()) {
-            sb.append("\t\t<node id=\"n" + entry.getKey().getID() + "\">" + getLabels(entry.getKey()) + "<data key=\"noderef\">n" + entry.getValue().getID() + "</data></node>\n");
+            sb.append("\t\t<node id=\"n" + entry.getKey().getID() + "\">" + getLabels(entry.getKey()) + "<charrey.data key=\"noderef\">n" + entry.getValue().getID() + "</charrey.data></node>\n");
         }
         for (Vertex vertex : graph.getVertices()) {
             if (graph.getPortMapping().containsKey(vertex) || graph.getHierarchy().containsKey(vertex)) {
@@ -97,7 +95,7 @@ public class Writer {
     private static String getLabels(Vertex key) {
         StringBuilder sb = new StringBuilder();
         for (Label label : key.getLabels()) {
-            sb.append("<data key=\"label\">" + Labels.write(label) + "</data>");
+            sb.append("<charrey.data key=\"label\">" + Labels.write(label) + "</charrey.data>");
         }
         return sb.toString();
     }

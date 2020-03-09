@@ -1,9 +1,9 @@
-package data.patterns;
+package charrey.data.patterns;
 
-import data.graph.HierarchyGraph;
-import data.graph.Label;
-import data.graph.Vertex;
-import data.graph.Patterns;
+import charrey.graph.HierarchyGraph;
+import charrey.graph.Label;
+import charrey.graph.Vertex;
+import charrey.graph.generator.SubgraphGenerator;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,12 +18,12 @@ public class Switch {
 
     private Map<Vertex, Map<Vertex, Vertex>> connections = new HashMap<>();
 
-    public void addOption(Patterns.IntConnection... connections) {
-        Set<Patterns.NodeConnection> option = Arrays.stream(connections)
-                .map((Function<Patterns.IntConnection, Patterns.NodeConnection>) x -> new Patterns.NodeConnection(ports.computeIfAbsent(x.from, y -> graph.addVertex(Label.SWITCH)), ports.computeIfAbsent(x.to, y -> graph.addVertex(Label.SWITCH))))
+    public void addOption(SubgraphGenerator.IntConnection... connections) {
+        Set<SubgraphGenerator.NodeConnection> option = Arrays.stream(connections)
+                .map((Function<SubgraphGenerator.IntConnection, SubgraphGenerator.NodeConnection>) x -> new SubgraphGenerator.NodeConnection(ports.computeIfAbsent(x.from, y -> graph.addVertex(Label.SWITCH)), ports.computeIfAbsent(x.to, y -> graph.addVertex(Label.SWITCH))))
                 .collect(Collectors.toSet());
         Vertex optionNode = graph.addVertex(Label.OPTION);
-        for (Patterns.NodeConnection connection : option) {
+        for (SubgraphGenerator.NodeConnection connection : option) {
             this.connections.computeIfAbsent(connection.from, x -> new HashMap<>());
             Vertex flowTo;
             if (!this.connections.get(connection.from).containsKey(connection.to)) {
