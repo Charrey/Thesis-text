@@ -1,4 +1,4 @@
-\documentclass[12pt, oneside]{article}
+\documentclass[12pt, oneside]{report}
 \usepackage{amsmath}
 \usepackage{datetime}
 \usepackage{todonotes}
@@ -9,9 +9,15 @@
 \usepackage[export]{adjustbox}
 \usepackage{tikz}
 \usepackage{footnote}
+\usepackage{enumitem}
 \usetikzlibrary{tikzmark}
+\usepackage{parskip}
 \usepackage{amsthm}
 \usepackage{listings}
+\usepackage{mdframed}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{subcaption}
+
 
 \usepackage{adjustbox}
 \usepackage[backend=biber, style=bibstyle/lncs]{biblatex}
@@ -19,7 +25,8 @@
 \renewcommand{\familydefault}{\sfdefault}
 \interfootnotelinepenalty=10000
 \usetikzlibrary{arrows.meta}
-\usetikzlibrary{arrows, decorations.markings}
+\usetikzlibrary{arrows, decorations.markings, shapes.geometric}
+
 \tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position
    1 with {\arrow[semithick]{Triangle[open,length=3mm,width=5mm]}}},
    double distance=2.4pt, shorten >= 8pt,
@@ -34,13 +41,136 @@
 \theoremstyle{indented}
 \newtheorem{defn}[thm]{Definition}
 
-\title{FPGA-on-FPGA emulation}
+
+
+
+\newcommand\diag[4]{%
+  \multicolumn{1}{p{#2}|}{\hskip-\tabcolsep
+  $\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,inner sep=#1]
+  \path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+  \node[minimum width={#2+2\tabcolsep},minimum height=\baselineskip+\extrarowheight] (box) {};
+  \draw (box.south west) -- (box.north east);
+  \node[anchor=south west] at (box.south west) {#3};
+  \node[anchor=north east] at (box.north east) {#4};
+ \end{tikzpicture}}$\hskip-\tabcolsep}}
+
+\newenvironment{important}[1][]{%
+   \begin{mdframed}[%
+      backgroundcolor={red!15}, hidealllines=true,
+      skipabove=0.7\baselineskip, skipbelow=0.7\baselineskip,
+      splitbottomskip=2pt, splittopskip=4pt, #1]%
+   \makebox[0pt]{% ignore the withd of !
+      \smash{% ignor the height of !
+         \fontsize{32pt}{32pt}\selectfont% make the ! bigger
+         \hspace*{-19pt}% move ! to the left
+         \raisebox{-2pt}{% move ! up a little
+            {\color{red!70!black}\sffamily\bfseries !}% type the bold red !
+         }%
+      }%
+   }%
+}{\end{mdframed}}
+
+% Upload fonts and set font families and default
+\usepackage{fontspec}
+\setromanfont[Ligatures=TeX]{Arial}
+\setsansfont[BoldFont=arialnarrowbd.ttf]{arialnarrow.ttf}
+\renewcommand{\familydefault}{\rmdefault}
+
+% Set fonts for chapter, section and subsection
+\usepackage{titlesec}
+\titleformat{\chapter}{\huge\sffamily\uppercase}{\thechapter}{1em}{}
+
+\titleformat{\section}{\normalsize\rmfamily\bfseries}{\thesection}{1em}{}
+
+\titleformat{\subsection}{\normalsize\rmfamily}{\thesubsection}{1em}{}
+
+% Set fonts for in table of contents
+\renewcommand{\contentsname}{\uppercase{\sffamily Contents}}
+
+
+%
+% These commands need to be defined in order to produce a correct and personalized document
+%
+\newcommand{\doctitle}{FPGA-on-FPGA emulation using node disjoint subgraph homeomorphism}
+\newcommand{\docsubtitle}{MSc Thesis}
+
+\newcommand{\me}{Pim van Leeuwen}
+\newcommand{\studentcode}{s1602772}
+\newcommand{\university}{University of Twente}
+\newcommand{\school}{EEMCS}
+\newcommand{\department}{Formal Methods and Tools}
+
+\newcommand{\supervisor}{dr. W. Kuijper}
+\newcommand{\cosupervisor}{dr. ir. R. Langerak}
+\newcommand{\cocosupervisor}{H.H. Folmer MSc.}
+\newcommand{\keywords}{Important, comma, separated, keywords, applicable, to, your, thesis}
+\newcommand{\version}{0.1 version}
+\newcommand{\monthYear}{November 2020}
+\newcommand{\Year}{2020}
+\newcommand{\signatureDate}{Month Day, Year}
+
+\author{\me}
+
+
+
+
+
+\title{FPGA-on-FPGA emulation using node disjoint subgraph homeomorphism}
 \author{Pim van Leeuwen}
 \date{\today}
 
 \begin{document}
 
-\maketitle
+%\maketitle
+
+\begin{titlepage}
+\headheight = 57pt
+\footskip = 5pt
+\headsep = 0pt
+
+
+{\begin{Large}
+\university\\
+\end{Large} }
+\school\\
+\department\\
+
+\vspace*{5 cm}
+
+
+
+\begin{Large}
+\textbf{\doctitle}\\
+\end{Large}
+\docsubtitle\\
+\me \quad (\studentcode)\\
+
+\begin{flushright}
+\textbf{Technical Supervisor}\\ \supervisor\\
+\textbf{Academic Supervisors}\\\cosupervisor\\
+\cocosupervisor
+\end{flushright}
+
+\vspace*{3cm}
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.5\linewidth]{images/utwente.png}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.4\linewidth]{images/nedap.png}
+\end{subfigure}
+\end{figure}
+
+
+
+
+
+\vfill
+\end{titlepage}
+
 
 
 
@@ -52,15 +182,16 @@ FPGAs allow reconfiguration of its logic at any point after production. The resu
 \tableofcontents
 \include{sections/Introduction/Introduction}
 \include{sections/Background/Background}
+\include{sections/Objectives/Objectives}
 \include{sections/Models/Models}
-%\include{sections/Preliminaries/Preliminaries}
 \include{sections/Algorithm/Algorithm}
+\include{sections/Pruning/Pruning}
+\include{sections/UseCase/UseCase}
 \include{sections/Experiments/Experiments}
 \include{sections/Software/Software}
 \include{sections/Conclusion/Conclusion}
 \include{sections/Discussion/Discussion}
 \include{sections/FutureResearch/FutureResearch}
-
 
 \begin{appendices}
 \section{History of subgraph isomorphism algorithms}

@@ -1,0 +1,30 @@
+\ifglsentryexists{fpga}{}%
+{%
+\gls@defglossaryentry{fpga}%
+{%
+name={Field Programmable Gate Array},%
+sort={Field Programmable Gate Array},%
+type={main},%
+first={Field Programmable Gate Array},%
+firstplural={Field Programmable Gate Arrays},%
+text={Field Programmable Gate Array},%
+plural={Field Programmable Gate Arrays},%
+description={Is a mark up language specially suited for scientific documents},%
+descriptionplural={Is a mark up language specially suited for scientific documents},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%

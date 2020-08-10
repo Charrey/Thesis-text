@@ -1,0 +1,16 @@
+\chapter{Objectives}
+\label{sec:Objectives}
+This research entails the discovery of how to emulate a virtual FPGA on a concrete FPGA. To this purpose, we have established the following research question:
+
+Given...
+\begin{itemize}
+    \item a graph specification of the structural layout of a virtual FPGA $A$,
+    \item a graph specification of the structural layout of a concrete FPGA $B$,
+\end{itemize}{}
+how do you assemble a linear\footnote{i.e. a numeric constant $c$ exist such that the number of instructions required in the execution of $f$ is less than $c * (\text{the number of components of the virtual FPGA})$} function $f$ such that for any representative model of a program $x$ for model A, $f(x)$ is a representative model of a program for model B that is semantically equivalent?
+\section*{Subquestion 1}
+How do the computational- and space requirements of the generation (not execution) of $f$ scale with the size of FPGAs A and B?
+\section*{Subquestion 2}
+How much wiring and how many components does the concrete FPGA need for emulation of a virtual FPGA of complexity $x$? Is this practical for use in education?
+\section*{Expected outcomes}
+We expect an algorithm and an implementation of that algorithm that, given two FPGA models, generates a function that translates a model of an FPGA program with compatibility with one FPGA model to a model of an FPGA program with compatibility with the other. Furthermore, we include specifications on how to model FPGA models for this purpose. 

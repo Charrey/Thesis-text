@@ -1,4 +1,4 @@
-\section{Background}
+\chapter{Background}
 \input{sections/Background/FPGAs/FPGAs}
 \input{sections/Background/SimuEmu/SimuEmu}
 \input{sections/Background/PathSubIso/PathSubIso}

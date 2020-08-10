@@ -10,6 +10,8 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.HashMap;
@@ -111,6 +113,20 @@ public class Writer {
             }  finally {
                 writer.close();
                 }
+            }
+        }
+
+        public static void writeToFile(String toWrite, Path path) throws IOException {
+            Util.makeDirectories(path.getParent());
+            java.io.Writer writer = null;
+            try {
+                if (!Files.exists(path)) {Files.createFile(path);}
+                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path.toRealPath().toString()), StandardCharsets.UTF_8));
+                writer.write(toWrite);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                writer.close();
             }
         }
 

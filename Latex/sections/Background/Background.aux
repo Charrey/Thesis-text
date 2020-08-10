@@ -1,41 +1,59 @@
 \relax 
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces A truth table that shows the result of an XOR operation}}{4}\protected@file@percent }
-\newlabel{fig:truth_table}{{1}{4}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces A Lookup Table (LUT) in which an XOR-operation is configured}}{4}\protected@file@percent }
-\newlabel{fig:lookuptable}{{2}{4}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2}Background}{4}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Field Programmable Gate Arrays}{4}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.1}Lookup tables}{4}\protected@file@percent }
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Traditional representation of a register}}{5}\protected@file@percent }
-\newlabel{fig:register}{{3}{5}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.2}Registers}{5}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.3}Logic Cells}{5}\protected@file@percent }
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces An $n$-input logic cell. $x_k$ and $m$ must be configured for any $0 \leq k \leq n$}}{6}\protected@file@percent }
-\newlabel{fig:logiccell}{{4}{6}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.4}Routing}{6}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.5}Pins}{6}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.6}Compilation}{7}\protected@file@percent }
-\newlabel{sec:compilation}{{2.1.6}{7}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Simulation versus Emulation}{7}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Path subgraph isomorphism}{7}\protected@file@percent }
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Simulation of an FPGA: the programming of the virtual FPGA is reflected in additional input of the actual FPGA. The value of $x$ in the simulation is identical to the configuration of the program to be simulated.}}{8}\protected@file@percent }
-\newlabel{fig:simulation}{{5}{8}}
+\providecommand\zref@newlabel[2]{}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {2}Background}{5}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\addvspace {10\p@ }}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.1}FPGAs}{5}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces The hierarchy of a typical FPGA. A typical FPGA mostly consists of Configurable Logic Blocks (CLBs) and a CLB mostly consists of logic cells. The way logic cells and CLBs are connected may be different for each FPGA architecture.\relax }}{5}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces A truth table that shows the result of an XOR operation\relax }}{6}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:truth_table}{{2.2}{6}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces A Lookup Table (LUT) in which an XOR-operation is configured\relax }}{6}\protected@file@percent }
+\newlabel{fig:lookuptable}{{2.3}{6}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Lookup tables}{6}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Traditional representation of a register. Note that input \textit  {D} and output \textit  {Q} may consist of multiple wires.\relax }}{7}\protected@file@percent }
+\newlabel{fig:register}{{2.4}{7}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Registers}{7}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}Logic cells}{7}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces An $n$-input logic cell. $x_k$ and $m$ must be configured for any $0 \leq k \leq n$\relax }}{8}\protected@file@percent }
+\newlabel{fig:logiccell}{{2.5}{8}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.4}Routing}{8}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.5}Pins}{8}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.2}FPGA compilation}{9}\protected@file@percent }
+\newlabel{sec:compilation}{{2.2}{9}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Simulation of an FPGA: the programming of the virtual FPGA is reflected in additional input of the actual FPGA. The value of $x$ in the simulation is identical to the configuration of the program to be simulated.\relax }}{10}\protected@file@percent }
+\newlabel{fig:simulation}{{2.6}{10}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Literature}{10}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Emulation of an FPGA: the programming of the virtual FPGA is reflected in the programming of the actual FPGA. In this example, $y_i$ takes the value of $x_i$. A less direct mapping could occur in emulation when, for example, a MUX is emulated by a LUT, or the inputs have a different permutation.\relax }}{11}\protected@file@percent }
+\newlabel{fig:emulation}{{2.7}{11}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.3}FPGA simulation}{11}\protected@file@percent }
+\newlabel{sec:simulation}{{2.3}{11}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.4}FPGA emulation}{11}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.5}Graph theory}{12}\protected@file@percent }
+\newlabel{def:graph}{{2.5.1}{12}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Two graphs $G_1$ and $G_2$. $G_1$ is (node disjoint) subgraph homeomorphic to $G_2$ with the mapping $\{(a, \epsilon ), (b, \eta ), (c, \delta ), (d, \beta ), (a \to b, \epsilon \to \eta ), (c \to a, \delta \to \epsilon ), (c \to b, \delta \to \zeta \to \eta ), (d \to c, \beta \to \gamma \to \delta )\}$. Other homeomorphisms exist as well.\relax }}{13}\protected@file@percent }
+\newlabel{def:pathsubgraphisomorphism}{{2.5.2}{13}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Literature}{13}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Subgraph isomorhism}{14}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Subgraph Homeomorphism}{17}\protected@file@percent }
 \@setckpt{sections/Background/Background}{
-\setcounter{page}{9}
+\setcounter{page}{18}
 \setcounter{equation}{0}
 \setcounter{enumi}{0}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
 \setcounter{enumiv}{0}
-\setcounter{footnote}{0}
+\setcounter{footnote}{4}
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
-\setcounter{section}{2}
-\setcounter{subsection}{3}
+\setcounter{chapter}{2}
+\setcounter{section}{5}
+\setcounter{subsection}{1}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{5}
+\setcounter{figure}{8}
 \setcounter{table}{0}
 \setcounter{parentequation}{0}
 \setcounter{@todonotes@numberoftodonotes}{0}
@@ -43,6 +61,19 @@
 \setcounter{@ppsavesec}{0}
 \setcounter{@ppsaveapp}{0}
 \setcounter{lstnumber}{1}
+\setcounter{mdf@globalstyle@cnt}{0}
+\setcounter{mdfcountframes}{0}
+\setcounter{mdf@env@i}{0}
+\setcounter{mdf@env@ii}{0}
+\setcounter{mdf@zref@counter}{0}
+\setcounter{AlgoLine}{0}
+\setcounter{algocfline}{0}
+\setcounter{algocfproc}{0}
+\setcounter{algocf}{0}
+\setcounter{caption@flags}{0}
+\setcounter{continuedfloat}{0}
+\setcounter{subfigure}{0}
+\setcounter{subtable}{0}
 \setcounter{tabx@nest}{0}
 \setcounter{listtotal}{0}
 \setcounter{listcount}{0}
@@ -52,7 +83,7 @@
 \setcounter{citetotal}{0}
 \setcounter{multicitecount}{0}
 \setcounter{multicitetotal}{0}
-\setcounter{instcount}{4}
+\setcounter{instcount}{67}
 \setcounter{maxnames}{3}
 \setcounter{minnames}{1}
 \setcounter{maxitems}{3}
@@ -66,7 +97,7 @@
 \setcounter{refsegment}{0}
 \setcounter{maxextratitle}{0}
 \setcounter{maxextratitleyear}{0}
-\setcounter{maxextraname}{0}
+\setcounter{maxextraname}{2}
 \setcounter{maxextradate}{0}
 \setcounter{maxextraalpha}{0}
 \setcounter{abbrvpenalty}{50}
@@ -156,6 +187,6 @@
 \setcounter{smartand}{1}
 \setcounter{bbx:relatedcount}{0}
 \setcounter{bbx:relatedtotal}{0}
-\setcounter{thm}{0}
+\setcounter{thm}{2}
 \setcounter{lstlisting}{0}
 }

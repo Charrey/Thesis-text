@@ -292,7 +292,7 @@ public class FPGAGenerator {
             }
         }
         if (write) {
-            Writer.export(graph, true, Paths.get("src/test/resources/graphml/LUT"));
+            Writer.export(graph, true, Paths.get("src/test/resources/graphml/Snake"));
         }
         return graph;
     }
@@ -314,6 +314,9 @@ public class FPGAGenerator {
             }
         }
         recursiveRemove(res, x -> x.getLabels().contains(Label.REMOVE));
+        if (write) {
+            Writer.export(res, true, Paths.get("src/test/resources/graphml/LutTree"));
+        }
         return res;
 
     }
@@ -414,7 +417,7 @@ public class FPGAGenerator {
      * @param wireCount the wire count
      * @return the hierarchy graph
      */
-    public static HierarchyGraph makeRegisterEmulator(int wireCount) {
+    public static HierarchyGraph makeRegisterEmulator(int wireCount, boolean write) throws IOException {
         HierarchyGraph graph = new HierarchyGraph();
         Register register = register(wireCount, true, false, false, false, false);
         Vertex Registercomponent = graph.addComponent(register.hierarchyGraph, "register");
@@ -430,6 +433,9 @@ public class FPGAGenerator {
         for (int i = 0; i < wireCount; i++) {
             graph.addEdge(pins.get(i+1), graph.addPort(register.inputs.get(i), Registercomponent));
             graph.addEdge(pins.get(i+wireCount+1), graph.addPort(register.outputs.get(i), Registercomponent));
+        }
+        if (write) {
+            Writer.export(graph, true, Paths.get("src/test/resources/graphml/RegisterEmulator"));
         }
         return graph;
 

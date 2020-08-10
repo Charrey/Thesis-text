@@ -1,5 +1,208 @@
-\section{Algorithm}
-\subsection{State space storage}
-\subsection{State space exploration}
-\subsection{Hierarchy usage}
-\subsection{Defining $f$}
+\chapter{Algorithm}
+
+\tikzstyle{decision} = [diamond, align=center, draw=black]
+
+\tikzstyle{block} = [rectangle, minimum width=2.5cm, minimum height=1cm, align=left, draw=black]
+
+
+\begin{figure}
+\centering
+%\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[
+    triangle/.style = {regular polygon, regular polygon sides=3 }
+]
+	\pgfmathsetmacro{\px}{0}
+	\pgfmathsetmacro{\py}{0}
+	\pgfmathsetmacro{\tx}{0}
+	\pgfmathsetmacro{\ty}{-4}
+	\pgfmathsetmacro{\treex}{10}
+	\pgfmathsetmacro{\treey}{0}
+	
+\node [circle, draw, fill=blue!20] (a) at (\px, \py) [minimum size=0.5cm] {};	
+\node [rectangle, draw, fill=blue!20] (b) at (\px, \py-2) [minimum size=0.5cm] {};
+\node (c) at (\px, \py-3) {Pattern Graph};
+\draw (a)--(b);
+
+
+\node [circle, draw, fill=red!20] (d) at (\tx, \ty) [minimum size=0.5cm] {};	
+\node [rectangle, draw, fill=red!20] (e) at (\tx, \ty-2) [minimum size=0.5cm] {};
+\node [triangle, draw, fill=red!20] (f) at (\tx+1.732, \ty-1) [minimum size=0.5cm] {};
+\node (g) at (\tx, \ty-3) {Target Graph};
+\draw (d)--(e);
+\draw (d)--(f);
+\draw (e)--(f);
+
+\draw (\treex, \treey)--(\treex, \treey-2);
+\draw (\treex, \treey)--(\treex-3.5, \treey-2);
+\draw (\treex, \treey)--(\treex+3.5, \treey-2);
+\node [circle, draw, fill=blue!20] at (\treex-3.8, \treey-2.5) [minimum size=0.5cm] {};
+\node [circle, draw, fill=red!20] at (\treex-3.2, \treey-2.5) [minimum size=0.5cm] {};
+
+\node [circle, draw, fill=blue!20] at (\treex-0.3, \treey-2.5) [minimum size=0.5cm] {};
+\node [triangle, draw, fill=red!20] at (\treex+0.3, \treey-2.6) [minimum size=0.5cm] {};
+
+\node [circle, draw, fill=blue!20] at (\treex+3.2, \treey-2.5) [minimum size=0.5cm] {};
+\node [rectangle, draw, fill=red!20] at (\treex+3.8, \treey-2.5) [minimum size=0.5cm] {};
+
+
+\draw (\treex-3.5, -3)--(\treex-2.625, \treey-4.5);
+\draw (\treex-3.5, -3)--(\treex-4.375, \treey-4.5);
+\draw (\treex, -3)--(\treex-0.875, \treey-4.5);
+\draw (\treex, -3)--(\treex+0.875, \treey-4.5);
+\draw (\treex+3.5, -3)--(\treex+2.625, \treey-4.5);
+\draw (\treex+3.5, -3)--(\treex+4.375, \treey-4.5);
+
+\node [rectangle, draw, fill=red!20] at (\treex-4.075, \treey-5) [minimum size=0.5cm] {};
+\node [rectangle, draw, fill=blue!20] at (\treex-4.675, \treey-5) [minimum size=0.5cm] {};
+\node [rectangle, fill=green] at (\treex-4.45, \treey-5.7) [minimum width=1.8cm, minimum height=0.3cm]{};
+
+\node [rectangle, draw, fill=blue!20] at (\treex-2.925, \treey-5) [minimum size=0.5cm] {};
+\node [triangle, draw, fill=red!20] at (\treex-2.325, \treey-5.1) [minimum size=0.5cm] {};
+
+\node [rectangle, draw, fill=blue!20] at (\treex-1.175, \treey-5) [minimum size=0.5cm] {};
+\node [circle, draw, fill=red!20] at (\treex-0.575, \treey-5) [minimum size=0.5cm] {};
+
+\node [triangle, draw, fill=red!20] at (\treex+1.175, \treey-5.1) [minimum size=0.5cm] {};
+\node [rectangle, draw, fill=blue!20] at (\treex+0.575, \treey-5) [minimum size=0.5cm] {};
+
+\node [rectangle, draw, fill=red!20] at (\treex+2.925, \treey-5) [minimum size=0.5cm] {};
+\node [rectangle, draw, fill=blue!20] at (\treex+2.325, \treey-5) [minimum size=0.5cm] {};
+
+\node [circle, draw, fill=red!20] at (\treex+4.675, \treey-5) [minimum size=0.5cm] {};
+\node [rectangle, draw, fill=blue!20] at (\treex+4.075, \treey-5) [minimum size=0.5cm] {};
+
+\node at (\treex, \treey-6) {Search Space Tree};
+\end{tikzpicture}
+%}
+\caption{State space of subgraph isomorphism search algorithms. Vertices with the same shape may be matched to each other, while vertices with different shapes have incompatible labels. The green bar denotes the only search path that leads to a successful subgraph isomorphism. Source: \cite{RIalgorithm}}
+\label{fig:statespace}
+\end{figure}
+
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\textbf{Inputs: } the current matching state $s$, the current node compatibility matrix $M$, the current independent path matrix $R$\\
+\textbf{Outputs: } \textit{found}, indicating whether a valid homeomorphism has been found.\\
+\If{$s$ is dead state} {
+	\Return false\;
+} \ElseIf {$s$ is complete} {
+	\Return true\;
+}
+
+$found \longleftarrow false$
+
+ initialization\;
+ \While{$!found \land \exists$ valid node/edge-path mapping pair}{
+  $m \longleftarrow GetNextNodePair()$\tcp*[h]{$m \longleftarrow GetNextEdgePathPair()$}\;
+  $s' \longleftarrow BackupState(s)$\; 
+  $NodeMap_s \longleftarrow NodeMap_s \cup \{m\}$\tcp*[h]{$EdegePathMap_s \longleftarrow EdgePathMap_s \cup \{m\}$}\;
+  $Refine(M, R)$\;
+  $found \longleftarrow ndSHD2(s, M, R)$\;
+  \If{found} {
+  	\Return true\;
+  }
+  $s \longleftarrow RecoverState(s')$\;
+ }
+ \Return false\;
+ \caption{ndSHD2}
+ \label{algorithm:ndSHD2}
+\end{algorithm}
+
+\section{Baseline: ndSHD2}
+In our research we will extend existing work on node disjoint subgraph isomorphism. In the literature we found two existing concrete algorithms. We choose to adapt Xiao's algorithm ndSHD2\cite{XIAONODEDISJOINT} as baseline over Lingas \cite{LINGAS2009464} because it includes methods for vertex-on-vertex mapping. This saves valuable time research vertex-on-vertex mapping strategies. We will adapt this algorithm to compute paths on-the-fly instead of beforehand to avoid the exponential space requirement.
+
+ndSHD Is shown in Algorithm \ref{algorithm:ndSHD2}. It is a form of depth first search in a partial mapping search space that attempts- and backtracks vertex-on-vertex mappings and edge-on-path mappings. An example of such a search space is shown in Figure \ref{fig:statespace}. Whenever a partial match is extended with a vertex-on-vertex mapping or with an edge-on-path mapping the search space is refined using a pruning strategy implemented by the $Refine(M,R)$ call. This method filters out future path mappings that have an already mapped target graph vertex as intermediate vertex.
+
+
+In our literature study, we found that the core of many subgraph isomorphism algorithms\footnote{Ullman, VF, VF2, VF2+, VF2++, UI, Fast-ON, L2G, Cheng, QuickSI, GraphQL, ILF, TurboISO, Glassgow, CLF-Match, RI, RI-DS, McGregor, LAD, PathLAD} is a form of DFS state space exploration as well where the states consist of partial vertex-to-vertex mappings. Xiao's algorithm's seach is extended with a partial mapping from $E_{source}$ to the path set of $G_{target}$.
+
+
+The algorithm leaves some parameters open that affect the order in which search states are visited:
+
+
+\begin{itemize}
+\item The order in which source- \textbf{and} target vertices are retrieved with $GetNextNodePair()$,
+\item when $GetNextNodePair()$ should be called and when $GetNextEdgePathPair()$ should be called and
+\item the order in which edges- \textbf{and} paths are retrieved with $GetNextEdgePathPair()$.
+\end{itemize}
+
+We fill in these parameters based on observations from subgraph isomorphism algorithms.
+
+\section{Parameters}
+
+\subsubsection{When to map vertices and when to map edges / ordering of edges}
+The paper does conclude that the performance was better when edges were mapped as early in the process as possible (immediately after both vertices of the edge have been mapped). We will use this strategy as well. In case of ties we choose the edge that connects with the earliest matched vertex in the search process.
+
+\subsubsection{The ordering of source graph vertices}
+To get a viable vertex ordering for subgraph homeomorphism we may we use the most optimal vertex algorithm from subgraph isomorphism. From performance comparisons we extract that the best performing algorithm that adheres to partial mapping search for subgraph isomorphism is RI-DS. In our literature study, we found no evidence a faster algorithm exists. 
+
+To describe the ordering process of RI-DS, let us provide a few definitions:
+
+
+\begin{defn}[predecessors and successors]
+Given two graphs $G=(V, E, L)$ and some vertex $v \in V$, their predecessors and successors are defined as follows:
+
+$succ(v) := {v' \in V . (v, v') \in E}$
+
+$pred(v) := {v' \in V . (v', v) \in E}$
+ 
+\end{defn}
+
+\begin{defn}[E for vertices]
+If some $v\in V$, then $E(v):= succ(v) \cup pred(v)$.
+\end{defn}
+
+\begin{defn}[E for sets of vertices]
+If some $S\subseteq V$, then $E(S):=\bigcup\limits_{v \in S} E(v)$.
+\end{defn}
+
+
+The algorithm RI-DS obtains a variable ordering using a greedy algorithm called ``GreatestConstrainedFirst". This algorithm starts with an ordering $\mu$ containing only the source graph vertex with the highest degree, i.e. $v\in V_1$ where $|E(v)|$ is highest. Iteratively, it chooses the next vertex to be explored in partial mapping search. It selects each vertex $v$ of which $|E(v)\cap \mu|$ is greatest. If multiple vertices have the greatest value, ties are broken by choosing the vertex for which $|E(E(v)\setminus \mu)\cap \mu|$ is greatest. If multiple vertices remain that have the same value, ties are broken by choosing the vertex for which $|E(E(v)\setminus \mu)\setminus \mu|$ is greatest. Any remaining ties are broken randomly.
+
+The result of this ordering is that consequent vertices have many edges with vertices earlier in the ordering. Xiao established that matching edges earlier results in a faster algorithm. Using an order that allows early placement of edges such as GreatestConstrainedFirst should accoring to Xiao result in fast execution.
+
+\subsubsection{The ordering of target graph vertices}
+We found one subgraph isomorphism algorithm that uses a target graph vertex order that is \textit{not} arbitrary, being Glasgow\cite{McCreesh2015}. In this algorithm, target graph vertices with higher degree are prioritized. We will use the same target graph vertex ordering.
+\todo{coordinate system matching}
+
+\subsubsection{The ordering of target graph paths}
+In subgraph isomorphism, edge-on-edge mappings are trivial from vertex-on-vertex mappings. However, in subgraph homeomorphism a source graph edge may be mapped on many target graph path candidates (all starting- and ending at the same two vertices). Therefore, we cannot extract the order in which to try out paths from subgraph isomorphism. Instead, we implemented different methods to iterate over paths to try:
+
+\begin{itemize}
+\item \textbf{K-path -} Try all paths from shortest to longest, avoiding unusable vertices in the existing partial mapping.
+\item \textbf{DFS -} Search for paths using depth first search from the start vertex, choosing arbitrary directions at each vertex and avoiding unusable vertices in the existing partial mapping.
+\item \textbf{Greedy DFS -} Search for paths using greedy depth first search, choosing the direction closest to the goal vertex first and avoiding unusable vertices in the existing partial mapping.
+\item \textbf{Control point -} Select increasingly many `control points' (from $0$ to $|V|$) randomly in the target graph that must be in the path, then connecting them by a shortest path algorithm that avoids unusable vertices in the existing partial mapping.\footnote{To avoid duplicate paths, any path that could have been generated with fewer control points is skipped. Furthermore, any control point configuration where shifting some control point towards the goal vertex results in the same path is skipped.}
+\end{itemize}
+
+These methods provide for each two vertices in a graph each path connecting them exactly once. The space requirements for each method are shown in Table \ref{tab:iterator-spacerequirements}.
+
+\begin{table}[]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Path iterator} & \textbf{Space complexity} \\ \hline
+K-Path                 & $O(|V|^2)$                \\ \hline
+DFS                    & $O(|V|)$                  \\ \hline
+Greedy DFS             & $O(|V|^2)$                \\ \hline
+Control point          & $O(|V|)$                  \\ \hline
+\end{tabular}
+\caption{Worst-case space complexity of each path iteration strategy}
+\label{tab:iterator-spacerequirements}
+\end{table}
+
+\section{Optimisations}
+In addition to fixating some parameters of the ndSHD2 algorithm, we implement some optimisations (some of which from the domain of subgraph isomorphism) and individually evaluate them.
+
+\subsection{Refusing long paths}
+Since path iterators may provide any valid path to map an edge to during the matching process, they may also provide paths that take up unnecessarily many resources. Specifically, they take up so many resources that with a subset of the vertices and edges of that path, a shorter path can be formed. Formally, some path $p$ is ``unnecessarily long" iff:
+
+
+$\exists p' \in P . first(p') = first(p) \land last(p') = last(p) \land intermediate(p') \subset intermediate(p)$
+
+With this optimisation enabled, such paths are skipped by path iterators.
+
+\subsection{Runtime Pruning}
+Some subgraph isomorphism algorithms\cite{Cordella2004, McCreesh2015} prune the search space during the search using some detection method of dead search paths. In Chapter \ref{chapter:pruning} we will elaborate on the different techniques we implement for subgraph homeomorphism.
+
+

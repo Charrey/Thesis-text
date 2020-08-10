@@ -1,3 +1,19 @@
+@article{wolf2016yosys,
+  title={{Y}osys {O}pen {SY}nthesis {S}uite},
+  author={Wolf, Clifford},
+  year={2016}
+}
+
+@techreport{Brayton,
+    Author = {Brayton, Robert K. and Chiodo, M. and Hojati, R. and Kam, T. and Kodandapani, K. and Kurshan, R.P. and Malik, S. and Sangiovanni-Vincentelli, Alberto L. and Sentovich, E.M. and Shiple, T. and Singh, K.J. and Wang, H.Y.},
+    Title = {{BLIF-MV}: An Interchange Format for Design Verification and Synthesis},
+    Institution = {EECS Department, University of California, Berkeley},
+    Year = {1991},
+    Month = {11},
+    URL = {http://www2.eecs.berkeley.edu/Pubs/TechRpts/1991/1861.html},
+    Number = {UCB/ERL M91/97}
+}
+
 @ARTICLE{Sangiovanni-Vincentelli19931057,
 author={Sangiovanni-Vincentelli, A.},
 title={Synthesis Methods for Field Programmable Gate Arrays},
@@ -1396,3 +1412,111 @@ day={26}
     title = {Graph Markup Language (GraphML)},
     year = {2004}
 }
+
+@article{Karp1975,
+author = {Karp, R. M.},
+title = {On the Computational Complexity of Combinatorial Problems},
+year = {1975},
+issue_date = {January 1975},
+publisher = {Wiley-Interscience},
+address = {USA},
+volume = {5},
+number = {1},
+issn = {0028-3045},
+url = {https://doi.org/10.1002/net.1975.5.1.45},
+doi = {10.1002/net.1975.5.1.45},
+journal = {Netw.},
+month = jan,
+pages = {45–68},
+numpages = {24}
+}
+
+
+@article{FORTUNE1980111,
+title = "The directed subgraph homeomorphism problem",
+journal = "Theoretical Computer Science",
+volume = "10",
+number = "2",
+pages = "111 - 121",
+year = "1980",
+issn = "0304-3975",
+doi = "https://doi.org/10.1016/0304-3975(80)90009-2",
+url = "http://www.sciencedirect.com/science/article/pii/0304397580900092",
+author = "Steven Fortune and John Hopcroft and James Wyllie",
+abstract = "The set of pattern graphs for which the fixed directed subgraph homeomorphism problem is NP-complete is characterized. A polynomial time algorithm is given for the remaining cases. The restricted problem where the input graph is a directed acyclic graph is in polynomial time for all pattern graphs and an algorithm is given."
+}
+
+
+
+
+@article{LINGAS2009464,
+title = "An exact algorithm for subgraph homeomorphism",
+journal = "Journal of Discrete Algorithms",
+volume = "7",
+number = "4",
+pages = "464 - 468",
+year = "2009",
+issn = "1570-8667",
+doi = "https://doi.org/10.1016/j.jda.2008.10.003",
+url = "http://www.sciencedirect.com/science/article/pii/S1570866708000968",
+author = "Andrzej Lingas and Martin Wahlen",
+keywords = "Subgraph homeomorphism, Disjoint paths, Time complexity, Space complexity",
+abstract = "The subgraph homeomorphism problem is to decide if there is an injective mapping of the vertices of a pattern graph into vertices of a host graph so that the edges of the pattern graph can be mapped into (internally) vertex-disjoint paths in the host graph. The restriction of subgraph homeomorphism where an injective mapping of the vertices of the pattern graph into vertices of the host graph is already given in the input instance is termed fixed-vertex subgraph homeomorphism. We show that fixed-vertex subgraph homeomorphism for a pattern graph on p vertices and a host graph on n vertices can be solved in time 2n−pnO(1) or in time 3n−pnO(1) and polynomial space. In effect, we obtain new non-trivial upper bounds on the time complexity of the problem of finding k vertex-disjoint paths and general subgraph homeomorphism."
+}
+
+
+@InProceedings{XIAONODEDISJOINT,
+author="Xiao, Yanghua
+and Wu, Wentao
+and Wang, Wei
+and He, Zhenying",
+editor="Haritsa, Jayant R.
+and Kotagiri, Ramamohanarao
+and Pudi, Vikram",
+title="Efficient Algorithms for Node Disjoint Subgraph Homeomorphism Determination",
+booktitle="Database Systems for Advanced Applications",
+year="2008",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="452--460",
+abstract="Recently, great efforts have been dedicated to researches on the management of large-scale graph-based data, where node disjoint subgraph homeomorphism relation between graphs has been shown to be more suitable than (sub)graph isomorphism in many cases, especially in those cases where node skipping and node mismatching are desired. However, no efficient algorithm for node disjoint subgraph homeomorphism determination (ndSHD) has been available. In this paper, we propose two computationally efficient ndSHD algorithms based on state spaces searching with backtracking, which employ many heuristics to prune the search spaces. Experimental results on synthetic data sets show that the proposed algorithms are efficient, require relatively little time in most of cases, can scale to large or dense graphs, and can accommodate to more complex fuzzy matching cases.",
+isbn="978-3-540-78568-2"
+}
+
+
+
+@CONFERENCE{Grohe2011479,
+author={Grohe, M. and Kawarabayashi, K.-I. and Marx, D. and Wollan, P.},
+title={Finding topological subgraphs is fixed-parameter tractable},
+journal={Proceedings of the Annual ACM Symposium on Theory of Computing},
+year={2011},
+pages={479-488},
+doi={10.1145/1993636.1993700},
+url={https://www.scopus.com/inward/record.uri?eid=2-s2.0-79959696260&doi=10.1145%2f1993636.1993700&partnerID=40&md5=6e36958dfd5a7b5942408c1f726f0133},
+affiliation={Institut für Informatik, Humboldt-Universität Zu Berlin, Unter den Linden 6, 10099 Berlin, Germany; National Institute of Informatics, 2-1-2 Hitotsubashi, Chiyoda-ku, Tokyo 101-8430, Japan; Department of Computer Science, University of Rome, La Sapienza, Via Salaria 113, Rome, 00198, Italy},
+correspondence_address1={Grohe, M.; Institut für Informatik, Humboldt-Universität Zu Berlin, Unter den Linden 6, 10099 Berlin, Germany; email: grohe@informatik.huberlin.de},
+issn={07378017},
+isbn={9781450306911},
+language={English},
+abbrev_source_title={Proc. Annu. ACM Symp. Theory Comput.},
+document_type={Conference Paper},
+source={Scopus},
+}
+
+
+@inproceedings{LaPaughOptim,
+author = {LaPaugh, Andrea S. and Rivest, Ronald L.},
+title = {The Subgraph Homeomorphism Problem},
+year = {1978},
+isbn = {9781450374378},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.ezproxy2.utwente.nl/10.1145/800133.804330},
+doi = {10.1145/800133.804330},
+booktitle = {Proceedings of the Tenth Annual ACM Symposium on Theory of Computing},
+pages = {40–50},
+numpages = {11},
+location = {San Diego, California, USA},
+series = {STOC ’78}
+}
+

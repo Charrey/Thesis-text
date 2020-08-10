@@ -19,6 +19,332 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{8711459}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=46b639e1e1addba1065aa6ebde8e43af}{%
+           family={{Abulaish}},
+           familyi={A\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=24016774b1d151d976ff2bf8c1f7f9fb}{%
+           family={{Ansari}},
+           familyi={A\bibinitperiod},
+           given={Z.\bibnamedelimi A.},
+           giveni={Z\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=a734486386704814ba13f201e398e143}{%
+           family={{Jahiruddin}},
+           familyi={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{6c79d92e0807a609c4a830c2d7a58340}
+      \strng{fullhash}{6c79d92e0807a609c4a830c2d7a58340}
+      \strng{bibnamehash}{6c79d92e0807a609c4a830c2d7a58340}
+      \strng{authorbibnamehash}{6c79d92e0807a609c4a830c2d7a58340}
+      \strng{authornamehash}{6c79d92e0807a609c4a830c2d7a58340}
+      \strng{authorfullhash}{6c79d92e0807a609c4a830c2d7a58340}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2019 11th International Conference on Communication Systems Networks (COMSNETS)}
+      \field{issn}{2155-2487}
+      \field{month}{1}
+      \field{title}{SubISO: A Scalable and Novel Approach for Subgraph Isomorphism Search in Large Graph}
+      \field{year}{2019}
+      \field{pages}{102\bibrangedash 109}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/COMSNETS.2019.8711459
+      \endverb
+      \keyw{data compression;data handling;data mining;graph theory;query processing;search problems;SubISO;subgraph isomorphism search;data graph;subgraphs;graph compression;subgraph isomorphism finding method;isomorphic invariants;generic subgraph search function;large graphs;query graph;data mining;postponing cartesian products;candidate region exploration;information retrieval;Search problems;Linear programming;Indexes;Computer science;Data mining;Image edge detection;Data models;Data Mining;Graph Mining;Graph Searching;Subgraph Isomorphism}
+    \endentry
+    \entry{Almasri2015}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=861a2b47e8bea2e4f59d317ff481cb0d}{%
+           family={Almasri},
+           familyi={A\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=a33ddb8a494fa054e57432655de9e8ec}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={X.},
+           giveni={X\bibinitperiod}}}%
+        {{hash=7c9da252dc4080c04f537736b8c6f842}{%
+           family={Fedoroff},
+           familyi={F\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{21c9bbf65595475a2f9ac709d70b4d5e}
+      \strng{fullhash}{21c9bbf65595475a2f9ac709d70b4d5e}
+      \strng{bibnamehash}{21c9bbf65595475a2f9ac709d70b4d5e}
+      \strng{authorbibnamehash}{21c9bbf65595475a2f9ac709d70b4d5e}
+      \strng{authornamehash}{21c9bbf65595475a2f9ac709d70b4d5e}
+      \strng{authorfullhash}{21c9bbf65595475a2f9ac709d70b4d5e}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{© 2014 IEEE. The applications of the sub graph isomorphism search are growing with the growing number of areas that model their systems using graphs or networks. Specifically, many biological systems, such as protein interaction networks, molecular structures and protein contact maps, are modeled as graphs. The sub graph isomorphism search is concerned with finding all sub graphs that are isomorphic to a relevant query graph, the existence of such sub graphs can reflect on the characteristics of the modeled system. The most computationally expensive step in the search for isomorphic sub graphs is the backtracking algorithm that traverses the nodes of the target graph. In this paper, we propose a pruning approach that is inspired by the minimum remaining value heuristic that achieves greater scalability over large query and target graphs. Our testing on various biological networks shows that performance enhancement of our approach over existing state-of-the-art approaches varies between 6x and 53x.}
+      \field{booktitle}{IEEE International Conference on Data Mining Workshops, ICDMW}
+      \field{isbn}{9781479942749}
+      \field{number}{January}
+      \field{title}{{Quick mining of isomorphic exact large patterns from large graphs}}
+      \field{volume}{2015-Janua}
+      \field{year}{2015}
+      \field{pages}{517\bibrangedash 524}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/ICDMW.2014.65
+      \endverb
+    \endentry
+    \entry{Battiti2007}{book}{}
+      \name{author}{2}{}{%
+        {{hash=5357d22a35f66802995adc038dfc8885}{%
+           family={Battiti},
+           familyi={B\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=1a3933f33665ba9f3f18dc20a338a03f}{%
+           family={Mascia},
+           familyi={M\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{55e9a1404e9cfc2a7cf5a743262d27a5}
+      \strng{fullhash}{55e9a1404e9cfc2a7cf5a743262d27a5}
+      \strng{bibnamehash}{55e9a1404e9cfc2a7cf5a743262d27a5}
+      \strng{authorbibnamehash}{55e9a1404e9cfc2a7cf5a743262d27a5}
+      \strng{authornamehash}{55e9a1404e9cfc2a7cf5a743262d27a5}
+      \strng{authorfullhash}{55e9a1404e9cfc2a7cf5a743262d27a5}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This work presents an algorithm for the sub-graph isomorphism problem based on a new pruning technique for directed graphs. During the tree search, the method checks if a new association between two vertices is compatible by considering the structure of their local neighborhoods, represented as the number of limited-length paths of different type originating from each vertex. In addition, randomized versions of the algorithms are studied experimentally by deriving their runtime distributions. Finally, algorithm portfolios consisting of multiple instances of the same randomized algorithm are proposed and analyzed. The experimental results on benchmark graphs demonstrate that the new pruning method is competitive w.r.t. recently proposed techniques. Significantly better results are obtained on sparse graphs. Furthermore, even better results are obtained by the portfolios, when both the average and standard deviation of solution times are considered. © Springer-Verlag Berlin Heidelberg 2007.}
+      \field{booktitle}{Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)}
+      \field{isbn}{9783540744450}
+      \field{title}{{An algorithm portfolio for the sub-graph isomorphism problem}}
+      \field{volume}{4638 LNCS}
+      \field{year}{2007}
+      \field{pages}{106\bibrangedash 120}
+      \range{pages}{15}
+    \endentry
+    \entry{6339165}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=c3d0f927190e0434ab2f6eb5343209ed}{%
+           family={{Benz}},
+           familyi={B\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=d7a0c3a88334e298eac62949ba079228}{%
+           family={{Seffrin}},
+           familyi={S\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=de1427dc887df6f46445c58dd6798cbb}{%
+           family={{Huss}},
+           familyi={H\bibinitperiod},
+           given={S.\bibnamedelimi A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{79ba859c1d01843b5fdc17a21e82f5a8}
+      \strng{fullhash}{79ba859c1d01843b5fdc17a21e82f5a8}
+      \strng{bibnamehash}{79ba859c1d01843b5fdc17a21e82f5a8}
+      \strng{authorbibnamehash}{79ba859c1d01843b5fdc17a21e82f5a8}
+      \strng{authornamehash}{79ba859c1d01843b5fdc17a21e82f5a8}
+      \strng{authorfullhash}{79ba859c1d01843b5fdc17a21e82f5a8}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{22nd International Conference on Field Programmable Logic and Applications (FPL)}
+      \field{issn}{1946-1488}
+      \field{month}{8}
+      \field{title}{Bil: A tool-chain for bitstream reverse-engineering}
+      \field{year}{2012}
+      \field{pages}{735\bibrangedash 738}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1109/FPL.2012.6339165
+      \endverb
+      \keyw{field programmable gate arrays;logic design;query processing;reverse engineering;bitstream reverse-engineering;BIL tool-chain;Xilinx FPGA bitstream security;device-specific netlists;database querying;FPGA structure;mapping database;Xilinx design flow;textual device description;resource database;bitfile interpretation library;Tiles;Field programmable gate arrays;Correlation;Databases;Wires;Algorithm design and analysis;Security}
+    \endentry
+    \entry{Bi2016}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=f4c107a739d7769f46e35741f83464e8}{%
+           family={Bi},
+           familyi={B\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=c76b6675a752d46ac98cd049f7d728dc}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=d54334745e5a0b56a24e9d644566f3e4}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={X.},
+           giveni={X\bibinitperiod}}}%
+        {{hash=24b5df9802acece15f6c6437087c9761}{%
+           family={Qin},
+           familyi={Q\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=13414502df57d59c82c59a065c752294}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={W.},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{41e95a581d630e529c921728b5cfcc22}
+      \strng{fullhash}{7563e7b586720c5dc4dfe8123f591687}
+      \strng{bibnamehash}{7563e7b586720c5dc4dfe8123f591687}
+      \strng{authorbibnamehash}{7563e7b586720c5dc4dfe8123f591687}
+      \strng{authornamehash}{41e95a581d630e529c921728b5cfcc22}
+      \strng{authorfullhash}{7563e7b586720c5dc4dfe8123f591687}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{© 2016 ACM. In this paper, we study the problem of subgraph matching that extracts all subgraph isomorphic embeddings of a query graph q in a large data graph G. The existing algorithms for subgraph matching follow Ullmann's backtracking approach; that is, iteratively map query vertices to data vertices by following a matching order of query vertices. It has been shown that the matching order of query vertices is a very important aspect to the efficiency of a subgraph matching algorithm. Recently, many advanced techniques, such as enforcing connectivity and merging similar vertices in query or data graphs, have been proposed to provide an effective matching order with the aim to reduce unpromising intermediate results especially the ones caused by redundant Cartesian products. In this paper, for the first time we address the issue of unpromising results by Cartesian products from "dissimilar" vertices. We propose a new framework by postponing the Cartesian products based on the structure of a query to minimize the redundant Cartesian products. Our second contribution is proposing a new path-based auxiliary data structure, with the size O(|E(G)| × |V(q)|), to generate a matching order and conduct subgraph matching, which significantly reduces the exponential size O(|V(G)||V(q)|-1) of the existing path-based auxiliary data structure, where V(G) and E(G) are the vertex and edge sets of a data graph G, respectively, and V(q) is the vertex set of a query q. Extensive empirical studies on real and synthetic graphs demonstrate that our techniques outperform the state-of-the-art algorithms by up to 3 orders of magnitude.}
+      \field{booktitle}{Proceedings of the ACM SIGMOD International Conference on Management of Data}
+      \field{isbn}{9781450335317}
+      \field{title}{{Efficient subgraph matching by postponing Cartesian products}}
+      \field{volume}{26-June-20}
+      \field{year}{2016}
+      \field{pages}{1199\bibrangedash 1214}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1145/2882903.2915236
+      \endverb
+    \endentry
+    \entry{Bonnici2017}{article}{}
+      \name{author}{2}{}{%
+        {{hash=731cd24cd48178de7277bcc5821f699e}{%
+           family={Bonnici},
+           familyi={B\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=7aa1c87e377e570558d18232b80c20cf}{%
+           family={Giugno},
+           familyi={G\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{ac8f1b0e537f5126e61514a865d09d00}
+      \strng{fullhash}{ac8f1b0e537f5126e61514a865d09d00}
+      \strng{bibnamehash}{ac8f1b0e537f5126e61514a865d09d00}
+      \strng{authorbibnamehash}{ac8f1b0e537f5126e61514a865d09d00}
+      \strng{authornamehash}{ac8f1b0e537f5126e61514a865d09d00}
+      \strng{authorfullhash}{ac8f1b0e537f5126e61514a865d09d00}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{© 2004-2012 IEEE. Graphs are mathematical structures to model several biological data. Applications to analyze them require to apply solutions for the subgraph isomorphism problem, which is NP-complete. Here, we investigate the existing strategies to reduce the subgraph isomorphism algorithm running time with emphasis on the importance of the order with which the graph vertices are taken into account during the search, called variable ordering, and its incidence on the total running time of the algorithms. We focus on two recent solutions, which are based on an effective variable ordering strategy. We discuss their comparison both with the variable ordering strategies reviewed in the paper and the other algorithms present in the ICPR2014 contest on graph matching algorithms for pattern search in biological databases.}
+      \field{journaltitle}{IEEE/ACM Transactions on Computational Biology and Bioinformatics}
+      \field{number}{1}
+      \field{title}{{On the Variable Ordering in Subgraph Isomorphism Algorithms}}
+      \field{volume}{14}
+      \field{year}{2017}
+      \field{pages}{193\bibrangedash 203}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1109/TCBB.2016.2515595
+      \endverb
+    \endentry
+    \entry{Bonnici2019}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=731cd24cd48178de7277bcc5821f699e}{%
+           family={Bonnici},
+           familyi={B\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=7aa1c87e377e570558d18232b80c20cf}{%
+           family={Giugno},
+           familyi={G\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=e1ea69d82009c640c0871bdcca9360e6}{%
+           family={Bombieri},
+           familyi={B\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{81f97a807e404436757c05839f2b8088}
+      \strng{fullhash}{81f97a807e404436757c05839f2b8088}
+      \strng{bibnamehash}{81f97a807e404436757c05839f2b8088}
+      \strng{authorbibnamehash}{81f97a807e404436757c05839f2b8088}
+      \strng{authornamehash}{81f97a807e404436757c05839f2b8088}
+      \strng{authorfullhash}{81f97a807e404436757c05839f2b8088}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{© 2018 IEEE. The subgraph isomorphism problem is a computational task that applies to a wide range of today's applications, ranging from the understanding of biological networks to the analysis of social networks. Even though different implementations for CPUs have been proposed to improve the efficiency of such a graph search algorithm, they have shown to be bounded by the intrinsic sequential nature of the algorithm. More recently, graphics processing units (GPUs) have become widespread platforms that provide massive parallelism at low cost. Nevertheless, parallelizing any efficient and optimized sequential algorithm for subgraph isomorphism on many-core architectures is a very challenging task. This article presents GRASS, a parallel implementation of the subgraph isomorphism algorithm for GPUs. Different strategies are implemented in GRASS to deal with the space complexity of the graph searching algorithm, the potential workload imbalance, and the thread divergence involved by the non-homogeneity of actual graphs. The paper presents the results obtained on several graphs of different sizes and characteristics to understand the efficiency of the proposed approach.}
+      \field{booktitle}{Proceedings - 2018 IEEE International Conference on Bioinformatics and Biomedicine, BIBM 2018}
+      \field{isbn}{9781538654880}
+      \field{title}{{An Efficient Implementation of a Subgraph Isomorphism Algorithm for GPUs.}}
+      \field{year}{2019}
+      \field{pages}{2674\bibrangedash 2681}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/BIBM.2018.8621444
+      \endverb
+    \endentry
+    \entry{RIalgorithm}{article}{}
+      \name{author}{5}{}{%
+        {{hash=731cd24cd48178de7277bcc5821f699e}{%
+           family={Bonnici},
+           familyi={B\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=7aa1c87e377e570558d18232b80c20cf}{%
+           family={Giugno},
+           familyi={G\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=615a16fed2ee04e28164c9d1a6073fe1}{%
+           family={Pulvirenti},
+           familyi={P\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=01ed50a3afec2d2e353c7949d39352cd}{%
+           family={Shasha},
+           familyi={S\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=e2a90799085e0108b0892eefad620c70}{%
+           family={Ferro},
+           familyi={F\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \strng{namehash}{52de4a8c597c79146496709851940dfd}
+      \strng{fullhash}{a276e345cc17c46ce6ed48a11ad6cf77}
+      \strng{bibnamehash}{a276e345cc17c46ce6ed48a11ad6cf77}
+      \strng{authorbibnamehash}{a276e345cc17c46ce6ed48a11ad6cf77}
+      \strng{authornamehash}{52de4a8c597c79146496709851940dfd}
+      \strng{authorfullhash}{a276e345cc17c46ce6ed48a11ad6cf77}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{14712105}
+      \field{journaltitle}{BMC Bioinformatics}
+      \field{number}{SUPPL7}
+      \field{title}{A subgraph isomorphism algorithm and its application to biochemical data}
+      \field{volume}{14}
+      \field{year}{2013}
+      \verb{doi}
+      \verb 10.1186/1471-2105-14-S7-S13
+      \endverb
+    \endentry
     \entry{Brandes04graphmarkup}{misc}{}
       \name{author}{4}{}{%
         {{hash=392b457d9bac1ed69366176e7857d7e9}{%
@@ -55,6 +381,820 @@
       \field{title}{Graph Markup Language (GraphML)}
       \field{year}{2004}
     \endentry
+    \entry{Brayton}{report}{}
+      \name{author}{12}{}{%
+        {{hash=f5dce34fdfb70de7aa1a0f36f2c4bf7c}{%
+           family={Brayton},
+           familyi={B\bibinitperiod},
+           given={Robert\bibnamedelima K.},
+           giveni={R\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=14671c0616f7a0d5779a3affb295bd4b}{%
+           family={Chiodo},
+           familyi={C\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=a5481e20352bdc0bad275266bb83b865}{%
+           family={Hojati},
+           familyi={H\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=0962bfb2c0074ec201b9485fb9f81671}{%
+           family={Kam},
+           familyi={K\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=854595ef9ec87a609c217f62076bcfcd}{%
+           family={Kodandapani},
+           familyi={K\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=d885edf31c6f992feec1f51b042790d7}{%
+           family={Kurshan},
+           familyi={K\bibinitperiod},
+           given={R.P.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=51c753b0214957876662cdea96a924b0}{%
+           family={Malik},
+           familyi={M\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7a9dc5aaba6292c07c0d6b5aeb616a74}{%
+           family={Sangiovanni-Vincentelli},
+           familyi={S\bibinithyphendelim V\bibinitperiod},
+           given={Alberto\bibnamedelima L.},
+           giveni={A\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=2916e31039b652816fb8b84bd5899f73}{%
+           family={Sentovich},
+           familyi={S\bibinitperiod},
+           given={E.M.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=725f8b024384911eb460320cfc8d9864}{%
+           family={Shiple},
+           familyi={S\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=24e14d04c5403030490870d48411e07a}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={K.J.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=4584921b6576fd419df05a3110bd7f7a}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={H.Y.},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {EECS Department, University of California, Berkeley}%
+      }
+      \strng{namehash}{bc6e8ca53d191c8abf92d44d90d58a81}
+      \strng{fullhash}{dd3deb8734699803e484044f6ed11aac}
+      \strng{bibnamehash}{dd3deb8734699803e484044f6ed11aac}
+      \strng{authorbibnamehash}{dd3deb8734699803e484044f6ed11aac}
+      \strng{authornamehash}{bc6e8ca53d191c8abf92d44d90d58a81}
+      \strng{authorfullhash}{dd3deb8734699803e484044f6ed11aac}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{11}
+      \field{number}{UCB/ERL M91/97}
+      \field{title}{{BLIF-MV}: An Interchange Format for Design Verification and Synthesis}
+      \field{type}{techreport}
+      \field{year}{1991}
+      \verb{urlraw}
+      \verb http://www2.eecs.berkeley.edu/Pubs/TechRpts/1991/1861.html
+      \endverb
+      \verb{url}
+      \verb http://www2.eecs.berkeley.edu/Pubs/TechRpts/1991/1861.html
+      \endverb
+    \endentry
+    \entry{5562766}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=ee518daaa5aa0cdc991df5430335e96f}{%
+           family={{Bröcheler}},
+           familyi={B\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=082c68ddc32ab149643b495722750666}{%
+           family={{Pugliese}},
+           familyi={P\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=3f1aca0898450f3bb3459feb9a871d30}{%
+           family={{Subrahmanian}},
+           familyi={S\bibinitperiod},
+           given={V.\bibnamedelimi S.},
+           giveni={V\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{cdfb5fd1662ba380818ac3c5338c3e69}
+      \strng{fullhash}{cdfb5fd1662ba380818ac3c5338c3e69}
+      \strng{bibnamehash}{cdfb5fd1662ba380818ac3c5338c3e69}
+      \strng{authorbibnamehash}{cdfb5fd1662ba380818ac3c5338c3e69}
+      \strng{authornamehash}{cdfb5fd1662ba380818ac3c5338c3e69}
+      \strng{authorfullhash}{cdfb5fd1662ba380818ac3c5338c3e69}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2010 International Conference on Advances in Social Networks Analysis and Mining}
+      \field{issn}{null}
+      \field{month}{8}
+      \field{title}{COSI: Cloud Oriented Subgraph Identification in Massive Social Networks}
+      \field{year}{2010}
+      \field{pages}{248\bibrangedash 255}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/ASONAM.2010.80
+      \endverb
+      \keyw{computational complexity;data handling;graph theory;Internet;pattern matching;probability;query processing;social networking (online);subgraph matching;graph data;social network;graph pattern;NP-complete;cloud computing;probability estimation;query answering;edge weight;Tin;Partitioning algorithms;Force;Clouds;Indexes;Facebook;social network;subgraph matching;cloud computing;graph database;data partitioning;query answering}
+    \endentry
+    \entry{Carletti2015}{book}{}
+      \name{author}{3}{}{%
+        {{hash=d22c83a744ecbb05775b9c5648ed8291}{%
+           family={Carletti},
+           familyi={C\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=edabefc00d800357e89b4728a3acc4c8}{%
+           family={Foggia},
+           familyi={F\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=5413105b4f665eb7fd0f0c6c60d26051}{%
+           family={Vento},
+           familyi={V\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{7b16f7e43ec1a5af6ef094769303f0d1}
+      \strng{fullhash}{7b16f7e43ec1a5af6ef094769303f0d1}
+      \strng{bibnamehash}{7b16f7e43ec1a5af6ef094769303f0d1}
+      \strng{authorbibnamehash}{7b16f7e43ec1a5af6ef094769303f0d1}
+      \strng{authornamehash}{7b16f7e43ec1a5af6ef094769303f0d1}
+      \strng{authorfullhash}{7b16f7e43ec1a5af6ef094769303f0d1}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{© Springer International Publishing Switzerland 2015. Subgraph isomorphism is a common problem in several application fields where graphs are the best suited data representation, but it is known to be an NP-Complete problem. However, several algorithms exist that are fast enough on commonly encountered graphs so as to be practically usable; among them, for more than a decade VF2 has been the state of the art algorithm used to solve this problem and it is still the reference algorithm for many applications. Nevertheless, VF2 has been designed and implemented ten years ago when the structural features of the commonly used graphs were considerably different. Hence a renovation is required to make the algorithm able to compete in the challenges arisen in the last years, such as the use of graph matching on the very large graphs coming from bioinformatics applications. In this paper we propose a significant set of enhancements to the original VF2 algorithm that enable it to compete with more recently proposed graph matching techniques. Finally, we evaluate the effectiveness of these enhancement by comparing the matching performance both with the original VF2 and with several recent algorithms, using both the widely known MIVIA graph database and another public graph dataset containing real-world graphs from bioinformatics applications.}
+      \field{booktitle}{Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)}
+      \field{isbn}{9783319182230}
+      \field{title}{{VF2 plus: An improved version of VF2 for biological graphs}}
+      \field{volume}{9069}
+      \field{year}{2015}
+      \field{pages}{168\bibrangedash 177}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1007/978-3-319-18224-7_17
+      \endverb
+    \endentry
+    \entry{CHENG1981371}{article}{}
+      \name{author}{2}{}{%
+        {{hash=740767c651ec7240d2102fa3a5064976}{%
+           family={Cheng},
+           familyi={C\bibinitperiod},
+           given={J.K.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=680846e3138d113a525d898a748a2f9a}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={T.S.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{7a22a88be873d2ac35efe78bee041bfa}
+      \strng{fullhash}{7a22a88be873d2ac35efe78bee041bfa}
+      \strng{bibnamehash}{7a22a88be873d2ac35efe78bee041bfa}
+      \strng{authorbibnamehash}{7a22a88be873d2ac35efe78bee041bfa}
+      \strng{authornamehash}{7a22a88be873d2ac35efe78bee041bfa}
+      \strng{authorfullhash}{7a22a88be873d2ac35efe78bee041bfa}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{An efficient algorithm for subgraph isomorphism is presented. It combines tree search with relaxation by using resolution. Bitwise parallelism, which is an important factor in speed, is achieved during the resolution process even though a sequential computer is used. The algorithm can be easily modified to apply to multi-relation labeled graphs, attributed graphs and some higher order structures such as arrangements.}
+      \field{issn}{0031-3203}
+      \field{journaltitle}{Pattern Recognition}
+      \field{number}{5}
+      \field{title}{A subgraph isomorphism algorithm using resolution}
+      \field{volume}{13}
+      \field{year}{1981}
+      \field{pages}{371\bibrangedash 379}
+      \range{pages}{9}
+      \verb{doi}
+      \verb https://doi.org/10.1016/0031-3203(81)90093-5
+      \endverb
+      \verb{urlraw}
+      \verb http://www.sciencedirect.com/science/article/pii/0031320381900935
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/0031320381900935
+      \endverb
+      \keyw{Subgraph isomorphism,Relaxation,Tree search,Resolution,Constraint set,Feasibility}
+    \endentry
+    \entry{Cibej2014}{book}{}
+      \name{author}{2}{}{%
+        {{hash=246676082d15f90e46fd0029299230cf}{%
+           family={{Č}ibej},
+           familyi={Č\bibinitperiod},
+           given={U.},
+           giveni={U\bibinitperiod}}}%
+        {{hash=899aa5e3dad5fe59a8c1937cb28044c2}{%
+           family={Miheli{č}},
+           familyi={M\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{7326fd4bfcc4ed2bf858571d51b61eb3}
+      \strng{fullhash}{7326fd4bfcc4ed2bf858571d51b61eb3}
+      \strng{bibnamehash}{7326fd4bfcc4ed2bf858571d51b61eb3}
+      \strng{authorbibnamehash}{7326fd4bfcc4ed2bf858571d51b61eb3}
+      \strng{authornamehash}{7326fd4bfcc4ed2bf858571d51b61eb3}
+      \strng{authorfullhash}{7326fd4bfcc4ed2bf858571d51b61eb3}
+      \field{sortinit}{Č}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{© Springer International Publishing Switzerland 2014. Searching for subgraph isomorphisms is an essential problem in pattern matching. Most of the algorithms use a branch-and-bound method to sequentially assign pattern nodes to compatible nodes in the target graph. It is well known that the order in which nodes are assigned, a so-called search strategy, influences drastically the size of the search space. In this article we investigate the impact of various search strategies on the efficiency of two algorithms, the first being the Ullmann's algorithm and the second one the recently proposed improvement of Ullmann's algorithm. From the large set of proposed orders we find the most successful ones by thorough testing on a large database of graphs.}
+      \field{booktitle}{Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)}
+      \field{isbn}{9783319041254}
+      \field{title}{{Search strategies for subgraph isomorphism algorithms}}
+      \field{volume}{8321}
+      \field{year}{2014}
+      \field{pages}{77\bibrangedash 88}
+      \range{pages}{12}
+    \endentry
+    \entry{cook}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=609a39905dc0e988c3b294dceecdb1e4}{%
+           family={Cook},
+           familyi={C\bibinitperiod},
+           given={Stephen\bibnamedelima A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Shaker Heights, Ohio, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{609a39905dc0e988c3b294dceecdb1e4}
+      \strng{fullhash}{609a39905dc0e988c3b294dceecdb1e4}
+      \strng{bibnamehash}{609a39905dc0e988c3b294dceecdb1e4}
+      \strng{authorbibnamehash}{609a39905dc0e988c3b294dceecdb1e4}
+      \strng{authornamehash}{609a39905dc0e988c3b294dceecdb1e4}
+      \strng{authorfullhash}{609a39905dc0e988c3b294dceecdb1e4}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the Third Annual ACM Symposium on Theory of Computing}
+      \field{isbn}{9781450374644}
+      \field{series}{STOC ’71}
+      \field{title}{The Complexity of Theorem-Proving Procedures}
+      \field{year}{1971}
+      \field{pages}{151\bibrangedash 158}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1145/800157.805047
+      \endverb
+      \verb{urlraw}
+      \verb https://doi-org.ezproxy2.utwente.nl/10.1145/800157.805047
+      \endverb
+      \verb{url}
+      \verb https://doi-org.ezproxy2.utwente.nl/10.1145/800157.805047
+      \endverb
+    \endentry
+    \entry{906251}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=51503bb1f602ab2e80b1be23cc9a1f82}{%
+           family={{Cordella}},
+           familyi={C\bibinitperiod},
+           given={L.\bibnamedelimi P.},
+           giveni={L\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=edabefc00d800357e89b4728a3acc4c8}{%
+           family={{Foggia}},
+           familyi={F\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=28159cd5cffdc4444453a7fcb193ae9a}{%
+           family={{Sansone}},
+           familyi={S\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=5413105b4f665eb7fd0f0c6c60d26051}{%
+           family={{Vento}},
+           familyi={V\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{71553cd0fa3e16afc2a2d3fe1a6b890b}
+      \strng{fullhash}{5a1050e0e0baf2f9a85912299582db69}
+      \strng{bibnamehash}{5a1050e0e0baf2f9a85912299582db69}
+      \strng{authorbibnamehash}{5a1050e0e0baf2f9a85912299582db69}
+      \strng{authornamehash}{71553cd0fa3e16afc2a2d3fe1a6b890b}
+      \strng{authorfullhash}{5a1050e0e0baf2f9a85912299582db69}
+      \field{extraname}{1}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings 15th International Conference on Pattern Recognition. ICPR-2000}
+      \field{issn}{1051-4651}
+      \field{month}{9}
+      \field{title}{Fast graph matching for detecting CAD image components}
+      \field{volume}{2}
+      \field{year}{2000}
+      \field{pages}{1034\bibrangedash 1037 vol.2}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1109/ICPR.2000.906251
+      \endverb
+      \keyw{graph theory;CAD;image matching;CAD image components;attributed relational graph matching algorithm;mechanical drawings;graph-subgraph isomorphism;semantic information;Algorithm design and analysis;Computational efficiency;Topology;Data structures;Computational complexity;Tree graphs;Bismuth}
+    \endentry
+    \entry{Cordella2004}{article}{}
+      \name{author}{4}{}{%
+        {{hash=51503bb1f602ab2e80b1be23cc9a1f82}{%
+           family={Cordella},
+           familyi={C\bibinitperiod},
+           given={L.P.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=edabefc00d800357e89b4728a3acc4c8}{%
+           family={Foggia},
+           familyi={F\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=28159cd5cffdc4444453a7fcb193ae9a}{%
+           family={Sansone},
+           familyi={S\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=5413105b4f665eb7fd0f0c6c60d26051}{%
+           family={Vento},
+           familyi={V\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{71553cd0fa3e16afc2a2d3fe1a6b890b}
+      \strng{fullhash}{5a1050e0e0baf2f9a85912299582db69}
+      \strng{bibnamehash}{5a1050e0e0baf2f9a85912299582db69}
+      \strng{authorbibnamehash}{5a1050e0e0baf2f9a85912299582db69}
+      \strng{authornamehash}{71553cd0fa3e16afc2a2d3fe1a6b890b}
+      \strng{authorfullhash}{5a1050e0e0baf2f9a85912299582db69}
+      \field{extraname}{2}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We present an algorithm for graph isomorphism and subgraph isomorphism suited for dealing with large graphs. A first version of the algorithm has been presented in a previous paper, where we examined its performance for the isomorphism of small and medium size graphs. The algorithm is improved here to reduce its spatial complexity and to achieve a better performance on large graphs; its features are analyzed in detail with special reference to time and memory requirements. The results of a testing performed on a publicly available database of synthetically generated graphs and on graphs relative to a real application dealing with technical drawings are presented, confirming the effectiveness of the approach, especially when working with large graphs. © 2004 IEEE.}
+      \field{journaltitle}{IEEE Transactions on Pattern Analysis and Machine Intelligence}
+      \field{number}{10}
+      \field{title}{{A (sub)graph isomorphism algorithm for matching large graphs}}
+      \field{volume}{26}
+      \field{year}{2004}
+      \field{pages}{1367\bibrangedash 1372}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/TPAMI.2004.75
+      \endverb
+    \endentry
+    \entry{DiNatale2010}{article}{}
+      \name{author}{6}{}{%
+        {{hash=e0f20065dca0a12443d0c2f0c6a658cb}{%
+           family={{Di Natale}},
+           familyi={D\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=e2a90799085e0108b0892eefad620c70}{%
+           family={Ferro},
+           familyi={F\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=7aa1c87e377e570558d18232b80c20cf}{%
+           family={Giugno},
+           familyi={G\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=334f4ab778bd7f63ab80e07eea756c5f}{%
+           family={Mongiov{ì}},
+           familyi={M\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=615a16fed2ee04e28164c9d1a6073fe1}{%
+           family={Pulvirenti},
+           familyi={P\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=01ed50a3afec2d2e353c7949d39352cd}{%
+           family={Shasha},
+           familyi={S\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{db8b66e5f6957c776399eea4cd1f9065}
+      \strng{fullhash}{58db0531444bdc4779e4dba094b83e37}
+      \strng{bibnamehash}{58db0531444bdc4779e4dba094b83e37}
+      \strng{authorbibnamehash}{58db0531444bdc4779e4dba094b83e37}
+      \strng{authornamehash}{db8b66e5f6957c776399eea4cd1f9065}
+      \strng{authorfullhash}{58db0531444bdc4779e4dba094b83e37}
+      \field{sortinit}{D}
+      \field{sortinithash}{c438b3d5d027251ba63f5ed538d98af5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Background: Finding the subgraphs of a graph database that are isomorphic to a given query graph has practical applications in several fields, from cheminformatics to image understanding. Since subgraph isomorphism is a computationally hard problem, indexing techniques have been intensively exploited to speed up the process. Such systems filter out those graphs which cannot contain the query, and apply a subgraph isomorphism algorithm to each residual candidate graph. The applicability of such systems is limited to databases of small graphs, because their filtering power degrades on large graphs.Results: In this paper, SING (Subgraph search In Non-homogeneous Graphs), a novel indexing system able to cope with large graphs, is presented. The method uses the notion of feature, which can be a small subgraph, subtree or path. Each graph in the database is annotated with the set of all its features. The key point is to make use of feature locality information. This idea is used to both improve the filtering performance and speed up the subgraph isomorphism task.Conclusions: Extensive tests on chemical compounds, biological networks and synthetic graphs show that the proposed system outperforms the most popular systems in query time over databases of medium and large graphs. Other specific tests show that the proposed system is effective for single large graphs. © 2010 Di Natale et al; licensee BioMed Central Ltd.}
+      \field{journaltitle}{BMC Bioinformatics}
+      \field{title}{{SING: Subgraph search In Non-homogeneous Graphs}}
+      \field{volume}{11}
+      \field{year}{2010}
+      \verb{doi}
+      \verb 10.1186/1471-2105-11-96
+      \endverb
+    \endentry
+    \entry{1585279}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=cb9f33e4835e2d49f7bef97362b4906c}{%
+           family={{Donath}},
+           familyi={D\bibinitperiod},
+           given={W.\bibnamedelimi E.},
+           giveni={W\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{cb9f33e4835e2d49f7bef97362b4906c}
+      \strng{fullhash}{cb9f33e4835e2d49f7bef97362b4906c}
+      \strng{bibnamehash}{cb9f33e4835e2d49f7bef97362b4906c}
+      \strng{authorbibnamehash}{cb9f33e4835e2d49f7bef97362b4906c}
+      \strng{authornamehash}{cb9f33e4835e2d49f7bef97362b4906c}
+      \strng{authorfullhash}{cb9f33e4835e2d49f7bef97362b4906c}
+      \field{sortinit}{D}
+      \field{sortinithash}{c438b3d5d027251ba63f5ed538d98af5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{17th Design Automation Conference}
+      \field{month}{6}
+      \field{title}{Complexity Theory and Design Automation}
+      \field{year}{1980}
+      \field{pages}{412\bibrangedash 419}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/DAC.1980.1585279
+      \endverb
+      \keyw{Complexity theory;Design automation;Test pattern generators;Wire;Routing;Circuits;Wiring;Costs;Permission;Books}
+    \endentry
+    \entry{FORTUNE1980111}{article}{}
+      \name{author}{3}{}{%
+        {{hash=d02b4e8e2ea11262609e99936cdb20be}{%
+           family={Fortune},
+           familyi={F\bibinitperiod},
+           given={Steven},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a8813c6fc67d61735e9349b0c2b8d89f}{%
+           family={Hopcroft},
+           familyi={H\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=65ad4a04380ca0de3c2eb2fad9c10aed}{%
+           family={Wyllie},
+           familyi={W\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{8fe1318e4620f657051ca7c4d0be225e}
+      \strng{fullhash}{8fe1318e4620f657051ca7c4d0be225e}
+      \strng{bibnamehash}{8fe1318e4620f657051ca7c4d0be225e}
+      \strng{authorbibnamehash}{8fe1318e4620f657051ca7c4d0be225e}
+      \strng{authornamehash}{8fe1318e4620f657051ca7c4d0be225e}
+      \strng{authorfullhash}{8fe1318e4620f657051ca7c4d0be225e}
+      \field{sortinit}{F}
+      \field{sortinithash}{fb0c0faa89eb6abae8213bf60e6799ea}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The set of pattern graphs for which the fixed directed subgraph homeomorphism problem is NP-complete is characterized. A polynomial time algorithm is given for the remaining cases. The restricted problem where the input graph is a directed acyclic graph is in polynomial time for all pattern graphs and an algorithm is given.}
+      \field{issn}{0304-3975}
+      \field{journaltitle}{Theoretical Computer Science}
+      \field{number}{2}
+      \field{title}{The directed subgraph homeomorphism problem}
+      \field{volume}{10}
+      \field{year}{1980}
+      \field{pages}{111\bibrangedash 121}
+      \range{pages}{11}
+      \verb{doi}
+      \verb https://doi.org/10.1016/0304-3975(80)90009-2
+      \endverb
+      \verb{urlraw}
+      \verb http://www.sciencedirect.com/science/article/pii/0304397580900092
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/0304397580900092
+      \endverb
+    \endentry
+    \entry{4566369}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=96193b8d8a39fcf9708e0f64fabcf2fc}{%
+           family={{Gao}},
+           familyi={G\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=9de72148d832c9f15a2a0a466642a1bb}{%
+           family={{Long}},
+           familyi={L\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{52126e575b4a02608ba4e15130f02da5}
+      \strng{fullhash}{52126e575b4a02608ba4e15130f02da5}
+      \strng{bibnamehash}{52126e575b4a02608ba4e15130f02da5}
+      \strng{authorbibnamehash}{52126e575b4a02608ba4e15130f02da5}
+      \strng{authornamehash}{52126e575b4a02608ba4e15130f02da5}
+      \strng{authorfullhash}{52126e575b4a02608ba4e15130f02da5}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2008 Congress on Image and Signal Processing}
+      \field{month}{3}
+      \field{title}{Spaceborne Digital Signal Processing System Design Based on FPGA}
+      \field{volume}{2}
+      \field{year}{2008}
+      \field{pages}{577\bibrangedash 581}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1109/CISP.2008.658
+      \endverb
+      \keyw{Digital signal processing;Field programmable gate arrays;System analysis and design;Signal analysis;Real time systems;Process design;Signal design;Parallel architectures;Logic design;Reconfigurable logic;on-board digital signal processing;radiation tolerant;parallel architecture;pulse compression}
+    \endentry
+    \entry{Garcia20146247}{article}{}
+      \name{author}{6}{}{%
+        {{hash=297df13ee4a312405ee6619c454b6023}{%
+           family={García},
+           familyi={G\bibinitperiod},
+           given={G.J.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=b6449ebde44a687a066aa4cb32e7bade}{%
+           family={Jara},
+           familyi={J\bibinitperiod},
+           given={C.A.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=0e9dde4e83eb72e82e946e5f32fef399}{%
+           family={Pomares},
+           familyi={P\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=c80bf9212ce2ffae8c2efb75dcc44d5e}{%
+           family={Alabdo},
+           familyi={A\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=5dd23703ea6c93bc40d32acc0e5de060}{%
+           family={Poggi},
+           familyi={P\bibinitperiod},
+           given={L.M.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=febc481f0f6cd811dc1f94a38e362260}{%
+           family={Torres},
+           familyi={T\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \list{publisher}{1}{%
+        {MDPI AG}%
+      }
+      \strng{namehash}{98dd6b7e024f8953327e1558e11fe817}
+      \strng{fullhash}{e1a1666ca0d6c2a2ee2b51782f16a714}
+      \strng{bibnamehash}{e1a1666ca0d6c2a2ee2b51782f16a714}
+      \strng{authorbibnamehash}{e1a1666ca0d6c2a2ee2b51782f16a714}
+      \strng{authornamehash}{98dd6b7e024f8953327e1558e11fe817}
+      \strng{authorfullhash}{e1a1666ca0d6c2a2ee2b51782f16a714}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{14248220}
+      \field{journaltitle}{Sensors (Switzerland)}
+      \field{number}{4}
+      \field{title}{A survey on {FPGA}-based sensor systems: Towards intelligent and reconfigurable low-power sensors for computer vision, control and signal processing}
+      \field{volume}{14}
+      \field{year}{2014}
+      \field{pages}{6247\bibrangedash 6278}
+      \range{pages}{32}
+      \verb{doi}
+      \verb 10.3390/s140406247
+      \endverb
+    \endentry
+    \entry{Gouda2012}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=33caf082bfc5c696eea33ea98b9404d3}{%
+           family={Gouda},
+           familyi={G\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=cf9280bf63077689271687c42ed4ef72}{%
+           family={Hassaan},
+           familyi={H\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \strng{namehash}{14747c483f26f4ab81487f2e7d9d3e96}
+      \strng{fullhash}{14747c483f26f4ab81487f2e7d9d3e96}
+      \strng{bibnamehash}{14747c483f26f4ab81487f2e7d9d3e96}
+      \strng{authorbibnamehash}{14747c483f26f4ab81487f2e7d9d3e96}
+      \strng{authornamehash}{14747c483f26f4ab81487f2e7d9d3e96}
+      \strng{authorfullhash}{14747c483f26f4ab81487f2e7d9d3e96}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9789774035067}
+      \field{journaltitle}{2012 8th International Conference on Informatics and Systems, INFOS 2012}
+      \field{title}{A fast algorithm for subgraph search problem}
+      \field{year}{2012}
+      \field{pages}{DE53\bibrangedash DE58}
+      \range{pages}{-1}
+      \verb{urlraw}
+      \verb https://www.scopus.com/inward/record.uri?eid=2-s2.0-84864851264&partnerID=40&md5=70757bcec147922eead98764e9471ebc
+      \endverb
+      \verb{url}
+      \verb https://www.scopus.com/inward/record.uri?eid=2-s2.0-84864851264&partnerID=40&md5=70757bcec147922eead98764e9471ebc
+      \endverb
+    \endentry
+    \entry{Grohe2011479}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=b7806d04a8066f6775748e35d6cb46ee}{%
+           family={Grohe},
+           familyi={G\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=eceb11a42b0d740c0156d0c1cb7e2eec}{%
+           family={Kawarabayashi},
+           familyi={K\bibinitperiod},
+           given={K.-I.},
+           giveni={K\bibinithyphendelim I\bibinitperiod}}}%
+        {{hash=cd57fc0bce896f530fb25e9a7457730f}{%
+           family={Marx},
+           familyi={M\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=2f91e50e2c7b90b570edab8dd7374cef}{%
+           family={Wollan},
+           familyi={W\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \strng{namehash}{217a131a0749a070af97edc012a642dd}
+      \strng{fullhash}{f038d6ee2beb7822d73a8dcad27c49f5}
+      \strng{bibnamehash}{f038d6ee2beb7822d73a8dcad27c49f5}
+      \strng{authorbibnamehash}{f038d6ee2beb7822d73a8dcad27c49f5}
+      \strng{authornamehash}{217a131a0749a070af97edc012a642dd}
+      \strng{authorfullhash}{f038d6ee2beb7822d73a8dcad27c49f5}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781450306911}
+      \field{issn}{07378017}
+      \field{journaltitle}{Proceedings of the Annual ACM Symposium on Theory of Computing}
+      \field{title}{Finding topological subgraphs is fixed-parameter tractable}
+      \field{year}{2011}
+      \field{pages}{479\bibrangedash 488}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1145/1993636.1993700
+      \endverb
+      \verb{urlraw}
+      \verb https://www.scopus.com/inward/record.uri?eid=2-s2.0-79959696260&doi=10.1145%2f1993636.1993700&partnerID=40&md5=6e36958dfd5a7b5942408c1f726f0133
+      \endverb
+      \verb{url}
+      \verb https://www.scopus.com/inward/record.uri?eid=2-s2.0-79959696260&doi=10.1145%2f1993636.1993700&partnerID=40&md5=6e36958dfd5a7b5942408c1f726f0133
+      \endverb
+    \endentry
+    \entry{Han2013}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=8f2fa63af89c778043af19f0ecbd6b16}{%
+           family={Han},
+           familyi={H\bibinitperiod},
+           given={W.-S.},
+           giveni={W\bibinithyphendelim S\bibinitperiod}}}%
+        {{hash=a38fe2282e0ae708270c02346a36d08f}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d0efc77a4a7392824bb67baae8ac13d2}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={J.-H.},
+           giveni={J\bibinithyphendelim H\bibinitperiod}}}%
+      }
+      \strng{namehash}{f38b9134c779da0a397a97285c36fd42}
+      \strng{fullhash}{f38b9134c779da0a397a97285c36fd42}
+      \strng{bibnamehash}{f38b9134c779da0a397a97285c36fd42}
+      \strng{authorbibnamehash}{f38b9134c779da0a397a97285c36fd42}
+      \strng{authornamehash}{f38b9134c779da0a397a97285c36fd42}
+      \strng{authorfullhash}{f38b9134c779da0a397a97285c36fd42}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Given a query graph q and a data graph g, the subgraph isomorphism search finds all occurrences of q in g and is considered one of the most fundamental query types for many real applications. While this problem belongs to NP-hard, many algorithms have been proposed to solve it in a reasonable time for real datasets. However, a recent study has shown, through an extensive benchmark with various real datasets, that all existing algorithms have serious problems in their matching order selection. Furthermore, all algorithms blindly permutate all possible mappings for query vertices, often leading to useless computations. In this paper, we present an efficient and robust subgraph search solution, called Turbo ISO, which is turbo-charged with two novel concepts, candidate region exploration and the combine and permute strategy (in short, COMB/PERM). The candidate region exploration identifies on-the-fly candidate subgraphs (i.e, candidate regions), which contain embeddings, and computes a robust matching order for each candidate region explored. The COMB/PERM strategy exploits the novel concept of the neighborhood equivalence class (NEC). Each query vertex in the same NEC has identically matching data vertices. During subgraph isomorphism search, COMB/PERM generates only combinations for each NEC instead of permutating all possible enumerations. Thus, if a chosen combination is determined to not contribute to a complete solution, all possible permutations for that combination will be safely pruned. Extensive experiments with many real datasets show that Turbo ISO consistently and significantly outperforms all competitors by up to several orders of magnitude. Copyright © 2013 ACM.}
+      \field{booktitle}{Proceedings of the ACM SIGMOD International Conference on Management of Data}
+      \field{isbn}{9781450320375}
+      \field{title}{{Turbo<inf>ISO</inf>: Towards ultrafast and robust subgraph isomorphism search in large graph databases}}
+      \field{year}{2013}
+      \field{pages}{337\bibrangedash 348}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1145/2463676.2465300
+      \endverb
+    \endentry
+    \entry{Hauck:2007:RCT:1564780}{book}{}
+      \name{author}{2}{}{%
+        {{hash=1247f39c4e6360db9cce48b335b6cd8d}{%
+           family={Hauck},
+           familyi={H\bibinitperiod},
+           given={Scott},
+           giveni={S\bibinitperiod}}}%
+        {{hash=993a662ebb1216999014a9bcb9357ece}{%
+           family={DeHon},
+           familyi={D\bibinitperiod},
+           given={Andre},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {San Francisco, CA, USA}%
+      }
+      \list{publisher}{1}{%
+        {Morgan Kaufmann Publishers Inc.}%
+      }
+      \strng{namehash}{4dbc58fc3ca9b2dd6e2db59e4c4fcfa2}
+      \strng{fullhash}{4dbc58fc3ca9b2dd6e2db59e4c4fcfa2}
+      \strng{bibnamehash}{4dbc58fc3ca9b2dd6e2db59e4c4fcfa2}
+      \strng{authorbibnamehash}{4dbc58fc3ca9b2dd6e2db59e4c4fcfa2}
+      \strng{authornamehash}{4dbc58fc3ca9b2dd6e2db59e4c4fcfa2}
+      \strng{authorfullhash}{4dbc58fc3ca9b2dd6e2db59e4c4fcfa2}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780123705228}
+      \field{title}{Reconfigurable Computing: The Theory and Practice of {FPGA}-Based Computation}
+      \field{year}{2007}
+      \field{pages}{402\bibrangedash 402}
+      \range{pages}{1}
+    \endentry
+    \entry{graphql}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=30eb4220cde9ac15205333e7348569e0}{%
+           family={He},
+           familyi={H\bibinitperiod},
+           given={Huahai},
+           giveni={H\bibinitperiod}}}%
+        {{hash=76e40f2424b16931b1cd1ee0d4884b24}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={Ambuj\bibnamedelima K.},
+           giveni={A\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Vancouver, Canada}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{1bf3341efaff02f398228cd2e14abb54}
+      \strng{fullhash}{1bf3341efaff02f398228cd2e14abb54}
+      \strng{bibnamehash}{1bf3341efaff02f398228cd2e14abb54}
+      \strng{authorbibnamehash}{1bf3341efaff02f398228cd2e14abb54}
+      \strng{authornamehash}{1bf3341efaff02f398228cd2e14abb54}
+      \strng{authorfullhash}{1bf3341efaff02f398228cd2e14abb54}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 2008 ACM SIGMOD International Conference on Management of Data}
+      \field{isbn}{9781605581026}
+      \field{series}{SIGMOD ’08}
+      \field{title}{Graphs-at-a-Time: Query Language and Access Methods for Graph Databases}
+      \field{year}{2008}
+      \field{pages}{405\bibrangedash 418}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1145/1376616.1376660
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/1376616.1376660
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/1376616.1376660
+      \endverb
+      \keyw{graph query language,graph algebra,query optimization}
+    \endentry
     \entry{alhyari2019}{thesis}{}
       \name{author}{1}{}{%
         {{hash=fbeab58c27ad5e53740cbd018e35ecc9}{%
@@ -78,63 +1218,938 @@
       \field{type}{phdthesis}
       \field{year}{2019}
     \endentry
-    \entry{pistorius2007benchmarking}{inproceedings}{}
-      \name{author}{4}{}{%
-        {{hash=15eecbbb29d7ad7da4dbf898f90d1089}{%
-           family={Pistorius},
-           familyi={P\bibinitperiod},
-           given={Joachim},
+    \entry{Ikram2020172}{article}{}
+      \name{author}{2}{}{%
+        {{hash=b3cb9e1f922b15cd696b683622b3c37a}{%
+           family={Ikram},
+           familyi={I\bibinitperiod},
+           given={J.},
            giveni={J\bibinitperiod}}}%
-        {{hash=e4d3114e8611a85a3b01dd455c14c571}{%
-           family={Hutton},
-           familyi={H\bibinitperiod},
-           given={Mike},
-           giveni={M\bibinitperiod}}}%
-        {{hash=627b3c463aae56575e34c339f60f510a}{%
-           family={Mishchenko},
+        {{hash=1199e61cc74a47666e1fc395efecefea}{%
+           family={Mohsen},
            familyi={M\bibinitperiod},
-           given={Alan},
-           giveni={A\bibinitperiod}}}%
-        {{hash=4fb487f81f57d4c6d7412fa6fec1b9d0}{%
-           family={Brayton},
-           familyi={B\bibinitperiod},
-           given={Robert},
-           giveni={R\bibinitperiod}}}%
+           given={M.},
+           giveni={M\bibinitperiod}}}%
       }
-      \strng{namehash}{571fcc208a68042b75c10706fa7c4b1b}
-      \strng{fullhash}{1adf01677645058f8a875e23080791dc}
-      \strng{bibnamehash}{1adf01677645058f8a875e23080791dc}
-      \strng{authorbibnamehash}{1adf01677645058f8a875e23080791dc}
-      \strng{authornamehash}{571fcc208a68042b75c10706fa7c4b1b}
-      \strng{authorfullhash}{1adf01677645058f8a875e23080791dc}
-      \field{sortinit}{P}
-      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \name{editor}{1}{}{%
+        {{hash=c5c2fd0e3404fa6cba561d422f67ec79}{%
+           family={Bouhlel\bibnamedelima M.S.},
+           familyi={B\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Rovetta\bibnamedelima S.},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \list{publisher}{2}{%
+        {Springer Science}%
+        {Business Media Deutschland GmbH}%
+      }
+      \strng{namehash}{6b95a6ac862def30532e8b30596cbea9}
+      \strng{fullhash}{6b95a6ac862def30532e8b30596cbea9}
+      \strng{bibnamehash}{6b95a6ac862def30532e8b30596cbea9}
+      \strng{authorbibnamehash}{6b95a6ac862def30532e8b30596cbea9}
+      \strng{authornamehash}{6b95a6ac862def30532e8b30596cbea9}
+      \strng{authorfullhash}{6b95a6ac862def30532e8b30596cbea9}
+      \strng{editorbibnamehash}{c5c2fd0e3404fa6cba561d422f67ec79}
+      \strng{editornamehash}{c5c2fd0e3404fa6cba561d422f67ec79}
+      \strng{editorfullhash}{c5c2fd0e3404fa6cba561d422f67ec79}
+      \field{sortinit}{I}
+      \field{sortinithash}{9417e9a1288a9371e2691d999083ed39}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{booktitle}{International Workshop on Logic \& Synthesis}
-      \field{title}{Benchmarking method and designs targeting logic synthesis for FPGAs}
-      \field{volume}{7}
-      \field{year}{2007}
-      \field{pages}{230\bibrangedash 237}
-      \range{pages}{8}
+      \field{isbn}{9783030210045}
+      \field{issn}{21903018}
+      \field{journaltitle}{Smart Innovation, Systems and Technologies}
+      \field{title}{{FPGA} Implementation of a Quantum Cryptography Algorithm}
+      \field{volume}{146}
+      \field{year}{2020}
+      \field{pages}{172\bibrangedash 181}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1007/978-3-030-21005-2_17
+      \endverb
     \endentry
-    \entry{BDDSynthesis}{article}{}
-      \name{author}{3}{}{%
-        {{hash=36d7865e6117c4c6806f82c737aa5e4f}{%
-           family={Vemuri},
-           familyi={V\bibinitperiod},
-           given={Navin},
-           giveni={N\bibinitperiod}}}%
-        {{hash=42c961de70f0d86b355099897e375fbe}{%
-           family={Kalla},
-           familyi={K\bibinitperiod},
-           given={Priyank},
+    \entry{Juttner2018a}{article}{}
+      \name{author}{2}{}{%
+        {{hash=e90ee0d4297cc62c4fb5cea0102882a4}{%
+           family={J{ü}ttner},
+           familyi={J\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=8c847afb8846ccf0ba72ad837009e9b9}{%
+           family={Madarasi},
+           familyi={M\bibinitperiod},
+           given={P.},
            giveni={P\bibinitperiod}}}%
-        {{hash=e24e4f7fc07908365fdbe5b097a1e7ed}{%
-           family={Tessier},
+      }
+      \strng{namehash}{22556b4f5b849ecd3987247b81c62c6a}
+      \strng{fullhash}{22556b4f5b849ecd3987247b81c62c6a}
+      \strng{bibnamehash}{22556b4f5b849ecd3987247b81c62c6a}
+      \strng{authorbibnamehash}{22556b4f5b849ecd3987247b81c62c6a}
+      \strng{authornamehash}{22556b4f5b849ecd3987247b81c62c6a}
+      \strng{authorfullhash}{22556b4f5b849ecd3987247b81c62c6a}
+      \field{sortinit}{J}
+      \field{sortinithash}{c45040a764d616897e7f5b30174d7b92}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{© 2018 This paper presents a largely improved version of the VF2 algorithm for the Subgraph Isomorphism Problem. The improvements are twofold. Firstly, it is based on a new approach for determining the matching order of the nodes, and secondly, more efficient — nevertheless easier to compute — cutting rules are proposed. They together reduce the search space significantly. In addition to the usual Subgraph Isomorphism Problem, the paper also presents specialized algorithms for the Induced Subgraph Isomorphism and for the Graph Isomorphism Problems. Finally, an extensive experimental evaluation is provided using a wide range of inputs, including both real-life biological and chemical datasets and standard randomly generated graph series. The results show major and consistent running time improvements over the other known methods. The C++ implementations of the algorithms are available open-source as part of the LEMON graph and network optimization library.}
+      \field{journaltitle}{Discrete Applied Mathematics}
+      \field{title}{{VF2++—An improved subgraph isomorphism algorithm}}
+      \field{volume}{242}
+      \field{year}{2018}
+      \field{pages}{69\bibrangedash 81}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1016/j.dam.2018.02.018
+      \endverb
+    \endentry
+    \entry{Kanazawa2010}{article}{}
+      \name{author}{2}{}{%
+        {{hash=ef64742dc50c1b0452da4b01eb80c921}{%
+           family={Kanazawa},
+           familyi={K\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=2f463be5ec8b672eb84d6fd452e6725f}{%
+           family={Maruyama},
+           familyi={M\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \strng{namehash}{da4283c269d3c4bd309864ca77831749}
+      \strng{fullhash}{da4283c269d3c4bd309864ca77831749}
+      \strng{bibnamehash}{da4283c269d3c4bd309864ca77831749}
+      \strng{authorbibnamehash}{da4283c269d3c4bd309864ca77831749}
+      \strng{authornamehash}{da4283c269d3c4bd309864ca77831749}
+      \strng{authorfullhash}{da4283c269d3c4bd309864ca77831749}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{19367406}
+      \field{journaltitle}{ACM Transactions on Reconfigurable Technology and Systems}
+      \field{number}{1}
+      \field{title}{An approach for solving large SAT problems on FPGA}
+      \field{volume}{4}
+      \field{year}{2010}
+      \verb{doi}
+      \verb 10.1145/1857927.1857937
+      \endverb
+    \endentry
+    \entry{Karp1975}{article}{}
+      \name{author}{1}{}{%
+        {{hash=f49f7c7ed47f2c2858a260d2181ffbb7}{%
+           family={Karp},
+           familyi={K\bibinitperiod},
+           given={R.\bibnamedelimi M.},
+           giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {USA}%
+      }
+      \list{publisher}{1}{%
+        {Wiley-Interscience}%
+      }
+      \strng{namehash}{f49f7c7ed47f2c2858a260d2181ffbb7}
+      \strng{fullhash}{f49f7c7ed47f2c2858a260d2181ffbb7}
+      \strng{bibnamehash}{f49f7c7ed47f2c2858a260d2181ffbb7}
+      \strng{authorbibnamehash}{f49f7c7ed47f2c2858a260d2181ffbb7}
+      \strng{authornamehash}{f49f7c7ed47f2c2858a260d2181ffbb7}
+      \strng{authorfullhash}{f49f7c7ed47f2c2858a260d2181ffbb7}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0028-3045}
+      \field{journaltitle}{Netw.}
+      \field{month}{1}
+      \field{number}{1}
+      \field{title}{On the Computational Complexity of Combinatorial Problems}
+      \field{volume}{5}
+      \field{year}{1975}
+      \field{pages}{45\bibrangedash 68}
+      \range{pages}{24}
+      \verb{doi}
+      \verb 10.1002/net.1975.5.1.45
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1002/net.1975.5.1.45
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1002/net.1975.5.1.45
+      \endverb
+    \endentry
+    \entry{Kotthoff2016}{book}{}
+      \name{author}{3}{}{%
+        {{hash=289278432bd9f679074636b47740fa2f}{%
+           family={Kotthoff},
+           familyi={K\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=093bea7640da5b1525a5ff2abc8bf649}{%
+           family={McCreesh},
+           familyi={M\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=4ba025b3874f542af6cb6b34e2fb22e0}{%
+           family={Solnon},
+           familyi={S\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{dd3879188ab352ca0479a7e63c848e58}
+      \strng{fullhash}{dd3879188ab352ca0479a7e63c848e58}
+      \strng{bibnamehash}{dd3879188ab352ca0479a7e63c848e58}
+      \strng{authorbibnamehash}{dd3879188ab352ca0479a7e63c848e58}
+      \strng{authornamehash}{dd3879188ab352ca0479a7e63c848e58}
+      \strng{authorfullhash}{dd3879188ab352ca0479a7e63c848e58}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{© Springer International Publishing AG 2016. Subgraph isomorphism is a computationally challenging problem with important practical applications, for example in computer vision, biochemistry, and model checking. There are a number of stateof- the-art algorithms for solving the problem, each of which has its own performance characteristics. As with many other hard problems, the single best choice of algorithm overall is rarely the best algorithm on an instance-by-instance. We develop an algorithm selection approach which leverages novel features to characterise subgraph isomorphism problems and dynamically decides which algorithm to use on a per-instance basis. We demonstrate substantial performance improvements on a large set of hard benchmark problems. In addition, we show how algorithm selection models can be leveraged to gain new insights into what affects the performance of an algorithm.}
+      \field{booktitle}{Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)}
+      \field{isbn}{9783319503486}
+      \field{title}{{Portfolios of subgraph isomorphism algorithms}}
+      \field{volume}{10079 LNCS}
+      \field{year}{2016}
+      \field{pages}{107\bibrangedash 122}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1007/978-3-319-50349-3_8
+      \endverb
+    \endentry
+    \entry{mugram}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=d7b72c6e8ef5b81f1fb7e9f891f93692}{%
+           family={{Krishna}},
+           familyi={K\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=77dbed1f4adc9f29a4470d945e4e9fa4}{%
+           family={{Ranga Suri}},
+           familyi={R\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+        {{hash=cc1666ddebd3f13c35770f1daf81549e}{%
+           family={{Athithan}},
+           familyi={A\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{ac17091e79684c7a2431b7994464c2d4}
+      \strng{fullhash}{ac17091e79684c7a2431b7994464c2d4}
+      \strng{bibnamehash}{ac17091e79684c7a2431b7994464c2d4}
+      \strng{authorbibnamehash}{ac17091e79684c7a2431b7994464c2d4}
+      \strng{authornamehash}{ac17091e79684c7a2431b7994464c2d4}
+      \strng{authorfullhash}{ac17091e79684c7a2431b7994464c2d4}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2012 International Conference on Recent Advances in Computing and Software Systems}
+      \field{issn}{null}
+      \field{month}{4}
+      \field{title}{MuGRAM: An approach for multi-labelled graph matching}
+      \field{year}{2012}
+      \field{pages}{19\bibrangedash 26}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/RACSS.2012.6212691
+      \endverb
+      \keyw{data mining;graph theory;query processing;social networking (online);MuGRAM;multilabelled graph matching;graph mining;graph representation;social networks;communication networks;neighbourhood matching;query processing;Indexing;Pattern matching;Algorithm design and analysis;Social network services;Computational biology;Heuristic algorithms;Data mining;Multi-labelled graphs;Graph matching}
+    \endentry
+    \entry{LaPaughOptim}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=798e84f52963714da35cb670baa0d95a}{%
+           family={LaPaugh},
+           familyi={L\bibinitperiod},
+           given={Andrea\bibnamedelima S.},
+           giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=3a964821f97ee17f8bb285bc61c52899}{%
+           family={Rivest},
+           familyi={R\bibinitperiod},
+           given={Ronald\bibnamedelima L.},
+           giveni={R\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {San Diego, California, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{0fa739922ceaeb7daaf2c546f25957cd}
+      \strng{fullhash}{0fa739922ceaeb7daaf2c546f25957cd}
+      \strng{bibnamehash}{0fa739922ceaeb7daaf2c546f25957cd}
+      \strng{authorbibnamehash}{0fa739922ceaeb7daaf2c546f25957cd}
+      \strng{authornamehash}{0fa739922ceaeb7daaf2c546f25957cd}
+      \strng{authorfullhash}{0fa739922ceaeb7daaf2c546f25957cd}
+      \field{sortinit}{L}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the Tenth Annual ACM Symposium on Theory of Computing}
+      \field{isbn}{9781450374378}
+      \field{series}{STOC ’78}
+      \field{title}{The Subgraph Homeomorphism Problem}
+      \field{year}{1978}
+      \field{pages}{40\bibrangedash 50}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1145/800133.804330
+      \endverb
+      \verb{urlraw}
+      \verb https://doi-org.ezproxy2.utwente.nl/10.1145/800133.804330
+      \endverb
+      \verb{url}
+      \verb https://doi-org.ezproxy2.utwente.nl/10.1145/800133.804330
+      \endverb
+    \endentry
+    \entry{LINGAS2009464}{article}{}
+      \name{author}{2}{}{%
+        {{hash=8c29a3f5ebb059872c89fc19a067959d}{%
+           family={Lingas},
+           familyi={L\bibinitperiod},
+           given={Andrzej},
+           giveni={A\bibinitperiod}}}%
+        {{hash=298d1141260600ddd0d6e2dbb1f8369b}{%
+           family={Wahlen},
+           familyi={W\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{9130b8311dd7300d6a24643099a56bd8}
+      \strng{fullhash}{9130b8311dd7300d6a24643099a56bd8}
+      \strng{bibnamehash}{9130b8311dd7300d6a24643099a56bd8}
+      \strng{authorbibnamehash}{9130b8311dd7300d6a24643099a56bd8}
+      \strng{authornamehash}{9130b8311dd7300d6a24643099a56bd8}
+      \strng{authorfullhash}{9130b8311dd7300d6a24643099a56bd8}
+      \field{sortinit}{L}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The subgraph homeomorphism problem is to decide if there is an injective mapping of the vertices of a pattern graph into vertices of a host graph so that the edges of the pattern graph can be mapped into (internally) vertex-disjoint paths in the host graph. The restriction of subgraph homeomorphism where an injective mapping of the vertices of the pattern graph into vertices of the host graph is already given in the input instance is termed fixed-vertex subgraph homeomorphism. We show that fixed-vertex subgraph homeomorphism for a pattern graph on p vertices and a host graph on n vertices can be solved in time 2n−pnO(1) or in time 3n−pnO(1) and polynomial space. In effect, we obtain new non-trivial upper bounds on the time complexity of the problem of finding k vertex-disjoint paths and general subgraph homeomorphism.}
+      \field{issn}{1570-8667}
+      \field{journaltitle}{Journal of Discrete Algorithms}
+      \field{number}{4}
+      \field{title}{An exact algorithm for subgraph homeomorphism}
+      \field{volume}{7}
+      \field{year}{2009}
+      \field{pages}{464\bibrangedash 468}
+      \range{pages}{5}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.jda.2008.10.003
+      \endverb
+      \verb{urlraw}
+      \verb http://www.sciencedirect.com/science/article/pii/S1570866708000968
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/S1570866708000968
+      \endverb
+      \keyw{Subgraph homeomorphism,Disjoint paths,Time complexity,Space complexity}
+    \endentry
+    \entry{Lipets2009320}{article}{}
+      \name{author}{3}{}{%
+        {{hash=7e0fe70a7bf52ce80f49c35c4c2a30b3}{%
+           family={Lipets},
+           familyi={L\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=3f148b6b0d35adfc988ae9ab9c836212}{%
+           family={Vanetik},
+           familyi={V\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+        {{hash=0af1bc5b91c25141801e96340602c9a4}{%
+           family={Gudes},
+           familyi={G\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \strng{namehash}{8fe62702b86b8f5d2ca9f6eb787f4017}
+      \strng{fullhash}{8fe62702b86b8f5d2ca9f6eb787f4017}
+      \strng{bibnamehash}{8fe62702b86b8f5d2ca9f6eb787f4017}
+      \strng{authorbibnamehash}{8fe62702b86b8f5d2ca9f6eb787f4017}
+      \strng{authornamehash}{8fe62702b86b8f5d2ca9f6eb787f4017}
+      \strng{authorfullhash}{8fe62702b86b8f5d2ca9f6eb787f4017}
+      \field{sortinit}{L}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{13845810}
+      \field{journaltitle}{Data Mining and Knowledge Discovery}
+      \field{number}{3}
+      \field{title}{Subsea: An efficient heuristic algorithm for subgraph isomorphism}
+      \field{volume}{19}
+      \field{year}{2009}
+      \field{pages}{320\bibrangedash 350}
+      \range{pages}{31}
+      \verb{doi}
+      \verb 10.1007/s10618-009-0132-7
+      \endverb
+      \verb{urlraw}
+      \verb https://www.scopus.com/inward/record.uri?eid=2-s2.0-70349598122&doi=10.1007%2fs10618-009-0132-7&partnerID=40&md5=b840b5838f42ad217775101c77e0061a
+      \endverb
+      \verb{url}
+      \verb https://www.scopus.com/inward/record.uri?eid=2-s2.0-70349598122&doi=10.1007%2fs10618-009-0132-7&partnerID=40&md5=b840b5838f42ad217775101c77e0061a
+      \endverb
+    \endentry
+    \entry{Ma2019}{article}{}
+      \name{author}{5}{}{%
+        {{hash=dc76eef66c89440e4e5275de607ffbfe}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=238d377a23890d8bd96508637b4a1664}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=3cec0f5b4f98c013123343f9b73c4808}{%
+           family={Cao},
+           familyi={C\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=55014134b0a3c9c678f7044c5c602948}{%
+           family={Tian},
            familyi={T\bibinitperiod},
-           given={Russell},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=f6c004d44779b124e0a469820ce26193}{%
+           family={Al-Rodhann},
+           familyi={A\bibinithyphendelim R\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{a558cb408b65cfdb901bc6482aba2a2a}
+      \strng{fullhash}{5cd55ebde1b8cda93c1ba380d3859580}
+      \strng{bibnamehash}{5cd55ebde1b8cda93c1ba380d3859580}
+      \strng{authorbibnamehash}{5cd55ebde1b8cda93c1ba380d3859580}
+      \strng{authornamehash}{a558cb408b65cfdb901bc6482aba2a2a}
+      \strng{authorfullhash}{5cd55ebde1b8cda93c1ba380d3859580}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physica A: Statistical Mechanics and its Applications}
+      \field{title}{{InfMatch: Finding isomorphism subgraph on a big target graph based on the importance of vertex}}
+      \field{volume}{527}
+      \field{year}{2019}
+      \verb{doi}
+      \verb 10.1016/j.physa.2019.121278
+      \endverb
+    \endentry
+    \entry{Malik2019}{book}{}
+      \name{author}{3}{}{%
+        {{hash=264f344c26e5d73973840b842f2f455a}{%
+           family={Mal{í}k},
+           familyi={M\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=fe067fcd5b726a1bc8fa71c6cefd21f6}{%
+           family={Such{ý}},
+           familyi={S\bibinitperiod},
+           given={O.},
+           giveni={O\bibinitperiod}}}%
+        {{hash=e6d0f1487b6bf8cc68075d1e11fa054a}{%
+           family={Valla},
+           familyi={V\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{80e175314e7c3482e260ade5edcd2452}
+      \strng{fullhash}{80e175314e7c3482e260ade5edcd2452}
+      \strng{bibnamehash}{80e175314e7c3482e260ade5edcd2452}
+      \strng{authorbibnamehash}{80e175314e7c3482e260ade5edcd2452}
+      \strng{authornamehash}{80e175314e7c3482e260ade5edcd2452}
+      \strng{authorfullhash}{80e175314e7c3482e260ade5edcd2452}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{© 2019, Springer Nature Switzerland AG. We consider the subgraph isomorphism problem where, given two graphs G (source graph) and F (pattern graph), one is to decide whether there is a (not necessarily induced) subgraph of G isomorphic to F. While many practical heuristic algorithms have been developed for the problem, as pointed out by McCreesh et al. [JAIR 2018], for each of them there are rather small instances which they cannot cope. Therefore, developing an alternative approach that could possibly cope with these hard instances would be of interest. A seminal paper by Alon, Yuster and Zwick [J. ACM 1995] introduced the color coding approach to solve the problem, where the main part is a dynamic programming over color subsets and partial mappings. As with many exponential-time dynamic programming algorithms, the memory requirements constitute the main limiting factor for its usage. Because these requirements grow exponentially with the treewidth of the pattern graph, all existing implementations based on the color coding principle restrict themselves to specific pattern graphs, e.g., paths or trees. In contrast, we provide an efficient implementation of the algorithm significantly reducing its memory requirements so that it can be used for pattern graphs of larger treewidth. Moreover, our implementation not only decides the existence of an isomorphic subgraph, but it also enumerates all such subgraphs (or given number of them). We provide an extensive experimental comparison of our implementation to other available solvers for the problem.}
+      \field{booktitle}{Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)}
+      \field{isbn}{9783030340285}
+      \field{title}{{Efficient Implementation of Color Coding Algorithm for Subgraph Isomorphism Problem}}
+      \field{volume}{11544 LNCS}
+      \field{year}{2019}
+      \field{pages}{283\bibrangedash 299}
+      \range{pages}{17}
+      \verb{doi}
+      \verb 10.1007/978-3-030-34029-2_19
+      \endverb
+    \endentry
+    \entry{McCreesh2015}{book}{}
+      \name{author}{2}{}{%
+        {{hash=093bea7640da5b1525a5ff2abc8bf649}{%
+           family={McCreesh},
+           familyi={M\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=83e945958c2741f82322ce10a929373b}{%
+           family={Prosser},
+           familyi={P\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5b6451d8640190a4c1e4cee4a242a5b}
+      \strng{fullhash}{c5b6451d8640190a4c1e4cee4a242a5b}
+      \strng{bibnamehash}{c5b6451d8640190a4c1e4cee4a242a5b}
+      \strng{authorbibnamehash}{c5b6451d8640190a4c1e4cee4a242a5b}
+      \strng{authornamehash}{c5b6451d8640190a4c1e4cee4a242a5b}
+      \strng{authorfullhash}{c5b6451d8640190a4c1e4cee4a242a5b}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{© Springer International Publishing Switzerland 2015. The subgraph isomorphism problem involves finding a pattern graph inside a target graph. We present a new bit- and threadparallel constraint-based search algorithm for the problem, and experiment on a wide range of standard benchmark instances to demonstrate its effectiveness. We introduce supplemental graphs, to create implied constraints. We use a new low-overhead, lazy variation of conflict directed backjumping which interacts safely with parallel search, and a countingbased all-different propagator which is better suited for large domains.}
+      \field{booktitle}{Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)}
+      \field{isbn}{9783319232188}
+      \field{title}{{A parallel, backjumping subgraph isomorphism algorithm using supplemental graphs}}
+      \field{volume}{9255}
+      \field{year}{2015}
+      \field{pages}{295\bibrangedash 312}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1007/978-3-319-23219-5_21
+      \endverb
+    \endentry
+    \entry{MCGREGOR1979229}{article}{}
+      \name{author}{1}{}{%
+        {{hash=5847783f0afec0f18c7dd4cc96c5bdb5}{%
+           family={McGregor},
+           familyi={M\bibinitperiod},
+           given={J.J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{5847783f0afec0f18c7dd4cc96c5bdb5}
+      \strng{fullhash}{5847783f0afec0f18c7dd4cc96c5bdb5}
+      \strng{bibnamehash}{5847783f0afec0f18c7dd4cc96c5bdb5}
+      \strng{authorbibnamehash}{5847783f0afec0f18c7dd4cc96c5bdb5}
+      \strng{authornamehash}{5847783f0afec0f18c7dd4cc96c5bdb5}
+      \strng{authorfullhash}{5847783f0afec0f18c7dd4cc96c5bdb5}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The determination of subgraph and graph isomorphisms is an important application for the algebraic manipulation of networks of binary constraints. Simplified and streamlined arc consistency and tree search algorithms are introduced, and experimental results show substantial reduction in timings compared with previous algorithms for determining isomorphisms. Several path consistency algorithms, including a new one, have been timed experimentally on isomorphism problems, and found not to be cost effective despite their theoretical appeal. The importance of this result is enhanced by the absence of previously published experimentation with path consistency. A theoretical study of the new path consistency algorithm provides insight into the experimental results.}
+      \field{issn}{0020-0255}
+      \field{journaltitle}{Information Sciences}
+      \field{number}{3}
+      \field{title}{Relational consistency algorithms and their application in finding subgraph and graph isomorphisms}
+      \field{volume}{19}
+      \field{year}{1979}
+      \field{pages}{229\bibrangedash 250}
+      \range{pages}{22}
+      \verb{doi}
+      \verb https://doi.org/10.1016/0020-0255(79)90023-9
+      \endverb
+      \verb{urlraw}
+      \verb http://www.sciencedirect.com/science/article/pii/0020025579900239
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/0020025579900239
+      \endverb
+    \endentry
+    \entry{Nawari2015}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=00c2cad88df2e9224dfd19b98a3a7714}{%
+           family={Nawari},
+           familyi={N\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=54dd086c76800a9a92e4836ba415b294}{%
+           family={Ahmed},
+           familyi={A\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=1dbb03beded6dd7099b2964d356e6be7}{%
+           family={Hamid},
+           familyi={H\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=d77226578906d39c1828ee21f1dfacd9}{%
+           family={Elkhidir},
+           familyi={E\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \list{publisher}{2}{%
+        {Institute of Electrical}%
+        {Electronics Engineers Inc.}%
+      }
+      \strng{namehash}{1cc0b90836e3036000ffba8e7b70d1b3}
+      \strng{fullhash}{18af4019e3ee21eba49b8d5784f46b17}
+      \strng{bibnamehash}{18af4019e3ee21eba49b8d5784f46b17}
+      \strng{authorbibnamehash}{18af4019e3ee21eba49b8d5784f46b17}
+      \strng{authornamehash}{1cc0b90836e3036000ffba8e7b70d1b3}
+      \strng{authorfullhash}{18af4019e3ee21eba49b8d5784f46b17}
+      \field{sortinit}{N}
+      \field{sortinithash}{98cf339a479c0454fe09153a08675a15}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781479999057}
+      \field{journaltitle}{2015 World Symposium on Computer Networks and Information Security, WSCNIS 2015}
+      \field{title}{{FPGA} based implementation of elliptic curve cryptography}
+      \field{year}{2015}
+      \verb{doi}
+      \verb 10.1109/WSCNIS.2015.7368282
+      \endverb
+    \endentry
+    \entry{Regin1994362}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=29f3c8097fc4b74cf7bd168b1f9c93aa}{%
+           family={Régin},
+           familyi={R\bibinitperiod},
+           given={Jean-Charles},
+           giveni={J\bibinithyphendelim C\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \list{publisher}{1}{%
+        {AAAI, Menlo Park, CA, United States}%
+      }
+      \strng{namehash}{29f3c8097fc4b74cf7bd168b1f9c93aa}
+      \strng{fullhash}{29f3c8097fc4b74cf7bd168b1f9c93aa}
+      \strng{bibnamehash}{29f3c8097fc4b74cf7bd168b1f9c93aa}
+      \strng{authorbibnamehash}{29f3c8097fc4b74cf7bd168b1f9c93aa}
+      \strng{authornamehash}{29f3c8097fc4b74cf7bd168b1f9c93aa}
+      \strng{authorfullhash}{29f3c8097fc4b74cf7bd168b1f9c93aa}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the National Conference on Artificial Intelligence}
+      \field{title}{Filtering algorithm for constraints of difference in CSPs}
+      \field{volume}{1}
+      \field{year}{1994}
+      \field{pages}{362\bibrangedash 367}
+      \range{pages}{6}
+    \endentry
+    \entry{boostISO}{article}{}
+      \name{author}{2}{}{%
+        {{hash=9f15cd72f8fcff13c7f3bb428cca3111}{%
+           family={Ren},
+           familyi={R\bibinitperiod},
+           given={Xuguang},
+           giveni={X\bibinitperiod}}}%
+        {{hash=ec7127da761d1ab21dfbe96bef966546}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Junhu},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {VLDB Endowment}%
+      }
+      \strng{namehash}{68be7f2a4b1197174854d30b2110215e}
+      \strng{fullhash}{68be7f2a4b1197174854d30b2110215e}
+      \strng{bibnamehash}{68be7f2a4b1197174854d30b2110215e}
+      \strng{authorbibnamehash}{68be7f2a4b1197174854d30b2110215e}
+      \strng{authornamehash}{68be7f2a4b1197174854d30b2110215e}
+      \strng{authorfullhash}{68be7f2a4b1197174854d30b2110215e}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2150-8097}
+      \field{journaltitle}{Proc. VLDB Endow.}
+      \field{month}{1}
+      \field{number}{5}
+      \field{title}{Exploiting Vertex Relationships in Speeding up Subgraph Isomorphism over Large Graphs}
+      \field{volume}{8}
+      \field{year}{2015}
+      \field{pages}{617\bibrangedash 628}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.14778/2735479.2735493
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.14778/2735479.2735493
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.14778/2735479.2735493
+      \endverb
+      \keyw{graph adaptation,subgraph isomorphism,BoostIso}
+    \endentry
+    \entry{rudolf}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=a25e2ba7996bb93f946a80159b4f54d1}{%
+           family={Rudolf},
+           familyi={R\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \name{editor}{4}{}{%
+        {{hash=9e25f033174059ba160f0dd00d9f0dc4}{%
+           family={Ehrig},
+           familyi={E\bibinitperiod},
+           given={Hartmut},
+           giveni={H\bibinitperiod}}}%
+        {{hash=af382dc4ee2ef85f92a873e209159a0a}{%
+           family={Engels},
+           familyi={E\bibinitperiod},
+           given={Gregor},
+           giveni={G\bibinitperiod}}}%
+        {{hash=0e69548c1ac42bee7fb828381c4f4d32}{%
+           family={Kreowski},
+           familyi={K\bibinitperiod},
+           given={Hans-J{ö}rg},
+           giveni={H\bibinithyphendelim J\bibinitperiod}}}%
+        {{hash=28cb0e4624d878cdc6b02c4061d38500}{%
+           family={Rozenberg},
+           familyi={R\bibinitperiod},
+           given={Grzegorz},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{a25e2ba7996bb93f946a80159b4f54d1}
+      \strng{fullhash}{a25e2ba7996bb93f946a80159b4f54d1}
+      \strng{bibnamehash}{a25e2ba7996bb93f946a80159b4f54d1}
+      \strng{authorbibnamehash}{a25e2ba7996bb93f946a80159b4f54d1}
+      \strng{authornamehash}{a25e2ba7996bb93f946a80159b4f54d1}
+      \strng{authorfullhash}{a25e2ba7996bb93f946a80159b4f54d1}
+      \strng{editorbibnamehash}{6323edb49d0e2ce52ea0e6e0b7065ee7}
+      \strng{editornamehash}{43ce10bc05f19691494d1c59a9e9912c}
+      \strng{editorfullhash}{6323edb49d0e2ce52ea0e6e0b7065ee7}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper presents a way to represent and solve the problem of graph matching -- also known as the subgraph homomorphism problem -- as a constraint satisfaction problem (CSP), opening up direct access to the large variety of research findings on optimized solution algorithms for CSPs. By decoupling the solution algorithm from the concrete graph model, this approach allows for variations of the model without affecting the algorithm. Furthermore, complementing the standard CSP definition, a query concept is introduced to allow for abstract representation of concrete implementation properties for optimization purposes.}
+      \field{booktitle}{Theory and Application of Graph Transformations}
+      \field{isbn}{978-3-540-46464-8}
+      \field{title}{Utilizing Constraint Satisfaction Techniques for Efficient Graph Pattern Matching}
+      \field{year}{2000}
+      \field{pages}{238\bibrangedash 251}
+      \range{pages}{14}
+    \endentry
+    \entry{Saha2014}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=afd1e60f98a1b8edc596eafa58fcb7f5}{%
+           family={Saha},
+           familyi={S\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=fee7297f37e2cb3aff66c7704fd2aad2}{%
+           family={Alam},
+           familyi={A\bibinitperiod},
+           given={M.N.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=f2498d8b227d0197d148e56e693c47c4}{%
+           family={Mondol},
+           familyi={M\bibinitperiod},
+           given={R.K.},
            giveni={R\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \list{publisher}{2}{%
+        {Institute of Electrical}%
+        {Electronics Engineers Inc.}%
+      }
+      \strng{namehash}{15771f569ec6b923c522acc9ce446234}
+      \strng{fullhash}{15771f569ec6b923c522acc9ce446234}
+      \strng{bibnamehash}{15771f569ec6b923c522acc9ce446234}
+      \strng{authorbibnamehash}{15771f569ec6b923c522acc9ce446234}
+      \strng{authornamehash}{15771f569ec6b923c522acc9ce446234}
+      \strng{authorfullhash}{15771f569ec6b923c522acc9ce446234}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781479926961}
+      \field{journaltitle}{5th International Conference on Computing Communication and Networking Technologies, ICCCNT 2014}
+      \field{title}{{FPGA} implementation of FlexRay protocol with built-in-self-test capability}
+      \field{year}{2014}
+      \verb{doi}
+      \verb 10.1109/ICCCNT.2014.6963106
+      \endverb
+    \endentry
+    \entry{QuickSI}{article}{}
+      \name{author}{4}{}{%
+        {{hash=5239eff550895bb5128519fc0fc9cae8}{%
+           family={Shang},
+           familyi={S\bibinitperiod},
+           given={Haichuan},
+           giveni={H\bibinitperiod}}}%
+        {{hash=f5acec98b29ee91fa6b08b85a6a0adad}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Ying},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=1e1a342aa4d9a000cc638434ec3948f6}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Xuemin},
+           giveni={X\bibinitperiod}}}%
+        {{hash=884c1f71d9e6e18affc0cfdbd135f5ae}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Jeffrey\bibnamedelima Xu},
+           giveni={J\bibinitperiod\bibinitdelim X\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {VLDB Endowment}%
+      }
+      \strng{namehash}{96fc102a890a7a52fa333a9f9068bc65}
+      \strng{fullhash}{8840f425e941b825cd1c7fc405da6f5e}
+      \strng{bibnamehash}{8840f425e941b825cd1c7fc405da6f5e}
+      \strng{authorbibnamehash}{8840f425e941b825cd1c7fc405da6f5e}
+      \strng{authornamehash}{96fc102a890a7a52fa333a9f9068bc65}
+      \strng{authorfullhash}{8840f425e941b825cd1c7fc405da6f5e}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2150-8097}
+      \field{journaltitle}{Proc. VLDB Endow.}
+      \field{month}{8}
+      \field{number}{1}
+      \field{title}{Taming Verification Hardness: An Efficient Algorithm for Testing Subgraph Isomorphism}
+      \field{volume}{1}
+      \field{year}{2008}
+      \field{pages}{364\bibrangedash 375}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.14778/1453856.1453899
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.14778/1453856.1453899
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.14778/1453856.1453899
+      \endverb
+    \endentry
+    \entry{LAD}{article}{}
+      \name{author}{1}{}{%
+        {{hash=4ba025b3874f542af6cb6b34e2fb22e0}{%
+           family={Solnon},
+           familyi={S\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{4ba025b3874f542af6cb6b34e2fb22e0}
+      \strng{fullhash}{4ba025b3874f542af6cb6b34e2fb22e0}
+      \strng{bibnamehash}{4ba025b3874f542af6cb6b34e2fb22e0}
+      \strng{authorbibnamehash}{4ba025b3874f542af6cb6b34e2fb22e0}
+      \strng{authornamehash}{4ba025b3874f542af6cb6b34e2fb22e0}
+      \strng{authorfullhash}{4ba025b3874f542af6cb6b34e2fb22e0}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00043702}
+      \field{journaltitle}{Artificial Intelligence}
+      \field{number}{12-13}
+      \field{title}{AllDifferent-based filtering for subgraph isomorphism}
+      \field{volume}{174}
+      \field{year}{2010}
+      \field{pages}{850\bibrangedash 864}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1016/j.artint.2010.05.002
+      \endverb
+      \verb{urlraw}
+      \verb https://www.scopus.com/inward/record.uri?eid=2-s2.0-77953714503&doi=10.1016%2fj.artint.2010.05.002&partnerID=40&md5=f364639a483235ee34443bf8d2732fbe
+      \endverb
+      \verb{url}
+      \verb https://www.scopus.com/inward/record.uri?eid=2-s2.0-77953714503&doi=10.1016%2fj.artint.2010.05.002&partnerID=40&md5=f364639a483235ee34443bf8d2732fbe
+      \endverb
+    \endentry
+    \entry{Sun2012788}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=13ccffa8fb1a9b606fa3ce4e5854867a}{%
+           family={Sun},
+           familyi={S\bibinitperiod},
+           given={Z.},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=39856f0439f35f79a8eed8b12d26166c}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=39856f0439f35f79a8eed8b12d26166c}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=5cfa96698943f3393b7894eac8f333b2}{%
+           family={Shao},
+           familyi={S\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=ef065b28c31984323fd6d3483d29aafd}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{6a20f156e44e1b1ce47e338350bdf2b9}
+      \strng{fullhash}{64e51d46e6e2bd457e8d1cccf2fbab18}
+      \strng{bibnamehash}{64e51d46e6e2bd457e8d1cccf2fbab18}
+      \strng{authorbibnamehash}{64e51d46e6e2bd457e8d1cccf2fbab18}
+      \strng{authornamehash}{6a20f156e44e1b1ce47e338350bdf2b9}
+      \strng{authorfullhash}{64e51d46e6e2bd457e8d1cccf2fbab18}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{21508097}
+      \field{journaltitle}{Proceedings of the VLDB Endowment}
+      \field{number}{9}
+      \field{title}{Efficient subgraph matching on billion node graphs}
+      \field{volume}{5}
+      \field{year}{2012}
+      \field{pages}{788\bibrangedash 799}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.14778/2311906.2311907
+      \endverb
+      \verb{urlraw}
+      \verb https://www.scopus.com/inward/record.uri?eid=2-s2.0-84863746279&doi=10.14778%2f2311906.2311907&partnerID=40&md5=f3d8d1a18bce9ded8c3fdddda6606139
+      \endverb
+      \verb{url}
+      \verb https://www.scopus.com/inward/record.uri?eid=2-s2.0-84863746279&doi=10.14778%2f2311906.2311907&partnerID=40&md5=f3d8d1a18bce9ded8c3fdddda6606139
+      \endverb
+    \endentry
+    \entry{ullmann1976}{article}{}
+      \name{author}{1}{}{%
+        {{hash=a2002268c1fa29f360509adfc687e144}{%
+           family={Ullmann},
+           familyi={U\bibinitperiod},
+           given={J.\bibnamedelimi R.},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
       }
       \list{location}{1}{%
         {New York, NY, USA}%
@@ -142,35 +2157,697 @@
       \list{publisher}{1}{%
         {Association for Computing Machinery}%
       }
-      \strng{namehash}{bcd2542c3ccb35df6b92fcbff5c33971}
-      \strng{fullhash}{bcd2542c3ccb35df6b92fcbff5c33971}
-      \strng{bibnamehash}{bcd2542c3ccb35df6b92fcbff5c33971}
-      \strng{authorbibnamehash}{bcd2542c3ccb35df6b92fcbff5c33971}
-      \strng{authornamehash}{bcd2542c3ccb35df6b92fcbff5c33971}
-      \strng{authorfullhash}{bcd2542c3ccb35df6b92fcbff5c33971}
-      \field{sortinit}{V}
-      \field{sortinithash}{02432525618c08e2b03cac47c19764af}
+      \strng{namehash}{a2002268c1fa29f360509adfc687e144}
+      \strng{fullhash}{a2002268c1fa29f360509adfc687e144}
+      \strng{bibnamehash}{a2002268c1fa29f360509adfc687e144}
+      \strng{authorbibnamehash}{a2002268c1fa29f360509adfc687e144}
+      \strng{authornamehash}{a2002268c1fa29f360509adfc687e144}
+      \strng{authorfullhash}{a2002268c1fa29f360509adfc687e144}
+      \field{sortinit}{U}
+      \field{sortinithash}{77a6935510e008adcf5b555e7b4f0711}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{1084-4309}
-      \field{journaltitle}{ACM Transactions on Design Automation of Electronic Systems}
-      \field{month}{10}
-      \field{number}{4}
-      \field{title}{BDD-Based Logic Synthesis for LUT-Based FPGAs}
-      \field{volume}{7}
-      \field{year}{2002}
-      \field{pages}{501\bibrangedash 525}
-      \range{pages}{25}
+      \field{issn}{0004-5411}
+      \field{journaltitle}{J. ACM}
+      \field{month}{1}
+      \field{number}{1}
+      \field{title}{An Algorithm for Subgraph Isomorphism}
+      \field{volume}{23}
+      \field{year}{1976}
+      \field{pages}{31\bibrangedash 42}
+      \range{pages}{12}
       \verb{doi}
-      \verb 10.1145/605440.605442
+      \verb 10.1145/321921.321925
       \endverb
       \verb{urlraw}
-      \verb https://doi.org/10.1145/605440.605442
+      \verb https://doi.org/10.1145/321921.321925
       \endverb
       \verb{url}
-      \verb https://doi.org/10.1145/605440.605442
+      \verb https://doi.org/10.1145/321921.321925
       \endverb
-      \keyw{FPGA,decomposition,logic synthesis,BDD}
+    \endentry
+    \entry{wolf2016yosys}{article}{}
+      \name{author}{1}{}{%
+        {{hash=1ad2f7e98b23682c3e9b4d44e3cc850b}{%
+           family={Wolf},
+           familyi={W\bibinitperiod},
+           given={Clifford},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{1ad2f7e98b23682c3e9b4d44e3cc850b}
+      \strng{fullhash}{1ad2f7e98b23682c3e9b4d44e3cc850b}
+      \strng{bibnamehash}{1ad2f7e98b23682c3e9b4d44e3cc850b}
+      \strng{authorbibnamehash}{1ad2f7e98b23682c3e9b4d44e3cc850b}
+      \strng{authornamehash}{1ad2f7e98b23682c3e9b4d44e3cc850b}
+      \strng{authorfullhash}{1ad2f7e98b23682c3e9b4d44e3cc850b}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Y}osys {O}pen {SY}nthesis {S}uite}
+      \field{year}{2016}
+    \endentry
+    \entry{XIAONODEDISJOINT}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=2372c327abe4e8df4d4a28ad8d3655e7}{%
+           family={Xiao},
+           familyi={X\bibinitperiod},
+           given={Yanghua},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=78b1e26e42f1c66abbe501cc9ea1b676}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Wentao},
+           giveni={W\bibinitperiod}}}%
+        {{hash=f27ec46ccd272a021fd78bdac92dd490}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod}}}%
+        {{hash=5abe4f476807754998a03a3b97453478}{%
+           family={He},
+           familyi={H\bibinitperiod},
+           given={Zhenying},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=37a0d10a35d574bc85b97555f0f1665c}{%
+           family={Haritsa},
+           familyi={H\bibinitperiod},
+           given={Jayant\bibnamedelima R.},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=b389781580a6743b0b820c0b6fc6f789}{%
+           family={Kotagiri},
+           familyi={K\bibinitperiod},
+           given={Ramamohanarao},
+           giveni={R\bibinitperiod}}}%
+        {{hash=566f0ddb38593d65b5e785ccda2deddb}{%
+           family={Pudi},
+           familyi={P\bibinitperiod},
+           given={Vikram},
+           giveni={V\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{d2fd966a1fea337b29672402805e72ef}
+      \strng{fullhash}{0bd7ba0e6703896a1f40080e0be90ea8}
+      \strng{bibnamehash}{0bd7ba0e6703896a1f40080e0be90ea8}
+      \strng{authorbibnamehash}{0bd7ba0e6703896a1f40080e0be90ea8}
+      \strng{authornamehash}{d2fd966a1fea337b29672402805e72ef}
+      \strng{authorfullhash}{0bd7ba0e6703896a1f40080e0be90ea8}
+      \strng{editorbibnamehash}{049d65f1088e0ce06b59cd3e03b387f1}
+      \strng{editornamehash}{049d65f1088e0ce06b59cd3e03b387f1}
+      \strng{editorfullhash}{049d65f1088e0ce06b59cd3e03b387f1}
+      \field{sortinit}{X}
+      \field{sortinithash}{e90038f30fa4b9ce59606fc8347e3cc7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Recently, great efforts have been dedicated to researches on the management of large-scale graph-based data, where node disjoint subgraph homeomorphism relation between graphs has been shown to be more suitable than (sub)graph isomorphism in many cases, especially in those cases where node skipping and node mismatching are desired. However, no efficient algorithm for node disjoint subgraph homeomorphism determination (ndSHD) has been available. In this paper, we propose two computationally efficient ndSHD algorithms based on state spaces searching with backtracking, which employ many heuristics to prune the search spaces. Experimental results on synthetic data sets show that the proposed algorithms are efficient, require relatively little time in most of cases, can scale to large or dense graphs, and can accommodate to more complex fuzzy matching cases.}
+      \field{booktitle}{Database Systems for Advanced Applications}
+      \field{isbn}{978-3-540-78568-2}
+      \field{title}{Efficient Algorithms for Node Disjoint Subgraph Homeomorphism Determination}
+      \field{year}{2008}
+      \field{pages}{452\bibrangedash 460}
+      \range{pages}{9}
+    \endentry
+    \entry{Xie2017}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=ee44d13b0c9ea1efe328122e09b851f0}{%
+           family={Xie},
+           familyi={X\bibinitperiod},
+           given={X.},
+           giveni={X\bibinitperiod}}}%
+        {{hash=ae6f64f7b429f6425fbe070323390f1b}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Z.},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=32e563370422457790db030ab2c13183}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{07fcfa367c023a12f8bb2796ccc75545}
+      \strng{fullhash}{07fcfa367c023a12f8bb2796ccc75545}
+      \strng{bibnamehash}{07fcfa367c023a12f8bb2796ccc75545}
+      \strng{authorbibnamehash}{07fcfa367c023a12f8bb2796ccc75545}
+      \strng{authornamehash}{07fcfa367c023a12f8bb2796ccc75545}
+      \strng{authorfullhash}{07fcfa367c023a12f8bb2796ccc75545}
+      \field{sortinit}{X}
+      \field{sortinithash}{e90038f30fa4b9ce59606fc8347e3cc7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{© 2016 IEEE. Recently, subgraph matching has been implemented in more and more domains, such as social network and semantic web. An approximated solution for subgraph matching named strong simulation has been put forward. Strong Simulation can preserve the topology of data graphs and find a bounded number of matches, but the complexity further holds a cubic-time, so it's yet intractable to deal with large graphs. To solve the problem, this paper focuses on a partition scheme to reduce the search space of subgraph matching algorithm. Firstly, we present a pruning method on data graph based on the connection relationships of nodes and edges in query graph. Secondly, we propose to use a multilevel partitioning algorithm when the subgraphs we get from former step are too large. Thirdly, we propose an algorithm for subgraph matching based on the partitioning scheme, which can preserve the topology of query graph and guarantee the correctness of results. Lastly, we experimentally prove the effectiveness and efficiency of this scheme, both using real-life data and synthetic data. It turns out that our method is quite efficient and the matching results are also satisfactory.}
+      \field{booktitle}{Proceedings - 13th Web Information Systems and Applications Conference, WISA 2016 - In conjunction with 1st Symposium on Big Data Processing and Analysis, BDPA 2016 and 1st Workshop on Information System Security, ISS 2016}
+      \field{isbn}{9781509054374}
+      \field{title}{{Efficient Subgraph Matching in Large Graph with Partitioning Scheme}}
+      \field{year}{2017}
+      \field{pages}{28\bibrangedash 33}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/WISA.2016.16
+      \endverb
+    \endentry
+    \entry{Yalla2009225}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=426cfa92a2bb12b055986e6b8a05f02b}{%
+           family={Yalla},
+           familyi={Y\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=eadf73613877588a81cd51efd688a693}{%
+           family={Kaps},
+           familyi={K\bibinitperiod},
+           given={J.-P.},
+           giveni={J\bibinithyphendelim P\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \strng{namehash}{0cae48a18abfbf1860eabbcf483f0c34}
+      \strng{fullhash}{0cae48a18abfbf1860eabbcf483f0c34}
+      \strng{bibnamehash}{0cae48a18abfbf1860eabbcf483f0c34}
+      \strng{authorbibnamehash}{0cae48a18abfbf1860eabbcf483f0c34}
+      \strng{authornamehash}{0cae48a18abfbf1860eabbcf483f0c34}
+      \strng{authorfullhash}{0cae48a18abfbf1860eabbcf483f0c34}
+      \field{sortinit}{Y}
+      \field{sortinithash}{6ae2ff5458ff901249c2745238c951b7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780769539171}
+      \field{journaltitle}{ReConFig'09 - 2009 International Conference on ReConFigurable Computing and FPGAs}
+      \field{title}{Lightweight cryptography for {FPGAs}}
+      \field{year}{2009}
+      \field{pages}{225\bibrangedash 230}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/ReConFig.2009.54
+      \endverb
+    \endentry
+    \entry{Yu2018}{article}{}
+      \name{author}{5}{}{%
+        {{hash=f46cff6a47143fdbd36ae8842919e073}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=5b7ae85b03c5b187088b01846c0a6d48}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=aa5a7c8780167efaa3ed45566a0806a0}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=03f38c879ca0bc9f1dcbada69ea0519a}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=1e698c271fc1d390e8c94e298dcbfff6}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={H.-M.},
+           giveni={H\bibinithyphendelim M\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \list{publisher}{1}{%
+        {MDPI AG}%
+      }
+      \strng{namehash}{56581c67a86bce08f334a1ace4c9fccb}
+      \strng{fullhash}{a41bac178c1f680ce3580d796a296b71}
+      \strng{bibnamehash}{a41bac178c1f680ce3580d796a296b71}
+      \strng{authorbibnamehash}{a41bac178c1f680ce3580d796a296b71}
+      \strng{authornamehash}{56581c67a86bce08f334a1ace4c9fccb}
+      \strng{authorfullhash}{a41bac178c1f680ce3580d796a296b71}
+      \field{sortinit}{Y}
+      \field{sortinithash}{6ae2ff5458ff901249c2745238c951b7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{20799292}
+      \field{journaltitle}{Electronics (Switzerland)}
+      \field{number}{10}
+      \field{title}{Recent advances in {FPGA} reverse engineering}
+      \field{volume}{7}
+      \field{year}{2018}
+      \verb{doi}
+      \verb 10.3390/electronics7100246
+      \endverb
+    \endentry
+    \entry{Zampelli2010}{article}{}
+      \name{author}{3}{}{%
+        {{hash=e9cac221437f7c20c07283be96993b34}{%
+           family={Zampelli},
+           familyi={Z\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=6c4aadd72f670c7c7d12a6580314d2a0}{%
+           family={Deville},
+           familyi={D\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=4ba025b3874f542af6cb6b34e2fb22e0}{%
+           family={Solnon},
+           familyi={S\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{22ecb9ba7413aeb9f1a3bcc359b87046}
+      \strng{fullhash}{22ecb9ba7413aeb9f1a3bcc359b87046}
+      \strng{bibnamehash}{22ecb9ba7413aeb9f1a3bcc359b87046}
+      \strng{authorbibnamehash}{22ecb9ba7413aeb9f1a3bcc359b87046}
+      \strng{authornamehash}{22ecb9ba7413aeb9f1a3bcc359b87046}
+      \strng{authorfullhash}{22ecb9ba7413aeb9f1a3bcc359b87046}
+      \field{sortinit}{Z}
+      \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The subgraph isomorphism problem consists in deciding if there exists a copy of a pattern graph in a target graph. We introduce in this paper a global constraint and an associated filtering algorithm to solve this problem within the context of constraint programming. The main idea of the filtering algorithm is to label every node with respect to its relationships with other nodes of the graph, and to define a partial order on these labels in order to express compatibility of labels for subgraph isomorphism. This partial order over labels is used to filter domains. Labelings can also be strengthened by adding information from the labels of neighbors. Such a strengthening can be applied iteratively until a fixpoint is reached. Practical experiments illustrate that our new filtering approach is more effective on difficult instances of scale free graphs than state-of-the-art algorithms and other constraint programming approaches. © Springer Science + Business Media, LLC 2009.}
+      \field{journaltitle}{Constraints}
+      \field{number}{3}
+      \field{title}{{Solving subgraph isomorphism problems with constraint programming}}
+      \field{volume}{15}
+      \field{year}{2010}
+      \field{pages}{327\bibrangedash 353}
+      \range{pages}{27}
+      \verb{doi}
+      \verb 10.1007/s10601-009-9074-3
+      \endverb
+    \endentry
+    \entry{Zhang2007}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=24007f156eb06261431b2b25b64844f8}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=e4de55a2232dd35ac44fb9cf7b51a0d3}{%
+           family={Hu},
+           familyi={H\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=51e5fb9f55c5b5d1edb17aea3861c908}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{d87d16cad93026a83bbac571eae20a1b}
+      \strng{fullhash}{d87d16cad93026a83bbac571eae20a1b}
+      \strng{bibnamehash}{d87d16cad93026a83bbac571eae20a1b}
+      \strng{authorbibnamehash}{d87d16cad93026a83bbac571eae20a1b}
+      \strng{authornamehash}{d87d16cad93026a83bbac571eae20a1b}
+      \strng{authorfullhash}{d87d16cad93026a83bbac571eae20a1b}
+      \field{sortinit}{Z}
+      \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Graphs are widely used to model complex structured data such as XML documents, protein networks, and chemical compounds. One of the fundamental problems in graph databases is efficient search and retrieval of graphs using indexing techniques. In this paper, we study the problem of indexing graph databases using frequent subtrees as indexing structures. Trees can be manipulated efficiently while preserving a lot of structural information of the original graphs. In our proposed method, frequent subtrees of a database are selected as the feature set. To save memory, the set of feature trees is shrunk based on a support threshold function and their discriminative power. A treepartition based query processing scheme is proposed to perform graph queries. The concept of Center Distance Constraints is introduced to prune the search space. Furthermore, a new algorithm which utilizes the location information of indexing structures is used to perform subgraph isomorphism tests. We apply our method on a wide range of real and synthetic data to demonstrate the usefulness and effectiveness of this approach. © 2007 IEEE.}
+      \field{booktitle}{Proceedings - International Conference on Data Engineering}
+      \field{isbn}{9781424408030}
+      \field{title}{{TreePi: A novel graph indexing method}}
+      \field{year}{2007}
+      \field{pages}{966\bibrangedash 975}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1109/ICDE.2007.368955
+      \endverb
+    \endentry
+    \entry{gaddi}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=42f529b7f497ff7acc1d2547f55bdb47}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Shijie},
+           giveni={S\bibinitperiod}}}%
+        {{hash=5c3dbc2a541280cfc96792878d4d773c}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Shirong},
+           giveni={S\bibinitperiod}}}%
+        {{hash=df7964e44c59618d377ea26520d99168}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Jiong},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Saint Petersburg, Russia}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{213f6f2cde68595148d88541c1ef5ab9}
+      \strng{fullhash}{213f6f2cde68595148d88541c1ef5ab9}
+      \strng{bibnamehash}{213f6f2cde68595148d88541c1ef5ab9}
+      \strng{authorbibnamehash}{213f6f2cde68595148d88541c1ef5ab9}
+      \strng{authornamehash}{213f6f2cde68595148d88541c1ef5ab9}
+      \strng{authorfullhash}{213f6f2cde68595148d88541c1ef5ab9}
+      \field{sortinit}{Z}
+      \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 12th International Conference on Extending Database Technology: Advances in Database Technology}
+      \field{isbn}{9781605584225}
+      \field{series}{EDBT ’09}
+      \field{title}{GADDI: Distance Index Based Subgraph Matching in Biological Networks}
+      \field{year}{2009}
+      \field{pages}{192\bibrangedash 203}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1145/1516360.1516384
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/1516360.1516384
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/1516360.1516384
+      \endverb
+    \endentry
+    \entry{8653869}{article}{}
+      \name{author}{4}{}{%
+        {{hash=6987c26bf5f9b6e119893b5d925c7b8c}{%
+           family={{Zhang}},
+           familyi={Z\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=3702f1c146e64a6c91fc47b81ea59fc7}{%
+           family={{Wang}},
+           familyi={W\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5ec62d743a3bd0939cc1071164c54834}{%
+           family={{Guo}},
+           familyi={G\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=d90f53b6c47cfea3540b0fb9da23dbd7}{%
+           family={{Chen}},
+           familyi={C\bibinitperiod},
+           given={Z.},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{47fcee5bef758c9a691e95658bdc10e3}
+      \strng{fullhash}{cb31c6822ac15a8ef27a341c0ae67c95}
+      \strng{bibnamehash}{cb31c6822ac15a8ef27a341c0ae67c95}
+      \strng{authorbibnamehash}{cb31c6822ac15a8ef27a341c0ae67c95}
+      \strng{authornamehash}{47fcee5bef758c9a691e95658bdc10e3}
+      \strng{authorfullhash}{cb31c6822ac15a8ef27a341c0ae67c95}
+      \field{sortinit}{Z}
+      \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2169-3536}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{A Comprehensive {FPGA} Reverse Engineering Tool-Chain: From Bitstream to {RTL} Code}
+      \field{volume}{7}
+      \field{year}{2019}
+      \field{pages}{38379\bibrangedash 38389}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1109/ACCESS.2019.2901949
+      \endverb
+      \keyw{field programmable gate arrays;logic design;reverse engineering;RTL code;FPGA bitstream;FPGA architecture information;bitstream mapping information;bitstream reversal tool;reverse engineering stages;precise reverse engineering;comprehensive FPGA reverse engineering tool-chain;Hardware Trojan attacks;register-transfer level code;netlist-code-based HT detection;field-programmable gate arrays;integrated database;netlist reversal tool;Field programmable gate arrays;Tools;Reverse engineering;Hardware;Trojan horses;Computer architecture;Switches;FPGA;reverse engineering;bitstream;hardware trojan}
+    \endentry
+    \entry{spath}{article}{}
+      \name{author}{2}{}{%
+        {{hash=77c63a9ff95acd2be483d360def92ba4}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Peixiang},
+           giveni={P\bibinitperiod}}}%
+        {{hash=7cacfe272c4d395c979d6aecd2f5ec9c}{%
+           family={Han},
+           familyi={H\bibinitperiod},
+           given={Jiawei},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {VLDB Endowment}%
+      }
+      \strng{namehash}{5e370ed5819e06fbcdc14b1776e8a32e}
+      \strng{fullhash}{5e370ed5819e06fbcdc14b1776e8a32e}
+      \strng{bibnamehash}{5e370ed5819e06fbcdc14b1776e8a32e}
+      \strng{authorbibnamehash}{5e370ed5819e06fbcdc14b1776e8a32e}
+      \strng{authornamehash}{5e370ed5819e06fbcdc14b1776e8a32e}
+      \strng{authorfullhash}{5e370ed5819e06fbcdc14b1776e8a32e}
+      \field{sortinit}{Z}
+      \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2150-8097}
+      \field{journaltitle}{Proc. VLDB Endow.}
+      \field{month}{9}
+      \field{number}{1–2}
+      \field{title}{On Graph Query Optimization in Large Networks}
+      \field{volume}{3}
+      \field{year}{2010}
+      \field{pages}{340\bibrangedash 351}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.14778/1920841.1920887
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.14778/1920841.1920887
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.14778/1920841.1920887
+      \endverb
+    \endentry
+    \entry{ZHENG2014116}{article}{}
+      \name{author}{6}{}{%
+        {{hash=47f186914841809b3eb163610d6b6bed}{%
+           family={Zheng},
+           familyi={Z\bibinitperiod},
+           given={Weiguo},
+           giveni={W\bibinitperiod}}}%
+        {{hash=b96ad380f16252e8af65f57335baab97}{%
+           family={Zou},
+           familyi={Z\bibinitperiod},
+           given={Lei},
+           giveni={L\bibinitperiod}}}%
+        {{hash=f40eeb463314c0badec31d5f6acd6c38}{%
+           family={Lian},
+           familyi={L\bibinitperiod},
+           given={Xiang},
+           giveni={X\bibinitperiod}}}%
+        {{hash=7478cebb3f743da449da1308fb5b53cc}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Huaming},
+           giveni={H\bibinitperiod}}}%
+        {{hash=f27ec46ccd272a021fd78bdac92dd490}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod}}}%
+        {{hash=df1f95c2e74fde634f4ea228b82d50dd}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Dongyan},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{1470365ad930216dee3a2e9c8b7a7f2a}
+      \strng{fullhash}{c182541c91cc5d6492fd1b68c9673fa4}
+      \strng{bibnamehash}{c182541c91cc5d6492fd1b68c9673fa4}
+      \strng{authorbibnamehash}{c182541c91cc5d6492fd1b68c9673fa4}
+      \strng{authornamehash}{1470365ad930216dee3a2e9c8b7a7f2a}
+      \strng{authorfullhash}{c182541c91cc5d6492fd1b68c9673fa4}
+      \field{sortinit}{Z}
+      \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Recent progress in biology and computer science have generated many complicated networks, most of which can be modeled as large and dense graphs. Developing effective and efficient subgraph match methods over these graphs is urgent, meaningful and necessary. Although some excellent exploratory approaches have been proposed these years, they show poor performances when the graphs are large and dense. This paper presents a novel Subgraph Query technique Based on Clique feature, called SQBC, which integrates the carefully designed clique encoding with the existing vertex encoding [40] as the basic index unit to reduce the search space. Furthermore, SQBC optimizes the subgraph isomorphism test based on clique features. Extensive experiments over biological networks, RDF dataset and synthetic graphs have shown that SQBC outperforms the most popular competitors both in effectiveness and efficiency especially when the data graphs are large and dense.}
+      \field{issn}{0020-0255}
+      \field{journaltitle}{Information Sciences}
+      \field{title}{SQBC: An efficient subgraph matching method over large and dense graphs}
+      \field{volume}{261}
+      \field{year}{2014}
+      \field{pages}{116\bibrangedash 131}
+      \range{pages}{16}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.ins.2013.10.003
+      \endverb
+      \verb{urlraw}
+      \verb http://www.sciencedirect.com/science/article/pii/S0020025513007123
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/S0020025513007123
+      \endverb
+      \keyw{Algorithm,Large network,Database,Graph theory,Subgraph isomorphism,Index strategy}
+    \endentry
+    \entry{Zhu2010140}{article}{}
+      \name{author}{5}{}{%
+        {{hash=a0926b6039f743fc204323d9c1b5db43}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=1f26f664835ac6c347db22001b657f1a}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=d54334745e5a0b56a24e9d644566f3e4}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={X.},
+           giveni={X\bibinitperiod}}}%
+        {{hash=8628895f6e2475e1c8162e02b2e0857e}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=8c0d8d495d30364a6fdc14d3ee19f5b7}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={W.},
+           giveni={W\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \strng{namehash}{e6ec5beca346d9e80b8818d90f8949d6}
+      \strng{fullhash}{eb30361eed9ab4e7e35ec1b0c68689b6}
+      \strng{bibnamehash}{eb30361eed9ab4e7e35ec1b0c68689b6}
+      \strng{authorbibnamehash}{eb30361eed9ab4e7e35ec1b0c68689b6}
+      \strng{authornamehash}{e6ec5beca346d9e80b8818d90f8949d6}
+      \strng{authorfullhash}{eb30361eed9ab4e7e35ec1b0c68689b6}
+      \field{extraname}{1}
+      \field{sortinit}{Z}
+      \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{03029743}
+      \field{journaltitle}{Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)}
+      \field{number}{PART 1}
+      \field{title}{NOVA: A novel and efficient framework for finding subgraph isomorphism mappings in large graphs}
+      \field{volume}{5981 LNCS}
+      \field{year}{2010}
+      \field{pages}{140\bibrangedash 154}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1007/978-3-642-12026-8_13
+      \endverb
+      \verb{urlraw}
+      \verb https://www.scopus.com/inward/record.uri?eid=2-s2.0-77957896367&doi=10.1007%2f978-3-642-12026-8_13&partnerID=40&md5=6b32a9d1a740c10a9b259724cdf14e0b
+      \endverb
+      \verb{url}
+      \verb https://www.scopus.com/inward/record.uri?eid=2-s2.0-77957896367&doi=10.1007%2f978-3-642-12026-8_13&partnerID=40&md5=6b32a9d1a740c10a9b259724cdf14e0b
+      \endverb
+    \endentry
+    \entry{Zhu20111272}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=0029d410aa3a4f17856f92f67e9000a0}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=dfcd697da58e41b07b0927e77d83ac14}{%
+           family={Song},
+           familyi={S\bibinitperiod},
+           given={Q.},
+           giveni={Q\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \strng{namehash}{623dc5fcb53578fa727486f193b95575}
+      \strng{fullhash}{623dc5fcb53578fa727486f193b95575}
+      \strng{bibnamehash}{623dc5fcb53578fa727486f193b95575}
+      \strng{authorbibnamehash}{623dc5fcb53578fa727486f193b95575}
+      \strng{authornamehash}{623dc5fcb53578fa727486f193b95575}
+      \strng{authorfullhash}{623dc5fcb53578fa727486f193b95575}
+      \field{sortinit}{Z}
+      \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780769544083}
+      \field{issn}{15504786}
+      \field{journaltitle}{Proceedings - IEEE International Conference on Data Mining, ICDM}
+      \field{title}{A study of Laplacian spectra of graph for subgraph queries}
+      \field{year}{2011}
+      \field{pages}{1272\bibrangedash 1277}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/ICDM.2011.17
+      \endverb
+      \verb{urlraw}
+      \verb https://www.scopus.com/inward/record.uri?eid=2-s2.0-84857150632&doi=10.1109%2fICDM.2011.17&partnerID=40&md5=5f816440408517847f7578aa00bfda4d
+      \endverb
+      \verb{url}
+      \verb https://www.scopus.com/inward/record.uri?eid=2-s2.0-84857150632&doi=10.1109%2fICDM.2011.17&partnerID=40&md5=5f816440408517847f7578aa00bfda4d
+      \endverb
+    \endentry
+    \entry{Zhu2019}{article}{}
+      \name{author}{7}{}{%
+        {{hash=0029d410aa3a4f17856f92f67e9000a0}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=34c1df36e9f676fe341ec67a5a1a511c}{%
+           family={Yao},
+           familyi={Y\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=61ad10c626e1d641e0b1d7b5f48d3233}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=f51a93248f1cb84c029683f6e709a1a2}{%
+           family={Hei},
+           familyi={H\bibinitperiod},
+           given={X.},
+           giveni={X\bibinitperiod}}}%
+        {{hash=746c23a7e527727576c544551cadb0f8}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Q.},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=cac0d9902b8b23748265a4e8713b4581}{%
+           family={Ji},
+           familyi={J\bibinitperiod},
+           given={W.},
+           giveni={W\bibinitperiod}}}%
+        {{hash=e66a9b9ffe34ff6df59c13d1f576254b}{%
+           family={Yao},
+           familyi={Y\bibinitperiod},
+           given={Q.},
+           giveni={Q\bibinitperiod}}}%
+      }
+      \strng{namehash}{65bfc0d8e6e8ad7cc0dbc0a1e53c277f}
+      \strng{fullhash}{c51340c5f4190cbd9b9ba36ad51d3657}
+      \strng{bibnamehash}{c51340c5f4190cbd9b9ba36ad51d3657}
+      \strng{authorbibnamehash}{c51340c5f4190cbd9b9ba36ad51d3657}
+      \strng{authornamehash}{65bfc0d8e6e8ad7cc0dbc0a1e53c277f}
+      \strng{authorfullhash}{c51340c5f4190cbd9b9ba36ad51d3657}
+      \field{extraname}{2}
+      \field{sortinit}{Z}
+      \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{© 2018, Springer-Verlag London Ltd., part of Springer Nature. Graph and graph database are widely used in many domains, and the graph querying attracts more and more attentions. Among these querying problems, subgraph querying is the most compelling one, since it contains very expensive subgraph isomorphism. The paper proposes a novel subgraph querying method PLGCoding, which use some information of shortest paths and Laplacian spectra to filter out false positives. Specifically, we first extract some features, including some information of vertices, edges, the shortest paths and Laplacian spectra, and encode extracted features. An index PLGCode-Tree is built based on codes to shrink the candidate set. Then, we propose two-step filtering strategy to implement the filtering-and-verification framework and thus generate the answer set. Compared with competing methods on real dataset, experimental results show PLGCoding can improve the querying efficiency.}
+      \field{journaltitle}{Neural Computing and Applications}
+      \field{number}{9}
+      \field{title}{{A novel subgraph querying method based on paths and spectra}}
+      \field{volume}{31}
+      \field{year}{2019}
+      \field{pages}{5671\bibrangedash 5678}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1007/s00521-018-3837-y
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

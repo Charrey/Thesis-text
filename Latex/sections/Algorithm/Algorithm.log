@@ -1,0 +1,139 @@
+This is LuaTeX, Version 1.10.0 (MiKTeX 2.9.7050 64-bit)  (format=lualatex 2019.7.12)  10 MAR 2020 11:32
+ restricted system commands enabled.
+**Algorithm.tex
+(./Algorithm.tex
+LaTeX2e <2018-12-01>
+Lua module: luaotfload-main 2019-05-18 2.97 luaotfload entry point
+Lua module: luaotfload-init 2019-05-18 2.97 luaotfload submodule / initializatio
+n
+Lua module: lualibs 2019-05-18 2.65 ConTeXt Lua standard libraries.
+Lua module: lualibs-extended 2019-05-18 2.65 ConTeXt Lua libraries -- extended c
+ollection.
+Lua module: luaotfload-log 2019-05-18 2.97 luaotfload submodule / logging
+Lua module: luaotfload-parsers 2019-05-18 2.97 luaotfload submodule / filelist
+Lua module: luaotfload-configuration 2019-05-18 2.97 luaotfload submodule / conf
+ig file reader
+luaotfload | conf : Root cache directory is C:/Users/Pim van Leeuwen/AppData/Loc
+al/MiKTeX/2.9/luatex-cache/generic/names.
+luaotfload | init : Loading fontloader “fontloader-2019-05-18.lua” from kpse
+-resolved path “C:/Program Files/MiKTeX 2.9/tex/luatex/luaotfload/fontloader-2
+019-05-18.lua”.
+Lua-only attribute luaotfload@state = 2
+Lua-only attribute luaotfload@noligature = 3
+Lua-only attribute luaotfload@syllabe = 4
+luaotfload | init : Context OpenType loader version “3.108”
+Inserting `luaotfload.node_processor' at position 1 in `pre_linebreak_filter'.
+Inserting `luaotfload.node_processor' at position 1 in `hpack_filter'.
+Lua module: luaotfload-loaders 2019-05-18 2.97 luaotfload submodule / callback h
+andling
+Inserting `luaotfload.define_font' at position 1 in `define_font'.
+Lua module: luaotfload-database 2019-05-18 2.97 luaotfload submodule / database
+Lua module: luaotfload-colors 2019-05-18 2.97 luaotfload submodule / color
+Lua-only attribute luaotfload_color_attribute = 5
+Lua module: luaotfload-resolvers 2019-05-18 2.97 luaotfload submodule / resolver
+s
+luaotfload | conf : Root cache directory is C:/Users/Pim van Leeuwen/AppData/Loc
+al/MiKTeX/2.9/luatex-cache/generic/names.
+Lua module: luaotfload-features 2019-05-18 2.97 luaotfload submodule / features
+Lua module: luaotfload-letterspace 2019-05-18 2.97 luaotfload submodule / color
+Lua module: luaotfload-auxiliary 2019-05-18 2.97 luaotfload submodule / auxiliar
+y functions
+Inserting `luaotfload.aux.set_sscale_dimens' at position 1 in `luaotfload.patch_
+font'.
+Inserting `luaotfload.aux.patch_cambria_domh' at position 2 in `luaotfload.patch
+_font'.
+Inserting `luaotfload.aux.fixup_fontdata' at position 1 in `luaotfload.patch_fon
+t_unsafe'.
+Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
+'.
+Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
+.
+luaotfload | main : initialization completed in 0.658 seconds
+! Undefined control sequence.
+l.1 \section
+          {Algorithm}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section{A
+            lgorithm}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+l.2 \subsection
+             {Baseline}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.3 \subsubsection
+                {Heuristics}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.4 \subsection
+             {Extension: paths}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.5 \subsection
+             {Extension: components}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.6 \subsection
+             {Defining $f$}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 6.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 6.
+)
+! Emergency stop.
+<*> Algorithm.tex
+              
+*** (job aborted, no legal \end found)
+
+
+
+Here is how much of LuaTeX's memory you used:
+ 21 strings out of 494291
+ 100000,106986 words of node,token memory allocated 902 words of node memory still in use:
+   1 hlist, 1 local_par, 1 dir, 2 math, 10 glue, 4 kern, 72 glyph, 9 attribute, 
+34 glue_spec, 9 attribute_list, 1 temp nodes
+   avail lists: 1:1,2:7,3:1,4:1,5:2,8:1,9:1
+ 4369 multiletter control sequences out of 65536+200000
+ 24 fonts using 1213655 bytes
+ 18i,1n,12p,49b,59s stack positions out of 5000i,500n,10000p,200000b,50000s
+!  ==> Fatal error occurred, no output PDF file produced!
