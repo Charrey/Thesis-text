@@ -4,24 +4,25 @@
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces ndSHD2\relax }}{21}\protected@file@percent }
-\newlabel{algorithm:ndSHD2}{{1}{21}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.1}Baseline: ndSHD2}{21}\protected@file@percent }
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces State space of subgraph isomorphism search algorithms. Vertices with the same shape may be matched to each other, while vertices with different shapes have incompatible labels. The green bar denotes the only search path that leads to a successful subgraph isomorphism. Source: \cite {RIalgorithm}\relax }}{22}\protected@file@percent }
-\newlabel{fig:statespace}{{5.1}{22}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.2}Parameters}{23}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{When to map vertices and when to map edges / ordering of edges}{23}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{The ordering of source graph vertices}{23}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{The ordering of target graph vertices}{24}\protected@file@percent }
-\@writefile{tdo}{\defcounter {refsection}{0}\relax }\@writefile{tdo}{\contentsline {todo}{coordinate system matching}{24}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{The ordering of target graph paths}{24}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.3}Optimisations}{24}\protected@file@percent }
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Worst-case space complexity of each path iteration strategy\relax }}{25}\protected@file@percent }
-\newlabel{tab:iterator-spacerequirements}{{5.1}{25}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Refusing long paths}{25}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}Runtime Pruning}{25}\protected@file@percent }
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces ndSHD2\relax }}{22}\protected@file@percent }
+\newlabel{algorithm:ndSHD2}{{1}{22}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.2}Source graph vertex order}{23}\protected@file@percent }
+\newlabel{sec:sourceOrder}{{5.2}{23}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.3}Target graph vertex order}{24}\protected@file@percent }
+\newlabel{sec:targetOrder}{{5.3}{24}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.4}Path iteration}{25}\protected@file@percent }
+\newlabel{sec:pathIteration}{{5.4}{25}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.5}Optimisations}{25}\protected@file@percent }
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Worst-case space complexity of each path iteration strategy. The computational requirements of each method change in different ways for subsequent calls.\relax }}{26}\protected@file@percent }
+\newlabel{tab:iterator-spacerequirements}{{5.1}{26}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.1}Refusing long paths}{26}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.2}Runtime Pruning}{26}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.3}Contraction}{26}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Contraction applied to a source graph. With this optimisation, 4 fewer vertices and edges need to be mapped. When mapping the downward edges of (b), checks are made to make sure that one path has a purple vertex followed by a blue vertex, and the other has a green vertex followed by a purple vertex.\relax }}{27}\protected@file@percent }
+\newlabel{fig:contraction}{{5.1}{27}}
 \@setckpt{sections/Algorithm/Algorithm}{
-\setcounter{page}{26}
+\setcounter{page}{28}
 \setcounter{equation}{0}
 \setcounter{enumi}{0}
 \setcounter{enumii}{0}
@@ -31,15 +32,15 @@
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
 \setcounter{chapter}{5}
-\setcounter{section}{3}
-\setcounter{subsection}{2}
+\setcounter{section}{5}
+\setcounter{subsection}{3}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
 \setcounter{figure}{1}
 \setcounter{table}{1}
 \setcounter{parentequation}{0}
-\setcounter{@todonotes@numberoftodonotes}{1}
+\setcounter{@todonotes@numberoftodonotes}{0}
 \setcounter{@pps}{0}
 \setcounter{@ppsavesec}{0}
 \setcounter{@ppsaveapp}{0}
@@ -55,7 +56,7 @@
 \setcounter{algocf}{1}
 \setcounter{caption@flags}{0}
 \setcounter{continuedfloat}{0}
-\setcounter{subfigure}{0}
+\setcounter{subfigure}{2}
 \setcounter{subtable}{0}
 \setcounter{tabx@nest}{0}
 \setcounter{listtotal}{0}
@@ -66,7 +67,7 @@
 \setcounter{citetotal}{0}
 \setcounter{multicitecount}{0}
 \setcounter{multicitetotal}{0}
-\setcounter{instcount}{74}
+\setcounter{instcount}{75}
 \setcounter{maxnames}{3}
 \setcounter{minnames}{1}
 \setcounter{maxitems}{3}

@@ -17,6 +17,7 @@
 \usepackage{mdframed}
 \usepackage[ruled,vlined]{algorithm2e}
 \usepackage{subcaption}
+\usepackage{multirow}
 
 
 \usepackage{adjustbox}
@@ -115,7 +116,7 @@
 
 
 
-\title{FPGA-on-FPGA emulation using node disjoint subgraph homeomorphism}
+\title{FPGA-on-FPGA emulation using vertex disjoint subgraph homeomorphism}
 \author{Pim van Leeuwen}
 \date{\today}
 
@@ -198,7 +199,116 @@ FPGAs allow reconfiguration of its logic at any point after production. The resu
 \label{app:algorithmHistory}
 \adjincludegraphics[width=\textwidth, trim={0 {.555\height} 0 0},clip]{images/algorithmhistory.png}
 \adjincludegraphics[width=\textwidth, trim={0 0 0 {.445\height}},clip]{images/algorithmhistory.png}
+
+
+
+
+\section{Examples of path iterators}
+%-----------------
+%K-PATH EXAMPLE
+%-----------------
+\begin{figure}[ht]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  % include first image
+\includegraphics[width=0.8\linewidth]{images/pathiterators/examples-kpath-1.png}
+  \caption{First path}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  % include second image
+\includegraphics[width=0.8\linewidth]{images/pathiterators/examples-kpath-2.png}
+  \caption{Second path}
+\end{subfigure}
+\caption{The first two iterations of the K-path path iterator in a square graph. This example is unaffected by ``refusing longer paths".}
+\label{fig:pathexamples-kpath}
+\end{figure}
+
+%-----------------
+%DFS EXAMPLE
+%-----------------
+\begin{figure}[ht]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  % include first image
+\includegraphics[width=0.8\linewidth]{images/pathiterators/examples-DFS-1.png}
+  \caption{First path}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  % include second image
+\includegraphics[width=0.8\linewidth]{images/pathiterators/examples-DFS-2.png}
+  \caption{Second path}
+\end{subfigure}
+
+\begin{subfigure}{.5\textwidth}
+  \centering
+  % include second image
+\includegraphics[width=0.8\linewidth]{images/pathiterators/examples-DFS-1-RLP.png}
+  \caption{First path (refusing longer paths)}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  % include second image
+\includegraphics[width=0.8\linewidth]{images/pathiterators/examples-DFS-2-RLP.png}
+  \caption{Second path (refusing longer paths)}
+\end{subfigure}
+\caption{The first two iterations of the DFS path iterator in a square graph.}
+\label{fig:pathexamples-dfs}
+\end{figure}
+
+
+
+%-----------------
+%GREEDY DFS EXAMPLE
+%-----------------
+\begin{figure}[ht]
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=0.8\linewidth]{images/pathiterators/examples-Greedy DFS-1.png}
+  \caption{First path}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=0.8\linewidth]{images/pathiterators/examples-Greedy DFS-2.png}
+  \caption{Second path}
+\end{subfigure}
+
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=0.8\linewidth]{images/pathiterators/examples-Greedy DFS-1.png}
+  \caption{First path (refusing longer paths)}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=0.8\linewidth]{images/pathiterators/examples-Greedy DFS-reflongerpaths.png}
+  \caption{Second path (refusing longer paths)}
+\end{subfigure}
+\caption{The first two iterations of the greedy DFS path iterator in a square graph.}
+\label{fig:pathexamples-greedydfs}
+\end{figure}
+
+%-----------------
+%CONTROL POINT EXAMPLE
+%-----------------
+\begin{figure}[ht]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  % include first image
+\includegraphics[width=0.8\linewidth]{images/pathiterators/examples-Control point-1.png}
+  \caption{First path (0 control points)}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  % include second image
+\includegraphics[width=0.8\linewidth]{images/pathiterators/examples-Control point-2.png}
+  \caption{Second path (1 control point)}
+\end{subfigure}
+\caption{The first two iterations of the control point path iterator in a square graph. This example is unaffected by ``refusing longer paths".}
+\label{fig:pathexamples-controlpoint}
+\end{figure}
 \end{appendices}
+
 
 \newpage
 \printbibliography

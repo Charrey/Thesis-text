@@ -1,5 +1,5 @@
 \chapter{Performance experiments}
-Using a machine with an Intel\textsuperscript{\textregistered} Core\textsuperscript{\texttrademark} i7-7700HQ CPU and 16GB DDR4 memory we conduct several experiments with different inputs and settings, the results are shown in Tables \ref{tab:iterator-performance} through \ref{tab:pruning-performance}. For random graphs we consistently use the G(n, M) Erdős–Rényi random graph model.
+Using a machine with an Intel\textsuperscript{\textregistered} Core\textsuperscript{\texttrademark} i7-7700HQ CPU and 16GB DDR4 memory we conduct several experiments with different inputs and settings, the results are shown in Tables \ref{tab:iterator-performance} through \ref{tab:pruning-performance-big}. For random graphs we consistently use the G(n, M) Erdős–Rényi random graph model.
 
 \begin{table}[ht]
 \centering
@@ -17,7 +17,7 @@ DFS           &  &  &  &  &  &  \\ \hline
 Greedy DFS    &  &  &  &  &  &  \\ \hline
 Control point &  &  &  &  &  &  \\ \hline
 \end{tabular}
-\caption{Performance of different path iteration methods on random source graphs of size $|V|\in \{8..12\}$ with edge density 3.0 and random target graphs of size $|V|\in \{15..20\}$ with edge density 4.0. ``refuse unnecessarily long paths" is enabled and TODO pruning strategy is used.}
+\caption{Performance of different path iteration methods on random source graphs of size $|V|\in \{8..12\}$ with edge density 3.0 and random target graphs of size $|V|\in \{15..20\}$ with edge density 4.0. ``refuse unnecessarily long paths" and contraction are enabled and parallel all-different pruning is used.}
 \label{tab:iterator-performance}
 \end{table}
 
@@ -40,7 +40,7 @@ DFS           &  &  &  &  &  &  \\ \hline
 Greedy DFS    &  &  &  &  &  &  \\ \hline
 Control point &  &  &  &  &  &  \\ \hline
 \end{tabular}
-\caption{Performance of different path iteration methods on random source graphs of size $|V|\in \{1..5\}$ with edge density 3.0 and a square of four ECP5 logic tiles as target graph. ``refuse unnecessarily long paths" is enabled and TODO pruning strategy is used.}
+\caption{Performance of different path iteration methods on random source graphs of size $|V|\in \{1..5\}$ with edge density 3.0 and a square of four ECP5 logic tiles as target graph. ``refuse unnecessarily long paths" and contraction are enabled and parallel all-different pruning is used.}
 \label{tab:iterator-performance}
 \end{table}
 
@@ -65,51 +65,98 @@ $|V|=5$, $|E|=10$          & $|V|=8$, $|E|=15$          & -30.0\%               
 
 
 
-
 \begin{table}[ht]
 \centering
-\begin{tabular}{|l|l|l|l|l|l|l|}
+\begin{tabular}{|l|l|l|l|l|l|}
 \hline
-\textbf{Pruning strategy} & \textbf{CC} & \textbf{NC} & \textbf{Effect (succeed)} & \textbf{stdev} & \textbf{Effect (fail)} & \textbf{stdev} \\ \hline
-None         &        &        & +0.0\% & 0.0  & +0.0\%  &  0.0\\ \hline
-Empty domain &        &        &  &  &  &  \\ \hline
-Empty domain & \times &        &  &  &  &  \\ \hline
-Empty domain &        & \times &  &  &  &  \\ \hline
-Empty domain & \times & \times &  &  &  &  \\ \hline
-AllDifferent &        &        &  &  &  &  \\ \hline
-AllDifferent & \times &        &  &  &  &  \\ \hline
-AllDifferent &        & \times &  &  &  &  \\ \hline
-AllDifferent & \times & \times &  &  &  &  \\ \hline
+\textbf{Source graph size} & \textbf{Target graph size} & \textbf{K-Path} & \textbf{DFS} & \textbf{Greedy DFS} & \textbf{CP} \\ \hline
+$|V|=5$, $|E|=10$          & $|V|=8$, $|E|=15$          & -30.0\%                     & +10.0\%          &  -20.0\%                      & -17.0\%               \\ \hline
+&&&&&\\\hline
+&&&&&\\\hline
+&&&&&\\\hline
+&&&&&\\\hline
+&&&&&\\\hline
+&&&&&\\\hline
+                           & single ECP5 tile         &                           &                &                        &                \\ \hline
+                                                      & square of ECP5 tiles         &                           &                &                        &                \\ \hline
 \end{tabular}
-\caption{The performance benefit (seconds) of different pruning methods with- and without Connectivity check (CC) and neighbour check (NC) on random source graphs of size $|V|\in \{8..12\}$ with edge density 3.0 and random target graphs of size $|V|\in \{15..20\}$ with edge density 4.0.}
-\label{tab:pruning-performance}
+\caption{The performance benefit (seconds) of contraction on random source graphs and random target graphs.}
+\label{tab:contraction-performance}
 \end{table}
 
 
 
-\begin{table}[ht]
-\centering
-\begin{tabular}{|l|l|l|l|l|l|l|l|}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[]
+\begin{tabular}{|l|l|l|l|l|}
 \hline
-\textbf{Pruning strategy} & \textbf{CC} & \textbf{NC} & \textbf{Par} & \textbf{Effect (succeed)} & \textbf{stdev} & \textbf{Effect (fail)} & \textbf{stdev} \\ \hline
-None         &   &   & N/A & +0.0\% & 0.0 & +0.0\% & 0.0 \\ \hline
-Empty domain &   &   &     &        &     &        &     \\ \hline
-Empty domain &   &   & \times   &        &     &        &     \\ \hline
-Empty domain &   & \times &     &        &     &        &     \\ \hline
-Empty domain &   & \times & \times   &        &     &        &     \\ \hline
-Empty domain & \times &   &     &        &     &        &     \\ \hline
-Empty domain & \times &   & \times   &        &     &        &     \\ \hline
-Empty domain & \times & \times &     &        &     &        &     \\ \hline
-Empty domain & \times & \times & \times   &        &     &        &     \\ \hline
-AllDifferent &   &   &     &        &     &        &     \\ \hline
-AllDifferent &   &   & \times   &        &     &        &     \\ \hline
-AllDifferent &   & \times &     &        &     &        &     \\ \hline
-AllDifferent &   & \times & \times   &        &     &        &     \\ \hline
-AllDifferent & \times &   &     &        &     &        &     \\ \hline
-AllDifferent & \times &   & \times   &        &     &        &     \\ \hline
-AllDifferent & \times & \times &     &        &     &        &     \\ \hline
-AllDifferent & \times & \times & \times   &        &     &        &     \\ \hline
+\textbf{Pruning strategy}      & \textbf{Filtering}               & \textbf{Application} & \textbf{Effect (+)} & \textbf{Effect (-)} \\ \hline
+None                           &                                  &                      & +0.0\%              & +0.0\%              \\ \hline
+\multirow{12}{*}{Zero domain}  & \multirow{3}{*}{Label/degree}    & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \cline{2-5} 
+                               & \multirow{3}{*}{Free neighbours} & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \cline{2-5} 
+                               & \multirow{3}{*}{M-reachability}  & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \cline{2-5} 
+                               & \multirow{3}{*}{N-reachability}  & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \hline
+\multirow{12}{*}{AllDifferent} & \multirow{3}{*}{Label/degree}    & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \cline{2-5} 
+                               & \multirow{3}{*}{Free neighbours} & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \cline{2-5} 
+                               & \multirow{3}{*}{M-reachability}  & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \cline{2-5} 
+                               & \multirow{3}{*}{N-reachability}  & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \hline
 \end{tabular}
-\caption{The performance effect (seconds) of different pruning methods with- and without Connectivity check (CC) and neighbour check (NC) on random source graphs of size $|V|\in \{8..12\}$ with edge density 3.0 and a square of four ECP5 times as target graph.}
-\label{tab:pruning-performance}
+\caption{The performance effect (seconds) of different pruning methods with- and without Connectivity check (CC) and neighbour check (NC) on random source graphs of size $|V|\in \{8..12\}$ with edge density 3.0 and a square of four ECP5 times as target graph. Effect (+) denotes cases with some homeomorphism and Effect (-) denotes cases without a homemorphism.}
+\label{tab:pruning-performance-small}
+\end{table}
+
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[]
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Pruning strategy}      & \textbf{Filtering}               & \textbf{Application} & \textbf{Effect (+)} & \textbf{Effect (-)} \\ \hline
+None                           &                                  &                      & +0.0\%              & +0.0\%              \\ \hline
+\multirow{12}{*}{Zero domain}  & \multirow{3}{*}{Label/degree}    & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \cline{2-5} 
+                               & \multirow{3}{*}{Free neighbours} & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \cline{2-5} 
+                               & \multirow{3}{*}{M-reachability}  & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \cline{2-5} 
+                               & \multirow{3}{*}{N-reachability}  & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \hline
+\multirow{12}{*}{AllDifferent} & \multirow{3}{*}{Label/degree}    & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \cline{2-5} 
+                               & \multirow{3}{*}{Free neighbours} & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \cline{2-5} 
+                               & \multirow{3}{*}{M-reachability}  & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \cline{2-5} 
+                               & \multirow{3}{*}{N-reachability}  & Serial               &                     &                     \\ \cline{3-5} 
+                               &                                  & Cached               &                     &                     \\ \cline{3-5} 
+                               &                                  & Parallel             &                     &                     \\ \hline
+\end{tabular}
+\caption{The performance effect (seconds) of different pruning methods with- and without Connectivity check (CC) and neighbour check (NC) on random source graphs of size $|V|\in \{8..12\}$ with edge density 3.0 and a square of four ECP5 times as target graph. Effect (+) denotes cases with some homeomorphism and Effect (-) denotes cases without a homemorphism.}
+\label{tab:pruning-performance-big}
 \end{table}
