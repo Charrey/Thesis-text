@@ -2265,11 +2265,12 @@
     <bcf:citekey order="61">XIAONODEDISJOINT</bcf:citekey>
     <bcf:citekey order="62">Grohe2011479</bcf:citekey>
     <bcf:citekey order="63">LaPaughOptim</bcf:citekey>
-    <bcf:citekey order="64">RIalgorithm</bcf:citekey>
-    <bcf:citekey order="65">RIalgorithm</bcf:citekey>
-    <bcf:citekey order="66">XIAONODEDISJOINT</bcf:citekey>
-    <bcf:citekey order="67">LINGAS2009464</bcf:citekey>
-    <bcf:citekey order="68">McCreesh2015</bcf:citekey>
+    <bcf:citekey order="64">XIAONODEDISJOINT</bcf:citekey>
+    <bcf:citekey order="65">LINGAS2009464</bcf:citekey>
+    <bcf:citekey order="66">McCreesh2015</bcf:citekey>
+    <bcf:citekey order="67">YensAlgorithm</bcf:citekey>
+    <bcf:citekey order="68">Hershberger</bcf:citekey>
+    <bcf:citekey order="68">Brander1996</bcf:citekey>
     <bcf:citekey order="69">Cordella2004</bcf:citekey>
     <bcf:citekey order="69">McCreesh2015</bcf:citekey>
   </bcf:section>

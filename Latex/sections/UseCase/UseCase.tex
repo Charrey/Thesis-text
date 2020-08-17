@@ -3,8 +3,6 @@ We will apply our algorithm to map virtual FPGAs to the concrete Lattice ECP5 FP
 
 The structure of an ECP5 FPGA is shown in Figure \ref{fig:ecp5architecture}. This figure shows the grid/tile structure of the ECP5 along with specific components from the electrical engineering domain. The largest portion of the grid structure are logic tiles that contain 8 LUTs and 8 registers (or flip-flops (FF)). We will focus on this type of tile to find homeomorphisms.
 
-The logic cell of 
-
 The virtual FPGA we aim to emulate on this board (which we will call \textit{VirBoard}) is one that, like the ECP5 consists of a tile-like structure with no wires spanning no more than a single tile. Because of this limitation, a student may freely drag-and-drop functionality in the virtual environment without worrying about implicitly overlapping connections. Each tile in this virtual FPGA has significantly less functionality than one of the ECP5. It has a single in- and output at each wind direction that may be connected in various ways, a 2-bit LUT and an 1-bit register. A graph model of VirBoard is shown in Figure \ref{fig:virboard}.
 
 \begin{figure}
@@ -24,17 +22,4 @@ The virtual FPGA we aim to emulate on this board (which we will call \textit{Vir
 \footnotetext{\texttt{http://www.latticesemi.com/products/developmentboardsandkits/ecp5evaluationboard}, accessed July 10th 2020}	
 
 
-\begin{figure}
-\includegraphics[width=\textwidth]{sections/UseCase/image/architecture.jpg}
-\caption[The architecture of a Lattice ECP5 FPGA.]{The architecture of a Lattice ECP5 FPGA{\footnotemark}.}
-\label{fig:ecp5architecture}
-\end{figure}
-\footnotetext{ECP5 and ECP5-5G Family Data Sheet FPGA-DS-02012-2.1 (April 2019), Figure 2.1. Original caption: Simplified Block Diagram, LFE5UM/LFE5UM5G-85 Device (Top Level)}
-
-\begin{figure}
-\includegraphics[width=\textwidth]{sections/UseCase/image/slice-tile.png}
-\caption[A diagram of a logic tile of a Lattice ECP5 FPGA.]{A diagram of a logic tile of a Lattice ECP5 FPGA{\footnotemark}.}
-\label{fig:ecp5logiccell}
-\end{figure}
-\footnotetext{ECP5 and ECP5-5G Family Data Sheet FPGA-DS-02012-2.1 (April 2019), Figure 2.2. Original caption: PFU Diagram}
 

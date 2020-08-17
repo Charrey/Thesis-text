@@ -62,7 +62,7 @@ $C_{\mathit{outdegree}}(u, v) := |\{v' \in \mathit{succ}(v) . v' \not \in M\}| \
 This method satisfies criterium \label{li:complete} since 
 
 
-\subsection{Reachability of matched vertices}
+\subsection{Reachability of matched vertices (M-filtering)}
 A strong (and computationally very expensive) method of filtering the domain we will use\footnote{An even stronger method would be to find paths that each have different second vertices and each have different second-last vertices, or even to check that no intermediate vertex is used multiple times (NP-complete). This is, however, out of scope for this research.} for some source graph vertex $u$ and some target graph vertex $v$ in addition to label- indegree and outdegree compability is to check that $v$ can reach the mapped vertices of successors of $u$ and that $v$ can be reached from the mapped vertices of predecessors of $u$, i.e. that candidate paths exist for the upcoming edge-path matching attempts. This pruning method does not check whether a set of paths exist that is vertex disjoint since that is the task of the main algorithm: it merely checks the existence of paths. If no path exists, then no vertex disjoint path exists and pruning is required. An example of a domain filtered by reachability can be found in Figure \ref{fig:reachability-filtered}. Formally:
 
 
@@ -129,7 +129,7 @@ $C_{\mathit{outr}}(u, v) := \forall u' \in (\mathit{succ}(u) \cap M) .  \exists 
 \caption{After vertex placements $s_1 \to t_4$ and $s_2 \to t_2$, the domain for vertex $s_3$ would normally be $\{t_1, t_3\}$. However, by checking for reachability from $t_4$ we can reduce this to $\{t_3\}$. The numbers represent the matching order and the circle styles represent labels.}
 \label{fig:reachability-filtered}
 \end{figure}
-\subsection{Reachability of neighbourhood}
+\subsection{Reachability of neighbourhood \hspace{12pt}(N-filtering)}
 In addition to filtering domains based on the current partial matching and the source- and target graph, we can perform domain filtering based on domains that are already computed. If some source graph vertex $s_1$ with domain $D_1$ has an edge to some vertex $s_2$ with domain $D_2$, then for each target graph vertex $t_1 \in D_1$ there must exist a path to some vertex $t_2 \in D_2$. If not, then $t_1$ may be removed from $D_1$. We will call this filtering \textit{level 1 neighbourhood filtering}. If we $D_2$ was itself filtered using level 1 neighbourhood filtering, we call this \textit{level 2 neighbourhood filtering}. Similarly, each additional time the neighbourhood reachability filtered domain is reused in another neighbourhood reachability filtering we consider it of a higher level. When computing domains serially, an appropriate maximum level should be used: using level 2 neighbourhood filtering over level 1 neighbourhood filtering yiels, for example, much more domain reduction and is much less computationally demanding compared to level 20 neighbourhood filtering over level 19 neighbourhood filtering. However, if a cached approach is used (see section TODO), we can perform level $\infty$ neighbourhood filtering using a fixed point algorithm.
 
 \section{Pruning methods}
@@ -155,7 +155,7 @@ $s_4$                          & $\emptyset$                      \\ \hline
 
 \subsection{AllDifferent pruning}
 \label{sec:alldifferent}
-The AllDifferent constraint specifies that every variable should be able to have a different value. This is the case with some variable having an empty domain (i.e. AllDifferent is stronger than ZeroDomain), but also in other cases. Since a homeomorphism requires such an assignment, the AllDifferent pruning algorithm backtracks in this case. Unfortunately, we could not find an AllDifferent implementation using less than quadratic space. An example of a domain assignment where AllDifferent prunes the search space but ZeroDomain does not is shown in Table \ref{tab:alldifferent}. 
+The AllDifferent constraint specifies that every variable should be able to have a different value. This is the case with some variable having an empty domain, but also in other cases (i.e. AllDifferent is stronger than ZeroDomain). Since a homeomorphism requires such an assignment, the AllDifferent pruning algorithm backtracks in this case. Unfortunately, we could not find an AllDifferent implementation using less than quadratic space. An example of a domain assignment where AllDifferent prunes the search space but ZeroDomain does not is shown in Table \ref{tab:alldifferent}. 
 
 \begin{table}
 \centering
@@ -181,4 +181,4 @@ The simplest option is to calculate the domains and run the pruning strategy eac
 \subsection{Caching domains - incremental domain calculation}
 Another option is to cache the domain of each variable and update it based on the current partial matching. This saves valuable time but requires quadratic space\footnote{i.e. some constant $c$ exists such that the space required has an upper bound of $c * |V_{target}|^2$} (for each source graph vertex $\in |V_{source}|$ it needs to store a domain of average size $O(|V_{target}|)$). If the reachability pruning method is used, paths need to be cached as well. That is, for each edge $\in E_{source}$ we need to store a path of $O(|V_{target}|)$ vertices.
 \subsection{Parallel calculation}
-Finally, we can perform the domain filtering and procedure in a seperate CPU thread while the algorithm continues without backtracking. The pruning thread queries the current matching and calculates whether pruning is appropriate for that matching. If it decides that it is not, it requeries the current matching. Otherwise, it will interrupt the main thread and signal it to backtrack until the pruning method does not detect a dead branch anymore. This method cannot perform caching
+Finally, we can perform the domain filtering and procedure in a seperate CPU thread while the algorithm continues without backtracking. The pruning thread queries the current matching and calculates whether pruning is appropriate for that matching. If it decides that it is not, it requeries the current matching. Otherwise, it will interrupt the main thread and signal it to backtrack until the pruning method does not detect a dead branch anymore. This method cannot perform caching, since that requires updating the cache \textit{every} time the partial matching is extended - and performance benefits are only gained when the partial matching is only occasionally queried.

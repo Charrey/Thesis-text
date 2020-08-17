@@ -1,26 +1,26 @@
-\chapter{Software design}
-\section{Architecture}
-
-
-\section{Manual}
-\begin{enumerate}[label=Step \arabic* : ]
-\item Download the latest release from \texttt{https://github.com/Charrey/PathSubIsoTest}
-\item Save your source graph in DOT file format, using the structure defined in Chapter TODO. If a vertex has a label, provide it with the DOT attribute key ``label" and a string as value containing JSON array notation of the labels.
-\item Save your target graph in the same way.
-\item Open a command promt and call:
-
-\texttt{java -jar <release file> <source file> <target file>}
-
-Optionally, use the flags:
-
-\begin{tabular}{ll}
-\texttt{-strategy}&\texttt{[dfs/greedydfs/kpath (default)/controlpoint]}\\
-\texttt{-pruning}&\texttt{[none (default)/zerodomain/alldifferent]}\\
-\texttt{-domains}&\texttt{[label (default)/neighbours/reachability]}\\
-\texttt{-checks}&\texttt{[always (default)/parallel]}\\
-\texttt{-maxpaths} & \texttt{<maximum number of paths to try between the same 2 vertices>}`\\
-\texttt{-maxcp} & \texttt{<maximum number of control points>}\\
-&\texttt{(requires "-strategy controlpoint")}
-\end{tabular}
-\end{enumerate}
-%https://github.com/Charrey/PathSubIsoTest
+%\chapter{Software design}
+%\section{Architecture}
+%
+%
+%\section{Manual}
+%\begin{enumerate}[label=Step \arabic* : ]
+%\item Download the latest release from \texttt{https://github.com/Charrey/PathSubIsoTest}
+%\item Save your source graph in DOT file format, using the structure defined in Chapter \ref{sec:models}. If a vertex has labels, provide each label as a separate ``label" - <value> attribute.
+%\item Save your target graph in the same way.
+%\item Open a command promt and call:
+%
+%\texttt{java -jar <release file> <source file> <target file>}
+%
+%Optionally, use the flags:
+%
+%\begin{tabular}{ll}
+%\texttt{-strategy}&\texttt{[dfs/greedydfs/kpath (default)/controlpoint]}\\
+%\texttt{-pruning}&\texttt{[none (default)/zerodomain/alldifferent]}\\
+%\texttt{-domains}&\texttt{[label (default)/neighbours/reachability]}\\
+%\texttt{-checks}&\texttt{[always (default)/parallel]}\\
+%\texttt{-maxpaths} & \texttt{<maximum number of paths to try between the same 2 vertices>}`\\
+%\texttt{-maxcp} & \texttt{<maximum number of control points>}\\
+%&\texttt{(requires "-strategy controlpoint")}
+%\end{tabular}
+%\end{enumerate}
+%%https://github.com/Charrey/PathSubIsoTest

@@ -1,103 +1,97 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {1}Introduction}{3}% 
+\contentsline {chapter}{\numberline {1}Introduction}{3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Background}{5}% 
+\contentsline {chapter}{\numberline {2}Background}{5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.1}FPGAs}{5}% 
+\contentsline {section}{\numberline {2.1}FPGAs}{5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.1}Lookup tables}{6}% 
+\contentsline {subsection}{\numberline {2.1.1}Lookup tables}{6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.2}Registers}{7}% 
+\contentsline {subsection}{\numberline {2.1.2}Registers}{7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.3}Logic cells}{7}% 
+\contentsline {subsection}{\numberline {2.1.3}Logic cells}{7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.4}Routing}{8}% 
+\contentsline {subsection}{\numberline {2.1.4}Routing}{8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.5}Pins}{8}% 
+\contentsline {subsection}{\numberline {2.1.5}Pins}{8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}FPGA compilation}{9}% 
+\contentsline {section}{\numberline {2.2}FPGA compilation}{9}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}Literature}{10}% 
+\contentsline {subsection}{\numberline {2.2.1}Literature}{10}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}FPGA simulation}{11}% 
+\contentsline {section}{\numberline {2.3}FPGA simulation}{11}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}FPGA emulation}{11}% 
+\contentsline {section}{\numberline {2.4}FPGA emulation}{11}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.5}Graph theory}{12}% 
+\contentsline {section}{\numberline {2.5}Graph theory}{12}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.1}Literature}{13}% 
+\contentsline {subsection}{\numberline {2.5.1}Literature}{13}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Subgraph isomorhism}{14}% 
+\contentsline {subsubsection}{Subgraph isomorhism}{14}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Subgraph Homeomorphism}{17}% 
+\contentsline {subsubsection}{Subgraph Homeomorphism}{17}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Objectives}{18}% 
+\contentsline {chapter}{\numberline {3}Objectives}{18}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Models}{19}% 
+\contentsline {chapter}{\numberline {4}Models}{19}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Algorithm}{21}% 
+\contentsline {chapter}{\numberline {5}Algorithm}{21}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Baseline: ndSHD2}{21}% 
+\contentsline {section}{\numberline {5.1}Baseline: ndSHD2}{21}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Parameters}{23}% 
+\contentsline {section}{\numberline {5.2}Source graph vertex order}{23}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{When to map vertices and when to map edges / ordering of edges}{23}% 
+\contentsline {section}{\numberline {5.3}Target graph vertex order}{24}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{The ordering of source graph vertices}{23}% 
+\contentsline {section}{\numberline {5.4}Path iteration}{25}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{The ordering of target graph vertices}{24}% 
+\contentsline {section}{\numberline {5.5}Optimisations}{25}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{The ordering of target graph paths}{24}% 
+\contentsline {subsection}{\numberline {5.5.1}Refusing long paths}{26}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Optimisations}{24}% 
+\contentsline {subsection}{\numberline {5.5.2}Runtime Pruning}{26}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.1}Refusing long paths}{25}% 
+\contentsline {subsection}{\numberline {5.5.3}Contraction}{26}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.2}Runtime Pruning}{25}% 
+\contentsline {chapter}{\numberline {6}Pruning}{28}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Pruning}{26}% 
+\contentsline {section}{\numberline {6.1}Domain filtering}{29}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Domain filtering}{27}% 
+\contentsline {subsection}{\numberline {6.1.1}Labels and neighbours}{29}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.1}Labels and neighbours}{27}% 
+\contentsline {subsection}{\numberline {6.1.2}Free neighbours}{29}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.2}Free neighbours}{27}% 
+\contentsline {subsection}{\numberline {6.1.3}Reachability of matched vertices (M-filtering)}{30}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.3}Reachability of matched vertices}{28}% 
+\contentsline {subsection}{\numberline {6.1.4}Reachability of neighbourhood \hspace {12pt}(N-filtering)}{30}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.4}Reachability of neighbourhood}{28}% 
+\contentsline {section}{\numberline {6.2}Pruning methods}{31}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Pruning methods}{29}% 
+\contentsline {subsection}{\numberline {6.2.1}ZeroDomain pruning}{31}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.1}ZeroDomain pruning}{29}% 
+\contentsline {subsection}{\numberline {6.2.2}AllDifferent pruning}{32}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.2}AllDifferent pruning}{30}% 
+\contentsline {section}{\numberline {6.3}When to apply}{32}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}When to apply}{30}% 
+\contentsline {subsection}{\numberline {6.3.1}Runtime calculation}{32}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.1}Runtime calculation}{30}% 
+\contentsline {subsection}{\numberline {6.3.2}Caching domains - incremental domain calculation}{32}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.2}Caching domains - incremental domain calculation}{30}% 
+\contentsline {subsection}{\numberline {6.3.3}Parallel calculation}{33}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.3}Parallel calculation}{31}% 
+\contentsline {chapter}{\numberline {7}Use case: Lattic ECP5}{34}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Use case: Lattic ECP5}{32}% 
+\contentsline {chapter}{\numberline {8}Performance experiments}{36}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {8}Performance experiments}{36}% 
+\contentsline {chapter}{\numberline {9}Conclusion}{40}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {9}Software design}{39}% 
+\contentsline {chapter}{\numberline {10}Discussion}{41}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9.1}Architecture}{39}% 
+\contentsline {chapter}{\numberline {11}Future Research}{42}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9.2}Manual}{39}% 
+\contentsline {chapter}{Appendices}{43}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {10}Conclusion}{40}% 
+\contentsline {section}{\numberline {.1}History of subgraph isomorphism algorithms}{44}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {11}Discussion}{41}% 
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {12}Future Research}{42}% 
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendices}{43}% 
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.1}History of subgraph isomorphism algorithms}{44}% 
+\contentsline {section}{\numberline {.2}Examples of path iterators}{45}%
