@@ -4,13 +4,13 @@ Our algorithm will generate an emulation using vertex disjoint subgraph homeomor
 
 \begin{itemize}
 \item ..model a wire as a vertex that may be connected with any number of vertices in either direction of types ``$\mathit{arc}$", any number of incoming edges from ``$\mathit{port\_out}$" vertices and any number of outgoing edges to ``$\mathit{port\_in}$" edges.
-\item ..model a transistor as a vertex with a label ``$\mathit{arc}$" and a label ``$\mathit{configurable}$" for configurable transistors or label ``$\mathit{unconfigurable}$" for unconfigurable transistors (that are not counted towards label compatibility). It has an incoming edge from the source ``$\mathit{wire}$" of the transistor and an outgoing edge to the target ``$\mathit{wire}$" of the transistor.
+\item ..model a transistor as a vertex with a label ``$\mathit{arc}$" and a label ``$\mathit{configurable}$" for configurable transistors or label ``$\mathit{unconfigurable}$" for unconfigurable transistors (that are not counted towards label compatibility). It has an incoming edge from the source ``$\mathit{wire}$" of the transistor and an outgoing edge to the target ``$\mathit{wire}$" of the transistor. For the FPGA use case, we require the configurability label for a correct emulation: while a subgraph homeomorphism may be found without these labels, it does not take into account unintended electrical current transfer through transistors that cannot be `switched off'. Correctly applying these labels avoids subgraph homeomorphisms with unconfigurable transistors carrying currents between mapped components in the target graph that are not part of the mapping itself (i.e. unintended).
 \item ..model a logical unit with LUT- and register functionality as a vertex with label $``\mathit{slice}"$ that only has connections from vertices with label ``$\mathit{port\_in}$" and to vertices with label ``$\mathit{port\_out}$".
 \item ..model an input of a logical unit as a vertex with label ``$\mathit{port\_in}$" and an outgoing directed edge towards a ``$\mathit{slice}$" vertex and an incoming edge from a ``$\mathit{wire}$" vertex.
 \item ..model an output of a logical unit as a vertex with label ``$\mathit{port\_out}$" and an incoming directed edge from a ``$\mathit{slice}$" vertex and an outgoing edge to a ``$\mathit{wire}$" vertex.
 \end{itemize}
 
-An example of such am model is shown in Figure \ref{fig:graphmodel-logiccell} where a graph model is shown of the logic cell in Figure \ref{fig:logiccell}.
+For the scope of this research, we omit specifying the functionality of each port from this model. An example of such am model is shown in Figure \ref{fig:graphmodel-logiccell} where a graph model is shown of the logic cell in Figure \ref{fig:logiccell}.
 
 \begin{figure}
 \centering

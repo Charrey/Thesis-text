@@ -34,64 +34,68 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Objectives}{18}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Models}{19}%
+\contentsline {chapter}{\numberline {4}Models}{20}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Algorithm}{21}%
+\contentsline {chapter}{\numberline {5}Algorithm}{22}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Baseline: ndSHD2}{21}%
+\contentsline {section}{\numberline {5.1}Baseline: ndSHD2}{22}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Source graph vertex order}{23}%
+\contentsline {section}{\numberline {5.2}Source graph vertex order}{24}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Target graph vertex order}{24}%
+\contentsline {section}{\numberline {5.3}Target graph vertex order}{25}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Path iteration}{25}%
+\contentsline {section}{\numberline {5.4}Path iteration}{26}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.5}Optimisations}{25}%
+\contentsline {section}{\numberline {5.5}Optimisations}{26}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.1}Refusing long paths}{26}%
+\contentsline {subsection}{\numberline {5.5.1}Refusing long paths}{27}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.2}Runtime Pruning}{26}%
+\contentsline {subsection}{\numberline {5.5.2}Runtime Pruning}{27}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.3}Contraction}{26}%
+\contentsline {subsection}{\numberline {5.5.3}Contraction}{27}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Pruning}{28}%
+\contentsline {subsubsection}{Contraction for undirected graphs}{28}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Domain filtering}{29}%
+\contentsline {chapter}{\numberline {6}Pruning}{30}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.1}Labels and neighbours}{29}%
+\contentsline {section}{\numberline {6.1}Domain filtering}{31}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.2}Free neighbours}{29}%
+\contentsline {subsection}{\numberline {6.1.1}Labels and neighbours}{31}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.3}Reachability of matched vertices (M-filtering)}{30}%
+\contentsline {subsection}{\numberline {6.1.2}Free neighbours}{31}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.4}Reachability of neighbourhood \hspace {12pt}(N-filtering)}{30}%
+\contentsline {subsection}{\numberline {6.1.3}Reachability of matched vertices (M-filtering)}{32}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Pruning methods}{31}%
+\contentsline {subsection}{\numberline {6.1.4}Reachability of neighbourhood \hspace {12pt}(N-filtering)}{32}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.1}ZeroDomain pruning}{31}%
+\contentsline {section}{\numberline {6.2}Pruning methods}{33}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.2}AllDifferent pruning}{32}%
+\contentsline {subsection}{\numberline {6.2.1}ZeroDomain pruning}{33}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}When to apply}{32}%
+\contentsline {subsection}{\numberline {6.2.2}AllDifferent pruning}{34}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.1}Runtime calculation}{32}%
+\contentsline {section}{\numberline {6.3}When to apply}{34}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.2}Caching domains - incremental domain calculation}{32}%
+\contentsline {subsection}{\numberline {6.3.1}Runtime calculation}{34}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.3}Parallel calculation}{33}%
+\contentsline {subsection}{\numberline {6.3.2}Caching domains - incremental domain calculation}{34}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Use case: Lattic ECP5}{34}%
+\contentsline {subsection}{\numberline {6.3.3}Parallel calculation}{35}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {8}Performance experiments}{36}%
+\contentsline {chapter}{\numberline {7}Use case: Lattic ECP5}{36}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {9}Conclusion}{40}%
+\contentsline {chapter}{\numberline {8}Performance experiments}{38}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {10}Discussion}{41}%
+\contentsline {chapter}{\numberline {9}Conclusion}{43}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {11}Future Research}{42}%
+\contentsline {chapter}{\numberline {10}Discussion}{44}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendices}{43}%
+\contentsline {chapter}{\numberline {11}Future Research}{45}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.1}History of subgraph isomorphism algorithms}{44}%
+\contentsline {chapter}{Appendices}{46}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.2}Examples of path iterators}{45}%
+\contentsline {section}{\numberline {.1}History of subgraph isomorphism algorithms}{47}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {.2}Examples of path iterators}{49}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {.3}Proof: contraction preserves verted disjoint subgraph homeomorphism}{53}%

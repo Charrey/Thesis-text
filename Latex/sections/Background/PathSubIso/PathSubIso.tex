@@ -13,20 +13,18 @@ A graph is a tuple $(V, E, L)$ where $V$ is a set of vertices, $E \subseteq (V \
 
 
 \begin{defn}[vertex disjoint subgraph homeomorphism]
-Let $P$ the set of all directed paths in $G_2$, let $first(p)$ be the first vertex of a path $p$, let $last(p)$ be the last vertex of a path $p$ and let $intermediate(p)$ be all other vertices of a path $p$. Then, a vertex disjoint subgraph homeomorphism from $G_1$ to $G_2$ is a tuple $(f, q)$ where $f\subset (V_1 \times V_2)$ and $q \subset (E_1 \times P)$ are both injective relations such that:
+Let $P$ the set of all loopless paths in $G_2$, let $first(p)$ be the first vertex of a path $p$, let $last(p)$ be the last vertex of a path $p$ and let $intermediate(p)$ be all other vertices of a path $p$. Then, a vertex disjoint subgraph homeomorphism from $G_1$ to $G_2$ is a tuple $(f, q)$ where $f\subset (V_1 \times V_2)$ and $q \subset (E_1 \times P)$ are both injective relations such that:
 
 \begin{tabular}{rlr}
  1. & $\forall u \in V_1 . L_1(u)\subseteq L_2(f(u))$&\\
  
  &i.e. vertices are mapped to vertices that have at least the same label set.&\\
  
- 2. & $\forall (u_1, u_2) \in E_1 . \exists ! p \in P. first(p)=f(u_1) \land last(p)=f(u_2) \land ((u_1, u_2), p) \in q$&\\
+ 2. & $\forall (u_1, u_2) \in E_1 . \exists p \in \mathit{values}(q). \mathit{first}(p)=f(u_1) \land \mathit{last}(p)=f(u_2) \land ((u_1, u_2), p) \in q$&\\
  &i.e. each edge in $G_1$ is mapped to a path in $G_2$.&\\
  
- 3. & $\forall p \in P . \forall x \in intermediate(p) . ``arc" \in {L^V}_2(x) \land$&\\
- &i.e. every intermediate vertex in such a path is a routing switch, and\dots&\\
-    & $\not \exists p' \in (P \setminus \{p\}) . x \in intermediate(p')$&\\
-    &\dots these routing switches may be used in no more than one path.&\\
+ 3. & $\forall p \in \mathit{values}(q) . \forall x \in \mathit{intermediate}(p) . \not \exists p' \in (\mathit{values}(q) \setminus \{p\}) . x \in \mathit{intermediate}(p')$&\\
+    &i.e. these paths are vertex disjoint.&\\
 \end{tabular}
 
 \label{def:pathsubgraphisomorphism}

@@ -1,0 +1,47 @@
+\begin{titlepage}
+\headheight = 57pt
+\footskip = 5pt
+\headsep = 0pt
+
+
+{\begin{Large}
+\university\\
+\end{Large} }
+\school\\
+\department\\
+
+\vspace*{5 cm}
+
+
+
+\begin{Large}
+\textbf{\doctitle}\\
+\end{Large}
+\docsubtitle\\
+\me \quad (\studentcode)\\
+
+\begin{flushright}
+\textbf{Technical Supervisor}\\ \supervisor\\
+\textbf{Academic Supervisors}\\\cosupervisor\\
+\cocosupervisor
+\end{flushright}
+
+\vspace*{3cm}
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.5\linewidth]{images/utwente.png}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.4\linewidth]{images/nedap.png}
+\end{subfigure}
+\end{figure}
+
+
+
+
+
+\vfill
+\end{titlepage}
