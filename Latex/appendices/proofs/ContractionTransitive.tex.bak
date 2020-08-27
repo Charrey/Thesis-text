@@ -1,0 +1,38 @@
+\section{Proof: contraction preserves verted disjoint subgraph homeomorphism}
+\label{proof:contractionHomeo}
+\begin{proof}
+
+Let $M_{V}^{S' to S}$ and $M_{E}^{S' to S}$ be the (injective) vertex-to-vertex mapping and (injective) edge-to-path mapping from $S_{cont}$ to $S$, respectively, and let $(M_{V}^{S to T}, M_{E}^{S to T})$ be some vertex disjoint subgraph homeomorphism from $S$ to $T$, respectively.
+
+We then construct a vertex-to-vertex mapping $M_{V}^{S' to T}$ by mapping each vertex $v \in V_{S'}$ to $M_{V}^{S to T}(M_{V}^{S' to S}(v))$. Recall from the definition of vertex disjoint subgraph homeomorphism that $\forall u \in V_S . L_S(u) \subseteq L_T(M_{V}^{S to T}(u))$. Since for every vertex $v \in V_{S'}$ we have $M_{V}^{S' to S}(v) \in V_s$ (injectivity), it also holds that $\forall u \in V_{S'} . L_S(M_{V}^{S' to S}(u)) \subseteq L_T(M_{V}^{S to T}(M_{V}^{S' to S}(u)))$. Moreover, since labels of remaining vertices are preserved through contraction, we have $\forall v \in V_{S'}.L_{S'}(v)=L_S(M_{V}^{S' to S}(v))$. Therefore, it holds that: $\forall u \in V_{S'} . L_{S'}(u) \subseteq L_T(M_{V}^{S to T}(M_{V}^{S' to S}(u)))$. Therefore, this vertex-to-vertex mapping satisfies the first prequisite out of three for vertex disjoint subgraph homeomorphism.
+
+We then construct an edge-to-path mapping $E_{V}^{S' to T}$. For each edge $(u, v) \in E_{S'}$, we take the edges of the path $M_{E}^{S' to S}(u, v)$ and concatenate the edges of the corresponding paths in $T$ to obtain a new path $p'$. We then add $((u, v), p')$ to $E_{V}^{S' to T}$. Recall from the definition of vertex disjoint subgraph homeomorphism that $\forall(u_1, u_2) \in E_S . \exists p \in values(M_{E}^{S to T}).first(p) = M_{V}^{S to T}(u_1) \land last(p) = M_{V}^{S to T}(u_2) \land ((u_1, u_2), p) \in M_{E}^{S to T}$. 
+
+Since $E_{V}^{S' to T}$ is non-empty, we have $\forall(u_1, u_2) \in E_{S'} . \exists p \in values(M_{E}^{S' to T})$. Moreover, by choosing $p$ for each $(u_1, u_2)$ as $M_{E}^{S' to T}(u_1, u_2)$, we have:
+
+$\forall(u_1, u_2) \in E_{S'} . \exists p \in values(M_{E}^{S' to T}).first(p) = M_{V}^{S' to T}(u_1) \land last(p) = M_{V}^{S' to T}(u_2) \land ((u_1, u_2), p) \in M_{E}^{S' to T}$ which satisfies the second prerequisite.
+
+Lastly, we prove that performing a single contraction does not violate the third prerequisite
+
+$\exists p \in \mathit{values}(M_{E}^{S to T}) . \exists x \in \mathit{intermediate}(p) . \exists p' \in (\mathit{values}(M_{E}^{S to T}) \setminus \{p\}) . x \in \mathit{intermediate}(p')$
+
+and induce that performing any number of contractions does not. Obviously, the base case holds since it is our assumption (i.e. $S$ is vertex disjoint subgraph homeomorphic to $T$). Let $u\in V_S$ have indegree 1 and outdegree 1, qualifying it for contraction. Let the edges be $(\mathit{prec}(u), u)$ and $(u, \mathit{succ}(u))$ where  $\mathit{prec}(u)$ may be equal to $\mathit{succ}(u)$. We know that $M_{E}^{S to T}(\mathit{prec}(u), u)$ is internally vertex disjoint from all other paths in $\mathit{values}(M_{E}^{S to T})$, as well as $M_{E}^{S to T}(u, \mathit{succ}(u))$. They share at least an end vertex $M_{E}^{S to T}(u)$ and possibly $M_{E}^{S to T}(\mathit{prec}(u))$ if $\mathit{prec}(u)=\mathit{succ}(u)$. We know that $M_{E}^{S to T}(u)$ is not the end vertex of another path since $u$ has indegree- and outdegree 1, and not the intermediate vertex of another path since that is not permitted for subgraph homeomorphism. All in all, the combined paths contain intermediate vertices $\mathit{intermediate}(M_{E}^{S to T}(\mathit{prec}(u), u))$, \newline $\mathit{intermediate}(M_{E}^{S to T}(u, \mathit{succ}(u)))$ and the vertex $M_{V}^{S to T}(u)$ that are not intermediate vertices of other paths in $values(M_{E}^{S to T})$.
+
+When we contract this vertex, we get a new edge $(\mathit{prec}(u), \mathit{succ}(u))$ with start vertex $M_{E}^{S to T}(\mathit{prec}(u))$, end vertex $M_{E}^{S to T}(\mathit{succ}(u))$, and as intermediate vertices \newline $\mathit{intermediate}(M_{E}^{S to T}(\mathit{prec}(u), u)) \cup \mathit{intermediate}(M_{E}^{S to T}(u, \mathit{succ}(u))) \cup M_{V}^{S to T}(u)$. The vertex set used in $T$ remains exactly the same, thus does still not share intermediate vertices with other paths in $values(M_{E}^{S to T})$.
+ 
+By induction, the third prerequisite holds. Since all prerequisites hold, $S'$ is a vertex disjoint subgraph homeomorphism of $T$.
+
+
+%
+%Then, $x$ is part of the middle section of at least two different paths in $T$. Let us call these paths $p_1$ and $p_2$. These paths were concatenated from \textit{vertex disjoint} paths in $\mathit{values}(M_{E}^{S to T})$. This implies that ${M_{E}^{S to T}}^{-1}(x)$ (let us call this $x'$) must be a contracted vertex. Therefore, there exists some path segment $p_1' \in \mathit{values}(M_{E}^{S to T})$ that contains $x$ as end vertex and some path segment $p_1''\in \mathit{values}(M_{E}^{S to T})$ that contains $x$ as start vertex, and similarly for $p_2'$ and $p_2''$. Then, at least one of the following is true:
+%
+%\begin{itemize}
+%\item $x'$ has at least indegree 2 in which case we have a contradiction, since $x'$ was contracted.
+%\item $x'$ has at least outdegree 2 in which case we have a contradiction, since $x'$ was contracted.
+%\item $x'$ has a predecessor $prec(x')$ and successor $succ(x')$ such that $M_{E}^{S to T}(prec(x'))$
+%\end{itemize}
+%
+%$x'$ has at least indegree 2 or outdegree 2 or $p_1$ and $p_2$ share . However, we deduced that $x'$ must have been contracted, which is not performed on vertices with these indegrees and outdegrees.
+%
+%Since our assumption leads to a contradiction, we have proven its negation which is $\forall p \in \mathit{values}(M_{E}^{S' to T}) . \forall x \in \mathit{intermediate}(p) . \not \exists p' \in (\mathit{values}(M_{E}^{S' to T}) \setminus \{p\}) . x \in \mathit{intermediate}(p')$ which satisfies the third prerequisite.
+\end{proof} 

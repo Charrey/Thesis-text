@@ -218,22 +218,52 @@ With this optimisation enabled, such paths are skipped by path iterators. Exampl
 Some subgraph isomorphism algorithms\cite{Cordella2004, McCreesh2015} prune the search space during the search using some detection method of dead search paths. In Chapter \ref{chapter:pruning} we will elaborate on the different techniques we implement for subgraph homeomorphism.
 
 \subsection{Contraction}
-The source graph of a homeomorphism case will often contain vertices that have exactly one incoming edge and one outgoing edge. In FPGAs, for example, these could be transistors or ports of components. These vertices may also be thought of as edges, where the edge source is the vertex' predecessor and the edge target is the vertex' successor. This edge is different from the other edges in the source graph, because it `secretly' contains an extra vertex with some labels. Mapping this `larger' edge to a single path in target graph that contains a compatible vertex then yields a valid emulation. This process is what we call \textit{contraction}. It introduces some delay, since the algorithm needs to check whether paths are valid. However, it also saves time since much fewer vertices and edges need to be mapped. An example of contraction applied to a source graph is shown in Figure \ref{fig:contraction}.
+The source graph of a homeomorphism case will often contain vertices that have exactly one incoming edge and one outgoing edge. In FPGAs, for example, these could be transistors or ports of components. These vertices do topologically nothing but serve as an edge; therefore they may also be thought of as an edge, where the edge source is the vertex' predecessor and the edge target is the vertex' successor. When we use the word contraction, we mean surpressing all such vertices and replacing them with a single edge, as illustrated in Figure \ref{fig:contraction-basic}. This process transforms the source graph $S$ into the smallest graph $S_{cont}$ that is topologically equivalent to $S$. This may be a multigraph or a graph that contains loops. If a node disjoint subgraph homeomorphism exists from $S$ to some target graph $T$, then there also exists a vertex disjoint homeomorphism from $S_{cont}$ to $T$ (a proof is given in Appendix \ref{proof:contractionHomeo}). The optimisation `contraction' searches for a homeomorphism between $S_{cont}$ and the $T$ instead of finding one between $S$ and $T$.
+
+However, not every subgraph homeomorphism between $S'$ and $T$ corresponds to a subgraph homeomorphism between $S$ and $T$. For example, an edge resulting from contraction of a vertex with label set $\{\text{``}\mathit{red}\text{"}\}$  and a vertex with label set  $\{\text{``}\mathit{blue}\text{"}, \text{``}\mathit{green}\text{"}\}$ should only be mapped to a path in $T$ whose intermediate vertices contain one with a label set at least containing $\{\text{``}\mathit{red}\text{"}\}$ and one with a label set at least containing  $\{\text{``}\mathit{blue}\text{"}, \text{``}\mathit{green}\text{"}\}$ in that order. Only then will we have vertex candidates for contracted vertices in $S$ after we found a subgraph homeomorphism between $S'$ and $T$. When we contract vertices, therefore, we store the label sets of contracted vertices in order for each resulting edge. An example of contraction applied to a source graph with labels is shown in Figure \ref{fig:contraction}.
+
+During edge-path matching in the partial mapping search, we may need to map an edge $(u, v)$ that contains contracted vertices. For each 
+edge $e \in E_{cont}$ with the same source- and target vertex we determine the set of label set sequences that their found mapped paths in $T$ support. For edges that have no matches yet (initially each of them), we assume their path is compatible with each of those sequences. We then reverse this map to one that indicates for each label set sequence which paths are compatible. We then use AllDifferent (see Section \ref{sec:alldifferent}) to determine whether each label set sequence can be mapped to a different path in $T$. If this is the case, we continue the partial mapping search; otherwise we backtrack and try a different edge.
+
+This optimisation introduces some delay since the algorithm needs to check compatibility between label set sequences and paths, and solve an all-different constraint. However, it also saves time since it reduces the source graph's size.
+
+
+\subsubsection{Contraction for undirected graphs}
+Contraction can also be applied to undirected graphs by temporarily applying a uniform direction to each chain of 2-degree vertices in the source graph and then applying directed contraction, after which the edges may lose their direction again. Then, during the compatibility checking process we perform the same procedure, making sure the list of label sets is checked in the correct direction, i.e. for each edge $(u, v) \in E_{cont}$ and partial mapping $M$, the path $M(u, v)$ in $T$ should be checked in the direction from $M(u)$ to $M(v)$.
+
 
 
 \begin{figure}[ht]
 \begin{subfigure}{.5\textwidth}
   \centering
-\includegraphics[scale=0.8]{images/contraction/before.png}
+\includegraphics[width=0.8\linewidth]{images/contraction/whatisit1.png}
+  \caption{Part of a source graph that may be contracted}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=0.8\linewidth]{images/contraction/whatisit2.png}
+  \caption{The result of contraction}
+\end{subfigure}
+\caption{Contraction applied to vertex $s_2$, a vertex with indegree 1 and outdegree 1. During contraction, we save that a single vertex has been contracted with an empty label set.}
+\label{fig:contraction-basic}
+\end{figure}
+
+
+
+
+\begin{figure}[ht]
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[scale=0.6]{images/contraction/after.png}
   \caption{A source graph before contraction}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
   \centering
   % include second image
-\includegraphics[scale=0.8]{images/contraction/after.png}
+\includegraphics[scale=0.6]{images/contraction/before.png}
   \caption{The same source graph after contraction.}
 \end{subfigure}
-\caption{Contraction applied to a source graph. With this optimisation, 4 fewer vertices and edges need to be mapped. When mapping the downward edges of (b), checks are made to make sure that one path has a purple vertex followed by a blue vertex, and the other has a green vertex followed by a purple vertex.}
+\caption{Contraction applied to a source graph with labels. With this optimisation, 3 fewer vertices and 4 fewer edges need to be mapped. During contraction, we save the label sets of the contracted vertices in the order of the contracted path.}
 \label{fig:contraction}
 \end{figure}
 

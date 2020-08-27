@@ -1,0 +1,110 @@
+\documentclass[12pt, oneside]{report}
+\usepackage{amsmath}
+\usepackage{datetime}
+\usepackage{todonotes}
+\usepackage{amsfonts}
+\usepackage{subfiles}
+\usepackage[toc, page]{appendix}
+\usepackage{tikz,fullpage}
+\usepackage[export]{adjustbox}
+\usepackage{pgfplots}
+\usepackage{footnote}
+\usepackage{enumitem}
+\usetikzlibrary{tikzmark}
+\usepackage{parskip}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{mdframed}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{subcaption}
+\usepackage{multirow}
+
+
+\usepackage{adjustbox}
+\usepackage[backend=biber, style=bibstyle/lncs]{biblatex}
+\addbibresource{sources.bib}
+\renewcommand{\familydefault}{\sfdefault}
+\interfootnotelinepenalty=10000
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows, decorations.markings, shapes.geometric}
+
+\tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position
+   1 with {\arrow[semithick]{Triangle[open,length=3mm,width=5mm]}}},
+   double distance=2.4pt, shorten >= 8pt,
+   preaction = {decorate},
+   postaction = {draw,line width=2.4pt, white,shorten >= 5pt}]
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\theoremstyle{definition}
+\newtheoremstyle{indented}{3pt}{3pt}{\addtolength{\leftskip}{2.5em}}{
+}{\bfseries}{.}{.5em}{}
+
+\theoremstyle{indented}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{lemma}[thm]{Lemma}
+
+
+
+
+\newcommand\diag[4]{%
+  \multicolumn{1}{p{#2}|}{\hskip-\tabcolsep
+  $\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,inner sep=#1]
+  \path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+  \node[minimum width={#2+2\tabcolsep},minimum height=\baselineskip+\extrarowheight] (box) {};
+  \draw (box.south west) -- (box.north east);
+  \node[anchor=south west] at (box.south west) {#3};
+  \node[anchor=north east] at (box.north east) {#4};
+ \end{tikzpicture}}$\hskip-\tabcolsep}}
+
+\newenvironment{important}[1][]{%
+   \begin{mdframed}[%
+      backgroundcolor={red!15}, hidealllines=true,
+      skipabove=0.7\baselineskip, skipbelow=0.7\baselineskip,
+      splitbottomskip=2pt, splittopskip=4pt, #1]%
+   \makebox[0pt]{% ignore the withd of !
+      \smash{% ignor the height of !
+         \fontsize{32pt}{32pt}\selectfont% make the ! bigger
+         \hspace*{-19pt}% move ! to the left
+         \raisebox{-2pt}{% move ! up a little
+            {\color{red!70!black}\sffamily\bfseries !}% type the bold red !
+         }%
+      }%
+   }%
+}{\end{mdframed}}
+
+% Upload fonts and set font families and default
+\usepackage{fontspec}
+\setromanfont[Ligatures=TeX]{Arial}
+\setsansfont[BoldFont=arialnarrowbd.ttf]{arialnarrow.ttf}
+\renewcommand{\familydefault}{\rmdefault}
+
+% Set fonts for chapter, section and subsection
+\usepackage{titlesec}
+\titleformat{\chapter}{\huge\sffamily\uppercase}{\thechapter}{1em}{}
+
+\titleformat{\section}{\normalsize\rmfamily\bfseries}{\thesection}{1em}{}
+
+\titleformat{\subsection}{\normalsize\rmfamily}{\thesubsection}{1em}{}
+
+% Set fonts for in table of contents
+\renewcommand{\contentsname}{\uppercase{\sffamily Contents}}
+
+
+
+\newcommand{\doctitle}{FPGA-on-FPGA emulation using node disjoint subgraph homeomorphism}
+\newcommand{\docsubtitle}{MSc Thesis}
+\newcommand{\me}{Pim van Leeuwen}
+\newcommand{\studentcode}{s1602772}
+\newcommand{\university}{University of Twente}
+\newcommand{\school}{EEMCS}
+\newcommand{\department}{Formal Methods and Tools}
+\newcommand{\supervisor}{dr. W. Kuijper}
+\newcommand{\cosupervisor}{dr. ir. R. Langerak}
+\newcommand{\cocosupervisor}{H.H. Folmer MSc.}
+
+\author{\me}
+
+
+\title{FPGA-on-FPGA emulation using vertex disjoint subgraph homeomorphism}
+\author{Pim van Leeuwen}
+\date{\today}
