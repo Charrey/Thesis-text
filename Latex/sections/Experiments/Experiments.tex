@@ -1,11 +1,17 @@
 \chapter{Performance experiments}
-Using a machine with a Ryzen 5 3600 CPU @ 3.7GHz and 32GB DDR4 @ 3200MHz memory we conduct several experiments with different inputs and settings, the results are shown in Tables \ref{tab:iterator-performance} through \ref{tab:pruning-performance-big}. 
+Using a machine with an AMD Ryzen 5 3600 CPU @ 3.7GHz and sufficient 3200MHz memory we conduct several experiments with different inputs and setting. The results are shown in Tables \ref{tab:iterator-performance} through \ref{tab:pruning-performance-big}. 
 
 For source graph-target graph pairs without a present vertex disjoint subgraph homeomorphism we consistently use the G(n, M) Erdős–Rényi random graph model.
 
-Since vertex disjoint subgraph homeomorphisms are rare in random graphs, we construct source graph-target graph pairs with a present vertex disjoint subgraph homeomorphism by generating a random source graph and injecting vertices and edges to obtain a target graph. First we add vertices: with a 50\% probability we intersect a random existing edge with each new vertex and with 50\% probability we add it outside the existing graph. Then we add edges: while the vertices added outside the source graph have less-than-average degree we add uniformly sampled edges that include them; afterwards we add uniformly sampled random edges.
+Since vertex disjoint subgraph homeomorphisms are rare in random graphs, we construct source graph-target graph pairs with a present vertex disjoint subgraph homeomorphism a different way. First, wegenerating a random source graph using the use the G(n, M) Erdős–Rényi random graph model. Then we add vertices: with a 50\% probability we intersect a random existing edge with each new vertex and with 50\% probability we add it outside the existing graph. Then we add edges: while the vertices added outside the source graph have less-than-average degree we add uniformly sampled edges that include them; afterwards we add uniformly sampled random edges.
+
+Firstly, we compare the different methods of path iteration. The time taken to explore the entire search tree (without homeomorphism) gives an indication of the overhead introduced by a pathiterator, not taking heuristic value into account. This comparison is shown in Figure \ref{fig:plotfailiterators}. The time taken for each path iteration method to find a homeomorphism where one exists is shown in Figure \ref{todo}. Here, the delay introduced caused by overhead may be offset by heuristic value.
 
 
+
+
+
+%time to fail \ref{fig:plotfailiterators}
 \begin{figure}
 \centering
 \begin{tikzpicture}
@@ -138,8 +144,179 @@ Since vertex disjoint subgraph homeomorphisms are rare in random graphs, we cons
     \addlegendentry{GDFS C}
     \end{axis}
     \end{tikzpicture}
-    \caption{A comparison of the speed of path iterators on directed graphs. The time taken is measured of exploring the entire search tree without pruning or contraction and ``refuse longer paths" enabled. The source graph has average degree $3.0$ and the random target graph has $50\%$ more vertices and average degree $4.0$.}
+    \caption{A comparison of the speed of path iterators on directed graphs without a vertex disjoint subgraph homeomorphism. The time taken is measured of exploring the entire search tree without pruning or contraction and ``refuse longer paths" enabled. The source graph has average degree $3.0$ and the random target graph has $50\%$ more vertices and average degree $4.0$.}
+    \label{fig:plotfailiterators}
 \end{figure}
+
+
+%time to succeed \ref{fig:plotsucceediterators} TODO: run 10m each
+\begin{figure}
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        xlabel=$|V_S|$,
+        ylabel=$seconds$,
+        ymin=0.01,
+        ymode=log,
+        xmin=4,
+        xmax=14,
+        legend style={at={(0.9,0.1)},anchor=south east},
+        width=\textwidth,
+    ]
+
+
+
+\addplot[
+        mark=asterisk,
+        yellow,
+        error bars/.cd, y dir=both, y explicit,
+    ] plot coordinates {
+        (4,0.0040686272419627745)
+        (5,0.02789607619047619)
+        (6,0.14031256666666667)
+        (7,0.2701125243243243) 
+        (8,0.7778276)
+        (9,4.3198356)
+};
+    \addlegendentry{GDFS A IP}
+    
+    
+    \addplot[
+        mark=o,
+        purple,
+        error bars/.cd, y dir=both, y explicit,
+    ] plot coordinates {
+        (4,0.0027885141595525467)
+        (5,0.020353534764826178)
+        (6,0.09926867745098039)
+        (7,0.2653609487179487)
+        (8,0.31701626875)
+        (9,1.6662648400000002)
+};
+    \addlegendentry{GDFS O IP}
+    
+    \addplot[
+        mark=+,
+        green,
+        error bars/.cd, y dir=both, y explicit,
+    ] plot coordinates {
+        (4,0.005876000121065375)
+        (5,0.10363562142857143)
+        (6,0.50858517)
+        (7,0.6672153555555556)
+        (8,1.866422557142857)
+        (9,4.413240233333333)
+};
+    \addlegendentry{CP}
+    
+    
+    \addplot[
+        mark=*,
+        blue,
+        error bars/.cd, y dir=both, y explicit,
+    ] plot coordinates {
+        (4,0.004476061121408712)
+        (5,0.036955611481481486)
+        (6,0.17492663050847457)
+        (7,0.3083877264705882)
+        (8,1.0936501299999999)
+        (9,5.26660325)
+        (10,5.7741064)
+};
+    \addlegendentry{K-Path}
+    
+    
+    \addplot[
+        mark=x,
+        red,
+        error bars/.cd, y dir=both, y explicit,
+    ] plot coordinates {
+        (4,0.0019272253524046435)
+        (5,0.008586840086956522)
+        (6,0.0343196075862069)
+        (7,0.05045881464646465)
+        (8,0.1321905289473684)
+        (9,0.20174125294117645)
+        (10,0.9638180272727273)
+        (11,0.7288773214285714)
+        (12,2.1766248333333333)
+        (13,7.274199899999999)
+        (14,8.0345942)
+};
+    \addlegendentry{DFS}
+    
+    \addplot[
+        mark=star,
+        gray,
+        error bars/.cd, y dir=both, y explicit,
+    ] plot coordinates {
+        (4,0.01490073489425982)
+        (5,0.00978587002967359)
+        (6,0.0378543958174905)
+        (7,0.046830401408450704)
+        (8,0.09763976074766355)
+        (9,0.2921944421052632)
+        (10,0.4108861961538462)
+        (11,1.1481836727272727)
+        (12,1.1984511)
+        (13,3.7385270333333334)
+        (14,3.0652909666666663) 
+};
+    \addlegendentry{GDFS C}
+
+    
+
+    \end{axis}
+    \end{tikzpicture}
+    \caption{A comparison of the speed of path iterators on directed graphs with a vertex disjoint subgraph homeomorphism. The time taken is measured of exploring the entire search tree without pruning or contraction and ``refuse longer paths" enabled. The source graph has average degree $3.0$ and the random target graph has $50\%$ more vertices and average degree $4.0$.}
+    \label{fig:plotsucceediterators}
+\end{figure}
+
+
+
+%time to succeed \ref{fig:plotsucceediterators} TODO: run 10m each
+\begin{figure}
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        xlabel=$|V_S|$,
+        ylabel=$seconds$,
+        ymin=-1,
+        xmin=4,
+        xmax=14,
+        legend style={at={(0.9,0.1)},anchor=south east},
+        width=\textwidth,
+    ]
+
+
+\addplot [mark=none, black] {0.0};
+\addplot[
+        mark=asterisk,
+        yellow,
+        error bars/.cd, y dir=both, y explicit,
+    ] plot coordinates {
+        (4,0.2)
+        (5,0.1)
+        (6,0.05)
+        (7,-0.1) 
+        (8,-0.3)
+        (9,-0.4)
+};
+    \addlegendentry{GDFS A IP}
+    
+    
+
+    
+
+
+    \end{axis}
+    \end{tikzpicture}
+    \caption{The effect of contraction on the time taken to find vertex disjoint subgraph homeomorphisms for different path iteration methods.}
+    \label{fig:plotsucceediterators}
+\end{figure}
+
+
+
 
 \begin{table}[ht]
 \centering
