@@ -25,6 +25,17 @@ Firstly, we compare the different methods of path iteration. The time taken to e
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
     ]
+    
+\addplot[
+        mark=none,
+        black,
+    ] plot coordinates {
+        (4,600)
+        (20,600)
+};
+    \addlegendentry{Timeout 10m}    
+    
+    
     \addplot[
         mark=+,
         green,
@@ -64,7 +75,7 @@ Firstly, we compare the different methods of path iteration. The time taken to e
     
     \addplot[
         mark=asterisk,
-        yellow,
+        black,
     ] plot coordinates {
         (4,0.0043272421728668435) 
         (5,0.1078318674295203) 
@@ -159,26 +170,56 @@ Firstly, we compare the different methods of path iteration. The time taken to e
         ymin=0.01,
         ymode=log,
         xmin=4,
-        xmax=14,
+        xmax=21,
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
     ]
-
+    
+    \addplot[
+        mark=none,
+        black,
+    ] plot coordinates {
+        (4,600)
+        (21,600)
+};
+    \addlegendentry{Timeout 10m}
 
 
 \addplot[
-        mark=asterisk,
-        yellow,
+        mark=*,
+        blue,
         error bars/.cd, y dir=both, y explicit,
     ] plot coordinates {
-        (4,0.0040686272419627745)
-        (5,0.02789607619047619)
-        (6,0.14031256666666667)
-        (7,0.2701125243243243) 
-        (8,0.7778276)
-        (9,4.3198356)
+        (4,0.0012667032822330576)
+        (5,0.014450939583729977)
+        (6,0.05591708867636635)
+        (7,0.14911566497364495)
+        (8,0.44854427304185357)
+        (9,1.257458328264463)
+        (10,4.882261796422765)
+        (11,8.92112126069014)
+        (12,53.879064942750006)
+        (13,50.1927055715)
 };
-    \addlegendentry{GDFS A IP}
+    \addlegendentry{K-Path}
+    
+    \addplot[
+        mark=+,
+        green,
+        error bars/.cd, y dir=both, y explicit,
+    ] plot coordinates {
+        (4,0.0022598064731390965)
+        (5,0.040788492474074574)
+        (6,0.18285989427787933)
+        (7,0.7438714740483271)
+        (8,2.0661439080927835)
+        (9,11.051631589785714)
+        (10,26.467970115956522)
+        (11,91.75283437071428)
+        (12,114.154734211)
+        (13,342.4216391745)
+};
+    \addlegendentry{CP}
     
     
     \addplot[
@@ -186,44 +227,21 @@ Firstly, we compare the different methods of path iteration. The time taken to e
         purple,
         error bars/.cd, y dir=both, y explicit,
     ] plot coordinates {
-        (4,0.0027885141595525467)
-        (5,0.020353534764826178)
-        (6,0.09926867745098039)
-        (7,0.2653609487179487)
-        (8,0.31701626875)
-        (9,1.6662648400000002)
+        (4,7.913821003220384E-4)
+        (5,0.008231382983722117)
+        (6,0.031882214566006595)
+        (7,0.08963993490432053)
+        (8,0.29087998969535783)
+        (9,0.6738117268754134)
+        (10,1.8639315102639753)
+        (11,4.723388754421875)
+        (12,19.076032830888888)
+        (13,34.09402854616666)
+        (14,56.448447976636366)
+        (15,221.585912108)
+        (16,271.705023368)
 };
     \addlegendentry{GDFS O IP}
-    
-    \addplot[
-        mark=+,
-        green,
-        error bars/.cd, y dir=both, y explicit,
-    ] plot coordinates {
-        (4,0.005876000121065375)
-        (5,0.10363562142857143)
-        (6,0.50858517)
-        (7,0.6672153555555556)
-        (8,1.866422557142857)
-        (9,4.413240233333333)
-};
-    \addlegendentry{CP}
-    
-    
-    \addplot[
-        mark=*,
-        blue,
-        error bars/.cd, y dir=both, y explicit,
-    ] plot coordinates {
-        (4,0.004476061121408712)
-        (5,0.036955611481481486)
-        (6,0.17492663050847457)
-        (7,0.3083877264705882)
-        (8,1.0936501299999999)
-        (9,5.26660325)
-        (10,5.7741064)
-};
-    \addlegendentry{K-Path}
     
     
     \addplot[
@@ -231,41 +249,72 @@ Firstly, we compare the different methods of path iteration. The time taken to e
         red,
         error bars/.cd, y dir=both, y explicit,
     ] plot coordinates {
-        (4,0.0019272253524046435)
-        (5,0.008586840086956522)
-        (6,0.0343196075862069)
-        (7,0.05045881464646465)
-        (8,0.1321905289473684)
-        (9,0.20174125294117645)
-        (10,0.9638180272727273)
-        (11,0.7288773214285714)
-        (12,2.1766248333333333)
-        (13,7.274199899999999)
-        (14,8.0345942)
+        (4,5.262049048412901E-4)
+        (5,0.0037078367276320813)
+        (6,0.011864989818313664)
+        (7,0.024878632873617693)
+        (8,0.06746086448666291)
+        (9,0.1434635451083732)
+        (10,0.42305252119181946)
+        (11,0.8507154702662889)
+        (12,2.2694573458389513)
+        (13,4.062910206266234)
+        (14,15.418462455714286)
+        (15,88.48300721233333)
 };
     \addlegendentry{DFS}
+    
+    
+    \addplot[
+        mark=asterisk,
+        black,
+        error bars/.cd, y dir=both, y explicit,
+    ] plot coordinates {
+        (4,0.0012375753780820582)
+        (5,0.01386437069184402)
+        (6,0.053590561273019845)
+        (7,0.1357242449547409)
+        (8,0.3913462516747066)
+        (9,0.9992033137657806)
+        (10,2.177200933823741)
+        (11,5.359800497321429)
+        (12,14.644324665268291)
+        (13,39.5231686368125)
+        (14,127.138527012)
+        (15,40.69748180766667)
+        (16,477.083996688)
+};
+    \addlegendentry{GDFS A IP}
+    
     
     \addplot[
         mark=star,
         gray,
         error bars/.cd, y dir=both, y explicit,
     ] plot coordinates {
-        (4,0.01490073489425982)
-        (5,0.00978587002967359)
-        (6,0.0378543958174905)
-        (7,0.046830401408450704)
-        (8,0.09763976074766355)
-        (9,0.2921944421052632)
-        (10,0.4108861961538462)
-        (11,1.1481836727272727)
-        (12,1.1984511)
-        (13,3.7385270333333334)
-        (14,3.0652909666666663) 
+        (4,0.005644702207616498)
+        (5,0.008692270720925143)
+        (6,0.017174057391094375)
+        (7,0.03073833753675828)
+        (8,0.07604849509162437)
+        (9,0.13615389069436876) 
+        (10,0.38220422819426747)
+        (11,0.6959524782169374)
+        (12,1.95247773692233)
+        (13,6.06748104474) 
+        (14,9.499085503648649) 
+        (15,17.829571026735294) 
+        (16,59.15707016833334) 
+        (17,39.30442401336364) 
+        (18,77.68409019719999) 
+        (19,85.162749429) 
+        (20,223.46494652625)
+        (21,113.76846415325) 
 };
     \addlegendentry{GDFS C}
 
-    
 
+   
     \end{axis}
     \end{tikzpicture}
     \caption{A comparison of the speed of path iterators on directed graphs with a vertex disjoint subgraph homeomorphism. The time taken is measured of exploring the entire search tree without pruning or contraction and ``refuse longer paths" enabled. The source graph has average degree $3.0$ and the random target graph has $50\%$ more vertices and average degree $4.0$.}
@@ -282,6 +331,7 @@ Firstly, we compare the different methods of path iteration. The time taken to e
         xlabel=$|V_S|$,
         ylabel=$seconds$,
         ymin=-1,
+        ymax=1,
         xmin=4,
         xmax=14,
         legend style={at={(0.9,0.1)},anchor=south east},
@@ -304,9 +354,6 @@ Firstly, we compare the different methods of path iteration. The time taken to e
 };
     \addlegendentry{GDFS A IP}
     
-    
-
-    
 
 
     \end{axis}
@@ -314,6 +361,119 @@ Firstly, we compare the different methods of path iteration. The time taken to e
     \caption{The effect of contraction on the time taken to find vertex disjoint subgraph homeomorphisms for different path iteration methods.}
     \label{fig:plotsucceediterators}
 \end{figure}
+
+
+
+
+
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        xlabel=$|V_S|$,
+        ylabel=$seconds$,
+        ymin=0.01,
+        ymode=log,
+        xmin=4,
+        xmax=16,
+        legend style={at={(0.9,0.1)},anchor=south east},
+        width=\textwidth,
+    ]
+    
+        \addplot[
+        mark=none,
+        black,
+    ] plot coordinates {
+        (4,600)
+        (16,600)
+};
+    \addlegendentry{Timeout 10m}
+
+\addplot[
+        mark=asterisk,
+        black,
+    ] plot coordinates {
+        (4,0.0012733500687367946)
+        (5,0.013961093525222344)
+        (6,0.04882309154899406)
+        (7,0.12037806284610754)
+        (8,0.3548256466918983)
+        (9,0.715320859547619)
+        (10,2.2797796946037736)
+        (11,5.053094767408334)
+        (12,13.507568899266666)
+        (13,26.1401783795)
+        (14,55.4637695464)
+};
+    \addlegendentry{GDFS A IP}
+    
+    \addplot[
+        mark=*,
+        blue,
+    ] plot coordinates {
+        (4,0.0012887899289201789)
+        (5,0.014382741840146197)
+        (6,0.0524826445014447)
+        (7,0.12877008942798884)
+        (8,0.40779349980910323)
+        (9,1.0793785427771836)
+        (10,3.2986021624175823)
+        (11,7.926468189197369)
+        (12,21.974973627535714)
+        (13,43.69279381808334)
+        (14,28.98987175266667)
+};
+    \addlegendentry{K-Path}
+    
+    
+    \addplot[
+        mark=o,
+        purple,
+    ] plot coordinates {
+        (4,8.149382861884352E-4)
+        (5,0.008202635876828127)
+        (6,0.028093028601003708)
+        (7,0.0764138642950548)
+        (8,0.261033689564839)
+        (9,0.5919854175897435)
+        (10,1.8419382267484663)
+        (11,4.290794409128572)
+        (12,25.09465940583333)
+        (13,24.396632314266665)
+        (14,32.39383732925)
+        (15,128.70165874316666)
+        (16,75.12701285360001)
+};
+    \addlegendentry{GDFS O IP}
+
+    
+    
+    
+    
+
+    
+    
+    
+
+   
+    \end{axis}
+    \end{tikzpicture}
+    \caption{A comparison of the speed of path iterators on directed graphs with a vertex disjoint subgraph homeomorphism. The time taken is measured of exploring the entire search tree without pruning or contraction and ``refuse longer paths" enabled. The source graph has average degree $3.0$ and the random target graph has $50\%$ more vertices and average degree $4.0$.}
+    \label{fig:plotsucceediterators}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
