@@ -22,7 +22,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.3}FPGA simulation}{11}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}FPGA emulation}{11}%
+\contentsline {section}{\numberline {2.4}FPGA emulation}{12}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.5}Graph theory}{12}%
 \defcounter {refsection}{0}\relax 
