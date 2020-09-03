@@ -86,16 +86,16 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {8}Performance experiments}{38}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {9}Conclusion}{46}%
+\contentsline {chapter}{\numberline {9}Conclusion}{45}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {10}Discussion}{47}%
+\contentsline {chapter}{\numberline {10}Discussion}{46}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {11}Future Research}{48}%
+\contentsline {chapter}{\numberline {11}Future Research}{47}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendices}{49}%
+\contentsline {chapter}{Appendices}{48}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.1}History of subgraph isomorphism algorithms}{50}%
+\contentsline {section}{\numberline {.1}History of subgraph isomorphism algorithms}{49}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.2}Examples of path iterators}{52}%
+\contentsline {section}{\numberline {.2}Examples of path iterators}{51}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.3}Proof: contraction preserves verted disjoint subgraph homeomorphism}{56}%
+\contentsline {section}{\numberline {.3}Proof: contraction preserves verted disjoint subgraph homeomorphism}{55}%

@@ -323,152 +323,164 @@ Firstly, we compare the different methods of path iteration. The time taken to e
 
 
 
-%time to succeed \ref{fig:plotsucceediterators} TODO: run 10m each
+%contraction times \ref{fig:contractionsmall} timeout 30m
 \begin{figure}
 \centering
 \begin{tikzpicture}
     \begin{axis}[
         xlabel=$|V_S|$,
         ylabel=$seconds$,
-        ymin=-1,
-        ymax=1,
+        ymin=-0.000000001,
+        ymax=0.000000001,
         xmin=4,
-        xmax=14,
+        xmax=20,
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
     ]
 
 
 \addplot [mark=none, black] {0.0};
+
+
+
+\addplot[
+        mark=*,
+        blue,
+    ] plot coordinates {
+        (4,2.932140993814181E-11)
+        (5,8.7720080091192E-12)
+        (6,7.959205083828377E-12)
+        (7,1.0516842935321274E-11)
+        (8,1.3846681720649775E-11)
+        (9,1.3278493322591943E-11)
+        (10,9.431772188690199E-12)
+        (11,1.0427742369645348E-11)
+        (12,1.762989368085995E-11)
+        (13,-4.37768516655734E-11)
+        (14,-4.511212917791829E-12)
+        (15,4.8026201083270074E-11)
+};
+    \addlegendentry{K-Path}
+    
+    
+    
+\addplot[
+        mark=+,
+        green,
+    ] plot coordinates {
+        (4,2.2332244791963868E-10)
+        (5,1.2894586030492787E-11)
+        (6,1.2739181300796536E-11)
+        (7,1.6017815465222444E-11)
+        (8,1.6604858933035923E-12)
+        (9,-6.059090199426299E-12)
+        (10,9.39594395535824E-12)
+        (11,1.9454408356813372E-11)
+        (12,1.506393331670645E-11)
+        (13,2.4343296338245503E-11)
+};
+    \addlegendentry{CP}
+    
+
+\addplot[
+        mark=star,
+        gray,
+    ] plot coordinates {
+        (4,1.3449236191090652E-10)
+        (5,3.9424461507144745E-11)
+        (6,4.123997948788519E-12)
+        (7,-7.124749000038612E-12)
+        (8,-4.550093751058444E-12)
+        (9,-2.557899737322365E-12)
+        (10,3.4839846092196797E-12)
+        (11,8.924880334219604E-12)
+        (12,-6.3266559625812015E-12)
+        (13,3.4830158320769448E-12)
+        (14,4.471491114813807E-13)
+        (15,-5.3583849118332295E-12)
+        (16,-6.032475121829378E-12)
+        (17,1.0580563826445032E-11)
+        (18,2.4921100870856105E-13)
+        (19,-5.51069485408738E-12)
+        (20,3.6745570894507475E-12)
+};
+    \addlegendentry{GDFS C}
+    
+   
+   
 \addplot[
         mark=asterisk,
         yellow,
-        error bars/.cd, y dir=both, y explicit,
     ] plot coordinates {
-        (4,0.2)
-        (5,0.1)
-        (6,0.05)
-        (7,-0.1) 
-        (8,-0.3)
-        (9,-0.4)
-};
-    \addlegendentry{GDFS A IP}
-    
-
-
-    \end{axis}
-    \end{tikzpicture}
-    \caption{The effect of contraction on the time taken to find vertex disjoint subgraph homeomorphisms for different path iteration methods.}
-    \label{fig:plotsucceediterators}
-\end{figure}
-
-
-
-
-
-
-\begin{figure}
-\centering
-\begin{tikzpicture}
-    \begin{axis}[
-        xlabel=$|V_S|$,
-        ylabel=$seconds$,
-        ymin=0.01,
-        ymode=log,
-        xmin=4,
-        xmax=16,
-        legend style={at={(0.9,0.1)},anchor=south east},
-        width=\textwidth,
-    ]
-    
-        \addplot[
-        mark=none,
-        black,
-    ] plot coordinates {
-        (4,600)
-        (16,600)
-};
-    \addlegendentry{Timeout 10m}
-
-\addplot[
-        mark=asterisk,
-        black,
-    ] plot coordinates {
-        (4,0.0012733500687367946)
-        (5,0.013961093525222344)
-        (6,0.04882309154899406)
-        (7,0.12037806284610754)
-        (8,0.3548256466918983)
-        (9,0.715320859547619)
-        (10,2.2797796946037736)
-        (11,5.053094767408334)
-        (12,13.507568899266666)
-        (13,26.1401783795)
-        (14,55.4637695464)
+        (4,2.5817014120104498E-11)
+        (5,7.588652938149603E-12)
+        (6,6.678659103281653E-12)
+        (7,7.795817566846849E-12)
+        (8,9.740183930072732E-12)
+        (9,1.7547084454832595E-11)
+        (10,8.007714438420118E-12)
+        (11,2.472236632832395E-11)
+        (12,-4.3069129019126646E-11)
+        (13,-8.286425287724539E-12)
+        (14,-6.52925051744273E-12)
+        (15,-3.567912623592618E-11)
+        (16,1.3722965201731106E-11)
+        (17,9.008197187185096E-12)
+        (18,5.332941508324916E-12)
+        (19,2.0033625302170086E-12)
 };
     \addlegendentry{GDFS A IP}
     
     \addplot[
-        mark=*,
-        blue,
+        mark=x,
+        red,
     ] plot coordinates {
-        (4,0.0012887899289201789)
-        (5,0.014382741840146197)
-        (6,0.0524826445014447)
-        (7,0.12877008942798884)
-        (8,0.40779349980910323)
-        (9,1.0793785427771836)
-        (10,3.2986021624175823)
-        (11,7.926468189197369)
-        (12,21.974973627535714)
-        (13,43.69279381808334)
-        (14,28.98987175266667)
+        (4,2.404005357065415E-11)
+        (5,9.847114925286539E-12)
+        (6,8.222595522624967E-12)
+        (7,6.694101448821747E-12)
+        (8,7.50354643777528E-12)
+        (9,8.966580808443709E-12)
+        (10,7.694811181400364E-12)
+        (11,1.550304446686373E-11)
+        (12,5.195414819744207E-13)
+        (13,2.96892886474811E-12)
+        (14,1.3809535325944459E-11)
+        (15,-2.2146582030819945E-11)
+        (16,-7.43249518357636E-12)
+        (17,-5.879366264527795E-11)
+        (18,4.52192973530775E-11)
 };
-    \addlegendentry{K-Path}
-    
+    \addlegendentry{DFS}
     
     \addplot[
         mark=o,
         purple,
     ] plot coordinates {
-        (4,8.149382861884352E-4)
-        (5,0.008202635876828127)
-        (6,0.028093028601003708)
-        (7,0.0764138642950548)
-        (8,0.261033689564839)
-        (9,0.5919854175897435)
-        (10,1.8419382267484663)
-        (11,4.290794409128572)
-        (12,25.09465940583333)
-        (13,24.396632314266665)
-        (14,32.39383732925)
-        (15,128.70165874316666)
-        (16,75.12701285360001)
+        (4,2.4281869530195394E-11)
+        (5,8.94728269970603E-12)
+        (6,7.1701111074078675E-12)
+        (7,7.875692218417016E-12)
+        (8,7.438503763179787E-12)
+        (9,1.2660715198450901E-11)
+        (10,1.3068978206401108E-11)
+        (11,4.242523937867266E-12)
+        (12,1.6340262407110805E-11)
+        (13,-2.2798295806268762E-11)
+        (14,-7.487971797449773E-12)
+        (15,-5.214674853044758E-12)
+        (16,3.6968087345378095E-11)
+        (17,8.07749651664158E-12)
 };
     \addlegendentry{GDFS O IP}
 
-    
-    
-    
-    
 
-    
-    
-    
 
-   
     \end{axis}
     \end{tikzpicture}
-    \caption{A comparison of the speed of path iterators on directed graphs with a vertex disjoint subgraph homeomorphism. The time taken is measured of exploring the entire search tree without pruning or contraction and ``refuse longer paths" enabled. The source graph has average degree $3.0$ and the random target graph has $50\%$ more vertices and average degree $4.0$.}
-    \label{fig:plotsucceediterators}
+    \caption{Relative performance of contraction-enabled vertex disjoint subgraph homeomorphism compared to contraction-disabled for different path iteration methods. Mind the scale of the vertical axis ($10^{-9}$)}
+    \label{fig:contractionsmall}
 \end{figure}
-
-
-
-
-
-
-
 
 
 
