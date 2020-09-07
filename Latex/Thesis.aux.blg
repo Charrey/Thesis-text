@@ -1,0 +1,5 @@
+[0] Config.pm:312> INFO - This is Biber 2.15
+[0] Config.pm:315> INFO - Logfile is 'Thesis.aux.blg'
+[78] biber:330> INFO - === do sep  3, 2020, 14:48:12
+[93] Utils.pm:411> ERROR - Cannot find 'Thesis.aux.bcf'!
+[93] Biber.pm:132> INFO - ERRORS: 1
