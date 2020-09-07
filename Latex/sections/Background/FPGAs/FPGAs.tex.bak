@@ -129,7 +129,7 @@ The computing hardware most people are familiar with is CPUs. Manufacturers inco
 
 FPGAs are different from CPUs, as they do not store the programs they execute in RAM- they instead configure them in the (highly parallel) logic of the circuit itself. Configuring an FPGA to execute a specific program entails loading a configuration file onto the hardware and restarting the FPGA such that it reconfigures its logic. The hardware will then perform the configured logic on the input it receives via IO pins. 
 
-Because each logic cell performs logic independently, FPGAs can perform computations highly parallel and without delays from loading instructions. This computation process implies that FPGAs are very efficient at executing individual programs, specifically concurrent ones. Reconfiguring an FPGA is, however, a relatively expensive operation. Therefore, FPGAs are unsuitable for changing from program to program, as a CPU does when running an operating system.
+Because each logic cell performs logic independently, FPGAs can perform computations highly parallel and without delays from sequentially loading instructions. This computation process implies that FPGAs are very efficient at executing concurrent programs. Reconfiguring an FPGA is, however, a relatively expensive operation. Therefore, FPGAs are unsuitable for changing from program to program, as a CPU does when running an operating system. Moreover, FPGAs be slower than CPUs for nonparallel applications since its longer critical path length (i.e. distance an electric current has to travel each clock cycle) results in a lower clock speed. Lastly, the different structure of an FPGA requires programs for them to be developed in specialized HDL languages instead of CPU-based programming languages, although efforts are being made to bring these domains closer together.
 
 FPGAs perform execution using components such as lookup tables, registers, and special-purpose modules\footnote{These modules are used for efficient storage or calculation of specific functions. We will disregard them in this research.}. These components are physical structures on the circuit. In the next sections, we will discuss these modules.
 \subsection{Lookup tables}
@@ -195,11 +195,11 @@ Any boolean logic formula can be expressed in the form of a truth table, such as
 \label{fig:register}
 \end{figure}
 
-Programs require intermediate data storage to perform any computation that is more complex than finite logic or fixed-point calculations.
+Programs require intermediate data storage to perform any computation that is more complex than combinational logic.
 
-FPGAs use registers (or D flip-flops) for this purpose (see Figure \ref{fig:register}). Registers can store a small collection of bits, depending on the FPGA design. When a register's input $clock$ changes from 0 to 1, the contents of the register are replaced by the value of the input $D$, and the output $Q$ takes this value. The output stays constant until the clock changes from 0 to 1 again when D has a different value.
+FPGAs use registers for this purpose (see Figure \ref{fig:register}). Registers can store a small collection of bits, depending on the FPGA design. When a register's input $clock$ changes from 0 to 1, the contents of the register are replaced by the value of the input $D$, and the output $Q$ takes this value. The output stays constant until the clock changes from 0 to 1 again when D has a different value.
 
-FPGAs usually have a global clock- a wire which signal constantly changes between 0 and 1 that is connected to all registers in the hardware. The frequency of this clock is chosen such that all signals are guaranteed to be stable when the clock becomes 1. This stability is very convenient for programmers, who do not have to calculate the time it takes for a signal to propagate through a wire. The implication is that each circuit combining only lookup tables that end in the D-input of a register takes the same amount of time.
+FPGAs usually have clocks- wires whose signal constantly changes between 0 and 1 that is connected to registers in the hardware. This can be a single global clock connected to each register or a network of clocks each responsible for different parts of the FPGA. The frequency of this clock is chosen such that all signals are guaranteed to be stable when the clock becomes 1. This stability is very convenient for programmers, who do not have to calculate the time it takes for a signal to propagate through a wire. The implication is that each circuit combining only lookup tables that end in the D-input of a register takes the same amount of time.
 
 If the FPGA program has longer chains of lookup tables, then it takes longer for the output signal to stabilize. The vendor software accommodates for this by setting the global clock at a lower frequency. Since programs on FPGAs are highly parallel, there are likely some parts of the calculation that do not require a lower clock speed and can cause slowdown because of this. In these scenarios, adding registers to some parts of an FPGA program can improve performance if it allows the global clock speed to be higher.
 
@@ -285,7 +285,7 @@ FPGA manufacturers often group Logic cells in Configurable Logic Blocks (CLB) th
 The main building blocks of FPGAs are CLBs that are connected via routing fabric. These are responsible for most of the computation of FPGA programs. FPGAs can have additional modules such as RAM and Digital Signal Processors that optimize storage and specialized arithmetic, respectively. Each of these modules' functionality could also be performed by a collection of logic cells at the cost of performance. In this research, we will only consider CLBs.
 
 \subsection{Routing}
-A single logic cell can only perform simple programs such as logic gates. The FPGA needs to connect different logic cells to perform any kind of logic operation, dependent on what program it needs to execute. The way logic cells and other modules are connected on a physical FPGA in a specific configuration is called the \textbf{routing} of an FPGA. On the most basic level, FPGAs perform routing with configurable switches. These are tiny modules on an FPGA board that are connected with $>2$ wires, and can be configured to block signals from specific wires; the other wires can then send- and receive signals.
+A single logic cell can only perform simple programs such as logic gates. The FPGA needs to connect different logic cells to perform any kind of logic operation, dependent on what program it needs to execute. The way logic cells and other modules are connected on a physical FPGA in a specific configuration is called the \textbf{routing} of an FPGA. On the most basic level, FPGAs perform routing with configurable transistors. These are tiny modules on an FPGA board that are connected with an input wire and an output wire. They can be configured to allow electric current flowing from its input to its output or to block any incoming electric current.
 
 \subsection{Pins}
 To supply the FPGA with input and to allow it to provide output, an FPGA is equipped with a set of metal pins. Each of those pins is connected with a wire on the FPGA board. Each pin can be used for either input or output, depending on the configured program. For example, an FPGA used to control an electric stepper motor will receive input with the requested motor speed and direction and will output signals to specific circuits that need to be activated to obtain that speed and direction.
@@ -301,7 +301,7 @@ The software then needs to translate this abstract description to a \textbf{netl
 
 The next step in the compilation process is \textbf{placement}. The software maps each LUT, register, and other components to a physical place on the FPGA. The software can place components closer together to optimize the speed or can place components further apart to increase the probability routes can be found. Finding the optimal placement for speed is a proven NP-hard problem.
 
-The last step in the compilation process is \textbf{routing}. State-of-the-art FPGA compilation pipelines perform this step sequentially after placement\cite{alhyari2019}. With the components locked in place, the software attempts to find a configuration of routing switches such that each connection that the synthesis requires is made. Finding the optimal routes for speed is also an NP-hard problem. However, finding any matching routing configuration is an NP problem.
+The last step in the compilation process is \textbf{routing}. State-of-the-art FPGA compilation pipelines perform this step sequentially after placement\cite{alhyari2019}. With the components locked in place, the software attempts to find a configuration of routing switches such that each connection that the synthesis requires is made. Finding the optimal routes for speed is an NP-hard problem while finding any matching routing configuration is an NP problem. Both can be reducted to the problem of fixed-vertex subgraph homeomorphism of which the optimisation variant needs to explore the entire search tree, which \cite{ExactComplexity} showed can be computed in $O(2^{|T|-|S|}n^{O(1)})$ for the general case. However, routing algorithms are often made for specific FPGA architectures, allowing for better heuristics and thus performance.
 
 \begin{minipage}{\textwidth}
 \begin{important}
@@ -385,15 +385,14 @@ Yosys\cite{wolf2016yosys} is a free, open-source tool that performs general synt
 \end{itemize}
 
 Much literature exists on FPGA synthesis. The proposed research resembles logic synthesis, but does not involve the application of synthesis techniques. These techniques rely on the absence of unconfigured components and an input that resembles an FPGA configuration, which we both do not have.
-%It may be intuitive to model FPGAs as a variant of a netlist, and then use placement- and routing technologies to obtain a placement of a virtual FPGA on a concrete FPGA and with that an emulation. However, by looking at lower abstraction levels than FPGA hardware, e.g. logic gate levels, the problem of finding an emulation becomes much more complex. Different FPGA designs may implement the same functionality (e.g. a LUT) using different combinations of gates and transistors. To find an emulation that exhibits the same functionality, we would thus have to find a mapping from sets of interconnected logic gates to sets of interconnected logic gates that are logically equivalent instead of finding a mapping of components that serve the same function (e.g. LUT to LUT). This means that we have $O(2^n!)$ possible mappings from virtual FPGA to concrete FPGA instead of $O(n!)$, which is computationally infeasible\footnote{To illustrate this complexity: adding a $100$th component to a $99$-component FPGA would multiply the search space by $10^{10^{32}}$ instead of by $100$.}.
 
 \section{FPGA simulation}
 \label{sec:simulation}
 In this research, we will not be implementing FPGA simulation. However, for clarity, we will explain what we mean with simulation. Imagine a software engineer wants to execute a program $P$. Conventionally, they would program $P$ in an HDL, compile it to an FPGA configuration file and load it onto the hardware.
 
-To instead simulate the synthesized program, the engineer can also program a generic FPGA environment in an HDL, compile it to an FPGA configuration file and load it onto the hardware. They can afterwards provide $P$ as \textit{input} to the program instead of using $P$ \textit{as} a program. A simulation of a single LUT is shown in Figure \ref{fig:simulation}.
+To instead simulate the synthesized program, the engineer can also program a generic FPGA environment in an HDL, compile it to an FPGA configuration file and load it onto the hardware. They can afterwards provide $P$ as \textit{input} to the program instead of using $P$ \textit{as} a program. This way, the \texit{static} configuration of the virtual FPGA uses the \textit{dynamic} resources (e.g. RAM and registers) of the concrete FPGA. A simulation of a single LUT is shown in Figure \ref{fig:simulation}.
 
-Although engineers could use simulation to execute FPGA programs on FPGA hardware that the FPGA software was not compiled for, it introduces a considerable delay in execution. After all, many more components on the FPGA need to be used in the execution of the same program.	
+Although engineers could use simulation to execute FPGA programs on FPGA hardware that the FPGA software was not compiled for, it introduces a considerable delay in execution. After all, many more dynamic components on the FPGA need to be used to store and execute the configuration of the same program.	
 
 \begin{figure}
     \centering
@@ -403,7 +402,7 @@ Although engineers could use simulation to execute FPGA programs on FPGA hardwar
     \draw[thick,->] (-1.2,0.5) node[anchor=north west] {in\_2} -- (0,0.5);
     \draw[thick,->] (-1.2,1.5) node[anchor=north west] {in\_1} -- (0,1.5);
     
-    \draw[thick,->] (3,1)  -- (4,1) node[anchor=north west] {out\_1};
+    \draw[thick,->] (3,1)  -- (4,1) node[anchor=north] {out\_1};
     
     \draw[draw=white] (1,1.5)     node[anchor=south] {00};
     \draw[draw=white] (1,1)       node[anchor=south] {01};
@@ -418,29 +417,38 @@ Although engineers could use simulation to execute FPGA programs on FPGA hardwar
     
     
 
-     \draw (8,0) rectangle (11,2);
-    \draw (10, 0) -- (10, 2);
-    \draw[thick,->] (6.8,0.5) node[anchor=north west] {in\_2} -- (8,0.5);
-    \draw[thick,->] (6.8,1.5) node[anchor=north west] {in\_1} -- (8,1.5);
+     \draw (8,-1) rectangle (11,3);
+    \draw (10, -1) -- (10, 3);
+    \draw[thick,->] (6.8,0) node[anchor=north west] {in\_2} -- (8,0);
+    \draw[thick,->] (6.8,1) node[anchor=north west] {N/A} -- (8,1);    
+    \draw[thick,->] (6.8,2) node[anchor=north west] {in\_1} -- (8,2);
     
-    \draw[thick,->] (11,1)  -- (12,1) node[anchor=north west] {out\_1};
+    \draw[thick,->] (11,1.5)  -- (12,1.5) node[anchor=north] {out\_1};
+    \draw[thick,->] (11,0.5)  -- (12,0.5) node[anchor=north] {0};
     
-    \draw[draw=white] (9,1.5)        node[anchor=south] {00};
-    \draw[draw=white] (9,1)          node[anchor=south] {01};
-    \draw[draw=white] (9,0.5)        node[anchor=south] {10};
-    \draw[draw=white] (9,0)          node[anchor=south] {11};
+	\draw[draw=white] (9,2.5)        node[anchor=south] {000};
+    \draw[draw=white] (9,2)          node[anchor=south] {001};    
+    \draw[draw=white] (9,1.5)        node[anchor=south] {010};
+    \draw[draw=white] (9,1)          node[anchor=south] {011};
+    \draw[draw=white] (9,0.5)        node[anchor=south] {100};
+    \draw[draw=white] (9,0)          node[anchor=south] {101};
+    \draw[draw=white] (9,-0.5)        node[anchor=south] {110};
+    \draw[draw=white] (9,-1)          node[anchor=south] {111};
     
     
-    \draw[draw=white] (10.5,1.5)         node[anchor=south] {$y_0$};
-    \draw[draw=white] (10.5,1)           node[anchor=south] {$y_1$};
-    \draw[draw=white] (10.5,0.5)         node[anchor=south] {$y_2$};
-    \draw[draw=white] (10.5,0)           node[anchor=south] {$y_3$};
-    
+    \draw[draw=white] (10.5,2.5)         node[anchor=south] {$y_0 0$};
+    \draw[draw=white] (10.5,2)           node[anchor=south] {$y_1 0$};    
+    \draw[draw=white] (10.5,1.5)         node[anchor=south] {$y_0 0$};
+    \draw[draw=white] (10.5,1)           node[anchor=south] {$y_1 0$};
+    \draw[draw=white] (10.5,0.5)         node[anchor=south] {$y_2 0$};
+    \draw[draw=white] (10.5,0)           node[anchor=south] {$y_3 0$};
+    \draw[draw=white] (10.5,-0.5)         node[anchor=south] {$y_2 0$};
+    \draw[draw=white] (10.5,-1)           node[anchor=south] {$y_3 0$};
     
     \draw[vecArrow] (5.5,1) -- (6.5,1);
 
 \end{tikzpicture}
-    \caption{Emulation of an FPGA: the programming of the virtual FPGA is reflected in the programming of the actual FPGA. In this example, $y_i$ takes the value of $x_i$. A less direct mapping could occur in emulation when, for example, a MUX is emulated by a LUT, or the inputs have a different permutation.}
+    \caption{Emulation of an FPGA: the programming of the virtual FPGA is reflected in the programming of the actual FPGA. In this example, $y_i$ takes the value of $x_i$. Any extra inputs and outputs are unused.}
     \label{fig:emulation}
 \end{figure}
 

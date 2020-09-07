@@ -1,17 +1,17 @@
-[0] Config.pm:304> INFO - This is Biber 2.14
-[0] Config.pm:307> INFO - Logfile is 'Thesis.blg'
-[95] biber-MSWIN64:322> INFO - === 
-[122] Biber.pm:415> INFO - Reading 'Thesis.bcf'
-[281] Biber.pm:943> INFO - Found 63 citekeys in bib section 0
-[304] Biber.pm:4256> INFO - Processing section 0
-[305] Utils.pm:75> INFO - Globbing data source 'sources.bib'
-[319] Utils.pm:91> INFO - Globbed data source 'sources.bib' to sources.bib
-[341] Biber.pm:4455> INFO - Looking for bibtex format file 'sources.bib' for section 0
-[362] bibtex.pm:1653> INFO - LaTeX decoding ...
-[869] bibtex.pm:1471> INFO - Found BibTeX data source 'sources.bib'
-[1572] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[1572] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[1572] Biber.pm:4084> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
-[1572] Biber.pm:4090> INFO - No sort tailoring available for locale 'en-US'
-[1686] bbl.pm:652> INFO - Writing 'Thesis.bbl' with encoding 'UTF-8'
-[1753] bbl.pm:755> INFO - Output to Thesis.bbl
+[0] Config.pm:312> INFO - This is Biber 2.15
+[0] Config.pm:315> INFO - Logfile is 'Thesis.blg'
+[56] biber:330> INFO - === do sep  3, 2020, 15:24:10
+[66] Biber.pm:415> INFO - Reading 'Thesis.bcf'
+[133] Biber.pm:952> INFO - Found 66 citekeys in bib section 0
+[145] Biber.pm:4334> INFO - Processing section 0
+[152] Biber.pm:4523> INFO - Looking for bibtex format file 'sources.bib' for section 0
+[160] bibtex.pm:1682> INFO - LaTeX decoding ...
+[299] bibtex.pm:1494> INFO - Found BibTeX data source 'sources.bib'
+[660] Utils.pm:395> WARN - I didn't find a database entry for 'todo' (section 0)
+[734] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[734] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[734] Biber.pm:4162> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[734] Biber.pm:4168> INFO - No sort tailoring available for locale 'en-US'
+[798] bbl.pm:651> INFO - Writing 'Thesis.bbl' with encoding 'UTF-8'
+[833] bbl.pm:754> INFO - Output to Thesis.bbl
+[833] Biber.pm:128> INFO - WARNINGS: 1

@@ -21,8 +21,7 @@
 
 
 \usepackage{adjustbox}
-\usepackage[backend=biber, style=bibstyle/lncs]{biblatex}
-\addbibresource{sources.bib}
+
 \renewcommand{\familydefault}{\sfdefault}
 \interfootnotelinepenalty=10000
 \usetikzlibrary{arrows.meta}

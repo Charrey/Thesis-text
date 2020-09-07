@@ -85,7 +85,7 @@
       \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{© 2014 IEEE. The applications of the sub graph isomorphism search are growing with the growing number of areas that model their systems using graphs or networks. Specifically, many biological systems, such as protein interaction networks, molecular structures and protein contact maps, are modeled as graphs. The sub graph isomorphism search is concerned with finding all sub graphs that are isomorphic to a relevant query graph, the existence of such sub graphs can reflect on the characteristics of the modeled system. The most computationally expensive step in the search for isomorphic sub graphs is the backtracking algorithm that traverses the nodes of the target graph. In this paper, we propose a pruning approach that is inspired by the minimum remaining value heuristic that achieves greater scalability over large query and target graphs. Our testing on various biological networks shows that performance enhancement of our approach over existing state-of-the-art approaches varies between 6x and 53x.}
+      \field{abstract}{{©} 2014 IEEE. The applications of the sub graph isomorphism search are growing with the growing number of areas that model their systems using graphs or networks. Specifically, many biological systems, such as protein interaction networks, molecular structures and protein contact maps, are modeled as graphs. The sub graph isomorphism search is concerned with finding all sub graphs that are isomorphic to a relevant query graph, the existence of such sub graphs can reflect on the characteristics of the modeled system. The most computationally expensive step in the search for isomorphic sub graphs is the backtracking algorithm that traverses the nodes of the target graph. In this paper, we propose a pruning approach that is inspired by the minimum remaining value heuristic that achieves greater scalability over large query and target graphs. Our testing on various biological networks shows that performance enhancement of our approach over existing state-of-the-art approaches varies between 6x and 53x.}
       \field{booktitle}{IEEE International Conference on Data Mining Workshops, ICDMW}
       \field{isbn}{9781479942749}
       \field{number}{January}
@@ -121,7 +121,7 @@
       \field{sortinithash}{8de16967003c7207dae369d874f1456e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{This work presents an algorithm for the sub-graph isomorphism problem based on a new pruning technique for directed graphs. During the tree search, the method checks if a new association between two vertices is compatible by considering the structure of their local neighborhoods, represented as the number of limited-length paths of different type originating from each vertex. In addition, randomized versions of the algorithms are studied experimentally by deriving their runtime distributions. Finally, algorithm portfolios consisting of multiple instances of the same randomized algorithm are proposed and analyzed. The experimental results on benchmark graphs demonstrate that the new pruning method is competitive w.r.t. recently proposed techniques. Significantly better results are obtained on sparse graphs. Furthermore, even better results are obtained by the portfolios, when both the average and standard deviation of solution times are considered. © Springer-Verlag Berlin Heidelberg 2007.}
+      \field{abstract}{This work presents an algorithm for the sub-graph isomorphism problem based on a new pruning technique for directed graphs. During the tree search, the method checks if a new association between two vertices is compatible by considering the structure of their local neighborhoods, represented as the number of limited-length paths of different type originating from each vertex. In addition, randomized versions of the algorithms are studied experimentally by deriving their runtime distributions. Finally, algorithm portfolios consisting of multiple instances of the same randomized algorithm are proposed and analyzed. The experimental results on benchmark graphs demonstrate that the new pruning method is competitive w.r.t. recently proposed techniques. Significantly better results are obtained on sparse graphs. Furthermore, even better results are obtained by the portfolios, when both the average and standard deviation of solution times are considered. {©} Springer-Verlag Berlin Heidelberg 2007.}
       \field{booktitle}{Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)}
       \field{isbn}{9783540744450}
       \field{title}{{An algorithm portfolio for the sub-graph isomorphism problem}}
@@ -208,7 +208,7 @@
       \field{sortinithash}{8de16967003c7207dae369d874f1456e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{© 2016 ACM. In this paper, we study the problem of subgraph matching that extracts all subgraph isomorphic embeddings of a query graph q in a large data graph G. The existing algorithms for subgraph matching follow Ullmann's backtracking approach; that is, iteratively map query vertices to data vertices by following a matching order of query vertices. It has been shown that the matching order of query vertices is a very important aspect to the efficiency of a subgraph matching algorithm. Recently, many advanced techniques, such as enforcing connectivity and merging similar vertices in query or data graphs, have been proposed to provide an effective matching order with the aim to reduce unpromising intermediate results especially the ones caused by redundant Cartesian products. In this paper, for the first time we address the issue of unpromising results by Cartesian products from "dissimilar" vertices. We propose a new framework by postponing the Cartesian products based on the structure of a query to minimize the redundant Cartesian products. Our second contribution is proposing a new path-based auxiliary data structure, with the size O(|E(G)| × |V(q)|), to generate a matching order and conduct subgraph matching, which significantly reduces the exponential size O(|V(G)||V(q)|-1) of the existing path-based auxiliary data structure, where V(G) and E(G) are the vertex and edge sets of a data graph G, respectively, and V(q) is the vertex set of a query q. Extensive empirical studies on real and synthetic graphs demonstrate that our techniques outperform the state-of-the-art algorithms by up to 3 orders of magnitude.}
+      \field{abstract}{{©} 2016 ACM. In this paper, we study the problem of subgraph matching that extracts all subgraph isomorphic embeddings of a query graph q in a large data graph G. The existing algorithms for subgraph matching follow Ullmann's backtracking approach; that is, iteratively map query vertices to data vertices by following a matching order of query vertices. It has been shown that the matching order of query vertices is a very important aspect to the efficiency of a subgraph matching algorithm. Recently, many advanced techniques, such as enforcing connectivity and merging similar vertices in query or data graphs, have been proposed to provide an effective matching order with the aim to reduce unpromising intermediate results especially the ones caused by redundant Cartesian products. In this paper, for the first time we address the issue of unpromising results by Cartesian products from "dissimilar" vertices. We propose a new framework by postponing the Cartesian products based on the structure of a query to minimize the redundant Cartesian products. Our second contribution is proposing a new path-based auxiliary data structure, with the size O(|E(G)| × |V(q)|), to generate a matching order and conduct subgraph matching, which significantly reduces the exponential size O(|V(G)||V(q)|-1) of the existing path-based auxiliary data structure, where V(G) and E(G) are the vertex and edge sets of a data graph G, respectively, and V(q) is the vertex set of a query q. Extensive empirical studies on real and synthetic graphs demonstrate that our techniques outperform the state-of-the-art algorithms by up to 3 orders of magnitude.}
       \field{booktitle}{Proceedings of the ACM SIGMOD International Conference on Management of Data}
       \field{isbn}{9781450335317}
       \field{title}{{Efficient subgraph matching by postponing Cartesian products}}
@@ -243,7 +243,7 @@
       \field{sortinithash}{8de16967003c7207dae369d874f1456e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{© 2004-2012 IEEE. Graphs are mathematical structures to model several biological data. Applications to analyze them require to apply solutions for the subgraph isomorphism problem, which is NP-complete. Here, we investigate the existing strategies to reduce the subgraph isomorphism algorithm running time with emphasis on the importance of the order with which the graph vertices are taken into account during the search, called variable ordering, and its incidence on the total running time of the algorithms. We focus on two recent solutions, which are based on an effective variable ordering strategy. We discuss their comparison both with the variable ordering strategies reviewed in the paper and the other algorithms present in the ICPR2014 contest on graph matching algorithms for pattern search in biological databases.}
+      \field{abstract}{{©} 2004-2012 IEEE. Graphs are mathematical structures to model several biological data. Applications to analyze them require to apply solutions for the subgraph isomorphism problem, which is NP-complete. Here, we investigate the existing strategies to reduce the subgraph isomorphism algorithm running time with emphasis on the importance of the order with which the graph vertices are taken into account during the search, called variable ordering, and its incidence on the total running time of the algorithms. We focus on two recent solutions, which are based on an effective variable ordering strategy. We discuss their comparison both with the variable ordering strategies reviewed in the paper and the other algorithms present in the ICPR2014 contest on graph matching algorithms for pattern search in biological databases.}
       \field{journaltitle}{IEEE/ACM Transactions on Computational Biology and Bioinformatics}
       \field{number}{1}
       \field{title}{{On the Variable Ordering in Subgraph Isomorphism Algorithms}}
@@ -283,7 +283,7 @@
       \field{sortinithash}{8de16967003c7207dae369d874f1456e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{© 2018 IEEE. The subgraph isomorphism problem is a computational task that applies to a wide range of today's applications, ranging from the understanding of biological networks to the analysis of social networks. Even though different implementations for CPUs have been proposed to improve the efficiency of such a graph search algorithm, they have shown to be bounded by the intrinsic sequential nature of the algorithm. More recently, graphics processing units (GPUs) have become widespread platforms that provide massive parallelism at low cost. Nevertheless, parallelizing any efficient and optimized sequential algorithm for subgraph isomorphism on many-core architectures is a very challenging task. This article presents GRASS, a parallel implementation of the subgraph isomorphism algorithm for GPUs. Different strategies are implemented in GRASS to deal with the space complexity of the graph searching algorithm, the potential workload imbalance, and the thread divergence involved by the non-homogeneity of actual graphs. The paper presents the results obtained on several graphs of different sizes and characteristics to understand the efficiency of the proposed approach.}
+      \field{abstract}{{©} 2018 IEEE. The subgraph isomorphism problem is a computational task that applies to a wide range of today's applications, ranging from the understanding of biological networks to the analysis of social networks. Even though different implementations for CPUs have been proposed to improve the efficiency of such a graph search algorithm, they have shown to be bounded by the intrinsic sequential nature of the algorithm. More recently, graphics processing units (GPUs) have become widespread platforms that provide massive parallelism at low cost. Nevertheless, parallelizing any efficient and optimized sequential algorithm for subgraph isomorphism on many-core architectures is a very challenging task. This article presents GRASS, a parallel implementation of the subgraph isomorphism algorithm for GPUs. Different strategies are implemented in GRASS to deal with the space complexity of the graph searching algorithm, the potential workload imbalance, and the thread divergence involved by the non-homogeneity of actual graphs. The paper presents the results obtained on several graphs of different sizes and characteristics to understand the efficiency of the proposed approach.}
       \field{booktitle}{Proceedings - 2018 IEEE International Conference on Bioinformatics and Biomedicine, BIBM 2018}
       \field{isbn}{9781538654880}
       \field{title}{{An Efficient Implementation of a Subgraph Isomorphism Algorithm for GPUs.}}
@@ -567,7 +567,7 @@
       \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{© Springer International Publishing Switzerland 2015. Subgraph isomorphism is a common problem in several application fields where graphs are the best suited data representation, but it is known to be an NP-Complete problem. However, several algorithms exist that are fast enough on commonly encountered graphs so as to be practically usable; among them, for more than a decade VF2 has been the state of the art algorithm used to solve this problem and it is still the reference algorithm for many applications. Nevertheless, VF2 has been designed and implemented ten years ago when the structural features of the commonly used graphs were considerably different. Hence a renovation is required to make the algorithm able to compete in the challenges arisen in the last years, such as the use of graph matching on the very large graphs coming from bioinformatics applications. In this paper we propose a significant set of enhancements to the original VF2 algorithm that enable it to compete with more recently proposed graph matching techniques. Finally, we evaluate the effectiveness of these enhancement by comparing the matching performance both with the original VF2 and with several recent algorithms, using both the widely known MIVIA graph database and another public graph dataset containing real-world graphs from bioinformatics applications.}
+      \field{abstract}{{©} Springer International Publishing Switzerland 2015. Subgraph isomorphism is a common problem in several application fields where graphs are the best suited data representation, but it is known to be an NP-Complete problem. However, several algorithms exist that are fast enough on commonly encountered graphs so as to be practically usable; among them, for more than a decade VF2 has been the state of the art algorithm used to solve this problem and it is still the reference algorithm for many applications. Nevertheless, VF2 has been designed and implemented ten years ago when the structural features of the commonly used graphs were considerably different. Hence a renovation is required to make the algorithm able to compete in the challenges arisen in the last years, such as the use of graph matching on the very large graphs coming from bioinformatics applications. In this paper we propose a significant set of enhancements to the original VF2 algorithm that enable it to compete with more recently proposed graph matching techniques. Finally, we evaluate the effectiveness of these enhancement by comparing the matching performance both with the original VF2 and with several recent algorithms, using both the widely known MIVIA graph database and another public graph dataset containing real-world graphs from bioinformatics applications.}
       \field{booktitle}{Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)}
       \field{isbn}{9783319182230}
       \field{title}{{VF2 plus: An improved version of VF2 for biological graphs}}
@@ -625,12 +625,12 @@
     \entry{Cibej2014}{book}{}
       \name{author}{2}{}{%
         {{hash=246676082d15f90e46fd0029299230cf}{%
-           family={{Č}ibej},
+           family={Čibej},
            familyi={Č\bibinitperiod},
            given={U.},
            giveni={U\bibinitperiod}}}%
         {{hash=899aa5e3dad5fe59a8c1937cb28044c2}{%
-           family={Miheli{č}},
+           family={Mihelič},
            familyi={M\bibinitperiod},
            given={J.},
            giveni={J\bibinitperiod}}}%
@@ -645,7 +645,7 @@
       \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{© Springer International Publishing Switzerland 2014. Searching for subgraph isomorphisms is an essential problem in pattern matching. Most of the algorithms use a branch-and-bound method to sequentially assign pattern nodes to compatible nodes in the target graph. It is well known that the order in which nodes are assigned, a so-called search strategy, influences drastically the size of the search space. In this article we investigate the impact of various search strategies on the efficiency of two algorithms, the first being the Ullmann's algorithm and the second one the recently proposed improvement of Ullmann's algorithm. From the large set of proposed orders we find the most successful ones by thorough testing on a large database of graphs.}
+      \field{abstract}{{©} Springer International Publishing Switzerland 2014. Searching for subgraph isomorphisms is an essential problem in pattern matching. Most of the algorithms use a branch-and-bound method to sequentially assign pattern nodes to compatible nodes in the target graph. It is well known that the order in which nodes are assigned, a so-called search strategy, influences drastically the size of the search space. In this article we investigate the impact of various search strategies on the efficiency of two algorithms, the first being the Ullmann's algorithm and the second one the recently proposed improvement of Ullmann's algorithm. From the large set of proposed orders we find the most successful ones by thorough testing on a large database of graphs.}
       \field{booktitle}{Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)}
       \field{isbn}{9783319041254}
       \field{title}{{Search strategies for subgraph isomorphism algorithms}}
@@ -735,7 +735,7 @@
       \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{We present an algorithm for graph isomorphism and subgraph isomorphism suited for dealing with large graphs. A first version of the algorithm has been presented in a previous paper, where we examined its performance for the isomorphism of small and medium size graphs. The algorithm is improved here to reduce its spatial complexity and to achieve a better performance on large graphs; its features are analyzed in detail with special reference to time and memory requirements. The results of a testing performed on a publicly available database of synthetically generated graphs and on graphs relative to a real application dealing with technical drawings are presented, confirming the effectiveness of the approach, especially when working with large graphs. © 2004 IEEE.}
+      \field{abstract}{We present an algorithm for graph isomorphism and subgraph isomorphism suited for dealing with large graphs. A first version of the algorithm has been presented in a previous paper, where we examined its performance for the isomorphism of small and medium size graphs. The algorithm is improved here to reduce its spatial complexity and to achieve a better performance on large graphs; its features are analyzed in detail with special reference to time and memory requirements. The results of a testing performed on a publicly available database of synthetically generated graphs and on graphs relative to a real application dealing with technical drawings are presented, confirming the effectiveness of the approach, especially when working with large graphs. {©} 2004 IEEE.}
       \field{journaltitle}{IEEE Transactions on Pattern Analysis and Machine Intelligence}
       \field{number}{10}
       \field{title}{{A (sub)graph isomorphism algorithm for matching large graphs}}
@@ -765,7 +765,7 @@
            given={R.},
            giveni={R\bibinitperiod}}}%
         {{hash=334f4ab778bd7f63ab80e07eea756c5f}{%
-           family={Mongiov{ì}},
+           family={Mongiovì},
            familyi={M\bibinitperiod},
            given={M.},
            giveni={M\bibinitperiod}}}%
@@ -790,7 +790,7 @@
       \field{sortinithash}{c438b3d5d027251ba63f5ed538d98af5}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{Background: Finding the subgraphs of a graph database that are isomorphic to a given query graph has practical applications in several fields, from cheminformatics to image understanding. Since subgraph isomorphism is a computationally hard problem, indexing techniques have been intensively exploited to speed up the process. Such systems filter out those graphs which cannot contain the query, and apply a subgraph isomorphism algorithm to each residual candidate graph. The applicability of such systems is limited to databases of small graphs, because their filtering power degrades on large graphs.Results: In this paper, SING (Subgraph search In Non-homogeneous Graphs), a novel indexing system able to cope with large graphs, is presented. The method uses the notion of feature, which can be a small subgraph, subtree or path. Each graph in the database is annotated with the set of all its features. The key point is to make use of feature locality information. This idea is used to both improve the filtering performance and speed up the subgraph isomorphism task.Conclusions: Extensive tests on chemical compounds, biological networks and synthetic graphs show that the proposed system outperforms the most popular systems in query time over databases of medium and large graphs. Other specific tests show that the proposed system is effective for single large graphs. © 2010 Di Natale et al; licensee BioMed Central Ltd.}
+      \field{abstract}{Background: Finding the subgraphs of a graph database that are isomorphic to a given query graph has practical applications in several fields, from cheminformatics to image understanding. Since subgraph isomorphism is a computationally hard problem, indexing techniques have been intensively exploited to speed up the process. Such systems filter out those graphs which cannot contain the query, and apply a subgraph isomorphism algorithm to each residual candidate graph. The applicability of such systems is limited to databases of small graphs, because their filtering power degrades on large graphs.Results: In this paper, SING (Subgraph search In Non-homogeneous Graphs), a novel indexing system able to cope with large graphs, is presented. The method uses the notion of feature, which can be a small subgraph, subtree or path. Each graph in the database is annotated with the set of all its features. The key point is to make use of feature locality information. This idea is used to both improve the filtering performance and speed up the subgraph isomorphism task.Conclusions: Extensive tests on chemical compounds, biological networks and synthetic graphs show that the proposed system outperforms the most popular systems in query time over databases of medium and large graphs. Other specific tests show that the proposed system is effective for single large graphs. {©} 2010 Di Natale et al; licensee BioMed Central Ltd.}
       \field{journaltitle}{BMC Bioinformatics}
       \field{title}{{SING: Subgraph search In Non-homogeneous Graphs}}
       \field{volume}{11}
@@ -1044,10 +1044,10 @@
       \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{Given a query graph q and a data graph g, the subgraph isomorphism search finds all occurrences of q in g and is considered one of the most fundamental query types for many real applications. While this problem belongs to NP-hard, many algorithms have been proposed to solve it in a reasonable time for real datasets. However, a recent study has shown, through an extensive benchmark with various real datasets, that all existing algorithms have serious problems in their matching order selection. Furthermore, all algorithms blindly permutate all possible mappings for query vertices, often leading to useless computations. In this paper, we present an efficient and robust subgraph search solution, called Turbo ISO, which is turbo-charged with two novel concepts, candidate region exploration and the combine and permute strategy (in short, COMB/PERM). The candidate region exploration identifies on-the-fly candidate subgraphs (i.e, candidate regions), which contain embeddings, and computes a robust matching order for each candidate region explored. The COMB/PERM strategy exploits the novel concept of the neighborhood equivalence class (NEC). Each query vertex in the same NEC has identically matching data vertices. During subgraph isomorphism search, COMB/PERM generates only combinations for each NEC instead of permutating all possible enumerations. Thus, if a chosen combination is determined to not contribute to a complete solution, all possible permutations for that combination will be safely pruned. Extensive experiments with many real datasets show that Turbo ISO consistently and significantly outperforms all competitors by up to several orders of magnitude. Copyright © 2013 ACM.}
+      \field{abstract}{Given a query graph q and a data graph g, the subgraph isomorphism search finds all occurrences of q in g and is considered one of the most fundamental query types for many real applications. While this problem belongs to NP-hard, many algorithms have been proposed to solve it in a reasonable time for real datasets. However, a recent study has shown, through an extensive benchmark with various real datasets, that all existing algorithms have serious problems in their matching order selection. Furthermore, all algorithms blindly permutate all possible mappings for query vertices, often leading to useless computations. In this paper, we present an efficient and robust subgraph search solution, called Turbo ISO, which is turbo-charged with two novel concepts, candidate region exploration and the combine and permute strategy (in short, COMB/PERM). The candidate region exploration identifies on-the-fly candidate subgraphs (i.e, candidate regions), which contain embeddings, and computes a robust matching order for each candidate region explored. The COMB/PERM strategy exploits the novel concept of the neighborhood equivalence class (NEC). Each query vertex in the same NEC has identically matching data vertices. During subgraph isomorphism search, COMB/PERM generates only combinations for each NEC instead of permutating all possible enumerations. Thus, if a chosen combination is determined to not contribute to a complete solution, all possible permutations for that combination will be safely pruned. Extensive experiments with many real datasets show that Turbo ISO consistently and significantly outperforms all competitors by up to several orders of magnitude. Copyright {©} 2013 ACM.}
       \field{booktitle}{Proceedings of the ACM SIGMOD International Conference on Management of Data}
       \field{isbn}{9781450320375}
-      \field{title}{{Turbo<inf>ISO</inf>: Towards ultrafast and robust subgraph isomorphism search in large graph databases}}
+      \field{title}{{Turbo{<}inf{>}ISO{<}/inf{>}: Towards ultrafast and robust subgraph isomorphism search in large graph databases}}
       \field{year}{2013}
       \field{pages}{337\bibrangedash 348}
       \range{pages}{12}
@@ -1269,7 +1269,7 @@
     \entry{Juttner2018a}{article}{}
       \name{author}{2}{}{%
         {{hash=e90ee0d4297cc62c4fb5cea0102882a4}{%
-           family={J{ü}ttner},
+           family={Jüttner},
            familyi={J\bibinitperiod},
            given={A.},
            giveni={A\bibinitperiod}}}%
@@ -1289,7 +1289,7 @@
       \field{sortinithash}{c45040a764d616897e7f5b30174d7b92}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{© 2018 This paper presents a largely improved version of the VF2 algorithm for the Subgraph Isomorphism Problem. The improvements are twofold. Firstly, it is based on a new approach for determining the matching order of the nodes, and secondly, more efficient — nevertheless easier to compute — cutting rules are proposed. They together reduce the search space significantly. In addition to the usual Subgraph Isomorphism Problem, the paper also presents specialized algorithms for the Induced Subgraph Isomorphism and for the Graph Isomorphism Problems. Finally, an extensive experimental evaluation is provided using a wide range of inputs, including both real-life biological and chemical datasets and standard randomly generated graph series. The results show major and consistent running time improvements over the other known methods. The C++ implementations of the algorithms are available open-source as part of the LEMON graph and network optimization library.}
+      \field{abstract}{{©} 2018 This paper presents a largely improved version of the VF2 algorithm for the Subgraph Isomorphism Problem. The improvements are twofold. Firstly, it is based on a new approach for determining the matching order of the nodes, and secondly, more efficient — nevertheless easier to compute — cutting rules are proposed. They together reduce the search space significantly. In addition to the usual Subgraph Isomorphism Problem, the paper also presents specialized algorithms for the Induced Subgraph Isomorphism and for the Graph Isomorphism Problems. Finally, an extensive experimental evaluation is provided using a wide range of inputs, including both real-life biological and chemical datasets and standard randomly generated graph series. The results show major and consistent running time improvements over the other known methods. The C++ implementations of the algorithms are available open-source as part of the LEMON graph and network optimization library.}
       \field{journaltitle}{Discrete Applied Mathematics}
       \field{title}{{VF2++—An improved subgraph isomorphism algorithm}}
       \field{volume}{242}
@@ -1364,7 +1364,7 @@
       \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{© Springer International Publishing AG 2016. Subgraph isomorphism is a computationally challenging problem with important practical applications, for example in computer vision, biochemistry, and model checking. There are a number of stateof- the-art algorithms for solving the problem, each of which has its own performance characteristics. As with many other hard problems, the single best choice of algorithm overall is rarely the best algorithm on an instance-by-instance. We develop an algorithm selection approach which leverages novel features to characterise subgraph isomorphism problems and dynamically decides which algorithm to use on a per-instance basis. We demonstrate substantial performance improvements on a large set of hard benchmark problems. In addition, we show how algorithm selection models can be leveraged to gain new insights into what affects the performance of an algorithm.}
+      \field{abstract}{{©} Springer International Publishing AG 2016. Subgraph isomorphism is a computationally challenging problem with important practical applications, for example in computer vision, biochemistry, and model checking. There are a number of stateof- the-art algorithms for solving the problem, each of which has its own performance characteristics. As with many other hard problems, the single best choice of algorithm overall is rarely the best algorithm on an instance-by-instance. We develop an algorithm selection approach which leverages novel features to characterise subgraph isomorphism problems and dynamically decides which algorithm to use on a per-instance basis. We demonstrate substantial performance improvements on a large set of hard benchmark problems. In addition, we show how algorithm selection models can be leveraged to gain new insights into what affects the performance of an algorithm.}
       \field{booktitle}{Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)}
       \field{isbn}{9783319503486}
       \field{title}{{Portfolios of subgraph isomorphism algorithms}}
@@ -1481,6 +1481,7 @@
       \strng{authorbibnamehash}{9130b8311dd7300d6a24643099a56bd8}
       \strng{authornamehash}{9130b8311dd7300d6a24643099a56bd8}
       \strng{authorfullhash}{9130b8311dd7300d6a24643099a56bd8}
+      \field{extraname}{1}
       \field{sortinit}{L}
       \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
       \field{labelnamesource}{author}
@@ -1504,6 +1505,64 @@
       \verb http://www.sciencedirect.com/science/article/pii/S1570866708000968
       \endverb
       \keyw{Subgraph homeomorphism,Disjoint paths,Time complexity,Space complexity}
+    \endentry
+    \entry{ExactComplexity}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=8c29a3f5ebb059872c89fc19a067959d}{%
+           family={Lingas},
+           familyi={L\bibinitperiod},
+           given={Andrzej},
+           giveni={A\bibinitperiod}}}%
+        {{hash=298d1141260600ddd0d6e2dbb1f8369b}{%
+           family={Wahlen},
+           familyi={W\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod}}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=432ecd624d7b0bb1926744a2a227b7e8}{%
+           family={Cai},
+           familyi={C\bibinitperiod},
+           given={Jin-Yi},
+           giveni={J\bibinithyphendelim Y\bibinitperiod}}}%
+        {{hash=990477a0c46246d934e087bf998a0796}{%
+           family={Cooper},
+           familyi={C\bibinitperiod},
+           given={S.\bibnamedelimi Barry},
+           giveni={S\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=50f10f09174d83ca7fae4d7d22fb5495}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Hong},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{9130b8311dd7300d6a24643099a56bd8}
+      \strng{fullhash}{9130b8311dd7300d6a24643099a56bd8}
+      \strng{bibnamehash}{9130b8311dd7300d6a24643099a56bd8}
+      \strng{authorbibnamehash}{9130b8311dd7300d6a24643099a56bd8}
+      \strng{authornamehash}{9130b8311dd7300d6a24643099a56bd8}
+      \strng{authorfullhash}{9130b8311dd7300d6a24643099a56bd8}
+      \strng{editorbibnamehash}{2834d15ef878436a86242be6e35a4be5}
+      \strng{editornamehash}{2834d15ef878436a86242be6e35a4be5}
+      \strng{editorfullhash}{2834d15ef878436a86242be6e35a4be5}
+      \field{extraname}{2}
+      \field{sortinit}{L}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The subgraph homeomorphism problem is to decide whether there is an injective mapping of the vertices of a pattern graph into vertices of a host graph so that the edges of the pattern graph can be mapped into (internally) vertex-disjoint paths in the host graph. The restriction of subgraph homeomorphism where an injective mapping of the vertices of the pattern graph into vertices of the host graph is already given is termed fixed-vertex subgraph homeomorphism.}
+      \field{booktitle}{Theory and Applications of Models of Computation}
+      \field{isbn}{978-3-540-72504-6}
+      \field{title}{On Exact Complexity of Subgraph Homeomorphism}
+      \field{year}{2007}
+      \field{pages}{256\bibrangedash 261}
+      \range{pages}{6}
     \endentry
     \entry{Lipets2009320}{article}{}
       \name{author}{3}{}{%
@@ -1603,12 +1662,12 @@
     \entry{Malik2019}{book}{}
       \name{author}{3}{}{%
         {{hash=264f344c26e5d73973840b842f2f455a}{%
-           family={Mal{í}k},
+           family={Malík},
            familyi={M\bibinitperiod},
            given={J.},
            giveni={J\bibinitperiod}}}%
         {{hash=fe067fcd5b726a1bc8fa71c6cefd21f6}{%
-           family={Such{ý}},
+           family={Suchý},
            familyi={S\bibinitperiod},
            given={O.},
            giveni={O\bibinitperiod}}}%
@@ -1628,7 +1687,7 @@
       \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{© 2019, Springer Nature Switzerland AG. We consider the subgraph isomorphism problem where, given two graphs G (source graph) and F (pattern graph), one is to decide whether there is a (not necessarily induced) subgraph of G isomorphic to F. While many practical heuristic algorithms have been developed for the problem, as pointed out by McCreesh et al. [JAIR 2018], for each of them there are rather small instances which they cannot cope. Therefore, developing an alternative approach that could possibly cope with these hard instances would be of interest. A seminal paper by Alon, Yuster and Zwick [J. ACM 1995] introduced the color coding approach to solve the problem, where the main part is a dynamic programming over color subsets and partial mappings. As with many exponential-time dynamic programming algorithms, the memory requirements constitute the main limiting factor for its usage. Because these requirements grow exponentially with the treewidth of the pattern graph, all existing implementations based on the color coding principle restrict themselves to specific pattern graphs, e.g., paths or trees. In contrast, we provide an efficient implementation of the algorithm significantly reducing its memory requirements so that it can be used for pattern graphs of larger treewidth. Moreover, our implementation not only decides the existence of an isomorphic subgraph, but it also enumerates all such subgraphs (or given number of them). We provide an extensive experimental comparison of our implementation to other available solvers for the problem.}
+      \field{abstract}{{©} 2019, Springer Nature Switzerland AG. We consider the subgraph isomorphism problem where, given two graphs G (source graph) and F (pattern graph), one is to decide whether there is a (not necessarily induced) subgraph of G isomorphic to F. While many practical heuristic algorithms have been developed for the problem, as pointed out by McCreesh et al. [JAIR 2018], for each of them there are rather small instances which they cannot cope. Therefore, developing an alternative approach that could possibly cope with these hard instances would be of interest. A seminal paper by Alon, Yuster and Zwick [J. ACM 1995] introduced the color coding approach to solve the problem, where the main part is a dynamic programming over color subsets and partial mappings. As with many exponential-time dynamic programming algorithms, the memory requirements constitute the main limiting factor for its usage. Because these requirements grow exponentially with the treewidth of the pattern graph, all existing implementations based on the color coding principle restrict themselves to specific pattern graphs, e.g., paths or trees. In contrast, we provide an efficient implementation of the algorithm significantly reducing its memory requirements so that it can be used for pattern graphs of larger treewidth. Moreover, our implementation not only decides the existence of an isomorphic subgraph, but it also enumerates all such subgraphs (or given number of them). We provide an extensive experimental comparison of our implementation to other available solvers for the problem.}
       \field{booktitle}{Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)}
       \field{isbn}{9783030340285}
       \field{title}{{Efficient Implementation of Color Coding Algorithm for Subgraph Isomorphism Problem}}
@@ -1663,7 +1722,7 @@
       \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{© Springer International Publishing Switzerland 2015. The subgraph isomorphism problem involves finding a pattern graph inside a target graph. We present a new bit- and threadparallel constraint-based search algorithm for the problem, and experiment on a wide range of standard benchmark instances to demonstrate its effectiveness. We introduce supplemental graphs, to create implied constraints. We use a new low-overhead, lazy variation of conflict directed backjumping which interacts safely with parallel search, and a countingbased all-different propagator which is better suited for large domains.}
+      \field{abstract}{{©} Springer International Publishing Switzerland 2015. The subgraph isomorphism problem involves finding a pattern graph inside a target graph. We present a new bit- and threadparallel constraint-based search algorithm for the problem, and experiment on a wide range of standard benchmark instances to demonstrate its effectiveness. We introduce supplemental graphs, to create implied constraints. We use a new low-overhead, lazy variation of conflict directed backjumping which interacts safely with parallel search, and a countingbased all-different propagator which is better suited for large domains.}
       \field{booktitle}{Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)}
       \field{isbn}{9783319232188}
       \field{title}{{A parallel, backjumping subgraph isomorphism algorithm using supplemental graphs}}
@@ -1711,6 +1770,78 @@
       \verb{url}
       \verb http://www.sciencedirect.com/science/article/pii/0020025579900239
       \endverb
+    \endentry
+    \entry{steinertree}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=3e81f657bfe13c54760ebfbfa55fd242}{%
+           family={Miyamoto},
+           familyi={M\bibinitperiod},
+           given={Masayuki},
+           giveni={M\bibinitperiod}}}%
+        {{hash=e181a011b4706148ab549f10ad8294a3}{%
+           family={Iwamura},
+           familyi={I\bibinitperiod},
+           given={Masakazu},
+           giveni={M\bibinitperiod}}}%
+        {{hash=faaab17cc1e530be67764e7490574c4f}{%
+           family={Kise},
+           familyi={K\bibinitperiod},
+           given={Koichi},
+           giveni={K\bibinitperiod}}}%
+        {{hash=1d6f1e89c6b568b7cd404293e609b2ca}{%
+           family={Gall},
+           familyi={G\bibinitperiod},
+           given={François\bibnamedelima Le},
+           giveni={F\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \name{editor}{4}{}{%
+        {{hash=69c67a7835bae411a48cf54967c18f39}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Donghyun},
+           giveni={D\bibinitperiod}}}%
+        {{hash=16dea5f21437b305ee1fdf2424cd00b5}{%
+           family={Uma},
+           familyi={U\bibinitperiod},
+           given={R.\bibnamedelimi N.},
+           giveni={R\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=32887024e9e5d2743d9caf6fe9112748}{%
+           family={Cai},
+           familyi={C\bibinitperiod},
+           given={Zhipeng},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=3026a1e694e034f0ca608f650838f6e9}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Dong\bibnamedelima Hoon},
+           giveni={D\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer International Publishing}%
+      }
+      \strng{namehash}{b9a1152b10c0687ec596b5710540a2d3}
+      \strng{fullhash}{0156efd4e04e3aa4974665e3b79e902f}
+      \strng{bibnamehash}{0156efd4e04e3aa4974665e3b79e902f}
+      \strng{authorbibnamehash}{0156efd4e04e3aa4974665e3b79e902f}
+      \strng{authornamehash}{b9a1152b10c0687ec596b5710540a2d3}
+      \strng{authorfullhash}{0156efd4e04e3aa4974665e3b79e902f}
+      \strng{editorbibnamehash}{16f0169f72aa0db5d1d231c9bccbfc1d}
+      \strng{editornamehash}{6a19d2f9cfa31659b48d3d0cc2afd36c}
+      \strng{editorfullhash}{16f0169f72aa0db5d1d231c9bccbfc1d}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A recent breakthrough by Ambainis, Balodis, Iraids, Kokainis, Prūsis and Vihrovs (SODA'19) showed how to construct faster quantum algorithms for the Traveling Salesman Problem and a few other NP-hard problems by combining in a novel way quantum search with classical dynamic programming. In this paper, we show how to apply this approach to the minimum Steiner tree problem, a well-known NP-hard problem, and construct the first quantum algorithm that solves this problem faster than the best known classical algorithms. More precisely, the complexity of our quantum algorithm is {\$}{\$}{\backslash}mathcal {\{}O{\}}(1.812^k{\backslash}mathrm {\{}poly{\}}(n)){\$}{\$}, where n denotes the number of vertices in the graph and k denotes the number of terminals. In comparison, the best known classical algorithm has complexity {\$}{\$}{\backslash}mathcal {\{}O{\}}(2^k{\backslash}mathrm {\{}poly{\}}(n)){\$}{\$}.}
+      \field{booktitle}{Computing and Combinatorics}
+      \field{isbn}{978-3-030-58150-3}
+      \field{title}{Quantum Speedup for the Minimum Steiner Tree Problem}
+      \field{year}{2020}
+      \field{pages}{234\bibrangedash 245}
+      \range{pages}{12}
     \endentry
     \entry{Nawari2015}{inproceedings}{}
       \name{author}{4}{}{%
@@ -1859,7 +1990,7 @@
         {{hash=0e69548c1ac42bee7fb828381c4f4d32}{%
            family={Kreowski},
            familyi={K\bibinitperiod},
-           given={Hans-J{ö}rg},
+           given={Hans-Jörg},
            giveni={H\bibinithyphendelim J\bibinitperiod}}}%
         {{hash=28cb0e4624d878cdc6b02c4061d38500}{%
            family={Rozenberg},
@@ -2255,7 +2386,7 @@
       \field{sortinithash}{e90038f30fa4b9ce59606fc8347e3cc7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{© 2016 IEEE. Recently, subgraph matching has been implemented in more and more domains, such as social network and semantic web. An approximated solution for subgraph matching named strong simulation has been put forward. Strong Simulation can preserve the topology of data graphs and find a bounded number of matches, but the complexity further holds a cubic-time, so it's yet intractable to deal with large graphs. To solve the problem, this paper focuses on a partition scheme to reduce the search space of subgraph matching algorithm. Firstly, we present a pruning method on data graph based on the connection relationships of nodes and edges in query graph. Secondly, we propose to use a multilevel partitioning algorithm when the subgraphs we get from former step are too large. Thirdly, we propose an algorithm for subgraph matching based on the partitioning scheme, which can preserve the topology of query graph and guarantee the correctness of results. Lastly, we experimentally prove the effectiveness and efficiency of this scheme, both using real-life data and synthetic data. It turns out that our method is quite efficient and the matching results are also satisfactory.}
+      \field{abstract}{{©} 2016 IEEE. Recently, subgraph matching has been implemented in more and more domains, such as social network and semantic web. An approximated solution for subgraph matching named strong simulation has been put forward. Strong Simulation can preserve the topology of data graphs and find a bounded number of matches, but the complexity further holds a cubic-time, so it's yet intractable to deal with large graphs. To solve the problem, this paper focuses on a partition scheme to reduce the search space of subgraph matching algorithm. Firstly, we present a pruning method on data graph based on the connection relationships of nodes and edges in query graph. Secondly, we propose to use a multilevel partitioning algorithm when the subgraphs we get from former step are too large. Thirdly, we propose an algorithm for subgraph matching based on the partitioning scheme, which can preserve the topology of query graph and guarantee the correctness of results. Lastly, we experimentally prove the effectiveness and efficiency of this scheme, both using real-life data and synthetic data. It turns out that our method is quite efficient and the matching results are also satisfactory.}
       \field{booktitle}{Proceedings - 13th Web Information Systems and Applications Conference, WISA 2016 - In conjunction with 1st Symposium on Big Data Processing and Analysis, BDPA 2016 and 1st Workshop on Information System Security, ISS 2016}
       \field{isbn}{9781509054374}
       \field{title}{{Efficient Subgraph Matching in Large Graph with Partitioning Scheme}}
@@ -2421,7 +2552,7 @@
       \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{The subgraph isomorphism problem consists in deciding if there exists a copy of a pattern graph in a target graph. We introduce in this paper a global constraint and an associated filtering algorithm to solve this problem within the context of constraint programming. The main idea of the filtering algorithm is to label every node with respect to its relationships with other nodes of the graph, and to define a partial order on these labels in order to express compatibility of labels for subgraph isomorphism. This partial order over labels is used to filter domains. Labelings can also be strengthened by adding information from the labels of neighbors. Such a strengthening can be applied iteratively until a fixpoint is reached. Practical experiments illustrate that our new filtering approach is more effective on difficult instances of scale free graphs than state-of-the-art algorithms and other constraint programming approaches. © Springer Science + Business Media, LLC 2009.}
+      \field{abstract}{The subgraph isomorphism problem consists in deciding if there exists a copy of a pattern graph in a target graph. We introduce in this paper a global constraint and an associated filtering algorithm to solve this problem within the context of constraint programming. The main idea of the filtering algorithm is to label every node with respect to its relationships with other nodes of the graph, and to define a partial order on these labels in order to express compatibility of labels for subgraph isomorphism. This partial order over labels is used to filter domains. Labelings can also be strengthened by adding information from the labels of neighbors. Such a strengthening can be applied iteratively until a fixpoint is reached. Practical experiments illustrate that our new filtering approach is more effective on difficult instances of scale free graphs than state-of-the-art algorithms and other constraint programming approaches. {©} Springer Science + Business Media, LLC 2009.}
       \field{journaltitle}{Constraints}
       \field{number}{3}
       \field{title}{{Solving subgraph isomorphism problems with constraint programming}}
@@ -2461,7 +2592,7 @@
       \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{Graphs are widely used to model complex structured data such as XML documents, protein networks, and chemical compounds. One of the fundamental problems in graph databases is efficient search and retrieval of graphs using indexing techniques. In this paper, we study the problem of indexing graph databases using frequent subtrees as indexing structures. Trees can be manipulated efficiently while preserving a lot of structural information of the original graphs. In our proposed method, frequent subtrees of a database are selected as the feature set. To save memory, the set of feature trees is shrunk based on a support threshold function and their discriminative power. A treepartition based query processing scheme is proposed to perform graph queries. The concept of Center Distance Constraints is introduced to prune the search space. Furthermore, a new algorithm which utilizes the location information of indexing structures is used to perform subgraph isomorphism tests. We apply our method on a wide range of real and synthetic data to demonstrate the usefulness and effectiveness of this approach. © 2007 IEEE.}
+      \field{abstract}{Graphs are widely used to model complex structured data such as XML documents, protein networks, and chemical compounds. One of the fundamental problems in graph databases is efficient search and retrieval of graphs using indexing techniques. In this paper, we study the problem of indexing graph databases using frequent subtrees as indexing structures. Trees can be manipulated efficiently while preserving a lot of structural information of the original graphs. In our proposed method, frequent subtrees of a database are selected as the feature set. To save memory, the set of feature trees is shrunk based on a support threshold function and their discriminative power. A treepartition based query processing scheme is proposed to perform graph queries. The concept of Center Distance Constraints is introduced to prune the search space. Furthermore, a new algorithm which utilizes the location information of indexing structures is used to perform subgraph isomorphism tests. We apply our method on a wide range of real and synthetic data to demonstrate the usefulness and effectiveness of this approach. {©} 2007 IEEE.}
       \field{booktitle}{Proceedings - International Conference on Data Engineering}
       \field{isbn}{9781424408030}
       \field{title}{{TreePi: A novel graph indexing method}}
@@ -2827,7 +2958,7 @@
       \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{© 2018, Springer-Verlag London Ltd., part of Springer Nature. Graph and graph database are widely used in many domains, and the graph querying attracts more and more attentions. Among these querying problems, subgraph querying is the most compelling one, since it contains very expensive subgraph isomorphism. The paper proposes a novel subgraph querying method PLGCoding, which use some information of shortest paths and Laplacian spectra to filter out false positives. Specifically, we first extract some features, including some information of vertices, edges, the shortest paths and Laplacian spectra, and encode extracted features. An index PLGCode-Tree is built based on codes to shrink the candidate set. Then, we propose two-step filtering strategy to implement the filtering-and-verification framework and thus generate the answer set. Compared with competing methods on real dataset, experimental results show PLGCoding can improve the querying efficiency.}
+      \field{abstract}{{©} 2018, Springer-Verlag London Ltd., part of Springer Nature. Graph and graph database are widely used in many domains, and the graph querying attracts more and more attentions. Among these querying problems, subgraph querying is the most compelling one, since it contains very expensive subgraph isomorphism. The paper proposes a novel subgraph querying method PLGCoding, which use some information of shortest paths and Laplacian spectra to filter out false positives. Specifically, we first extract some features, including some information of vertices, edges, the shortest paths and Laplacian spectra, and encode extracted features. An index PLGCode-Tree is built based on codes to shrink the candidate set. Then, we propose two-step filtering strategy to implement the filtering-and-verification framework and thus generate the answer set. Compared with competing methods on real dataset, experimental results show PLGCoding can improve the querying efficiency.}
       \field{journaltitle}{Neural Computing and Applications}
       \field{number}{9}
       \field{title}{{A novel subgraph querying method based on paths and spectra}}
@@ -2840,6 +2971,7 @@
       \endverb
     \endentry
   \enddatalist
+  \missing{todo}
 \endrefsection
 \endinput
 

@@ -1,4 +1,7 @@
 \include{sections/Preamble/Preamble}
+\usepackage[backend=biber, style=bibstyle/lncs]{biblatex}
+\addbibresource{sources.bib}
+
 
 \begin{document}
 

@@ -1,31 +1,33 @@
 \section{Graph theory}
-Because of the network structure of FPGAs, it is easy to model them as graphs. If we model FPGA components as combinations of vertices and connections, we have a complete representation of an FPGA suitable for graph algorithms. Let us suppose that we find a subgraph embedding of a graph representation of a virtual FPGA model in a graph representation of a concrete FPGA model. Then, by copying configurations from components in the virtual FPGA model to their concrete mapping we would have an emulation function!
+Because of the network structure of FPGAs, it is easy to model them as graphs. If we model FPGA components as combinations of vertices and connections, we have a complete representation of an FPGA suitable for graph algorithms. Let us suppose that we find a subgraph embedding of a graph representation of a virtual FPGA model in a graph representation of a concrete FPGA model. Then, by copying configurations from components in the virtual FPGA model to their concrete mapping we would have an emulation function. This could entail changing some bits if, for example, the second output of a virtual LUT is mapped the the first output of the concrete LUT and vica versa. While virtual components may also be emulated by structures of multiple concrete components connected in specific ways, we deem finding such emulations out of scope for this research.
 
-The graph theoretic name for finding these embeddings is subgraph isomorphism. It is an NP-complete problem with many algorithms explored. The problem with using an approach of subgraph isomorphism is, however, that many possible emulations cannot be found. For example, a concrete FPGA may have much more configurable routing switches than an virtual FPGA. A subgraph isomorphism algorithm would in this case not find an emulation, even though one is technically possible by configuring some routing switches to function as wires.
+The graph theoretic name for finding these embeddings is subgraph isomorphism. It is an NP-complete problem\cite{cook} with many algorithms explored. The problem with using an approach of subgraph isomorphism is, however, that many possible emulations cannot be found. For example, a concrete FPGA may have much more configurable routing switches than an virtual FPGA. A subgraph isomorphism algorithm would in this case not find an emulation, even though one is technically possible by configuring some routing switches to function as wires.
 
-A variant of subgraph isomorphism is subgraph homeomorphism. In this problem, intermediate vertices are allowed in the embedding on the target-graph side. When these intermediate vertices may be used exactly once (as in our use case), it is called node disjoint subgraph homeomorphism. This means that the embedding consists of a vertex-to-vertex mapping and an edge-to-path mapping.
+A variant of subgraph isomorphism is (vertex disjoint) subgraph homeomorphism. In this problem, intermediate vertices are allowed in the embedding on the target-graph side. This means that the embedding consists of a vertex-to-vertex mapping and an edge-to-path mapping.
 
 
 \begin{defn}[graph]
-A graph is a tuple $(V, E, L)$ where $V$ is a set of vertices, $E \subseteq (V \times V)$ is a set of undirected edges and $L \subseteq (V \times P(\lambda))$ is a multilabelling function where $P$ is the powerset function and $\lambda$ is a finite alphabet.
+A graph is a tuple $(V, E, L)$ where $V$ is a set of vertices, $E$ is a multiset of directed edges such that each edge $e \in E \to e \in (V \times V)$ and $L: (V \to \mathbb{P}(\lambda))$ is a multilabelling function where $\lambda$ is a finite alphabet.
 \label{def:graph}
 \end{defn}
 
 
-\begin{defn}[vertex disjoint subgraph homeomorphism]
-Let $P$ the set of all loopless paths in $G_2$, let $first(p)$ be the first vertex of a path $p$, let $last(p)$ be the last vertex of a path $p$ and let $intermediate(p)$ be all other vertices of a path $p$. Then, a vertex disjoint subgraph homeomorphism from $G_1$ to $G_2$ is a tuple $(f, q)$ where $f\subset (V_1 \times V_2)$ and $q \subset (E_1 \times P)$ are both injective relations such that:
+\begin{defn}[(vertex disjoint) subgraph homeomorphism]
+Let $P$ the set of all loopless paths in $G_2$, let $first(p)$ be the first vertex of a path $p$, let $last(p)$ be the last vertex of a path $p$ and let $intermediate(p)$ be all other vertices of a path $p$. Then, a vertex disjoint subgraph homeomorphism from $G_1$ to $G_2$ is a tuple $(f, q)$ where $f\subseteq (V_1 \mapsto V_2)$ and $q \subseteq (E_1 \mapsto P)$ are both injective functions such that:
 
 \begin{tabular}{rlr}
  1. & $\forall u \in V_1 . L_1(u)\subseteq L_2(f(u))$&\\
  
  &i.e. vertices are mapped to vertices that have at least the same label set.&\\
  
- 2. & $\forall (u_1, u_2) \in E_1 . \exists p \in \mathit{values}(q). \mathit{first}(p)=f(u_1) \land \mathit{last}(p)=f(u_2) \land ((u_1, u_2), p) \in q$&\\
+ 2. & $\forall (u_1, u_2) \in E_1 .\mathit{first}(q(u_1, u_2))=f(u_1) \land \mathit{last}(q(u_1, u_2))=f(u_2)$&\\
  &i.e. each edge in $G_1$ is mapped to a path in $G_2$.&\\
  
  3. & $\forall p \in \mathit{values}(q) . \forall x \in \mathit{intermediate}(p) . \not \exists p' \in (\mathit{values}(q) \setminus \{p\}) . x \in \mathit{intermediate}(p')$&\\
     &i.e. these paths are vertex disjoint.&\\
 \end{tabular}
+
+This tuple is also the certificate for the decision problem of subgraph homeomorphism, which returns whether a tuple like this exists. A popular different way to define the decision problem is whether the target graph contains a subgraph which can be obtained by repeatedly intersecting the source graph's edges with vertices.
 
 \label{def:pathsubgraphisomorphism}
 \end{defn}
@@ -75,7 +77,7 @@ Let $P$ the set of all loopless paths in $G_2$, let $first(p)$ be the first vert
 \caption{Two graphs $G_1$ and $G_2$. $G_1$ is (node disjoint) subgraph homeomorphic to $G_2$ with the mapping $\{(a, \epsilon), (b, \eta), (c, \delta), (d, \beta), (a \to b, \epsilon \to \eta), (c \to a, \delta \to \epsilon), (c \to b, \delta \to \zeta \to \eta), (d \to c, \beta \to \gamma \to \delta)\}$. Other homeomorphisms exist as well.}
 \end{figure}
 
-If we have graphs $G_{virtual}$ and $G_{concrete}$, then wherever a subgraph homeomorphism from $G_{virtual}$ to $G_{concrete}$ exists, it describes a mapping where the logic of the virtual FPGA may be performed on the concrete FPGA in an emulation\footnote{If no such relation exists, it does not mean a function $f$ as specified in Section \ref{sec:Objectives} does not exist. Emulation could still be obtained by emulation of components by (multiple) components of possibly different types or by emulation of routing switches by sets of connected routing switches.}\footnote{This does not hold if some vertices in $G_{concrete}$ that are part of the mapping are unconfigurably connected and their mapped equivalents in $G_{virtual}$ are not. This is, however, rare and we account for this in our algorithm.}. The set $P$ of paths describe how nodes in the concrete FPGA are connected via paths of intermediate routing switches acting as wires.
+If we have graphs $G_{virtual}$ and $G_{concrete}$, then wherever a subgraph homeomorphism from $G_{virtual}$ to $G_{concrete}$ exists, it describes a mapping where the logic of the virtual FPGA may be performed on the concrete FPGA in an emulation\footnote{If no such relation exists, it does not mean a function $f$ as specified in Section \ref{sec:Objectives} does not exist. Emulation could still be obtained by emulation of components by (multiple) components of possibly different types or by emulation of routing switches by sets of connected routing switches.}\footnote{This does not hold if some vertices in $G_{concrete}$ that are part of the mapping are unconfigurably connected and their mapped equivalents in $G_{virtual}$ are not. This is, however, rare and we account for this in our algorithm.}. The vertex-to-vertex mapping $f$ describes how to obtain configurations for the concrete FPGA and the edge-to-path mapping $q$ describes how vertices in the concrete FPGA are connected via paths of intermediate components configured as wires.
 
 %Because we allow intermediate routing switches, our use case makes for a very different problem, yet similar:
 

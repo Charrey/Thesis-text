@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.12.0 (MiKTeX 20.6.29) (format=lualatex 2020.8.24)  2 SEP 2020 10:12
+This is LuaHBTeX, Version 1.12.0 (MiKTeX 20.6.29) (format=lualatex 2020.9.3)  7 SEP 2020 15:37
  restricted system commands enabled.
 **Thesis.tex
 (./Thesis.tex
@@ -158,7 +158,7 @@ LaTeX Info: Redefining \] on input line 2860.
 Package: datetime 2015/03/20 v2.60 Date Time Package
 
 (/usr/local/share/miktex-texmf/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2020/07/15 v2.5i e-TeX tools for LaTeX (JAW)
+Package: etoolbox 2020/08/24 v2.5j e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count185
 )
 (/usr/local/share/miktex-texmf/tex/latex/fmtcount/fmtcount.sty
@@ -221,7 +221,7 @@ LaTeX Info: Redefining \today on input line 736.
 \dt@b=\toks23
 )
 (/usr/local/share/miktex-texmf/tex/latex/todonotes/todonotes.sty
-Package: todonotes 2019/01/24 v1.1.2 Todonotes source and documentation.
+Package: todonotes 2020/08/18 v1.1.3 Todonotes source and documentation.
 Package: todonotes 2018/11/22
 
 (/usr/local/share/miktex-texmf/tex/latex/xcolor/xcolor.sty
@@ -589,14 +589,14 @@ Package: fullpage 1999/02/23 1.1 (PWD)
 \FP@margin=\skip55
 )
 (/usr/local/share/miktex-texmf/tex/latex/adjustbox/adjustbox.sty
-Package: adjustbox 2019/01/04 v1.2 Adjusting TeX boxes (trim, clip, ...)
+Package: adjustbox 2020/08/19 v1.3 Adjusting TeX boxes (trim, clip, ...)
 
 (/usr/local/share/miktex-texmf/tex/latex/adjustbox/adjcalc.sty
 Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back-
 ends (calc, etex, pgfmath)
 )
 (/usr/local/share/miktex-texmf/tex/latex/adjustbox/trimclip.sty
-Package: trimclip 2018/04/08 v1.1 Trim and clip general TeX material
+Package: trimclip 2020/08/19 v1.2 Trim and clip general TeX material
 
 (/usr/local/share/miktex-texmf/tex/latex/collectbox/collectbox.sty
 Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
@@ -1054,248 +1054,6 @@ Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
 \multirow@dima=\skip147
 \bigstrutjot=\dimen305
 )
-(/usr/local/share/miktex-texmf/tex/latex/biblatex/biblatex.sty
-Package: biblatex 2019/12/01 v3.14 programmable bibliographies (PK/MW)
-
-(/usr/local/share/miktex-texmf/tex/latex/logreq/logreq.sty
-Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count346
-
-(/usr/local/share/miktex-texmf/tex/latex/logreq/logreq.def
-File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
-))
-(/usr/local/share/miktex-texmf/tex/latex/url/url.sty
-\Urlmuskip=\muskip17
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-)
-\c@tabx@nest=\count347
-\c@listtotal=\count348
-\c@listcount=\count349
-\c@liststart=\count350
-\c@liststop=\count351
-\c@citecount=\count352
-\c@citetotal=\count353
-\c@multicitecount=\count354
-\c@multicitetotal=\count355
-\c@instcount=\count356
-\c@maxnames=\count357
-\c@minnames=\count358
-\c@maxitems=\count359
-\c@minitems=\count360
-\c@citecounter=\count361
-\c@maxcitecounter=\count362
-\c@savedcitecounter=\count363
-\c@uniquelist=\count364
-\c@uniquename=\count365
-\c@refsection=\count366
-\c@refsegment=\count367
-\c@maxextratitle=\count368
-\c@maxextratitleyear=\count369
-\c@maxextraname=\count370
-\c@maxextradate=\count371
-\c@maxextraalpha=\count372
-\c@abbrvpenalty=\count373
-\c@highnamepenalty=\count374
-\c@lownamepenalty=\count375
-\c@maxparens=\count376
-\c@parenlevel=\count377
-\blx@tempcnta=\count378
-\blx@tempcntb=\count379
-\blx@tempcntc=\count380
-\blx@maxsection=\count381
-\blx@maxsegment@0=\count382
-\blx@notetype=\count383
-\blx@parenlevel@text=\count384
-\blx@parenlevel@foot=\count385
-\blx@sectionciteorder@0=\count386
-\blx@entrysetcounter=\count387
-\labelnumberwidth=\skip148
-\labelalphawidth=\skip149
-\biblabelsep=\skip150
-\bibitemsep=\skip151
-\bibnamesep=\skip152
-\bibinitsep=\skip153
-\bibparsep=\skip154
-\bibhang=\skip155
-\blx@bcfin=\read3
-\blx@bcfout=\write4
-\blx@langwohyphens=\language1
-\c@mincomprange=\count388
-\c@maxcomprange=\count389
-\c@mincompwidth=\count390
-Package biblatex Info: Trying to load biblatex default data model...
-Package biblatex Info: ... file 'blx-dm.def' found.
-
-(/usr/local/share/miktex-texmf/tex/latex/biblatex/blx-dm.def
-File: blx-dm.def 2019/12/01 v3.14 biblatex localization (PK/MW)
-)
-Package biblatex Info: Trying to load biblatex style data model...
-Package biblatex Info: ... file 'bibstyle/lncs.dbx' found.
-
-(./bibstyle/lncs.dbx)
-Package biblatex Info: Trying to load biblatex custom data model...
-Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count391
-\c@savedafterword=\count392
-\c@annotator=\count393
-\c@savedannotator=\count394
-\c@author=\count395
-\c@savedauthor=\count396
-\c@bookauthor=\count397
-\c@savedbookauthor=\count398
-\c@commentator=\count399
-\c@savedcommentator=\count400
-\c@editor=\count401
-\c@savededitor=\count402
-\c@editora=\count403
-\c@savededitora=\count404
-\c@editorb=\count405
-\c@savededitorb=\count406
-\c@editorc=\count407
-\c@savededitorc=\count408
-\c@foreword=\count409
-\c@savedforeword=\count410
-\c@holder=\count411
-\c@savedholder=\count412
-\c@introduction=\count413
-\c@savedintroduction=\count414
-\c@namea=\count415
-\c@savednamea=\count416
-\c@nameb=\count417
-\c@savednameb=\count418
-\c@namec=\count419
-\c@savednamec=\count420
-\c@translator=\count421
-\c@savedtranslator=\count422
-\c@shortauthor=\count423
-\c@savedshortauthor=\count424
-\c@shorteditor=\count425
-\c@savedshorteditor=\count426
-\c@labelname=\count427
-\c@savedlabelname=\count428
-\c@institution=\count429
-\c@savedinstitution=\count430
-\c@lista=\count431
-\c@savedlista=\count432
-\c@listb=\count433
-\c@savedlistb=\count434
-\c@listc=\count435
-\c@savedlistc=\count436
-\c@listd=\count437
-\c@savedlistd=\count438
-\c@liste=\count439
-\c@savedliste=\count440
-\c@listf=\count441
-\c@savedlistf=\count442
-\c@location=\count443
-\c@savedlocation=\count444
-\c@organization=\count445
-\c@savedorganization=\count446
-\c@origlocation=\count447
-\c@savedoriglocation=\count448
-\c@origpublisher=\count449
-\c@savedorigpublisher=\count450
-\c@publisher=\count451
-\c@savedpublisher=\count452
-\c@language=\count453
-\c@savedlanguage=\count454
-\c@origlanguage=\count455
-\c@savedoriglanguage=\count456
-\c@pageref=\count457
-\c@savedpageref=\count458
-\shorthandwidth=\skip156
-\shortjournalwidth=\skip157
-\shortserieswidth=\skip158
-\shorttitlewidth=\skip159
-\shortauthorwidth=\skip160
-\shorteditorwidth=\skip161
-\locallabelnumberwidth=\skip162
-\locallabelalphawidth=\skip163
-\localshorthandwidth=\skip164
-\localshortjournalwidth=\skip165
-\localshortserieswidth=\skip166
-\localshorttitlewidth=\skip167
-\localshortauthorwidth=\skip168
-\localshorteditorwidth=\skip169
-Package biblatex Info: Trying to load enhanced support for Unicode engines...
-Package biblatex Info: ... file 'blx-unicode.def' found.
-
-(/usr/local/share/miktex-texmf/tex/latex/biblatex/blx-unicode.def)
-Package biblatex Info: Trying to load compatibility code...
-Package biblatex Info: ... file 'blx-compat.def' found.
-
-(/usr/local/share/miktex-texmf/tex/latex/biblatex/blx-compat.def
-File: blx-compat.def 2019/12/01 v3.14 biblatex compatibility (PK/MW)
-)
-Package biblatex Info: Trying to load generic definitions...
-Package biblatex Info: ... file 'biblatex.def' found.
-
-(/usr/local/share/miktex-texmf/tex/latex/biblatex/biblatex.def
-File: biblatex.def 2019/12/01 v3.14 biblatex compatibility (PK/MW)
-\c@textcitecount=\count459
-\c@textcitetotal=\count460
-\c@textcitemaxnames=\count461
-\c@biburlbigbreakpenalty=\count462
-\c@biburlbreakpenalty=\count463
-\c@biburlnumpenalty=\count464
-\c@biburlucpenalty=\count465
-\c@biburllcpenalty=\count466
-\biburlbigskip=\muskip18
-\biburlnumskip=\muskip19
-\biburlucskip=\muskip20
-\biburllcskip=\muskip21
-\c@smartand=\count467
-)
-Package biblatex Info: Trying to load bibliography style 'bibstyle/lncs'...
-Package biblatex Info: ... file 'bibstyle/lncs.bbx' found.
-
-(./bibstyle/lncs.bbx
-File: lncs.bbx 2014/05/19 v0.2
-Package biblatex Info: Trying to load bibliography style 'numeric'...
-Package biblatex Info: ... file 'numeric.bbx' found.
-
-(/usr/local/share/miktex-texmf/tex/latex/biblatex/bbx/numeric.bbx
-File: numeric.bbx 2019/12/01 v3.14 biblatex bibliography style (PK/MW)
-Package biblatex Info: Trying to load bibliography style 'standard'...
-Package biblatex Info: ... file 'standard.bbx' found.
-
-(/usr/local/share/miktex-texmf/tex/latex/biblatex/bbx/standard.bbx
-File: standard.bbx 2019/12/01 v3.14 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count468
-\c@bbx:relatedtotal=\count469
-))
-
-Package biblatex Warning: 'firstinits' option is deprecated.
-(biblatex)                Please use 'giveninits' instead.
-
-)
-Package biblatex Info: Trying to load citation style 'bibstyle/lncs'...
-Package biblatex Info: ... file 'bibstyle/lncs.cbx' found.
- (./bibstyle/lncs.cbx
-File: lncs.cbx 2012/05/13 v0.1
-Package biblatex Info: Trying to load citation style 'numeric'...
-Package biblatex Info: ... file 'numeric.cbx' found.
-
-(/usr/local/share/miktex-texmf/tex/latex/biblatex/cbx/numeric.cbx
-File: numeric.cbx 2019/12/01 v3.14 biblatex citation style (PK/MW)
-Package biblatex Info: Redefining '\cite'.
-Package biblatex Info: Redefining '\parencite'.
-Package biblatex Info: Redefining '\footcite'.
-Package biblatex Info: Redefining '\footcitetext'.
-Package biblatex Info: Redefining '\smartcite'.
-Package biblatex Info: Redefining '\supercite'.
-Package biblatex Info: Redefining '\textcite'.
-Package biblatex Info: Redefining '\textcites'.
-Package biblatex Info: Redefining '\cites'.
-Package biblatex Info: Redefining '\parencites'.
-Package biblatex Info: Redefining '\smartcites'.
-))
-Package biblatex Info: Trying to load configuration file...
-Package biblatex Info: ... file 'biblatex.cfg' found.
-
-(/usr/local/share/miktex-texmf/tex/latex/biblatex/biblatex.cfg
-File: biblatex.cfg 
-))
 (/usr/local/share/miktex-texmf/tex/generic/pgf/libraries/pgflibraryarrows.meta.
 code.tex
 File: pgflibraryarrows.meta.code.tex 2020/01/08 v3.1.5b (3.1.5b)
@@ -1325,7 +1083,7 @@ File: tikzlibraryshapes.geometric.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 s.geometric.code.tex
 File: pgflibraryshapes.geometric.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ))
-\c@thm=\count470
+\c@thm=\count346
 
 (/usr/local/share/miktex-texmf/tex/latex/fontspec/fontspec.sty
 Package: fontspec 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTeX
@@ -1333,17 +1091,17 @@ Lua module: fontspec 2020/02/21 2.7i Font selection for XeLaTeX and LuaLaTeX
 (/usr/local/share/miktex-texmf/tex/latex/fontspec/fontspec-luatex.sty
 Package: fontspec-luatex 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTe
 X
-\l__fontspec_script_int=\count471
-\l__fontspec_language_int=\count472
-\l__fontspec_strnum_int=\count473
-\l__fontspec_tmp_int=\count474
-\l__fontspec_tmpa_int=\count475
-\l__fontspec_tmpb_int=\count476
-\l__fontspec_tmpc_int=\count477
-\l__fontspec_em_int=\count478
-\l__fontspec_emdef_int=\count479
-\l__fontspec_strong_int=\count480
-\l__fontspec_strongdef_int=\count481
+\l__fontspec_script_int=\count347
+\l__fontspec_language_int=\count348
+\l__fontspec_strnum_int=\count349
+\l__fontspec_tmp_int=\count350
+\l__fontspec_tmpa_int=\count351
+\l__fontspec_tmpb_int=\count352
+\l__fontspec_tmpc_int=\count353
+\l__fontspec_em_int=\count354
+\l__fontspec_emdef_int=\count355
+\l__fontspec_strong_int=\count356
+\l__fontspec_strongdef_int=\count357
 \l__fontspec_tmpa_dim=\dimen311
 \l__fontspec_tmpb_dim=\dimen312
 \l__fontspec_tmpc_dim=\dimen313
@@ -1403,8 +1161,8 @@ Package fontspec Info: Font family 'arialnarrow.ttf(0)' created for font
 (/usr/local/share/miktex-texmf/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2019/10/16 v2.13 Sectioning titles
 \ttl@box=\box79
-\beforetitleunit=\skip170
-\aftertitleunit=\skip171
+\beforetitleunit=\skip148
+\aftertitleunit=\skip149
 \ttl@plus=\dimen314
 \ttl@minus=\dimen315
 \ttl@toksa=\toks50
@@ -1412,8 +1170,261 @@ Package: titlesec 2019/10/16 v2.13 Sectioning titles
 \titlewidthlast=\dimen317
 \titlewidthfirst=\dimen318
 ))
-\@quotelevel=\count482
-\@quotereset=\count483
+(/usr/local/share/miktex-texmf/tex/latex/biblatex/biblatex.sty
+Package: biblatex 2020/08/23 v3.15a programmable bibliographies (PK/MW)
+
+(/usr/local/share/miktex-texmf/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count358
+
+(/usr/local/share/miktex-texmf/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+(/usr/local/share/miktex-texmf/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+\c@tabx@nest=\count359
+\c@listtotal=\count360
+\c@listcount=\count361
+\c@liststart=\count362
+\c@liststop=\count363
+\c@citecount=\count364
+\c@citetotal=\count365
+\c@multicitecount=\count366
+\c@multicitetotal=\count367
+\c@instcount=\count368
+\c@maxnames=\count369
+\c@minnames=\count370
+\c@maxitems=\count371
+\c@minitems=\count372
+\c@citecounter=\count373
+\c@maxcitecounter=\count374
+\c@savedcitecounter=\count375
+\c@uniquelist=\count376
+\c@uniquename=\count377
+\c@refsection=\count378
+\c@refsegment=\count379
+\c@maxextratitle=\count380
+\c@maxextratitleyear=\count381
+\c@maxextraname=\count382
+\c@maxextradate=\count383
+\c@maxextraalpha=\count384
+\c@abbrvpenalty=\count385
+\c@highnamepenalty=\count386
+\c@lownamepenalty=\count387
+\c@maxparens=\count388
+\c@parenlevel=\count389
+\blx@tempcnta=\count390
+\blx@tempcntb=\count391
+\blx@tempcntc=\count392
+\blx@maxsection=\count393
+\blx@maxsegment@0=\count394
+\blx@notetype=\count395
+\blx@parenlevel@text=\count396
+\blx@parenlevel@foot=\count397
+\blx@sectionciteorder@0=\count398
+\blx@entrysetcounter=\count399
+\blx@biblioinstance=\count400
+\labelnumberwidth=\skip150
+\labelalphawidth=\skip151
+\biblabelsep=\skip152
+\bibitemsep=\skip153
+\bibnamesep=\skip154
+\bibinitsep=\skip155
+\bibparsep=\skip156
+\bibhang=\skip157
+\blx@bcfin=\read3
+\blx@bcfout=\write4
+\blx@langwohyphens=\language2
+\c@mincomprange=\count401
+\c@maxcomprange=\count402
+\c@mincompwidth=\count403
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+
+(/usr/local/share/miktex-texmf/tex/latex/biblatex/blx-dm.def
+File: blx-dm.def 2020/08/23 v3.15a biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load biblatex style data model...
+Package biblatex Info: ... file 'bibstyle/lncs.dbx' found.
+
+(./bibstyle/lncs.dbx)
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count404
+\c@savedafterword=\count405
+\c@annotator=\count406
+\c@savedannotator=\count407
+\c@author=\count408
+\c@savedauthor=\count409
+\c@bookauthor=\count410
+\c@savedbookauthor=\count411
+\c@commentator=\count412
+\c@savedcommentator=\count413
+\c@editor=\count414
+\c@savededitor=\count415
+\c@editora=\count416
+\c@savededitora=\count417
+\c@editorb=\count418
+\c@savededitorb=\count419
+\c@editorc=\count420
+\c@savededitorc=\count421
+\c@foreword=\count422
+\c@savedforeword=\count423
+\c@holder=\count424
+\c@savedholder=\count425
+\c@introduction=\count426
+\c@savedintroduction=\count427
+\c@namea=\count428
+\c@savednamea=\count429
+\c@nameb=\count430
+\c@savednameb=\count431
+\c@namec=\count432
+\c@savednamec=\count433
+\c@translator=\count434
+\c@savedtranslator=\count435
+\c@shortauthor=\count436
+\c@savedshortauthor=\count437
+\c@shorteditor=\count438
+\c@savedshorteditor=\count439
+\c@labelname=\count440
+\c@savedlabelname=\count441
+\c@institution=\count442
+\c@savedinstitution=\count443
+\c@lista=\count444
+\c@savedlista=\count445
+\c@listb=\count446
+\c@savedlistb=\count447
+\c@listc=\count448
+\c@savedlistc=\count449
+\c@listd=\count450
+\c@savedlistd=\count451
+\c@liste=\count452
+\c@savedliste=\count453
+\c@listf=\count454
+\c@savedlistf=\count455
+\c@location=\count456
+\c@savedlocation=\count457
+\c@organization=\count458
+\c@savedorganization=\count459
+\c@origlocation=\count460
+\c@savedoriglocation=\count461
+\c@origpublisher=\count462
+\c@savedorigpublisher=\count463
+\c@publisher=\count464
+\c@savedpublisher=\count465
+\c@language=\count466
+\c@savedlanguage=\count467
+\c@origlanguage=\count468
+\c@savedoriglanguage=\count469
+\c@pageref=\count470
+\c@savedpageref=\count471
+\shorthandwidth=\skip158
+\shortjournalwidth=\skip159
+\shortserieswidth=\skip160
+\shorttitlewidth=\skip161
+\shortauthorwidth=\skip162
+\shorteditorwidth=\skip163
+\locallabelnumberwidth=\skip164
+\locallabelalphawidth=\skip165
+\localshorthandwidth=\skip166
+\localshortjournalwidth=\skip167
+\localshortserieswidth=\skip168
+\localshorttitlewidth=\skip169
+\localshortauthorwidth=\skip170
+\localshorteditorwidth=\skip171
+Package biblatex Info: Trying to load enhanced support for Unicode engines...
+Package biblatex Info: ... file 'blx-unicode.def' found.
+
+(/usr/local/share/miktex-texmf/tex/latex/biblatex/blx-unicode.def)
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+(/usr/local/share/miktex-texmf/tex/latex/biblatex/blx-compat.def
+File: blx-compat.def 2020/08/23 v3.15a biblatex compatibility (PK/MW)
+)
+Package biblatex Info: expl3
+(biblatex)             2020-08-07 L3 programming layer (loader) 
+(biblatex)             is new enough (at least 2020/04/06),
+(biblatex)             setting 'casechanger=expl3'.
+Package biblatex Info: Trying to load expl3 case changing code...
+Package biblatex Info: ... file 'blx-case-expl3.def' found.
+
+(/usr/local/share/miktex-texmf/tex/latex/biblatex/blx-case-expl3.def
+File: blx-case-expl3 2020/08/23 v3.15a expl3 case changing code for biblatex
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+
+(/usr/local/share/miktex-texmf/tex/latex/biblatex/biblatex.def
+File: biblatex.def 2020/08/23 v3.15a biblatex compatibility (PK/MW)
+\c@textcitecount=\count472
+\c@textcitetotal=\count473
+\c@textcitemaxnames=\count474
+\c@biburlbigbreakpenalty=\count475
+\c@biburlbreakpenalty=\count476
+\c@biburlnumpenalty=\count477
+\c@biburlucpenalty=\count478
+\c@biburllcpenalty=\count479
+\biburlbigskip=\muskip18
+\biburlnumskip=\muskip19
+\biburlucskip=\muskip20
+\biburllcskip=\muskip21
+\c@smartand=\count480
+)
+Package biblatex Info: Trying to load bibliography style 'bibstyle/lncs'...
+Package biblatex Info: ... file 'bibstyle/lncs.bbx' found.
+
+(./bibstyle/lncs.bbx
+File: lncs.bbx 2014/05/19 v0.2
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
+
+(/usr/local/share/miktex-texmf/tex/latex/biblatex/bbx/numeric.bbx
+File: numeric.bbx 2020/08/23 v3.15a biblatex bibliography style (PK/MW)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+
+(/usr/local/share/miktex-texmf/tex/latex/biblatex/bbx/standard.bbx
+File: standard.bbx 2020/08/23 v3.15a biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count481
+\c@bbx:relatedtotal=\count482
+))
+
+Package biblatex Warning: 'firstinits' option is deprecated.
+(biblatex)                Please use 'giveninits' instead.
+
+)
+Package biblatex Info: Trying to load citation style 'bibstyle/lncs'...
+Package biblatex Info: ... file 'bibstyle/lncs.cbx' found.
+ (./bibstyle/lncs.cbx
+File: lncs.cbx 2012/05/13 v0.1
+Package biblatex Info: Trying to load citation style 'numeric'...
+Package biblatex Info: ... file 'numeric.cbx' found.
+
+(/usr/local/share/miktex-texmf/tex/latex/biblatex/cbx/numeric.cbx
+File: numeric.cbx 2020/08/23 v3.15a biblatex citation style (PK/MW)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
+))
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+(/usr/local/share/miktex-texmf/tex/latex/biblatex/biblatex.cfg
+File: biblatex.cfg 
+))
+\@quotelevel=\count483
+\@quotereset=\count484
  (./Thesis.aux
 (./sections/Titlepage/Title.aux) (./sections/Introduction/Introduction.aux)
 (./sections/Background/Background.aux) (./sections/Objectives/Objectives.aux)
@@ -1427,10 +1438,10 @@ LaTeX Warning: Label `li:complete' multiply defined.
 
 ) (./sections/UseCase/UseCase.aux) (./sections/Experiments/Experiments.aux
 
-LaTeX Warning: Label `fig:plotsucceediterators' multiply defined.
+LaTeX Warning: Label `fig:plotfailiterators' multiply defined.
 
 
-LaTeX Warning: Label `fig:plotsucceediterators' multiply defined.
+LaTeX Warning: Label `fig:plotfailiterators' multiply defined.
 
 
 LaTeX Warning: Label `tab:iterator-performance' multiply defined.
@@ -1443,71 +1454,137 @@ LaTeX Warning: Label `tab:iterator-performance' multiply defined.
 (./appendices/proofs/ContractionTransitive.aux))
 \openout1 = Thesis.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 3.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 3.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 6.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 6.
 
 
 (/usr/local/share/miktex-texmf/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
 
 (/usr/local/share/miktex-texmf/tex/latex/fmtcount/fc-english.def
 File: fc-english.def 2016/01/12
 )
 (/usr/local/share/miktex-texmf/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count484
+\scratchcounter=\count485
 \scratchdimen=\dimen319
 \scratchbox=\box80
-\nofMPsegments=\count485
-\nofMParguments=\count486
+\nofMPsegments=\count486
+\nofMParguments=\count487
 \everyMPshowfont=\toks51
-\MPscratchCnt=\count487
+\MPscratchCnt=\count488
 \MPscratchDim=\dimen320
-\MPnumerator=\count488
-\makeMPintoPDFobject=\count489
+\MPnumerator=\count489
+\makeMPintoPDFobject=\count490
 \everyMPtoPDFconversion=\toks52
 ) (/usr/local/share/miktex-texmf/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+
+(/usr/local/share/miktex-texmf/tex/latex/grfext/grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+)
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 5.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG
+,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
 )
 ABD: EveryShipout initializing macros
 
 Package todonotes Warning: The length marginparwidth is less than 2cm and will m
 ost likely cause issues with the appearance of inserted todonotes. The issue can
  be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to loa
-ding the todonotes package. on input line 3.
+ding the todonotes package. on input line 6.
 
 
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable ti
 ck labels; missing features). Consider writing \pgfplotsset{compat=1.17} into yo
 ur preamble.
- on input line 3.
+ on input line 6.
 
-\c@lstlisting=\count490
+\c@lstlisting=\count491
 \AtBeginShipoutBox=\box81
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
+
+Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
+(fontspec)             this).
+
+\symlegacymaths=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 6.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 6.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 6.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 6.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 6.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 6.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 6.
+LaTeX Font Info:    Redeclaring math accent \check on input line 6.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 6.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 6.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 6.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 6.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 6.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 6.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 6.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 6.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 6.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 6.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 6.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 6.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 6.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 6.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 6.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 6.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `normal' on input line 6.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> TU/Arial(0)/m/n on input line 6.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `bold' on input line 6.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> TU/Arial(0)/m/n on input line 6.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  TU/Arial(0)/m/n --> TU/Arial(0)/m/n on input line 6.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> TU/Arial(0)/m/it on input line 6.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> TU/Arial(0)/b/n on input line 6.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> TU/arialnarrow.ttf(0)/m/n on input line
+ 6.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 6.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  TU/Arial(0)/m/n --> TU/Arial(0)/b/n on input line 6.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> TU/Arial(0)/b/it on input line 6.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> TU/arialnarrow.ttf(0)/b/n on input lin
+e 6.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 6.
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
 (/usr/local/share/miktex-texmf/tex/latex/biblatex/lbx/english.lbx
-File: english.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
+File: english.lbx 2020/08/23 v3.15a biblatex localization (PK/MW)
 )
 Package biblatex Info: LuaTeX detected.
 (biblatex)             Assuming input encoding 'utf8'.
@@ -1518,67 +1595,17 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Thesis.bbl' found.
 
-(./Thesis.bbl)
-Package biblatex Info: Reference section=0 on input line 3.
-Package biblatex Info: Reference segment=0 on input line 3.
+(./Thesis.bbl
 
-Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
-(fontspec)             this).
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                todo
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
 
-\symlegacymaths=\mathgroup6
-LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 3.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 3.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 3.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 3.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 3.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 3.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 3.
-LaTeX Font Info:    Redeclaring math accent \check on input line 3.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 3.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 3.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 3.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 3.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 3.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 3.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 3.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 3.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 3.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 3.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 3.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 3.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 3.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 3.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 3.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 3.
-LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 3.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/Arial(0)/m/n on input line 3.
-LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 3.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/Arial(0)/m/n on input line 3.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/Arial(0)/m/n --> TU/Arial(0)/m/n on input line 3.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/Arial(0)/m/it on input line 3.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/Arial(0)/b/n on input line 3.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/arialnarrow.ttf(0)/m/n on input line
- 3.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 3.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/Arial(0)/m/n --> TU/Arial(0)/b/n on input line 3.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/Arial(0)/b/it on input line 3.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/arialnarrow.ttf(0)/b/n on input lin
-e 3.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 3.
+)
+Package biblatex Info: Reference section=0 on input line 6.
+Package biblatex Info: Reference segment=0 on input line 6.
 
 \openout2 = sections/Titlepage/Title.aux
  (./sections/Titlepage/Title.tex
@@ -1616,13 +1643,7 @@ Package luatex.def Info: images/nedap.png  used on input line 38.
 
 
 {/home/pim/.miktex/texmfs/data/pdftex/config/pdftex.map}<./images/utwente.png><.
-/images/nedap.png>])
-Overfull \hbox (22.9993pt too wide) in paragraph at lines 9--10
-\TU/Arial(0)/m/n/12 FPGA compilation process. Traditional FPGA programming pipel
-ines involve a computationally
- []
-
-[1
+/images/nedap.png>]) [1
 
 ] (./Thesis.toc [1
 
@@ -1634,142 +1655,43 @@ ines involve a computationally
 \openout2 = sections/Introduction/Introduction.aux
  (./sections/Introduction/Introduction.tex
 Chapter 1.
-
-Overfull \hbox (0.79446pt too wide) in paragraph at lines 2--3
-\TU/Arial(0)/m/n/12 industry. Because companies can configure the logic of these
- devices after mass hardware
- []
-
-
-Overfull \hbox (17.91675pt too wide) in paragraph at lines 2--3
-\TU/Arial(0)/m/n/12 logic effectively, even while the hardware is in use. Moreov
-er, the high computing performance
- []
-
-
-Overfull \hbox (23.58372pt too wide) in paragraph at lines 2--3
-\TU/Arial(0)/m/n/12 for parallel calculations yielded by a small chip makes an 
-FPGA suitable for sensor systems[20],
- []
-
-
-Overfull \hbox (10.24193pt too wide) in paragraph at lines 9--10
-[]\TU/Arial(0)/m/n/12 Techniques that require students to implement FPGA program
-s in HDLs furthermore abstract
- []
-
 [3
 
 
-]
-Overfull \hbox (43.85435pt too wide) in paragraph at lines 15--16
-[]\TU/Arial(0)/m/n/12 This research applies an algorithm for the graph problem 
-‘node disjoint subgraph homeomorphism’:
- []
-
-
-Overfull \hbox (32.70554pt too wide) in paragraph at lines 15--16
-\TU/Arial(0)/m/n/12 of subgraph isomorphism (a similar graph problem), evaluate the different settings/improvements
- []
-
-)
-Overfull \hbox (8.286pt too wide) in paragraph at lines 17--14
-[]\TU/Arial(0)/m/n/12 Another use case of such mappings is synthesis of the same
- configuration to many hardware
- []
-
-
-Overfull \hbox (1.89415pt too wide) in paragraph at lines 17--14
-\TU/Arial(0)/m/n/12 viewing partial FPGA emulation as a form of pre-compilation:
- performing FPGA compilation
- []
-
-[4]
+]) [4]
 \openout2 = sections/Background/Background.aux
  (./sections/Background/Background.tex
 Chapter 2.
-(./sections/Background/FPGAs/FPGAs.tex
-Underfull \hbox (badness 1221) in paragraph at lines 124--124
-[]\TU/Arial(0)/m/n/12 Figure 2.1: |The hierarchy of a typical FPGA. A typical FP
-GA mostly consists of
- []
-
-
-Overfull \hbox (2.08157pt too wide) in paragraph at lines 128--129
-\TU/Arial(0)/m/n/12 The computing hardware most people are familiar with is CPUs
-. Manufacturers incorporate
- []
-
-
-Overfull \hbox (21.8804pt too wide) in paragraph at lines 132--133
-\TU/Arial(0)/m/n/12 process implies that FPGAs are very efficient at executing 
-concurrent programs. Reconfiguring
- []
-
-[5
+(./sections/Background/FPGAs/FPGAs.tex [5
 
 
 
-] [6]
-Overfull \hbox (6.07181pt too wide) in paragraph at lines 200--201
-[]\TU/Arial(0)/m/n/12 FPGAs use registers for this purpose (see Figure 2.4[]). 
-Registers can store a small collection
- []
-
-[7]
-Overfull \hbox (3.22696pt too wide) in paragraph at lines 285--286
-\TU/Arial(0)/m/n/12 are responsible for most of the computation of FPGA programs
-. FPGAs can have additional
- []
-
-[8]
+] [6] [7] [8]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 308.
 Package mdframed Info: mdframed inside a box 
  mdframed uses option nobreak mdframed on input line 313.
  [9]
-Overfull \hbox (9.00931pt too wide) in paragraph at lines 380--382
-\TU/Arial(0)/m/n/12 make it highly usable in education. It can perform modular 
-optimisations and transformations
- []
-
-
-Overfull \hbox (5.02846pt too wide) in paragraph at lines 380--382
-\TU/Arial(0)/m/n/12 on netlists depending on a script, and outputs netlists in 
-BLIF[10] format. It divides synthesis
- []
-
-
 Overfull \hbox (0.21654pt too wide) in paragraph at lines 382--383
-[]\TU/Arial(0)/m/n/12 Behavioural synthesis - converting an HDL program to Regis
-ter Transfer Level (RTL):
+[]\TU/Arial(0)/m/n/12 Be-havioural syn-the-sis - con-vert-ing an HDL pro-gram to
+ Reg-is-ter Trans-fer Level (RTL):
  []
 
 [10]
-Overfull \hbox (18.51256pt too wide) in paragraph at lines 384--385
-[]\TU/Arial(0)/m/n/12 Logic synthesis - converting a netlist graph of logic gate
-s to a netlist graph of components
- []
-
-
-Overfull \hbox (12.53946pt too wide) in paragraph at lines 387--388
-[]\TU/Arial(0)/m/n/12 Much literature exists on FPGA synthesis. The proposed res
-earch resembles logic synthesis,
- []
-
-
-Overfull \hbox (7.1771pt too wide) in paragraph at lines 395--396
-\TU/Arial(0)/m/n/12 that the FPGA software was not compiled for, it introduces 
-a considerable delay in execution.
- []
+! Undefined control sequence.
+l.393 ...\textit{as} a program. This way, the \texit
+                                                  {static} configuration of ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
 ) (./sections/Background/SimuEmu/SimuEmu.tex [11])
 (./sections/Background/PathSubIso/PathSubIso.tex
-Overfull \hbox (21.00002pt too wide) in paragraph at lines 6--7
-[]\TU/Arial(0)/m/n/12 A variant of subgraph isomorphism is subgraph homeomorphis
-m. In this problem, intermediate
- []
+
+LaTeX Warning: Citation 'cook' on page 12 undefined on input line 4.
 
 [12]
 Overfull \hbox (31.85094pt too wide) in paragraph at lines 18--29
@@ -1777,91 +1699,15 @@ Overfull \hbox (31.85094pt too wide) in paragraph at lines 18--29
  []
 
 
-Overfull \hbox (13.30743pt too wide) in paragraph at lines 49--49
+Overfull \hbox (13.30743pt too wide) in paragraph at lines 51--51
 [][] 
  []
 
-
-Overfull \hbox (12.09134pt too wide) in paragraph at lines 245--246
-\TU/Arial(0)/m/n/12 homeomorphism. We then iteratively added other algorithms fr
-om performance comparisons
- []
-
-[13]
-Overfull \hbox (13.47311pt too wide) in paragraph at lines 252--253
-[]\TU/Arial(0)/m/n/12 PLGCoding[63], based on LSGCoding[62] uses the length of 
-the shortest path and ``Laplacian
- []
-
-[14]
-Overfull \hbox (6.60658pt too wide) in paragraph at lines 266--267
-[]\TU/Arial(0)/m/n/12 LLAMA[31] and BM1[3] are portfolio techniques. Based on he
-uristics, they pick an approach
- []
-
-
-Overfull \hbox (12.05553pt too wide) in paragraph at lines 272--273
-[]\TU/Arial(0)/m/n/12 TurboISO[23] extracts subregions from the target graph by finding instances of a compressed
- []
-
-
-Overfull \hbox (3.06627pt too wide) in paragraph at lines 274--275
-[]\TU/Arial(0)/m/n/12 SQBC[60] takes cliques into account when searching for sub
-graphs: any node in a maximal
- []
-
-[15]
-Overfull \hbox (10.79185pt too wide) in paragraph at lines 279--280
-[]\TU/Arial(0)/m/n/12 GraphQL[25] filters the domain of source graph nodes based
- on the fact that neighbourhoods
- []
-
-
-Overfull \hbox (10.04771pt too wide) in paragraph at lines 279--280
-\TU/Arial(0)/m/n/12 isomorphism by iteratively strengthens the filtering power 
-of labels until a fixed point indicates
- []
-
-
-Overfull \hbox (8.94577pt too wide) in paragraph at lines 286--287
-[]\TU/Arial(0)/m/n/12 Subsea[35] recursively cuts the target graph along its min
-imal cut, searches for the subgraph
- []
-
-
-Overfull \hbox (2.58939pt too wide) in paragraph at lines 294--295
-\TU/Arial(0)/m/n/12 approach to subgraph isomorphism and thus potential to subgr
-aph homeomorphism. Many
- []
-
-
-Overfull \hbox (54.81128pt too wide) in paragraph at lines 294--295
-\TU/Arial(0)/m/n/12 algorithms, however, use incompatible strategies to obtain 
-subgraph isomorphisms. Experimentation
- []
-
-[16]
-Overfull \hbox (2.08482pt too wide) in paragraph at lines 304--305
-[]\TU/Arial(0)/m/n/12 LaPaugh et al.[33] present some ways to reduce the graphs in a subgraph homeomorphism
- []
-
-)) [17]
+[13] [14] [15] [16])) [17]
 \openout2 = sections/Objectives/Objectives.aux
  (./sections/Objectives/Objectives.tex
 Chapter 3.
-)
-Overfull \hbox (2.26498pt too wide) in paragraph at lines 16--16
-\TU/Arial(0)/m/n/12 models, generates a function that translates a model of an 
-FPGA program with compatibility
- []
-
-
-Overfull \hbox (2.9894pt too wide) in paragraph at lines 16--16
-\TU/Arial(0)/m/n/12 problem (node disjoint subgraph homeomorphism). Furthermore,
- we include specifications
- []
-
-[18
+) [18
 
 
 
@@ -1869,11 +1715,11 @@ Overfull \hbox (2.9894pt too wide) in paragraph at lines 16--16
 \openout2 = sections/Models/Models.aux
  (./sections/Models/Models.tex
 Chapter 4.
-<images/modelOfCell.png, id=112, 472.76625pt x 643.40375pt>
+<images/modelOfCell.png, id=113, 753.81625pt x 964.60374pt>
 File: images/modelOfCell.png Graphic file (type png)
 <use images/modelOfCell.png>
 Package luatex.def Info: images/modelOfCell.png  used on input line 17.
-(luatex.def)             Requested size: 234.8775pt x 319.65903pt.
+(luatex.def)             Requested size: 234.8775pt x 300.55481pt.
 ) [20
 
 
@@ -1882,12 +1728,6 @@ Package luatex.def Info: images/modelOfCell.png  used on input line 17.
 \openout2 = sections/Algorithm/Algorithm.aux
  (./sections/Algorithm/Algorithm.tex
 Chapter 5.
-
-Overfull \hbox (3.65541pt too wide) in paragraph at lines 85--86
-\TU/Arial(0)/m/n/12 time) and includes methods for vertex-on-vertex mapping. In comparison, Lingas
-’ algorithm
- []
-
 [22
 
 
@@ -1897,65 +1737,19 @@ Overfull \hbox (3.65541pt too wide) in paragraph at lines 85--86
 LaTeX Warning: Reference `sec:pathIterationShort' on page 24 undefined on input 
 line 124.
 
-
-Overfull \hbox (12.98782pt too wide) in paragraph at lines 130--131
-\TU/Arial(0)/m/n/12 ordering technique from the subgraph \TU/Arial(0)/m/it/12 is
-omorphism \TU/Arial(0)/m/n/12 domain. From performance comparisons
- []
-
-
-Overfull \hbox (89.16966pt too wide) in paragraph at lines 152--153
-[]\TU/Arial(0)/m/n/12 The algorithm RI-DS obtains a variable ordering using a gr
-eedy algorithm called ``GreatestConstrainedFirst”.
- []
-
 [24] [25]
-Overfull \hbox (20.03561pt too wide) in paragraph at lines 175--176
-\TU/Arial(0)/m/n/12 In subgraph isomorphism, edge-on-edge mappings are trivial 
-from vertex-on-vertex mappings.
- []
-
-
-Overfull \hbox (4.25717pt too wide) in paragraph at lines 182--183
-[]\TU/Arial(0)/b/n/12 Greedy DFS - \TU/Arial(0)/m/n/12 Search for paths using gr
-eedy depth first search, choosing the direction
- []
-
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 189.
 
-
-Overfull \hbox (8.90709pt too wide) in paragraph at lines 207--208
-\TU/Arial(0)/m/n/12 some optimisations (some of which from the subgraph isomorph
-ism domain) and individually
- []
-
-
-Overfull \hbox (17.66908pt too wide) in paragraph at lines 210--211
-\TU/Arial(0)/m/n/12 process, they may also provide paths that take up unnecessar
-ily many resources. Specifically,
- []
-
-[26]
-Overfull \hbox (9.98788pt too wide) in paragraph at lines 223--224
-[]\TU/Arial(0)/m/n/12 However, not every subgraph homeomorphism between $\OML/c
-mm/m/it/12 S[]$ \TU/Arial(0)/m/n/12 and $\OML/cmm/m/it/12 T$ \TU/Arial(0)/m/n/1
-2 corresponds to a subgraph
- []
-
-[27]
-Overfull \hbox (20.14917pt too wide) in paragraph at lines 232--233
-\TU/Arial(0)/m/n/12 contraction, after which the edges may lose their direction again. Then, during the compatibility
- []
-
-<images/contraction/whatisit1.png, id=141, 312.16624pt x 61.22874pt>
+[26] [27]
+<images/contraction/whatisit1.png, id=142, 312.16624pt x 61.22874pt>
 File: images/contraction/whatisit1.png Graphic file (type png)
 <use images/contraction/whatisit1.png>
 Package luatex.def Info: images/contraction/whatisit1.png  used on input line 23
 9.
 (luatex.def)             Requested size: 187.90271pt x 36.85617pt.
-<images/contraction/whatisit2.png, id=142, 312.16624pt x 191.71625pt>
+<images/contraction/whatisit2.png, id=143, 312.16624pt x 191.71625pt>
 File: images/contraction/whatisit2.png Graphic file (type png)
 <use images/contraction/whatisit2.png>
 Package luatex.def Info: images/contraction/whatisit2.png  used on input line 24
@@ -1966,12 +1760,12 @@ Overfull \hbox (2.22264pt too wide) in paragraph at lines 237--247
 []$[]$ $[]$ 
  []
 
-<images/contraction/after.png, id=143, 367.3725pt x 310.15875pt>
+<images/contraction/after.png, id=144, 367.3725pt x 310.15875pt>
 File: images/contraction/after.png Graphic file (type png)
 <use images/contraction/after.png>
 Package luatex.def Info: images/contraction/after.png  used on input line 257.
 (luatex.def)             Requested size: 220.42519pt x 186.09668pt.
-<images/contraction/before.png, id=144, 367.3725pt x 299.1175pt>
+<images/contraction/before.png, id=145, 367.3725pt x 299.1175pt>
 File: images/contraction/before.png Graphic file (type png)
 <use images/contraction/before.png>
 Package luatex.def Info: images/contraction/before.png  used on input line 263.
@@ -1987,22 +1781,6 @@ g><./images/contraction/after.png><./images/contraction/before.png>]
 
 (./sections/Pruning/Pruning.tex
 Chapter 6.
-
-Overfull \hbox (8.50241pt too wide) in paragraph at lines 4--5
-\TU/Arial(0)/m/n/12 matchings, the algorithm will often explore branches of the search tree that will not eventually
- []
-
-
-Overfull \hbox (9.11765pt too wide) in paragraph at lines 15--16
-[]\TU/Arial(0)/m/n/12 Algorithms for subgraph \TU/Arial(0)/m/it/12 isomorphism 
-\TU/Arial(0)/m/n/12 use various pruning methods, which we will implement
- []
-
-
-Overfull \hbox (30.71959pt too wide) in paragraph at lines 15--16
-\TU/Arial(0)/m/n/12 subgraph homeomorphism but not every subgraph homeomorphism is a subgraph isomorphism.
- []
-
 [30
 
 
@@ -2025,15 +1803,12 @@ Chapter 7.
 LaTeX Warning: Reference `fig:ecp5architecture' on page 36 undefined on input li
 ne 4.
 
-
-LaTeX Warning: Citation 'todo' on page 36 undefined on input line 4.
-
-<images/virtualFPGA.png, id=175, 700.6175pt x 470.75874pt>
+<images/virtualFPGA.png, id=176, 700.6175pt x 470.75874pt>
 File: images/virtualFPGA.png Graphic file (type png)
 <use images/virtualFPGA.png>
 Package luatex.def Info: images/virtualFPGA.png  used on input line 10.
 (luatex.def)             Requested size: 375.80544pt x 252.51788pt.
-<images/ECP5.png, id=176, 578.16pt x 356.2911pt>
+<images/ECP5.png, id=177, 578.16pt x 356.2911pt>
 File: images/ECP5.png Graphic file (type png)
 <use images/ECP5.png>
 Package luatex.def Info: images/ECP5.png  used on input line 18.
@@ -2041,7 +1816,7 @@ Package luatex.def Info: images/ECP5.png  used on input line 18.
 
 Underfull \hbox (badness 10000) in paragraph at lines 22--22
 [][]\TU/lmtt/m/n/10 http://www.latticesemi.com/products/developmentboardsandkits
-/ecp5evaluationboard\TU/Arial(0)/m/n/10 ,
+/ecp5evaluationboard\TU/Arial(0)/m/n/10 , ac-
  []
 
 ) [36
@@ -2054,19 +1829,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 22--22
 (./sections/Experiments/Experiments.tex
 Chapter 8.
 
-Overfull \hbox (24.9442pt too wide) in paragraph at lines 4--5
-[]\TU/Arial(0)/m/n/12 For source graph-target graph pairs without a present vert
-ex disjoint subgraph homeomorphism
- []
-
-
 LaTeX Warning: Reference `todo' on page 38 undefined on input line 8.
-
-
-Overfull \hbox (1.61803pt too wide) in paragraph at lines 8--9
-\TU/Arial(0)/m/n/12 entire search tree (without homeomorphism) gives an indicati
-on of the overhead introduced
- []
 
 
 Overfull \hbox (8.03914pt too wide) in paragraph at lines 157--158
@@ -2074,61 +1837,65 @@ Overfull \hbox (8.03914pt too wide) in paragraph at lines 157--158
  []
 
 
-Overfull \hbox (8.03929pt too wide) in paragraph at lines 319--320
+Overfull \hbox (8.03929pt too wide) in paragraph at lines 315--316
  [][] 
  []
 
 
-Overfull \hbox (8.03914pt too wide) in paragraph at lines 480--481
+Overfull \hbox (8.03853pt too wide) in paragraph at lines 500--501
  [][] 
  []
 
 
-Underfull \hbox (badness 2150) in paragraph at lines 481--481
-[]\TU/Arial(0)/m/n/12 Figure 8.3: |Relative performance of contraction-enabled 
-vertex disjoint subgraph
- []
-
-
-Overfull \hbox (17.51657pt too wide) in paragraph at lines 495--509
+Overfull \hbox (8.03929pt too wide) in paragraph at lines 663--664
  [][] 
  []
 
 
-Overfull \hbox (17.51657pt too wide) in paragraph at lines 518--532
+Overfull \hbox (1.026pt too wide) in paragraph at lines 814--815
  [][] 
  []
 
 
-Overfull \hbox (1.40913pt too wide) in paragraph at lines 538--551
+Overfull \hbox (17.51657pt too wide) in paragraph at lines 829--843
  [][] 
  []
 
 
-Overfull \hbox (1.40913pt too wide) in paragraph at lines 559--572
+Overfull \hbox (17.51657pt too wide) in paragraph at lines 852--866
+ [][] 
+ []
+
+
+Overfull \hbox (1.40913pt too wide) in paragraph at lines 872--885
+ [][] 
+ []
+
+
+Overfull \hbox (1.40913pt too wide) in paragraph at lines 893--906
  [][] 
  []
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 581.
+               Default added (so using `tbp') on input line 915.
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 619.
+               Default added (so using `tbp') on input line 953.
 
 ) [38
 
 
 
-] [39] [40] [41] [42] [43] [44]
+] [39] [40] [41] [42] [43] [44] [45] [46]
 \openout2 = sections/Software/Software.aux
- (./sections/Software/Software.tex)
-\openout2 = sections/Conclusion/Conclusion.aux
 
-(./sections/Conclusion/Conclusion.tex
+(./sections/Software/Software.tex)
+\openout2 = sections/Conclusion/Conclusion.aux
+ (./sections/Conclusion/Conclusion.tex
 Chapter 9.
-) [45
+) [47
 
 
 
@@ -2138,7 +1905,7 @@ Chapter 9.
 \openout2 = sections/Discussion/Discussion.aux
  (./sections/Discussion/Discussion.tex
 Chapter 10.
-) [46
+) [48
 
 
 
@@ -2146,18 +1913,18 @@ Chapter 10.
 \openout2 = sections/FutureResearch/FutureResearch.aux
  (./sections/FutureResearch/FutureResearch.tex
 Chapter 11.
-) [47
+) [49
 
 
 
-] [48
+] [50
 
 
 
 ]
 \openout2 = appendices/SubgraphIsomorphism/History.aux
  (./appendices/SubgraphIsomorphism/History.tex
-<images/algorithmhistory.png, id=219, 982.67125pt x 2149.02875pt>
+<images/algorithmhistory.png, id=227, 982.67125pt x 2149.02875pt>
 File: images/algorithmhistory.png Graphic file (type png)
 <use images/algorithmhistory.png>
 Package luatex.def Info: images/algorithmhistory.png  used on input line 3.
@@ -2166,19 +1933,19 @@ File: images/algorithmhistory.png Graphic file (type png)
 <use images/algorithmhistory.png>
 Package luatex.def Info: images/algorithmhistory.png  used on input line 4.
 (luatex.def)             Requested size: 982.66885pt x 2149.02351pt.
-) [49
+) [51
 
-<./images/algorithmhistory.png>] [50]
+<./images/algorithmhistory.png>] [52]
 \openout2 = appendices/PathIteratorExamples/Examples.aux
  (./appendices/PathIteratorExamples/Exampl
 es.tex
-<images/pathiterators/examples-kpath-1.png, id=228, 604.2575pt x 604.2575pt>
+<images/pathiterators/examples-kpath-1.png, id=235, 604.2575pt x 604.2575pt>
 File: images/pathiterators/examples-kpath-1.png Graphic file (type png)
 <use images/pathiterators/examples-kpath-1.png>
 Package luatex.def Info: images/pathiterators/examples-kpath-1.png  used on inpu
 t line 9.
 (luatex.def)             Requested size: 187.90271pt x 187.89876pt.
-<images/pathiterators/examples-kpath-2.png, id=229, 604.2575pt x 604.2575pt>
+<images/pathiterators/examples-kpath-2.png, id=236, 604.2575pt x 604.2575pt>
 File: images/pathiterators/examples-kpath-2.png Graphic file (type png)
 <use images/pathiterators/examples-kpath-2.png>
 Package luatex.def Info: images/pathiterators/examples-kpath-2.png  used on inpu
@@ -2189,13 +1956,13 @@ Overfull \hbox (2.22264pt too wide) in paragraph at lines 6--18
 []$[]$ $[]$ 
  []
 
-<images/pathiterators/examples-DFS-1.png, id=230, 604.2575pt x 604.2575pt>
+<images/pathiterators/examples-DFS-1.png, id=237, 604.2575pt x 604.2575pt>
 File: images/pathiterators/examples-DFS-1.png Graphic file (type png)
 <use images/pathiterators/examples-DFS-1.png>
 Package luatex.def Info: images/pathiterators/examples-DFS-1.png  used on input 
 line 29.
 (luatex.def)             Requested size: 187.90271pt x 187.89876pt.
-<images/pathiterators/examples-DFS-2.png, id=231, 604.2575pt x 604.2575pt>
+<images/pathiterators/examples-DFS-2.png, id=238, 604.2575pt x 604.2575pt>
 File: images/pathiterators/examples-DFS-2.png Graphic file (type png)
 <use images/pathiterators/examples-DFS-2.png>
 Package luatex.def Info: images/pathiterators/examples-DFS-2.png  used on input 
@@ -2206,13 +1973,13 @@ Overfull \hbox (2.22264pt too wide) in paragraph at lines 26--38
 []$[]$ $[]$ 
  []
 
-<images/pathiterators/examples-DFS-1-RLP.png, id=232, 604.2575pt x 605.26125pt>
+<images/pathiterators/examples-DFS-1-RLP.png, id=239, 604.2575pt x 605.26125pt>
 File: images/pathiterators/examples-DFS-1-RLP.png Graphic file (type png)
 <use images/pathiterators/examples-DFS-1-RLP.png>
 Package luatex.def Info: images/pathiterators/examples-DFS-1-RLP.png  used on in
 put line 42.
 (luatex.def)             Requested size: 187.90271pt x 188.21088pt.
-<images/pathiterators/examples-DFS-2-RLP.png, id=233, 605.26125pt x 605.26125pt>
+<images/pathiterators/examples-DFS-2-RLP.png, id=240, 605.26125pt x 605.26125pt>
 
 File: images/pathiterators/examples-DFS-2-RLP.png Graphic file (type png)
 <use images/pathiterators/examples-DFS-2-RLP.png>
@@ -2224,14 +1991,14 @@ Overfull \hbox (2.22264pt too wide) in paragraph at lines 39--51
 []$[]$ $[]$ 
  []
 
-<images/pathiterators/examples-Greedy DFS-1.png, id=234, 604.2575pt x 604.2575pt
+<images/pathiterators/examples-Greedy DFS-1.png, id=241, 604.2575pt x 604.2575pt
 >
 File: images/pathiterators/examples-Greedy DFS-1.png Graphic file (type png)
 <use images/pathiterators/examples-Greedy DFS-1.png>
 Package luatex.def Info: images/pathiterators/examples-Greedy DFS-1.png  used on
  input line 63.
 (luatex.def)             Requested size: 187.90271pt x 187.89876pt.
-<images/pathiterators/examples-Greedy DFS-2.png, id=235, 604.2575pt x 604.2575pt
+<images/pathiterators/examples-Greedy DFS-2.png, id=242, 604.2575pt x 604.2575pt
 >
 File: images/pathiterators/examples-Greedy DFS-2.png Graphic file (type png)
 <use images/pathiterators/examples-Greedy DFS-2.png>
@@ -2248,7 +2015,7 @@ File: images/pathiterators/examples-Greedy DFS-1.png Graphic file (type png)
 Package luatex.def Info: images/pathiterators/examples-Greedy DFS-1.png  used on
  input line 74.
 (luatex.def)             Requested size: 187.90271pt x 187.89876pt.
-<images/pathiterators/examples-Greedy DFS-reflongerpaths.png, id=236, 605.26125p
+<images/pathiterators/examples-Greedy DFS-reflongerpaths.png, id=243, 605.26125p
 t x 605.26125pt>
 File: images/pathiterators/examples-Greedy DFS-reflongerpaths.png Graphic file (
 type png)
@@ -2261,14 +2028,14 @@ Overfull \hbox (2.22264pt too wide) in paragraph at lines 72--82
 []$[]$ $[]$ 
  []
 
-<images/pathiterators/examples-Control point-1.png, id=237, 604.2575pt x 604.257
+<images/pathiterators/examples-Control point-1.png, id=244, 604.2575pt x 604.257
 5pt>
 File: images/pathiterators/examples-Control point-1.png Graphic file (type png)
 <use images/pathiterators/examples-Control point-1.png>
 Package luatex.def Info: images/pathiterators/examples-Control point-1.png  used
  on input line 93.
 (luatex.def)             Requested size: 187.90271pt x 187.89876pt.
-<images/pathiterators/examples-Control point-2.png, id=238, 604.2575pt x 604.257
+<images/pathiterators/examples-Control point-2.png, id=245, 604.2575pt x 604.257
 5pt>
 File: images/pathiterators/examples-Control point-2.png Graphic file (type png)
 <use images/pathiterators/examples-Control point-2.png>
@@ -2280,37 +2047,28 @@ Overfull \hbox (2.22264pt too wide) in paragraph at lines 90--102
 []$[]$ $[]$ 
  []
 
-) [51
+) [53
 
 
 <./images/pathiterators/examples-kpath-1.png><./images/pathiterators/examples-kp
-ath-2.png>] [52<./images/pathiterators/examples-DFS-1.png><./images/pathiterator
+ath-2.png>] [54<./images/pathiterators/examples-DFS-1.png><./images/pathiterator
 s/examples-DFS-2.png><./images/pathiterators/examples-DFS-1-RLP.png><./images/pa
-thiterators/examples-DFS-2-RLP.png>] [53<./images/pathiterators/examples-Greedy 
+thiterators/examples-DFS-2-RLP.png>] [55<./images/pathiterators/examples-Greedy 
 DFS-1.png><./images/pathiterators/examples-Greedy DFS-2.png><./images/pathiterat
-ors/examples-Greedy DFS-reflongerpaths.png>] [54<./images/pathiterators/examples
+ors/examples-Greedy DFS-reflongerpaths.png>] [56<./images/pathiterators/examples
 -Control point-1.png><./images/pathiterators/examples-Control point-2.png>]
 \openout2 = appendices/proofs/ContractionTransitive.aux
  (./
 appendices/proofs/ContractionTransitive.tex
-Overfull \hbox (24.02412pt too wide) in paragraph at lines 7--8
-\TU/Arial(0)/m/n/12 since labels of remaining vertices are preserved through con
-traction, we have $\OMS/cmsy/m/n/12 8\OML/cmm/m/it/12 v \OMS/cmsy/m/n/12 2 \OML
-/cmm/m/it/12 V[]:L[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 v\OT1/cmr/m/n/12 ) =
- []
-
-
-Overfull \hbox (7.46707pt too wide) in paragraph at lines 7--8
+Overfull \hbox (15.03531pt too wide) in paragraph at lines 7--8
+\OML/cmm/m/it/12 V[]:L[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 v\OT1/cmr/m/n/12 ) = 
 \OML/cmm/m/it/12 L[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 M[]\OT1/cmr/m/n/12 (\OML/
-cmm/m/it/12 v\OT1/cmr/m/n/12 ))$\TU/Arial(0)/m/n/12 . Therefore, it holds that: $\OMS/cmsy/m/n/12 8\OML/cmm/m/it/12 u \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 V[]:L[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 u\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12  \OML/cmm/m/it/12 L[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 M[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 M[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 u\OT1/cmr/m/n/12 )))$\TU/Arial(0)/m/n/12 . Therefore,
- []
-
-
-Overfull \hbox (6.87764pt too wide) in paragraph at lines 9--10
-\TU/Arial(0)/m/n/12 vertex disjoint subgraph homeomorphism that $\OMS/cmsy/m/n/
-12 8\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 u[]; u[]\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/1
-2 2 \OML/cmm/m/it/12 E[]:\OMS/cmsy/m/n/12 9\OML/cmm/m/it/12 p \OMS/cmsy/m/n/12 
-2 \OML/cmm/m/it/12 values\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 M[]\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 :first\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 p\OT1/cmr/m/n/12 ) =
+cmm/m/it/12 v\OT1/cmr/m/n/12 ))$\TU/Arial(0)/m/n/12 . There-fore, it holds that:
+ $\OMS/cmsy/m/n/12 8\OML/cmm/m/it/12 u \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 V[]:L
+[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 u\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12  \OML/
+cmm/m/it/12 L[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 M[]\OT1/cmr/m/n/12 (\OML/cmm/m
+/it/12 M[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 u\OT1/cmr/m/n/12 )))$\TU/Arial(0)/m
+/n/12 .
  []
 
 
@@ -2325,90 +2083,19 @@ mr/m/n/12 ) \OMS/cmsy/m/n/12 ^ \OML/cmm/m/it/12 last\OT1/cmr/m/n/12 (\OML/cmm/m
 12 u[]\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^ \OT1/cmr/m/n/12 ((\OML/cmm/m/it/12 u[]; u[]\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 ; p\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 2
  []
 
-[55
-
-
-]) [56]
-Overfull \hbox (1.99345pt too wide) in paragraph at lines 39--39
-\TU/Arial(0)/m/n/10 Isomorphism Search in Large Graph. In: 2019 11th Internation
-al Conference on Communication Systems
- []
-
-
-Overfull \hbox (15.91794pt too wide) in paragraph at lines 39--39
-[]\TU/Arial(0)/m/n/10 Benz, F., Seffrin, A., and Huss, S.A.: Bil: A tool-chain 
-for bitstream reverse-engineering. In: 22nd International
- []
-
-
-Overfull \hbox (26.25778pt too wide) in paragraph at lines 39--39
-\TU/Arial(0)/m/n/10 Algorithm for GPUs. In: Proceedings - 2018 IEEE Internationa
-l Conference on Bioinformatics and Biomedicine,
- []
-
 [57
 
 
-]
-Overfull \hbox (19.96704pt too wide) in paragraph at lines 39--39
-[]\TU/Arial(0)/m/n/10 Han, W.[]S., Lee, J., and Lee, J.[]H.: Turbo<inf>ISO</inf>
-: Towards ultrafast and robust subgraph isomorphism
+]) [58]
+Overfull \hbox (6.24313pt too wide) in paragraph at lines 42--42
+\TU/Arial(0)/m/n/10 rithm for GPUs. In: Pro-ceed-ings - 2018 IEEE In-ter-na-tion
+al Con-fer-ence on Bioin-for-mat-ics and Biomedicine,
  []
 
-
-Overfull \hbox (24.79059pt too wide) in paragraph at lines 39--39
-[]\TU/Arial(0)/m/n/10 Hauck, S., and DeHon, A.: Reconfigurable Computing: The Th
-eory and Practice of FPGA-Based Computation.
- []
+[59
 
 
-Overfull \hbox (10.67041pt too wide) in paragraph at lines 39--39
-[]\TU/Arial(0)/m/n/10 Ikram, J., and Mohsen, M.: FPGA Implementation of a Quantu
-m Cryptography Algorithm. Smart Innovation,
- []
-
-
-Overfull \hbox (13.28598pt too wide) in paragraph at lines 39--39
-[]\TU/Arial(0)/m/n/10 Kanazawa, K., and Maruyama, T.: An approach for solving la
-rge SAT problems on FPGA. ACM Transactions
- []
-
-
-Overfull \hbox (16.43752pt too wide) in paragraph at lines 39--39
-[]\TU/Arial(0)/m/n/10 McCreesh, C., and Prosser, P.: A parallel, backjumping sub
-graph isomorphism algorithm using supplemental
- []
-
-[58]
-Overfull \hbox (22.52008pt too wide) in paragraph at lines 39--39
-[]\TU/Arial(0)/m/n/10 Nawari, M., Ahmed, H., Hamid, A., and Elkhidir, M.: FPGA 
-based implementation of elliptic curve cryptography.
- []
-
-
-Overfull \hbox (14.75827pt too wide) in paragraph at lines 39--39
-\TU/Arial(0)/m/n/10 H., Engels, G., Kreowski, H.[]J., and Rozenberg, G.  (eds.) Theory and Application of Graph Transformations,
- []
-
-
-Overfull \hbox (28.09232pt too wide) in paragraph at lines 39--39
-[]\TU/Arial(0)/m/n/10 Zampelli, S., Deville, Y., and Solnon, C.: Solving subgrap
-h isomorphism problems with constraint programming.
- []
-
-
-Overfull \hbox (0.70761pt too wide) in paragraph at lines 39--39
-[]\TU/Arial(0)/m/n/10 Zhang, S., Li, S., and Yang, J.: GADDI: Distance Index Bas
-ed Subgraph Matching in Biological Networks.
- []
-
-
-Overfull \hbox (8.83455pt too wide) in paragraph at lines 39--39
-\TU/Arial(0)/m/n/10 subgraph isomorphism mappings in large graphs. Lecture Notes
- in Computer Science (including subseries
- []
-
-[59] [60] (./Thesis.aux (./sections/Titlepage/Title.aux)
+] [60] [61] [62] (./Thesis.aux (./sections/Titlepage/Title.aux)
 (./sections/Introduction/Introduction.aux)
 (./sections/Background/Background.aux) (./sections/Objectives/Objectives.aux)
 (./sections/Models/Models.aux) (./sections/Algorithm/Algorithm.aux)
@@ -2436,16 +2123,16 @@ Package logreq Info: Writing requests to 'Thesis.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 44064 strings out of 481316
- 195594,1977958 words of node,token memory allocated
- 1573 words of node memory still in use:
-   22 hlist, 2 vlist, 10 rule, 18 glue, 4 kern, 1 glyph, 75 attribute, 126 glue_
+ 44321 strings out of 481302
+ 244499,2373549 words of node,token memory allocated
+ 1578 words of node memory still in use:
+   22 hlist, 2 vlist, 10 rule, 18 glue, 4 kern, 1 glyph, 75 attribute, 127 glue_
 spec, 75 attribute_list, 2 write, 16 pdf_literal, 16 pdf_colorstack nodes
-   avail lists: 1:9,2:15795,3:4408,4:213,5:252,6:91,7:11961,8:85,9:2748,10:16,11
-:33
- 59246 multiletter control sequences out of 65536+200000
+   avail lists: 1:10,2:24197,3:7340,4:339,5:251,6:95,7:15069,8:83,9:3362,10:23,1
+1:566
+ 59498 multiletter control sequences out of 65536+200000
  102 fonts using 25581931 bytes
- 73i,19n,107p,1773b,2300s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 73i,19n,107p,1775b,2300s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/share/miktex-texmf/fonts/opentype/public/lm/lmmono10-regular.otf></u
 sr/local/share/miktex-texmf/fonts/opentype/public/lm/lmmono12-regular.otf><./ari
 alnarrowbd.ttf></home/pim/.local/share/fonts/ariali.ttf><./arialnarrow.ttf></hom
@@ -2460,10 +2147,11 @@ c/amsfonts/cm/cmr12.pfb></usr/local/share/miktex-texmf/fonts/type1/public/amsfon
 ts/cm/cmr7.pfb></usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmr
 8.pfb></usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
 /usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/loc
-al/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on Thesis.pdf (62 pages, 1557043 bytes).
+al/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/share
+/miktex-texmf/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Thesis.pdf (64 pages, 1605579 bytes).
 
-PDF statistics: 361 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 371 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  176 words of extra memory for PDF output out of 10000 (max. 100000000)
 

@@ -26,7 +26,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.5}Graph theory}{12}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.1}Literature}{13}%
+\contentsline {subsection}{\numberline {2.5.1}Literature}{14}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{Subgraph isomorhism}{14}%
 \defcounter {refsection}{0}\relax 
@@ -86,16 +86,16 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {8}Performance experiments}{38}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {9}Conclusion}{45}%
+\contentsline {chapter}{\numberline {9}Conclusion}{47}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {10}Discussion}{46}%
+\contentsline {chapter}{\numberline {10}Discussion}{48}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {11}Future Research}{47}%
+\contentsline {chapter}{\numberline {11}Future Research}{49}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendices}{48}%
+\contentsline {chapter}{Appendices}{50}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.1}History of subgraph isomorphism algorithms}{49}%
+\contentsline {section}{\numberline {.1}History of subgraph isomorphism algorithms}{51}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.2}Examples of path iterators}{51}%
+\contentsline {section}{\numberline {.2}Examples of path iterators}{53}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.3}Proof: contraction preserves verted disjoint subgraph homeomorphism}{55}%
+\contentsline {section}{\numberline {.3}Proof: contraction preserves verted disjoint subgraph homeomorphism}{57}%

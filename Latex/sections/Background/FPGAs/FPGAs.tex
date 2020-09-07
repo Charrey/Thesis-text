@@ -301,7 +301,7 @@ The software then needs to translate this abstract description to a \textbf{netl
 
 The next step in the compilation process is \textbf{placement}. The software maps each LUT, register, and other components to a physical place on the FPGA. The software can place components closer together to optimize the speed or can place components further apart to increase the probability routes can be found. Finding the optimal placement for speed is a proven NP-hard problem.
 
-The last step in the compilation process is \textbf{routing}. State-of-the-art FPGA compilation pipelines perform this step sequentially after placement\cite{alhyari2019}. With the components locked in place, the software attempts to find a configuration of routing switches such that each connection that the synthesis requires is made. Finding the optimal routes for speed is an NP-hard problem while finding any matching routing configuration is an NP problem.
+The last step in the compilation process is \textbf{routing}. State-of-the-art FPGA compilation pipelines perform this step sequentially after placement\cite{alhyari2019}. With the components locked in place, the software attempts to find a configuration of routing switches such that each connection that the synthesis requires is made. Finding the optimal routes for speed is an NP-hard problem while finding any matching routing configuration is an NP problem. Both can be reducted to the problem of fixed-vertex subgraph homeomorphism of which the optimisation variant needs to explore the entire search tree, which \cite{ExactComplexity} showed can be computed in $O(2^{|T|-|S|}n^{O(1)})$ for the general case. However, routing algorithms are often made for specific FPGA architectures, allowing for better heuristics and thus performance.
 
 \begin{minipage}{\textwidth}
 \begin{important}
@@ -390,9 +390,9 @@ Much literature exists on FPGA synthesis. The proposed research resembles logic 
 \label{sec:simulation}
 In this research, we will not be implementing FPGA simulation. However, for clarity, we will explain what we mean with simulation. Imagine a software engineer wants to execute a program $P$. Conventionally, they would program $P$ in an HDL, compile it to an FPGA configuration file and load it onto the hardware.
 
-To instead simulate the synthesized program, the engineer can also program a generic FPGA environment in an HDL, compile it to an FPGA configuration file and load it onto the hardware. They can afterwards provide $P$ as \textit{input} to the program instead of using $P$ \textit{as} a program. A simulation of a single LUT is shown in Figure \ref{fig:simulation}.
+To instead simulate the synthesized program, the engineer can also program a generic FPGA environment in an HDL, compile it to an FPGA configuration file and load it onto the hardware. They can afterwards provide $P$ as \textit{input} to the program instead of using $P$ \textit{as} a program. This way, the \texit{static} configuration of the virtual FPGA uses the \textit{dynamic} resources (e.g. RAM and registers) of the concrete FPGA. A simulation of a single LUT is shown in Figure \ref{fig:simulation}.
 
-Although engineers could use simulation to execute FPGA programs on FPGA hardware that the FPGA software was not compiled for, it introduces a considerable delay in execution. After all, many more components on the FPGA need to be used in the execution of the same program.	
+Although engineers could use simulation to execute FPGA programs on FPGA hardware that the FPGA software was not compiled for, it introduces a considerable delay in execution. After all, many more dynamic components on the FPGA need to be used to store and execute the configuration of the same program.	
 
 \begin{figure}
     \centering
@@ -444,7 +444,6 @@ Although engineers could use simulation to execute FPGA programs on FPGA hardwar
     \draw[draw=white] (10.5,0)           node[anchor=south] {$y_3 0$};
     \draw[draw=white] (10.5,-0.5)         node[anchor=south] {$y_2 0$};
     \draw[draw=white] (10.5,-1)           node[anchor=south] {$y_3 0$};
-    
     
     \draw[vecArrow] (5.5,1) -- (6.5,1);
 
