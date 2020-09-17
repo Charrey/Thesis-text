@@ -390,7 +390,7 @@ Much literature exists on FPGA synthesis. The proposed research resembles logic 
 \label{sec:simulation}
 In this research, we will not be implementing FPGA simulation. However, for clarity, we will explain what we mean with simulation. Imagine a software engineer wants to execute a program $P$. Conventionally, they would program $P$ in an HDL, compile it to an FPGA configuration file and load it onto the hardware.
 
-To instead simulate the synthesized program, the engineer can also program a generic FPGA environment in an HDL, compile it to an FPGA configuration file and load it onto the hardware. They can afterwards provide $P$ as \textit{input} to the program instead of using $P$ \textit{as} a program. This way, the \texit{static} configuration of the virtual FPGA uses the \textit{dynamic} resources (e.g. RAM and registers) of the concrete FPGA. A simulation of a single LUT is shown in Figure \ref{fig:simulation}.
+To instead simulate the synthesized program, the engineer can also program a generic FPGA environment in an HDL, compile it to an FPGA configuration file and load it onto the hardware. They can afterwards provide $P$ as \textit{input} to the program instead of using $P$ \textit{as} a program. This way, the \textit{static} configuration of the virtual FPGA uses the \textit{dynamic} resources (e.g. RAM and registers) of the concrete FPGA. A simulation of a single LUT is shown in Figure \ref{fig:simulation}.
 
 Although engineers could use simulation to execute FPGA programs on FPGA hardware that the FPGA software was not compiled for, it introduces a considerable delay in execution. After all, many more dynamic components on the FPGA need to be used to store and execute the configuration of the same program.	
 

@@ -828,6 +828,38 @@ Firstly, we compare the different methods of path iteration. The time taken to e
     \label{fig:contractionsmall}
 \end{figure}
 
+%cached zero domain (no labels) times \ref{fig:contractionsmall} timeout 30m
+\begin{figure}
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        xlabel=$|V_S|$,
+        ylabel=$seconds$,
+        ymin=-100,
+        ymax=100,
+        xmin=4,
+        xmax=18.5,
+        legend style={at={(0.9,0.1)},anchor=south east},
+        width=\textwidth,
+        yticklabel={$\pgfmathprintnumber{\tick}\%$},
+    ]
+
+\addplot [mark=none, black] plot coordinates {
+        (4,0) (18.5, 0)};
+\addlegendentry{No contraction}
+
+
+
+
+
+
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Relative time consumption of contraction-enabled subgraph homeomorphism search compared to contraction-disabled for different path iteration methods.}
+    \label{fig:contractionsmall}
+\end{figure}
+
+
 
 
 
