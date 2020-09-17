@@ -1,0 +1,4 @@
+[diff]
+  tool = meld
+[difftool "meld"]
+  cmd = \"D:\\Meld\\Meld.exe\" "$LOCAL" "$REMOTE"
