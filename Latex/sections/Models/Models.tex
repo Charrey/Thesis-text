@@ -1,20 +1,7 @@
 \chapter{Models}
 \label{sec:models}
-Our algorithm will generate an emulation using vertex disjoint subgraph homeomorphism. For this purpose, we will use vertex-multilabeled directed simple graphs as defined in Definition \ref{def:graph}. In this model, we chose to use a single vertex for a unit that can be either a lut or a logic cell instead of different vertices for each. This is because for our ECP5 use case, we only encounter such logical units with `flexible' functionality. In these graphs we will:
+Our algorithm will generate an emulation using vertex disjoint subgraph homeomorphism. To do this, we model both the virtual and concrete FPGA as vertex-multilabeled directed graphs as defined in Definition \ref{def:graph}. This section specifies this process.
 
-\begin{itemize}
-\item ..model a wire as a vertex that may be connected with any number of vertices in either direction of types ``$\mathit{arc}$", any number of incoming edges from ``$\mathit{port\_out}$" vertices and any number of outgoing edges to ``$\mathit{port\_in}$" edges.
-\item ..model a transistor as a vertex with a label ``$\mathit{arc}$" and a label ``$\mathit{configurable}$" for configurable transistors or label ``$\mathit{unconfigurable}$" for unconfigurable transistors (that are not counted towards label compatibility). It has an incoming edge from the source ``$\mathit{wire}$" of the transistor and an outgoing edge to the target ``$\mathit{wire}$" of the transistor. For the FPGA use case, we require the configurability label for a correct emulation: while a subgraph homeomorphism may be found without these labels, it does not take into account unintended electrical current transfer through transistors that cannot be `switched off'. Correctly applying these labels avoids subgraph homeomorphisms with unconfigurable transistors carrying currents between mapped components in the target graph that are not part of the mapping itself (i.e. unintended).
-\item ..model a logical unit with LUT- and register functionality as a vertex with label $``\mathit{slice}"$ that only has connections from vertices with label ``$\mathit{port\_in}$" and to vertices with label ``$\mathit{port\_out}$".
-\item ..model an input of a logical unit as a vertex with label ``$\mathit{port\_in}$" and an outgoing directed edge towards a ``$\mathit{slice}$" vertex and an incoming edge from a ``$\mathit{wire}$" vertex.
-\item ..model an output of a logical unit as a vertex with label ``$\mathit{port\_out}$" and an incoming directed edge from a ``$\mathit{slice}$" vertex and an outgoing edge to a ``$\mathit{wire}$" vertex.
-\end{itemize}
+In short, we model each logic cell and each wire and transistor that are not part of a logic cell as vertices, and add an extra vertex for each input- and output of logic cells. The edges between the vertices denote either the direction of a transistor (if connecting a transistor and a wire) or the data flow of a logic cell (if connecting a wire with an in/output or an in/output with a logic cell).
 
-For the scope of this research, we omit specifying the functionality of each port from this model. An example of such am model is shown in Figure \ref{fig:graphmodel-logiccell} where a graph model is shown of the logic cell in Figure \ref{fig:logiccell}.
-
-\begin{figure}
-\centering
-\includegraphics[width=0.5\textwidth]{images/modelOfCell.png}
-\caption{Graph model of the logic cell shown in Figure \ref{fig:logiccell}}
-\label{fig:graphmodel-logiccell}
-\end{figure}
+We label each wire vertex with the label \texttt{WIRE}, each transistor with the label \texttt{ARC}, each logic cell with the label \texttt{SLICE} and each in/output with the label \texttt{PORT}. Furthermore, we add the label \texttt{CE} to an input that enables writing data to the register of the logic cell. Lastly, we add the label \texttt{UNCONFIGURABLE} to transistors that are always enabled and not configurable by the FPGA configurator. We use these labels to to avoid unintended electrical current flow between parts in the concrete FPGA.

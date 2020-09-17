@@ -126,12 +126,14 @@ The algorithm as specified in Xiao's paper leaves out some specific ordering det
 There are different ways to choose which vertex-vertex pair to add to the partial mapping first, and which only to try after other attempts have failed. These methods can be divided into three categories:
 
 \begin{enumerate}
-\item Choose a source graph vertex first, then attempt all target graph vertex candidates.
-\item Choose a target graph vertex first, then attempt all source graph vertex candidates.
+\item Choose a source graph vertex first using some heuristic, then attempt all target graph vertex candidates using another heuristic.
+\item Choose a target graph vertex first using some heuristic, then attempt all source graph vertex candidates using another heuristic.
 \item Choose a source vertex-target vertex with high heuristic first, then attempt all other pairs.
 \end{enumerate}
 
-While the strategy used does not affect the vertex-on-vertex mapping state space, it can affect the average-case performance. Strategy 3, for example, allows more flexibility and thus more powerful heuristics (if you have them). The disadvantage of it is that it requires $O(|V_s|*|V_t|)$ heuristic computations at each step in the search process. While caching can avoid recomputation after backtracking, this introduces quadratic space cost. Strategies 1 and 2 require no such calculations, and we are not aware of evidence that one strategy is more effective than the other. Since we are not aware of any subgraph isomorphism algorithm using strategy 2 and we would like to keep research separate, we omit investigating the benefits and disadvantages of strategy 2 for future research and use strategy 1.
+While the strategy used does not affect the vertex-on-vertex mapping state space, it can affect the average-case performance. Strategy 3, for example, uses combined heurstics that may be more powerful. The disadvantage of it requires $O(|V_s|*|V_t|)$ heuristic computations before the first pair is obtained. If these computations are done beforehand the heuristic cannot take the current partial mapping into account and is likely to be weak. Is this computation is done at each step in the search process, it introduces considerable delay.
+
+Strategies 1 and 2, on the other hand, require only $O(|V_s|+|V_t|)$ heuristic calculations to be made before obtaining a candidate pair. We choose a source graph vertex heuristic that is precomputed and provide 2 heuristics for target graph vertices, one of which is precomputed and one of which is calculated run-time.
 
 \section{Source graph vertex order}
 \label{sec:sourceOrder}
@@ -144,14 +146,14 @@ To describe the ordering process of RI-DS, let us provide a few definitions:
 \begin{defn}[predecessors and successors]
 Given two graphs $G=(V, E, L)$ and some vertex $v \in V$, their predecessors and successors are defined as follows:
 
-$succ(v) := {v' \in V . (v, v') \in E}$
+$\mathit{succ}(v) := {v' \in V . (v, v') \in E}$
 
-$pred(v) := {v' \in V . (v', v) \in E}$
+$\mathit{pred}(v) := {v' \in V . (v', v) \in E}$
  
 \end{defn}
 
 \begin{defn}[neighbour set]
-If some $v\in V$, then $neighbours(v):= succ(v) \cup pred(v)$.
+If some $v\in V$, then $\mathit{neighbours}(v):= \mathit{succ}(v) \cup \mathit{pred}(v)$.
 \end{defn}
 
 %\begin{defn}[E for sets of vertices]
@@ -167,13 +169,13 @@ The result of this ordering is that consequent vertices have many edges with ver
 
 The target graph vertex order is the order in which target graph vertices are added to the partial mapping. For example, if $t_1 \prec t_2$ in this ordering, then a pair with $t_2$ and some source graph vertex $s_x$ will only be added to the partial mapping if the pair $(s_x, t_1)$ was already proved unfeasible. Xiao does not describe a specific target graph vertex order.
 
-We found one subgraph isomorphism algorithm that describes a specific target graph vertex order, being Glasgow\cite{McCreesh2015}. In this algorithm, target graph vertices with higher degree are prioritized (without regard for which source graph vertex it is paired with) Formally, when some source graph vertex $s$ needs to be matched, $x$ are chosen using the following metric, choosing vertices with lower metric values first:
+We found one subgraph isomorphism algorithm that describes a specific target graph vertex order, being Glasgow\cite{McCreesh2015}. In this algorithm, target graph vertices with higher degree are prioritized. Since this does not depend on the chosen source graph vertex or on the current partial matching, this order can be precomputed, introducing only linear complexity. Formally, when some source graph vertex $s$ needs to be matched, $x$ are chosen using the following metric, choosing vertices with lower metric values first:
 
 $$\mathit{metric}_\mathit{degree}(s, t)=-|\mathit{neighbours}(t)|$$
 
-Another option is to take distance into account. Using a degree-based or random target graph vertex order will result in consectively chosen target graph vertices being spread roughly evenly throughout graph. Since we optimise our algorithm for large target graphs, chosen vertices at arbitrary locations will likely result in long paths necessary to reach them, and thus in unneccessary resource usage. However, we can use information from the current partial mapping to obtain better candidates: since we know which edges will be mapped after this vertex-vertex pair, we can choose our target vertex such that the paths associated with these edges are as short as possible.
+Another option is to take the current partial mapping into account. Using a degree-based or random target graph vertex order will result in consectively chosen target graph vertices being spread roughly evenly throughout graph. Since we optimise our algorithm for large target graphs, chosen vertices at arbitrary locations will likely result in long paths necessary to reach them, and thus in unneccessary resource usage. However, we can use information from the current partial mapping to obtain better candidates: since we know the chosen source graph vertex and thus which edges will be mapped after this vertex-vertex pair, we can choose our target vertex such that the paths associated with these edges are as short as possible.
 
-Whenever we need to match some source graph vertex $s_x$, This distance-based method will choose target vertices first that have the lowest distance to the source graph vertex' neighbours that are already in the partial matching. The result is that it earlier chosen vertices require fewer number of vertices to be used as intermediate vertex in one or more paths. The disadvantage of this method is that it requires runtime usage of a computionally expensive shortest path algorithm to choose a target graph vertex candidate. Formally, when some source graph vertex $s_x$ needs to be matched, $t_x$ are chosen using the following metric, choosing vertices with lower metric values first:
+Whenever we need to match some source graph vertex $s_x$, This distance-based method will choose target vertices first that have the lowest distance to the source graph vertex' neighbours that are already in the partial matching. The result is that fewer number of vertices need to be used as intermediate vertex in the paths associated with the edges to those neighbours. The disadvantage of this method is that it requires runtime usage of a computionally expensive shortest path algorithm to choose a target graph vertex candidate. The shortest path algorithm can be cached, which reduces the number of computations needed after backtracking but introduces quadratic\footnote{$O(|V_s|*|V_t|)$} space usage (we implement this with- and without caching). Formally, when some source graph vertex $s_x$ needs to be matched, $t_x$ are chosen using the following metric, choosing vertices with lower metric values first:
 
 
 $$\mathit{metric}_\mathit{distance}(s, t)=\sum_{s' \in E(s)} \begin{cases}

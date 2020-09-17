@@ -34,70 +34,70 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Objectives}{18}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Models}{20}%
+\contentsline {chapter}{\numberline {4}Models}{19}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Algorithm}{22}%
+\contentsline {chapter}{\numberline {5}Algorithm}{20}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Baseline: ndSHD2}{22}%
+\contentsline {section}{\numberline {5.1}Baseline: ndSHD2}{20}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}How to choose vertex-vertex pairs}{24}%
+\contentsline {section}{\numberline {5.2}How to choose vertex-vertex pairs}{22}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Source graph vertex order}{24}%
+\contentsline {section}{\numberline {5.3}Source graph vertex order}{22}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Target graph vertex order}{25}%
+\contentsline {section}{\numberline {5.4}Target graph vertex order}{23}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.5}Path iteration}{26}%
+\contentsline {section}{\numberline {5.5}Path iteration}{25}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.6}Optimisations}{27}%
+\contentsline {section}{\numberline {5.6}Optimisations}{26}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.6.1}Refusing long paths}{27}%
+\contentsline {subsection}{\numberline {5.6.1}Refusing long paths}{26}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.6.2}Runtime Pruning}{28}%
+\contentsline {subsection}{\numberline {5.6.2}Runtime Pruning}{26}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.6.3}Contraction}{28}%
+\contentsline {subsection}{\numberline {5.6.3}Contraction}{26}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Contraction for undirected graphs}{29}%
+\contentsline {subsubsection}{Contraction for undirected graphs}{27}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Pruning}{31}%
+\contentsline {chapter}{\numberline {6}Pruning}{29}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Domain filtering}{32}%
+\contentsline {section}{\numberline {6.1}Domain filtering}{30}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.1}Labels and neighbours}{32}%
+\contentsline {subsection}{\numberline {6.1.1}Labels and neighbours}{30}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.2}Free neighbours}{32}%
+\contentsline {subsection}{\numberline {6.1.2}Free neighbours}{30}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.3}Reachability of matched vertices (M-filtering)}{33}%
+\contentsline {subsection}{\numberline {6.1.3}Reachability of matched vertices (M-filtering)}{31}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.4}Reachability of neighbourhood \hspace {12pt}(N-filtering)}{33}%
+\contentsline {subsection}{\numberline {6.1.4}Reachability of neighbourhood \hspace {12pt}(N-filtering)}{31}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Pruning methods}{34}%
+\contentsline {section}{\numberline {6.2}Pruning methods}{32}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.1}ZeroDomain pruning}{34}%
+\contentsline {subsection}{\numberline {6.2.1}ZeroDomain pruning}{32}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.2}AllDifferent pruning}{35}%
+\contentsline {subsection}{\numberline {6.2.2}AllDifferent pruning}{33}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}When to apply}{35}%
+\contentsline {section}{\numberline {6.3}When to apply}{33}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.1}Runtime calculation}{35}%
+\contentsline {subsection}{\numberline {6.3.1}Runtime calculation}{33}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.2}Caching domains - incremental domain calculation}{35}%
+\contentsline {subsection}{\numberline {6.3.2}Caching domains - incremental domain calculation}{33}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.3}Parallel calculation}{36}%
+\contentsline {subsection}{\numberline {6.3.3}Parallel calculation}{34}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Use case: Lattic ECP5}{37}%
+\contentsline {chapter}{\numberline {7}Use case: Lattic ECP5}{35}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {8}Performance experiments}{39}%
+\contentsline {chapter}{\numberline {8}Performance experiments}{37}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {9}Conclusion}{49}%
+\contentsline {chapter}{\numberline {9}Conclusion}{47}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {10}Discussion}{50}%
+\contentsline {chapter}{\numberline {10}Discussion}{48}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {11}Future Research}{51}%
+\contentsline {chapter}{\numberline {11}Future Research}{49}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendices}{52}%
+\contentsline {chapter}{Appendices}{50}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.1}History of subgraph isomorphism algorithms}{53}%
+\contentsline {section}{\numberline {.1}History of subgraph isomorphism algorithms}{51}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.2}Examples of path iterators}{55}%
+\contentsline {section}{\numberline {.2}Examples of path iterators}{53}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.3}Proof: contraction preserves verted disjoint subgraph homeomorphism}{59}%
+\contentsline {section}{\numberline {.3}Proof: contraction preserves verted disjoint subgraph homeomorphism}{57}%
