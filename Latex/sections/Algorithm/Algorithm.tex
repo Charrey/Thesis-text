@@ -82,9 +82,9 @@
 
 
 \section{Baseline: ndSHD2}
-In our research we will extend existing work on node disjoint subgraph isomorphism. In the literature we found two existing concrete algorithms: Xiao's algorithm `ndSHD2'\cite{XIAONODEDISJOINT} and Lingas algorithm\cite{LINGAS2009464}. We choose to adapt Xiao's algorithm ndSHD2 as baseline over Lingas because it is easier to understand (thus easier to improve, saving valuable research time) and includes methods for vertex-on-vertex mapping. In comparison, Lingas' algorithm suggests attempting their edge-path mapping strategy on every possible vertex-on-vertex mapping. We will adapt Xiao's algorithm to compute paths on-the-fly instead of beforehand to avoid the exponential space requirement.
+In our research we will extend existing work on node disjoint subgraph isomorphism. In the literature we found two existing well-defined algorithms: Xiao's algorithm `ndSHD2'\cite{XIAONODEDISJOINT} and Lingas algorithm\cite{LINGAS2009464}. We choose to adapt Xiao's algorithm ndSHD2 as baseline over Lingas because it is easier to understand (thus easier to improve, saving valuable research time) and includes methods for vertex-on-vertex mapping. In comparison, Lingas' algorithm suggests attempting their edge-path mapping strategy on every possible vertex-on-vertex mapping. We will adapt Xiao's algorithm to compute paths on-the-fly instead of beforehand to avoid the exponential space requirement.
 
-To understand ndSHD2 better, let us first examine what the output is supposed to be. The algorithm should, given two graphs, not just indicate whether the latter graph is a subgraph homeomorphism of the former, but also indicate what subgraph homeomorphism that is. More formally, we need to solve the \textit{certification} problem rather than the \textit{decision} problem. This certification indicates to which target graph vertex each source graph vertex is mapped and to which target graph path each source graph edge is mapped such that the entire mapped source graph is a subgraph of the target graph. This is what we will from now on refer to as the \textbf{mapping}.
+To understand ndSHD2 better, let us first examine what the output is supposed to be. The algorithm should, given two graphs, not just indicate whether the latter graph has a subgraph homeomorphism of the former, but also indicate what subgraph homeomorphism that is. More formally, we need to solve the \textit{certification} problem rather than the \textit{decision} problem. This certification indicates to which target graph vertex each source graph vertex is mapped and to which target graph path each source graph edge is mapped such that the entire mapped source graph is a subgraph of the target graph. This is what we will from now on refer to as the \textbf{mapping}.
 
 \begin{algorithm}[H]
 \SetAlgoLined
@@ -96,19 +96,18 @@ To understand ndSHD2 better, let us first examine what the output is supposed to
 	\Return true\;
 }
 
-$found \longleftarrow false$
+$\mathit{found} \longleftarrow \mathit{false}$
 
- initialization\;
- \While{$!found \land \exists$ valid node/edge-path mapping pair}{
-  $m \longleftarrow GetNextNodePair()$\tcp*[h]{$m \longleftarrow GetNextEdgePathPair()$}\;
-  $s' \longleftarrow BackupState(s)$\; 
-  $NodeMap_s \longleftarrow NodeMap_s \cup \{m\}$\tcp*[h]{$EdegePathMap_s \longleftarrow EdgePathMap_s \cup \{m\}$}\;
-  $Refine(M, R)$\;
-  $found \longleftarrow ndSHD2(s, M, R)$\;
+ \While{$!\mathit{found} \land \exists$ valid node/edge-path mapping pair}{
+  $m \longleftarrow \mathit{GetNextNodePair}()$\tcp*[h]{$m \longleftarrow \mathit{GetNextEdgePathPair}()$}\;
+  $s' \longleftarrow \mathit{BackupState}(s)$\; 
+  $\mathit{NodeMap}_s \longleftarrow \mathit{NodeMap}_s \cup \{m\}$\tcp*[h]{$\mathit{EdgePathMap}_s \longleftarrow \mathit{EdgePathMap}_s \cup \{m\}$}\;
+  $\mathit{Refine(M, R)}$\;
+  $\mathit{found} \longleftarrow \mathit{ndSHD2}(s, M, R)$\;
   \If{found} {
   	\Return true\;
   }
-  $s \longleftarrow RecoverState(s')$\;
+  $s \longleftarrow \mathit{RecoverState}(s')$\;
  }
  \Return false\;
  \caption{ndSHD2}
@@ -122,6 +121,17 @@ In our literature study, we found that the core of many subgraph isomorphism alg
 The algorithm starts with an empty partial mapping, and starts mapping source graph vertices to target graph vertices. Whenever both vertices of a source graph edge has been matched, the algorithm finds a random path between the mapped edge source and target in the target graph. The algorithm prioritizes extending the matching with an edge-path pair over extending it with a vertex-vertex pair. Whenever no such path or vertex exists, the algorithm undoes (backtracks) the last matching step taken and tries a different alternative. Whenever a partial match is extended with a vertex-vertex pair or with an edge-path pair the search space is refined using a pruning strategy implemented by the $Refine(M,R)$ call. This method filters out future path candidates from a path storage that have an already mapped target graph vertex as intermediate vertex. This way, the resulting mapping is guaranteed to be vertex disjoint.
 
 The algorithm as specified in Xiao's paper leaves out some specific ordering details- we will assume that they used random ordering. We specify which vertex order we use in Sections \ref{sec:sourceOrder}, \ref{sec:targetOrder}. We will explain what order of paths we use in Section \ref{sec:pathIterationShort}.
+
+\section{How to choose vertex-vertex pairs}
+There are different ways to choose which vertex-vertex pair to add to the partial mapping first, and which only to try after other attempts have failed. These methods can be divided into three categories:
+
+\begin{enumerate}
+\item Choose a source graph vertex first, then attempt all target graph vertex candidates.
+\item Choose a target graph vertex first, then attempt all source graph vertex candidates.
+\item Choose a source vertex-target vertex with high heuristic first, then attempt all other pairs.
+\end{enumerate}
+
+While the strategy used does not affect the vertex-on-vertex mapping state space, it can affect the average-case performance. Strategy 3, for example, allows more flexibility and thus more powerful heuristics (if you have them). The disadvantage of it is that it requires $O(|V_s|*|V_t|)$ heuristic computations at each step in the search process. While caching can avoid recomputation after backtracking, this introduces quadratic space cost. Strategies 1 and 2 require no such calculations, and we are not aware of evidence that one strategy is more effective than the other. Since we are not aware of any subgraph isomorphism algorithm using strategy 2 and we would like to keep research separate, we omit investigating the benefits and disadvantages of strategy 2 for future research and use strategy 1.
 
 \section{Source graph vertex order}
 \label{sec:sourceOrder}
@@ -154,13 +164,16 @@ The algorithm RI-DS obtains a variable ordering using a greedy algorithm called 
 The result of this ordering is that consequent vertices have many edges with vertices earlier in the ordering. Xiao established that matching edges as soon as possible (rather than matching vertices first) results in a faster algorithm. Using an order that allows early placement of edges such as GreatestConstrainedFirst should accoring to Xiao result in fast execution.
 \section{Target graph vertex order}
 \label{sec:targetOrder}
-The target graph vertex order is the order in which taget graph vertices are added to the partial mapping. For example, if $t_1 \prec t_2$ in this ordering, then a pair with $t_2$ and some source graph vertex $s_x$ will only be added to the partial mapping if the pair $(s_x, t_1)$ was already proved unfeasible. Xiao does not describe a specific target graph vertex order.
 
-We found one subgraph isomorphism algorithm that describes a specific target graph vertex order, being Glasgow\cite{McCreesh2015}. In this algorithm, target graph vertices with higher degree are prioritized. Formally, when some source graph vertex $s$ needs to be matched, $x$ are chosen using the following metric, choosing vertices with lower metric values first:
+The target graph vertex order is the order in which target graph vertices are added to the partial mapping. For example, if $t_1 \prec t_2$ in this ordering, then a pair with $t_2$ and some source graph vertex $s_x$ will only be added to the partial mapping if the pair $(s_x, t_1)$ was already proved unfeasible. Xiao does not describe a specific target graph vertex order.
+
+We found one subgraph isomorphism algorithm that describes a specific target graph vertex order, being Glasgow\cite{McCreesh2015}. In this algorithm, target graph vertices with higher degree are prioritized (without regard for which source graph vertex it is paired with) Formally, when some source graph vertex $s$ needs to be matched, $x$ are chosen using the following metric, choosing vertices with lower metric values first:
 
 $$\mathit{metric}_\mathit{degree}(s, t)=-|\mathit{neighbours}(t)|$$
 
-Another option is to take distance into account. Using a degree-based or random order will result in consective in consective target graph vertices being spread roughly evenly in the graph. Since we optimise our algorithm for large target graphs, chosen vertices at arbitrary locations will likely result in long paths necessary to reach them, and thus in unneccessary resource usage. Whenever we need to match some source graph vertex $s_x$, This distance-based method will choose target vertices first that have the lowest distance to the source graph vertex' matched neighbours. The result is that it earlier chosen vertices require fewer number of vertices to be used as intermediate vertex in one or more paths. The disadvantage of this method is that it requires runtime usage of a computionally expensive shortest path algorithm to choose a target graph vertex candidate. Formally, when some source graph vertex $s_x$ needs to be matched, $t_x$ are chosen using the following metric, choosing vertices with lower metric values first:
+Another option is to take distance into account. Using a degree-based or random target graph vertex order will result in consectively chosen target graph vertices being spread roughly evenly throughout graph. Since we optimise our algorithm for large target graphs, chosen vertices at arbitrary locations will likely result in long paths necessary to reach them, and thus in unneccessary resource usage. However, we can use information from the current partial mapping to obtain better candidates: since we know which edges will be mapped after this vertex-vertex pair, we can choose our target vertex such that the paths associated with these edges are as short as possible.
+
+Whenever we need to match some source graph vertex $s_x$, This distance-based method will choose target vertices first that have the lowest distance to the source graph vertex' neighbours that are already in the partial matching. The result is that it earlier chosen vertices require fewer number of vertices to be used as intermediate vertex in one or more paths. The disadvantage of this method is that it requires runtime usage of a computionally expensive shortest path algorithm to choose a target graph vertex candidate. Formally, when some source graph vertex $s_x$ needs to be matched, $t_x$ are chosen using the following metric, choosing vertices with lower metric values first:
 
 
 $$\mathit{metric}_\mathit{distance}(s, t)=\sum_{s' \in E(s)} \begin{cases}
