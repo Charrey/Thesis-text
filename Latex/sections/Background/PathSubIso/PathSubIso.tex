@@ -299,7 +299,7 @@ From this literature research, we conclude that a DFS for partial mappings is a 
 \subsubsection{Subgraph Homeomorphism}
 Lingas et al.\cite{LINGAS2009464} present an algorithm for subgraph homeomorphism under the assumption the vertex placement is fixed. For general subgraph homeomorphism they suggest trying their algorithm on each possible vertex matching.
 
-Xiao et al.\cite{XIAONODEDISJOINT} present an algorithm for subgraph homeomorphism when the length of the intermediate paths is in a limited range\footnote{The algorithm involves precomputing all possible paths. The number of possible paths increases exponentially with the sizes of both the pattern- and target graph.}. Since our path lengths can be $[1, -\infty)$, we would need to find an alternate solution.
+Xiao et al.\cite{XIAONODEDISJOINT} present an algorithm for subgraph homeomorphism when the length of the intermediate paths is in a limited range\footnote{The algorithm involves precomputing all possible paths. The number of possible paths increases exponentially with the sizes of both the pattern- and target graph.}. Since our path lengths can be $[1, +\infty)$, we would need to find an alternate solution.
 
 Grohe et al.\cite{Grohe2011479} show that for every fixed source graph, an $O(|V_{target}|^3)$ algorithm exists that can find homeomorphic embeddings in any target graph. However, finding this algorithm is a non-trivial, NP-hard process.
 
