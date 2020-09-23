@@ -1,12 +1,39 @@
 \chapter{Performance experiments}
-Using a machine with an AMD Ryzen 5 3600 CPU @ 3.7GHz and sufficient 3200MHz memory we conduct several experiments with different inputs and setting. The results are shown in Tables \ref{tab:iterator-performance} through \ref{tab:pruning-performance-big}. 
+Using a machine with an AMD Ryzen 5 3600 CPU @ 3.7GHz and sufficient 3200MHz memory we conduct several experiments with different inputs and settings. For this purpose, we generate random pairs of source graph- and target graph that have subgraph homeomorphisms in them and random pairs that do not.
 
-For source graph-target graph pairs without a present vertex disjoint subgraph homeomorphism we consistently use the G(n, M) Erdős–Rényi random graph model.
+For source graph-target graph pairs without a necessarily present subgraph homeomorphism we independently generate graphs using the following method:
 
-Since vertex disjoint subgraph homeomorphisms are rare in random graphs, we construct source graph-target graph pairs with a present vertex disjoint subgraph homeomorphism a different way. First, wegenerating a random source graph using the use the G(n, M) Erdős–Rényi random graph model. Then we add vertices: with a 50\% probability we intersect a random existing edge with each new vertex and with 50\% probability we add it outside the existing graph. Then we add edges: while the vertices added outside the source graph have less-than-average degree we add uniformly sampled edges that include them; afterwards we add uniformly sampled random edges.
+\begin{enumerate}
+\item From $|V|$ we establish how many wires, transistors, logic cells and ports it needs to have the same distribution as the FPGA use case.
+\item We apply the appropriate labels to the vertex set as specified in Chapter \ref{chapter:models}.
+\item We connect each port to a random logic cell in a random direction (except the \texttt{CE} port which has to be an input).
+\item We connect each port to a random wire in the appropriate direction.
+\item We connect each transistor vertex to two different random wire vertices (one with an incoming edge and the other with an outgoing edge).
+\end{enumerate}
 
-Firstly, we compare the different methods of path iteration. The time taken to explore the entire search tree (without homeomorphism) gives an indication of the overhead introduced by a pathiterator, not taking heuristic value into account. This comparison is shown in Figure \ref{fig:plotfailiterators}. The time taken for each path iteration method to find a homeomorphism where one exists is shown in Figure \ref{todo}. Here, the delay introduced caused by overhead may be offset by heuristic value.
+Since vertex disjoint subgraph homeomorphisms are rare in random graphs, we construct source graph-target graph pairs with a present vertex disjoint subgraph homeomorphism a different way.
 
+\begin{enumerate}
+\item First, we generate a random source graph with $V_S$ vertices using the 5-step method described above.
+\item Then, we establish a distribution of $|V_T|-|V_S|$ wires, transistors, logic cells and ports we need to add to resemble the FPGA use case distribution as closely as possible.
+\item We apply the appropriate labels to these extra vertices as specified in Chapter \ref{chapter:models}.
+\item We connect each new port vertex to a random logic cell vertex, prioritizing new logic cell vertices over existing ones while the new logic cell vertices have a lower average degree.
+\item We use half of the extra wires to intersect existing connections. With each intersection equally likely, we intersect a $(\mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE})$-connection into a $(\mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE})$-connection, intersect a $(\mathtt{PORT} \to \mathtt{WIRE})$-connection into a $(\mathtt{PORT} \to \mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE})$-connection or intersect a  $(\mathtt{WIRE} \to \mathtt{PORT})$-connection into a $(\mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE} \to \mathtt{PORT})$-connection.
+\item We connect each remaining transistor vertex to two different random wire vertices (one with an incoming edge and the other with an outgoing edge), prioritizing new wire vertices over existing ones while the new wire vertices have a lower average degree.
+\end{enumerate}
+
+
+
+%Then, we calculate
+%Then we add vertices: with a 50\% probability we intersect a random existing edge with each new vertex and with 50\% probability we add it outside the existing graph. Then we add edges: while the vertices added outside the source graph have less-than-average degree we add uniformly sampled edges that include them; afterwards we add uniformly sampled random edges.
+
+Using this method we obtain random test cases that resemble the graphs of the FPGA use case as closely as possible while still introducing some randomness that allow us to benchmark our algorithm's performance under a variety of optimisations.
+
+Firstly, we compare the different methods of path iteration. The time taken to explore the entire search tree (without homeomorphism) gives an indication of the overhead introduced by a path iterator, not taking the heuristic value of that path iterator into account. This comparison is shown in Figure \ref{fig:plotfailiterators}. We also add the performance of a portfolio method: running the algorithm in parallel with each path iteration method and choosing the fastest outcome for each individual test case.
+
+Next, we measure the performance gain from contraction by plotting the mean time increase or decrease in cases where subgraph homeomorphisms are present. Similarly, we measure the performance gain from each method of pruning (pruning technique, filtering and application) compared to applying no pruning at all.
+
+Lastly, we take the optimal set of settings and measure for each path iteration method how long the algorithm on average takes to find a subgraph homeomorphism where one exists.
 
 
 

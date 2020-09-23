@@ -5,82 +5,6 @@
 \tikzstyle{block} = [rectangle, minimum width=2.5cm, minimum height=1cm, align=left, draw=black]
 
 
-%\begin{figure}
-%\centering
-%\resizebox{\textwidth}{!}{
-%\begin{tikzpicture}[
-%    triangle/.style = {regular polygon, regular polygon sides=3 }
-%]
-%	\pgfmathsetmacro{\px}{0}
-%	\pgfmathsetmacro{\py}{0}
-%	\pgfmathsetmacro{\tx}{0}
-%	\pgfmathsetmacro{\ty}{-4}
-%	\pgfmathsetmacro{\treex}{10}
-%	\pgfmathsetmacro{\treey}{0}
-%	
-%\node [circle, draw, fill=blue!20] (a) at (\px, \py) [minimum size=0.5cm] {};	
-%\node [rectangle, draw, fill=blue!20] (b) at (\px, \py-2) [minimum size=0.5cm] {};
-%\node (c) at (\px, \py-3) {Pattern Graph};
-%\draw (a)--(b);
-%
-%
-%\node [circle, draw, fill=red!20] (d) at (\tx, \ty) [minimum size=0.5cm] {};	
-%\node [rectangle, draw, fill=red!20] (e) at (\tx, \ty-2) [minimum size=0.5cm] {};
-%\node [triangle, draw, fill=red!20] (f) at (\tx+1.732, \ty-1) [minimum size=0.5cm] {};
-%\node (g) at (\tx, \ty-3) {Target Graph};
-%\draw (d)--(e);
-%\draw (d)--(f);
-%\draw (e)--(f);
-%
-%\draw (\treex, \treey)--(\treex, \treey-2);
-%\draw (\treex, \treey)--(\treex-3.5, \treey-2);
-%\draw (\treex, \treey)--(\treex+3.5, \treey-2);
-%\node [circle, draw, fill=blue!20] at (\treex-3.8, \treey-2.5) [minimum size=0.5cm] {};
-%\node [circle, draw, fill=red!20] at (\treex-3.2, \treey-2.5) [minimum size=0.5cm] {};
-%
-%\node [circle, draw, fill=blue!20] at (\treex-0.3, \treey-2.5) [minimum size=0.5cm] {};
-%\node [triangle, draw, fill=red!20] at (\treex+0.3, \treey-2.6) [minimum size=0.5cm] {};
-%
-%\node [circle, draw, fill=blue!20] at (\treex+3.2, \treey-2.5) [minimum size=0.5cm] {};
-%\node [rectangle, draw, fill=red!20] at (\treex+3.8, \treey-2.5) [minimum size=0.5cm] {};
-
-%
-%\draw (\treex-3.5, -3)--(\treex-2.625, \treey-4.5);
-%\draw (\treex-3.5, -3)--(\treex-4.375, \treey-4.5);
-%\draw (\treex, -3)--(\treex-0.875, \treey-4.5);
-%\draw (\treex, -3)--(\treex+0.875, \treey-4.5);
-%\draw (\treex+3.5, -3)--(\treex+2.625, \treey-4.5);
-%\draw (\treex+3.5, -3)--(\treex+4.375, \treey-4.5);
-%
-%\node [rectangle, draw, fill=red!20] at (\treex-4.075, \treey-5) [minimum size=0.5cm] {};
-%\node [rectangle, draw, fill=blue!20] at (\treex-4.675, \treey-5) [minimum size=0.5cm] {};
-%\node [rectangle, fill=green] at (\treex-4.45, \treey-5.7) [minimum width=1.8cm, minimum height=0.3cm]{};
-%
-%\node [rectangle, draw, fill=blue!20] at (\treex-2.925, \treey-5) [minimum size=0.5cm] {};
-%\node [triangle, draw, fill=red!20] at (\treex-2.325, \treey-5.1) [minimum size=0.5cm] {};
-%
-%\node [rectangle, draw, fill=blue!20] at (\treex-1.175, \treey-5) [minimum size=0.5cm] {};
-%\node [circle, draw, fill=red!20] at (\treex-0.575, \treey-5) [minimum size=0.5cm] {};
-%
-%\node [triangle, draw, fill=red!20] at (\treex+1.175, \treey-5.1) [minimum size=0.5cm] {};
-%\node [rectangle, draw, fill=blue!20] at (\treex+0.575, \treey-5) [minimum size=0.5cm] {};
-%
-%\node [rectangle, draw, fill=red!20] at (\treex+2.925, \treey-5) [minimum size=0.5cm] {};
-%\node [rectangle, draw, fill=blue!20] at (\treex+2.325, \treey-5) [minimum size=0.5cm] {};
-%
-%\node [circle, draw, fill=red!20] at (\treex+4.675, \treey-5) [minimum size=0.5cm] {};
-%\node [rectangle, draw, fill=blue!20] at (\treex+4.075, \treey-5) [minimum size=0.5cm] {};
-%
-%\node at (\treex, \treey-6) {Search Space Tree};
-%\end{tikzpicture}
-%%}
-%\caption{State space of subgraph isomorphism search algorithms. Vertices with the same shape may be matched to each other, while vertices with different shapes have incompatible labels. The green bar denotes the only search path that leads to a successful subgraph isomorphism. Source: \cite{RIalgorithm}}
-%\label{fig:statespace}
-%\end{figure}
-
-
-
-
 \section{Baseline: ndSHD2}
 In our research we will extend existing work on node disjoint subgraph isomorphism. In the literature we found two existing well-defined algorithms: Xiao's algorithm `ndSHD2'\cite{XIAONODEDISJOINT} and Lingas algorithm\cite{LINGAS2009464}. We choose to adapt Xiao's algorithm ndSHD2 as baseline over Lingas because it is easier to understand (thus easier to improve, saving valuable research time) and includes methods for vertex-on-vertex mapping. In comparison, Lingas' algorithm suggests attempting their edge-path mapping strategy on every possible vertex-on-vertex mapping. We will adapt Xiao's algorithm to compute paths on-the-fly instead of beforehand to avoid the exponential space requirement.
 
@@ -216,10 +140,8 @@ Control point          & $O(|V|)$                  \\ \hline
 \end{table}
 
 
-
-
 \section{Optimisations}
-In addition to implementing ordering parameters of the ndSHD2 algorithm, we implement some optimisations (some of which from the subgraph isomorphism domain) and individually evaluate them.
+In addition to implementing ordering parameters of the ndSHD2 algorithm, we implement some optimisations (some of which from the subgraph isomorphism domain) and individually evaluate them. 
 
 \subsection{Refusing long paths}
 Since path iterators may provide any valid path to map an edge to during the matching process, they may also provide paths that take up unnecessarily many resources. Specifically, they take up so many resources that with a subset of the vertices and edges of that path, a shorter path can be formed. Formally, some path $p$ is ``unnecessarily long" iff:
@@ -250,7 +172,7 @@ Although we are focued on directed graphs in our algorithm, it is interesting to
 
 
 
-\begin{figure}[ht]
+\begin{figure}
 \begin{subfigure}{.5\textwidth}
   \centering
 \includegraphics[width=0.8\linewidth]{images/contraction/whatisit1.png}
@@ -266,9 +188,7 @@ Although we are focued on directed graphs in our algorithm, it is interesting to
 \end{figure}
 
 
-
-
-\begin{figure}[ht]
+\begin{figure}
 \begin{subfigure}{.5\textwidth}
   \centering
 \includegraphics[scale=0.6]{images/contraction/after.png}
@@ -283,4 +203,34 @@ Although we are focued on directed graphs in our algorithm, it is interesting to
 \caption{Contraction applied to a source graph with labels. With this optimisation, 3 fewer vertices and 4 fewer edges need to be mapped. During contraction, we save the label sets of the contracted vertices in the order of the contracted path.}
 \label{fig:contraction}
 \end{figure}
+
+
+\section{Avoiding unintended current flow}
+\label{sec:unintendedcurrent}
+As mentioned in Chapter \ref{chapter:models}, the concrete FPGA may contain transistors that are always enabled, i.e. cannot be configured to block the flow of electrical current and function as a diode. If we would ignore this property of transistors, we may obtain a mathematically sound subgraph homeomorphism that does not include every unconfigurable transistor from the target graph in its mappings. If some unconfigurable transistor (or a sequence of them) connect two vertices in the target graph that \textbf{are} part of the mapping, then the subgraph homeomorphism does not describe a valid emulation: if the state of two components are independent in the virtual FPGA they should be independent in the concrete FPGA as well to preserve the semantics of the FPGA configuration. To avoid this issue, we propose two measures:
+
+\subsection{Avoiding unintended current flow from/to paths}
+Our first remedy is to avoid adding target graph vertices to the partial mapping that are connected to some path already present in the edge-path partial mapping through unconfigurable vertices. We do this by deleting those vertices and re-adding them whenever we backtrack the corresponding edge-path pair. More formally:
+
+Let $\mathit{unconfigurable}\in (V_T \times V_T)$ be the relation between two vertices if they are connected through a vertex representing a unconfigurable transistor, i.e:
+
+\vspace{10pt}
+
+\begin{center}
+\begin{tabular}{ll}
+$\mathit{unconfigurable} := \{(t_1, t_2) \in (V_T \times V_T) | \exists u \in (V_T \setminus \{t_1, t_2\}) .$&$\mathtt{UNCONFIGURABLE} \in L(u) \land$\\
+&$\{(t_1, u), (u, t_2)\} \subseteq E_T\}$
+\end{tabular}
+\end{center}
+
+\vspace{10pt}
+Let $\mathit{unconfigurable}^*$ be the symmetric closure of the transitive closure of $\mathit{unconfigurable}$. Then, whenenever we add an edge-path pair $(e, p)$ to the partial mapping, we delete each vertex $x$ for which $\exists v \in \mathit{intermediate}(p) . (x, v) \in \mathit{unconfigurable}^*$. Whenever the edge-path pair is removed from the partial mapping, each such vertex and their edges is added back to the target graph.
+
+
+\subsection{Avoiding unintended current flow between mapped vertices}
+Our second remedy is to avoid adding target graph vertices to the partial mapping that are connected to some target graph vertex already present in the vertex-vertex partial mapping through unconfigurable vertices. We also do this by deleting those vertices and re-adding them whenever we backtrack the corresponding vertex-vertex pair. More formally, whenever we add a vertex-vertex pair $(s, t)$ to the partial mapping, we delete each vertex $x$ for which $(x, t) \in \mathit{unconfigurable}^*$. Whenever the vertex-vertex pair is removed from the partial mapping, each such vertex and their edges is added back to the target graph.
+
+
+
+
 

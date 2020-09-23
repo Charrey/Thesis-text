@@ -1,7 +1,7 @@
 \chapter{Models}
-\label{sec:models}
+\label{chapter:models}
 Our algorithm will generate an emulation using vertex disjoint subgraph homeomorphism. To do this, we model both the virtual and concrete FPGA as vertex-multilabeled directed graphs as defined in Definition \ref{def:graph}. This section specifies this process.
 
 In short, we model each logic cell and each wire and transistor that are not part of a logic cell as vertices, and add an extra vertex for each input- and output of logic cells. The edges between the vertices denote either the direction of a transistor (if connecting a transistor and a wire) or the data flow of a logic cell (if connecting a wire with an in/output or an in/output with a logic cell).
 
-We label each wire vertex with the label \texttt{WIRE}, each transistor with the label \texttt{ARC}, each logic cell with the label \texttt{SLICE} and each in/output with the label \texttt{PORT}. Furthermore, we add the label \texttt{CE} to an input that enables writing data to the register of the logic cell. Lastly, we add the label \texttt{UNCONFIGURABLE} to transistors that are always enabled and not configurable by the FPGA configurator. We use these labels to to avoid unintended electrical current flow between parts in the concrete FPGA.
+We label each wire vertex with the label \texttt{WIRE}, each transistor with the label \texttt{ARC}, each logic cell with the label \texttt{SLICE} and each in/output with the label \texttt{PORT}. Furthermore, we add the label \texttt{CE} to an input that enables writing data to the register of the logic cell. Lastly, we add the label \texttt{UNCONFIGURABLE} to transistors that are always enabled and not configurable by the FPGA configurator. We use these labels to to avoid unintended electrical current flow between parts in the concrete FPGA. More information on how we use this label within the context of our algorithm can be found in Section \ref{sec:unintendedcurrent}.

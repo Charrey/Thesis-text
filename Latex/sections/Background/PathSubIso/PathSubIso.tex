@@ -13,7 +13,7 @@ A graph is a tuple $(V, E, L)$ where $V$ is a set of vertices, $E$ is a multiset
 
 
 \begin{defn}[(vertex disjoint) subgraph homeomorphism]
-Let $P$ the set of all loopless paths in $G_2$, let $first(p)$ be the first vertex of a path $p$, let $last(p)$ be the last vertex of a path $p$ and let $intermediate(p)$ be all other vertices of a path $p$. Then, a vertex disjoint subgraph homeomorphism from $G_1$ to $G_2$ is a tuple $(f, q)$ where $f\subseteq (V_1 \mapsto V_2)$ and $q \subseteq (E_1 \mapsto P)$ are both injective functions such that:
+Let $P$ the set of all loopless paths in $G_2$, let $\mathit{first}(p)$ be the first vertex of a path $p$, let $\mathit{last}(p)$ be the last vertex of a path $p$ and let $\mathit{intermediate}(p)$ be all other vertices of a path $p$. Then, a subgraph homeomorphism from $G_1$ to $G_2$ is a tuple $(f, q)$ where $f\subseteq (V_1 \mapsto V_2)$ and $q \subseteq (E_1 \mapsto P)$ are both injective functions such that:
 
 \begin{tabular}{rlr}
  1. & $\forall u \in V_1 . L_1(u)\subseteq L_2(f(u))$&\\
