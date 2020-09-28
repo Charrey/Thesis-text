@@ -83,8 +83,8 @@ If $M$ is the current partial mapping and $P$ is the set of paths in the target 
 \begin{tabular}{lll}
 \centering
 $\mathit{compatible}_{\mathit{M-REACH}}(s,t) := $&$\mathit{compatible}_{\mathit{FN}}(s,t)$&$\land$\\
-&$ \mathit{compatible}_{\mathit{M-REACH}}^{\mathit{pred}}(s,t)$&$\land$\\
-&$ \mathit{compatible}_{\mathit{M-REACH}}^{\mathit{succ}}(s,t)$&
+&$ \mathit{compatible}_{\mathit{M-REACH, pred}}(s,t)$&$\land$\\
+&$ \mathit{compatible}_{\mathit{M-REACH, succ}}(s,t)$&
 \end{tabular}
 \egroup
 
@@ -96,14 +96,14 @@ $$\text{where:}$$
 
 \begin{tabular}{lll}
 \centering
-$\mathit{compatible}_{\mathit{M-REACH}}^{\mathit{pred}}(s,t) := \forall s' \in (\mathit{pred}(s) \cap M) .  \exists p \in P .$&$\mathit{first}(p)=M(s')$&$\land$\\
+$\mathit{compatible}_{\mathit{M-REACH, pred}}(s,t) := \forall s' \in (\mathit{pred}(s) \cap M) .  \exists p \in P .$&$\mathit{first}(p)=M(s')$&$\land$\\
 &$\mathit{last}(p)=t$&$\land$\\
 &\multicolumn{2}{l}{$\mathit{intermediate}(p) \cap M=\emptyset$}
 \end{tabular}
 
 \begin{tabular}{lll}
 \centering
-$\mathit{compatible}_{\mathit{M-REACH}}^{\mathit{succ}}(s,t) := \forall s' \in (\mathit{succ}(s) \cap M) .  \exists p \in P .$&$\mathit{first}(p)=t$&$\land$\\
+$\mathit{compatible}_{\mathit{M-REACH, succ}}(s,t) := \forall s' \in (\mathit{succ}(s) \cap M) .  \exists p \in P .$&$\mathit{first}(p)=t$&$\land$\\
 &$\mathit{last}(p)=M(s')$&$\land$\\
 &\multicolumn{2}{l}{$\mathit{intermediate}(p) \cap M=\emptyset$}
 \end{tabular}
@@ -152,25 +152,25 @@ If Dijkstra's algorithm is used to find $p$, the complexity per source-target pa
 \label{fig:reachability-filtered}
 \end{figure}
 \subsection{Reachability of neighbourhood \hspace{12pt}(N-filtering)}
-In addition to filtering domains based on the current partial matching and the source- and target graph, we can perform domain filtering based on domains that are already computed by other methods. If some source graph vertex $s_1$ with domain $D_1$ has an edge to some vertex $s_2$ with domain $D_2$, then for each target graph vertex $t_1 \in D_1$ there must exist a path to some vertex $t_2 \in D_2$. If not, then $t_1$ may be removed from $D_1$. This process yields new (smaller) domains and is therefore repeated until a fixed point is reached.
+In addition to filtering domains based on reachability from- and to matched vertices that have a domain of one target graph vertex, we can also perform this on unmatched vertices that have multiple vertices in their domain. In this case, any single vertex in the domain of the source graph neighbour qualifies. If some source graph vertex $s_1$ with domain $D_1$ has an edge to some vertex $s_2$ with domain $D_2$, then for each target graph vertex $t_1 \in D_1$ there must exist a path to some vertex $t_2 \in D_2$. If not, then $t_1$ may be removed from $D_1$. Since this process is dependent on the domain of other vertices and reduces the size of domains itself, this process yields new (smaller) domains and is therefore repeated until a fixed point is reached.
 
 \begin{minipage}{\textwidth}
 \begin{defn}[compatibility under neighbourhood reachability constraint]
 
-If $M$ is the current partial mapping and $P$ is the set of paths in the target graph, then neighbourhood reachability compatibility is defined as $$\mathit{compatible}_{\mathit{N-REACH}}(s,t):= \lim_{i\to\infty} \mathit{nreach}_i(s, t) $$
+If $M$ is the current partial mapping and $P$ is the set of paths in the target graph, then neighbourhood reachability compatibility is defined as $$\mathit{compatible}_{\mathit{N-REACH}}(s,t):= \lim_{i\to +\infty} \mathit{nreach}_i(s, t) $$
 
 $$\text{where:}$$
 
 $$\mathit{nreach}_i(s, t) = \begin{cases}
                 \mathit{compatible}_{\mathit{M-REACH}}(s,t)   & i = 0\\
-               \mathit{ncomp}_i^{\mathit{pred}}(s, t) \land \mathit{ncomp}_i^{\mathit{succ}}(s, t) & \text{otherwise}
+               \mathit{ncomp}_{i, \mathit{pred}}(s, t) \land \mathit{ncomp}_{i, \mathit{succ}}(s, t) & \text{otherwise}
            \end{cases}$$
 
 \vspace{10pt}
 
 \begin{tabular}{lll}
 \centering
-$\mathit{ncomp}_i^{\mathit{pred}}(s, t) := $&\multicolumn{2}{l}{$\forall s' \in \mathit{pred}(s) . \exists t' \in V_T . \mathit{nreach}_{i-1}(s',t') \land $}\\
+$\mathit{ncomp}_{i, \mathit{pred}}(s, t) := $&\multicolumn{2}{l}{$\forall s' \in \mathit{pred}(s) . \exists t' \in V_T . \mathit{nreach}_{i-1}(s',t') \land $}\\
 &$\exists p \in P .$  & $\mathit{first}(p)=t' \land$ \\
 &&$\mathit{last}(p)=t \land$ \\
 &&$\mathit{intermediate}(p) \cap M = \emptyset$
@@ -178,7 +178,7 @@ $\mathit{ncomp}_i^{\mathit{pred}}(s, t) := $&\multicolumn{2}{l}{$\forall s' \in 
 
 \begin{tabular}{lll}
 
-$\mathit{ncomp}_i^{\mathit{succ}}(s, t) := $&\multicolumn{2}{l}{$\forall s' \in \mathit{succ}(s) . \exists t' \in V_T . \mathit{nreach}_{i-1}(s',t') \land $}\\
+$\mathit{ncomp}_{i, \mathit{succ}}(s, t) := $&\multicolumn{2}{l}{$\forall s' \in \mathit{succ}(s) . \exists t' \in V_T . \mathit{nreach}_{i-1}(s',t') \land $}\\
 &$\exists p \in P .$  & $\mathit{first}(p)=t \land$ \\
 &&$\mathit{last}(p)=t' \land$ \\
 &&$\mathit{intermediate}(p) \cap M = \emptyset$

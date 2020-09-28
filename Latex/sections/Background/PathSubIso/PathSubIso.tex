@@ -13,17 +13,18 @@ A graph is a tuple $(V, E, L)$ where $V$ is a set of vertices, $E$ is a multiset
 
 
 \begin{defn}[(vertex disjoint) subgraph homeomorphism]
-Let $P$ the set of all loopless paths in $G_2$, let $\mathit{first}(p)$ be the first vertex of a path $p$, let $\mathit{last}(p)$ be the last vertex of a path $p$ and let $\mathit{intermediate}(p)$ be all other vertices of a path $p$. Then, a subgraph homeomorphism from $G_1$ to $G_2$ is a tuple $(f, q)$ where $f\subseteq (V_1 \mapsto V_2)$ and $q \subseteq (E_1 \mapsto P)$ are both injective functions such that:
+Let $P$ the set of all loopless paths in $G_T$, let $\mathit{first}(p)$ be the first vertex of a path $p$, let $\mathit{last}(p)$ be the last vertex of a path $p$ and let $\mathit{intermediate}(p)$ be all other vertices of a path $p$. Then, a subgraph homeomorphism from graph $S$ to graph $T$ is a tuple $(\mathit{vmap}, \mathit{emap})$ where $\mathit{vmap}\subseteq (V_S \mapsto V_T)$ and $\mathit{emap} \subseteq (E_S \mapsto P)$ are both injective functions such that:
 
 \begin{tabular}{rlr}
- 1. & $\forall u \in V_1 . L_1(u)\subseteq L_2(f(u))$&\\
+ 1. & $\forall s \in V_S . L_S(s)\subseteq L_T(\mathit{vmap}(s))$&\\
  
  &i.e. vertices are mapped to vertices that have at least the same label set.&\\
  
- 2. & $\forall (u_1, u_2) \in E_1 .\mathit{first}(q(u_1, u_2))=f(u_1) \land \mathit{last}(q(u_1, u_2))=f(u_2)$&\\
+ 2. & $\forall (s_1, s_2) \in E_S .\mathit{first}(\mathit{emap}(s_1, s_2))=\mathit{vmap}(s_1) \land \mathit{last}(\mathit{emap}(s_1, s_2))=\mathit{vmap}(s_2)$&\\
  &i.e. each edge in $G_1$ is mapped to a path in $G_2$.&\\
  
- 3. & $\forall p \in \mathit{values}(q) . \forall x \in \mathit{intermediate}(p) . \not \exists p' \in (\mathit{values}(q) \setminus \{p\}) . x \in \mathit{intermediate}(p')$&\\
+ 3. & $\forall p \in \mathit{values}(\mathit{emap}) . \forall x \in \mathit{intermediate}(p) . $\\
+ &$\quad \not \exists p' \in (\mathit{values}(\mathit{emap}) \setminus \{p\}) . x \in \mathit{intermediate}(p')$&\\
     &i.e. these paths are vertex disjoint.&\\
 \end{tabular}
 
@@ -38,10 +39,10 @@ This tuple is also the certificate for the decision problem of subgraph homeomor
 \parbox{1.2in}{
 
 \begin{tikzpicture}
-\node at (0,1) (a) {a};
-\node at (1,0) (c)  {c};
-\node at (-1,0) (b)  {b};
-\node at (2,0) (d)  {d};
+\node at (0,1) (a) {$s_1$};
+\node at (1,0) (c)  {$s_3$};
+\node at (-1,0) (b)  {$s_2$};
+\node at (2,0) (d)  {$s_4$};
 
 \draw[->] (a)->(b);
 \draw[->] (c)->(a);
@@ -53,13 +54,13 @@ This tuple is also the certificate for the decision problem of subgraph homeomor
 \begin{minipage}{1.2in}%
 
 \begin{tikzpicture}
-\node at (0,3) (alpha) {\alpha};
-\node at (-1,2) (beta)  {\beta};
-\node at (1,2) (gamma)  {\gamma};
-\node at (-1,1) (delta)  {\delta};
-\node at (1,1) (epsilon)  {\epsilon};
-\node at (-1,0) (zeta)  {\zeta};
-\node at (1,0) (eta)  {\eta};
+\node at (0,3) (alpha) {$t_1$};
+\node at (-1,2) (beta)  {$t_2$};
+\node at (1,2) (gamma)  {$t_3$};
+\node at (-1,1) (delta)  {$t_4$};
+\node at (1,1) (epsilon)  {$t_5$};
+\node at (-1,0) (zeta)  {$t_6$};
+\node at (1,0) (eta)  {$t_7$};
 
 \draw[dotted, ->] (beta)->(alpha);
 \draw[dotted, ->] (alpha)->(gamma);
@@ -74,172 +75,11 @@ This tuple is also the certificate for the decision problem of subgraph homeomor
 
 \end{tikzpicture}
 \end{minipage}
-\caption{Two graphs $G_1$ and $G_2$. $G_1$ is (node disjoint) subgraph homeomorphic to $G_2$ with the mapping $\{(a, \epsilon), (b, \eta), (c, \delta), (d, \beta), (a \to b, \epsilon \to \eta), (c \to a, \delta \to \epsilon), (c \to b, \delta \to \zeta \to \eta), (d \to c, \beta \to \gamma \to \delta)\}$. Other homeomorphisms exist as well.}
+\caption{Two graphs $G_1$ and $G_2$. $G_1$ is (node disjoint) subgraph homeomorphic to $G_2$ with the mapping $\{(s_1, t_5), (s_2, t_7), (s_3, t_4), (s_4, t_2), (s_1 \to s_2, t_5 \to t_7), (s_3 \to s_1, t_4 \to t_5), (s_3 \to s_2, t_4 \to t_6 \to t_7), (s_4 \to s_3, t_2 \to t_3 \to t_4)\}$. Other homeomorphisms exist as well.}
 \end{figure}
 
-If we have graphs $G_{virtual}$ and $G_{concrete}$, then wherever a subgraph homeomorphism from $G_{virtual}$ to $G_{concrete}$ exists, it describes a mapping where the logic of the virtual FPGA may be performed on the concrete FPGA in an emulation\footnote{If no such relation exists, it does not mean a function $f$ as specified in Section \ref{sec:Objectives} does not exist. Emulation could still be obtained by emulation of components by (multiple) components of possibly different types or by emulation of routing switches by sets of connected routing switches.}\footnote{This does not hold if some vertices in $G_{concrete}$ that are part of the mapping are unconfigurably connected and their mapped equivalents in $G_{virtual}$ are not. This is, however, rare and we account for this in our algorithm.}. The vertex-to-vertex mapping $f$ describes how to obtain configurations for the concrete FPGA and the edge-to-path mapping $q$ describes how vertices in the concrete FPGA are connected via paths of intermediate components configured as wires.
+If we have graphs $G_{virtual}$ and $G_{concrete}$, then wherever a subgraph homeomorphism from $G_{virtual}$ to $G_{concrete}$ exists, it describes a mapping where the logic of the virtual FPGA may be performed on the concrete FPGA in an emulation\footnote{If no such relation exists, it does not mean a function $f$ as specified in Section \ref{sec:Objectives} does not exist. Emulation could still be obtained by emulation of components by (multiple) components of possibly different types or by emulation of routing switches by sets of connected routing switches.}\footnote{This does not hold if some vertices in $G_{concrete}$ that are part of the mapping are unconfigurably connected and their mapped equivalents in $G_{virtual}$ are not. This is, however, rare and we account for this in our algorithm.}. The vertex-to-vertex mapping $\mathit{vmap}$ describes how to obtain configurations for the concrete FPGA and the edge-to-path mapping $\mathit{emap}$ describes how vertices in the concrete FPGA are connected via paths of intermediate components configured as wires.
 
-%Because we allow intermediate routing switches, our use case makes for a very different problem, yet similar:
-
-
-%\begin{figure}
-%    \centering
-%\begin{adjustbox}{width=\textwidth}
-%\begin{tikzpicture}
-%\tikzstyle{graphnode} = [rectangle, minimum width=1.8cm, text centered, draw=black]
-%\tikzstyle{minigraphnode} = [circle, minimum width=0.3cm, draw=black]
-%\tikzstyle{tinygraphnode} = [circle, minimum width=0.1cm, draw=black, fill=black]
-
-%\draw (3,2.5) node[graphnode] {$\text{LUT}_{\text{out}}$};
-%\draw (3,0  ) node[graphnode] {$\text{Reg}_{\text{out}}$};
-%\draw (5.5,0) node[graphnode] {${\text{MUX}_{\text{in}}}$};
-%\draw (8,2.5) node[graphnode] {${\text{MUX}_{\text{in}}}$};
-%\draw (8,0  ) node[graphnode] {$\text{MUX}_{\text{out}}$};
-
-%\draw           (10   ,0) 	circle (0.15cm);
-%\draw           (10.75,0) 	circle (0.15cm);
-%\draw           (11.5 ,0) 	circle (0.15cm);
-%\draw (10.5,0)--(10.9,0);
-
-%\draw           (10   ,0.75) 	circle (0.15cm);
-%\draw           (10.75,0.75) 	circle (0.15cm);
-%\draw           (11.5 ,0.75) 	circle (0.15cm);
-%\draw (10.5,0.75)--(10.9,0.75);
-
-%\draw         (10   ,-0.75) 	circle (0.15cm);
-%\draw[dotted] (10.75,-0.75) 	circle (0.15cm);
-%\draw         (11.5 ,-0.75) 	circle (0.15cm);
-%\draw (10  , -0.6)--(10  ,-0.9);
-%\draw (11.5, -0.6)--(11.5,-0.9);
-
-%tinynodes
-%\draw             (5.5,2.23) circle (0.05cm);
-%\draw[fill=black] (5.5, 2.5) circle (0.05cm);
-%\draw[fill=black] (5.5,2.77) circle (0.05cm);
-
-%\draw             (4.25,-0.3) circle (0.05cm);
-%\draw[fill=black] (4.25,   0) circle (0.05cm);
-%\draw[fill=black] (4.25, 0.3) circle (0.05cm);
-
-%\draw[fill=black] (6.75,-0.3) circle (0.05cm);
-%\draw[fill=black] (6.75,   0) circle (0.05cm);
-%\draw             (6.75, 0.3) circle (0.05cm);
-
-%\draw[fill=black] (7.7,1.25) circle (0.05cm);
-%\draw             (  8,1.25) circle (0.05cm);
-%\draw[fill=black] (8.3,1.25) circle (0.05cm);
-
-%Lines between LUT and MUX (distance 0.3)
-%\draw[->]           (3.9        , 2.5 )--(7.1        ,2.5          );
-%\draw[dotted]   (3.858545281, 2.23)--(7.141454719,2.23       );
-%\draw           (3.858545281, 2.77)--(7.141454719,2.77);
-
-%Lines between Register and MUX (distance 0.3)
-%\draw           (3.9        ,    0)--(4.6,0);
-%\draw[dotted]   (3.853939201, -0.3)--(4.646060799,-0.3);
-%\draw           (3.853939201,  0.3)--(4.646060799,0.3);
-
-%Lines between MuxIn2 and MuxOut
-%\draw[dotted]   (8   ,1.6       )--(8  ,0.9);
-%\draw           (7.7, 1.651471863)--(7.7,0.848528137);
-%\draw           (8.3, 1.651471863)--(8.3,0.848528137);
-
-%Lineds between MuxIn1 and MuxOut
-%\draw           (6.4        , 0   )--(7.1  ,0);
-%\draw           (6.353939201, -0.3)--(7.146060799,-0.3);
-%\draw[dotted]   (6.353939201,  0.3)--(7.146060799,0.3);
-
-%Lines between MUX and switches
-%\draw           (8.9, 0)--(9.85,0);
-%\draw           (8.497493719,0.75)--(9.85,0.75);
-%\draw[dotted]   (8.497493719,-0.75)--(9.85,-0.75);
-
-%Lines between switches and switches
-%\draw           (10.15,0    )--(10.6,0    );
-%\draw           (10.15,0.75 )--(10.6,0.75 );
-%\draw[dotted]   (10.15,-0.75)--(10.6,-0.75);
-
-%\draw           (10.9,0    )--(11.35,0    );
-%\draw           (10.9,0.75 )--(11.35,0.75 );
-%\draw[dotted]   (10.9,-0.75)--(11.35,-0.75);
-
-%\draw           (11.65,0    )--(12,0    );
-%\draw           (11.65,0.75 )--(12,0.75 );
-%\draw[dotted]   (11.65,-0.75)--(12,-0.75);
-
-%\draw           (10   ,-0.9)--(10   ,-1.35);
-%\draw[dotted]   (10.75,-0.9)--(10.75,-1.35);
-%\draw           (11.5 ,-0.9)--(11.5 ,-1.35);
-
-%\draw           (10   ,-0.15)--(10   ,-0.6);
-%\draw[dotted]   (10.75,-0.15)--(10.75,-0.6);
-%\draw           (11.5 ,-0.15)--(11.5 ,-0.6);
-
-%\draw           (10   ,0.6)--(10   ,0.15);
-%\draw[dotted]   (10.75,0.6)--(10.75,0.15);
-%\draw           (11.5 ,0.6)--(11.5 ,0.15);
-
-%\draw           (10   ,1.35)--(10   ,0.9);
-%\draw[dotted]   (10.75,1.35)--(10.75,0.9);
-%\draw           (11.5 ,1.35)--(11.5 ,0.9);
-
-%----------------------------------
-%Virtual FPGA
-%----------------------------------
-%\draw (-8  ,2.5) node[graphnode] {${\text{LUT}_{\text{out}}}$};
-%\draw (-8  ,  0) node[graphnode] {${\text{Reg}_{\text{out}}}$};
-%\draw (-5.5,  0) node[graphnode] {${\text{MUX}_{\text{in}}}$};
-%\draw (-3  ,2.5) node[graphnode] {${\text{MUX}_{\text{in}}}$};
-%\draw (-3  ,  0) node[graphnode] {${\text{MUX}_{\text{out}}}$};
-
-%tinynodes
-
-%\draw (-1   ,0.375) 	circle (0.15cm);
-%\draw (-0.25,0.375) 	circle (0.15cm);
-
-%\draw (-1   ,-0.375) 	circle (0.15cm);
-%\draw (-0.25,-0.375) 	circle (0.15cm);
-
-%LUT to MUX
-%\draw (-7.112588033,2.65)--(-3.887411967,2.65);
-%\draw (-7.112588033,2.35)--(-3.887411967,2.35);
-
-%Register to MUX
-%\draw (-7.112588033, 0.15)--(-6.387411967,0.15);
-%\draw (-7.112588033,-0.15)--(-6.387411967,-0.15);
-
-%MUX1 to MUXout
-%\draw (-4.612588033, 0.15)--(-3.887411967,0.15);
-%\draw (-4.612588033,-0.15)--(-3.887411967,-0.15);
-
-%MUX2 to MUXout
-%\draw (-3.15, 1.612588033)--(-3.15,0.887411967);
-%\draw (-2.85,1.612588033)--(-2.85,0.887411967);
-
-%MUX to switches
-%\draw (-1.15,0.375)--(-2.15,0.375);
-%\draw (-1.15,-0.375)--(-2.15,-0.375);
-
-%\draw (-0.85,0.375 )--(-0.4,0.375);
-%\draw (-0.85,-0.375)--(-0.4,-0.375);
-
-%\draw (-0.1,0.375 )--(0.425,0.375);
-%\draw (-0.1,-0.375)--(0.425,-0.375);
-
-%\draw (-1   , 0.525)--(-1   , 1.1);
-%\draw (-0.25, 0.525)--(-0.25, 1.1);
-
-%\draw (-1   , -0.225)--(-1   , 0.225);
-%\draw (-0.25, -0.225)--(-0.25, 0.225);
-
-%\draw (-1   , -1.125)--(-1   , -0.525);
-%\draw (-0.25, -1.125)--(-0.25, -0.525);
-
-%\end{tikzpicture}
-%\end{adjustbox}
-%\caption{An example of an isomorphism/embedding of a virtual FPGA (left) in a concrete FPGA (right). Nodes are (parts of) components and edges are connections between them. Intermediate routing switches in the emulation are allowed whenever we can configure them to operate as a wire. Note that this figure is for clarity only and is not representative of our graph models.}
-%\label{fig:subIsoAsEmulation}
-%\end{figure}
 
 The similarity between \textit{subgraph isomorphism} and \textit{subgraph homeomorphism} allows us to take inspiration from existing subgraph isomorphism algorithms and use similar methods to solve subgraph homeomorphism and therewith the FPGA emulation problem.
 
@@ -299,7 +139,7 @@ From this literature research, we conclude that a DFS for partial mappings is a 
 \subsubsection{Subgraph Homeomorphism}
 Lingas et al.\cite{LINGAS2009464} present an algorithm for subgraph homeomorphism under the assumption the vertex placement is fixed. For general subgraph homeomorphism they suggest trying their algorithm on each possible vertex matching.
 
-Xiao et al.\cite{XIAONODEDISJOINT} present an algorithm for subgraph homeomorphism when the length of the intermediate paths is in a limited range\footnote{The algorithm involves precomputing all possible paths. The number of possible paths increases exponentially with the sizes of both the pattern- and target graph.}. Since our path lengths can be $[1, +\infty)$, we would need to find an alternate solution.
+Xiao et al.\cite{XIAONODEDISJOINT} present an algorithm for subgraph homeomorphism when the length of the intermediate paths is in a limited range\footnote{The algorithm involves precomputing all possible paths. The number of possible paths increases exponentially with the sizes of both the pattern- and target graph. Applying this to a graph model of an FPGA is infeasible.}. Since our path lengths can be $[1, +\infty)$, we would need to find an alternate solution.
 
 Grohe et al.\cite{Grohe2011479} show that for every fixed source graph, an $O(|V_{target}|^3)$ algorithm exists that can find homeomorphic embeddings in any target graph. However, finding this algorithm is a non-trivial, NP-hard process.
 

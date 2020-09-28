@@ -6,7 +6,7 @@ For source graph-target graph pairs without a necessarily present subgraph homeo
 \begin{enumerate}
 \item From $|V|$ we establish how many wires, transistors, logic cells and ports it needs to have the same distribution as the FPGA use case.
 \item We apply the appropriate labels to the vertex set as specified in Chapter \ref{chapter:models}.
-\item We connect each port to a random logic cell in a random direction (except the \texttt{CE} port which has to be an input).
+\item We connect each port to a random logic cell in a random direction (except the \texttt{CE} port which has to be an input). If the graph is so small there is no logic cell, we add a single one.
 \item We connect each port to a random wire in the appropriate direction.
 \item We connect each transistor vertex to two different random wire vertices (one with an incoming edge and the other with an outgoing edge).
 \end{enumerate}
@@ -15,11 +15,11 @@ Since vertex disjoint subgraph homeomorphisms are rare in random graphs, we cons
 
 \begin{enumerate}
 \item First, we generate a random source graph with $V_S$ vertices using the 5-step method described above.
-\item Then, we establish a distribution of $|V_T|-|V_S|$ wires, transistors, logic cells and ports we need to add to resemble the FPGA use case distribution as closely as possible.
+\item Then, we establish a distribution of $|V_T|$ wires, transistors, logic cells and ports we need to add to resemble the FPGA use case target graph distribution as closely as possible, and add missing vertices to the source graph such that the total vertex set encompasses the established distribution.
 \item We apply the appropriate labels to these extra vertices as specified in Chapter \ref{chapter:models}.
-\item We connect each new port vertex to a random logic cell vertex, prioritizing new logic cell vertices over existing ones while the new logic cell vertices have a lower average degree.
+\item We connect each new port vertex to a random logic cell vertex, prioritizing new logic cell vertices over existing ones while the new logic cell vertices have a lower average degree. Furthermore, we connect each new port vertex to a random wire in the appriopriate direction.
 \item We use half of the extra wires to intersect existing connections. With each intersection equally likely, we intersect a $(\mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE})$-connection into a $(\mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE})$-connection, intersect a $(\mathtt{PORT} \to \mathtt{WIRE})$-connection into a $(\mathtt{PORT} \to \mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE})$-connection or intersect a  $(\mathtt{WIRE} \to \mathtt{PORT})$-connection into a $(\mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE} \to \mathtt{PORT})$-connection.
-\item We connect each remaining transistor vertex to two different random wire vertices (one with an incoming edge and the other with an outgoing edge), prioritizing new wire vertices over existing ones while the new wire vertices have a lower average degree.
+\item We connect each remaining transistor vertex to two different random wire vertices (one with an incoming edge and the other with an outgoing edge), connecting with at least one new wire vertex while the new wire vertices have a lower average degree.
 \end{enumerate}
 
 
@@ -29,9 +29,11 @@ Since vertex disjoint subgraph homeomorphisms are rare in random graphs, we cons
 
 Using this method we obtain random test cases that resemble the graphs of the FPGA use case as closely as possible while still introducing some randomness that allow us to benchmark our algorithm's performance under a variety of optimisations.
 
-Firstly, we compare the different methods of path iteration. The time taken to explore the entire search tree (without homeomorphism) gives an indication of the overhead introduced by a path iterator, not taking the heuristic value of that path iterator into account. This comparison is shown in Figure \ref{fig:plotfailiterators}. We also add the performance of a portfolio method: running the algorithm in parallel with each path iteration method and choosing the fastest outcome for each individual test case.
+Firstly, we compare the different methods of path iteration. The time taken to find a homeomorphism gives an indication of the overhead introduced by a path iterator and also taking the heuristic value of that path iterator into account. This comparison is shown in Figure \ref{TODO}. We used target graphs that were respectively 50\%, 200\% and 400\% larger than the souce graph\footnote{In the FPGA use case the target graph is $\pm$ 97 times larger than the souce graph. This, however, is too computationally expensive for our testing methodology.}. We also add the performance of a portfolio method: running the algorithm in parallel with each path iteration method and choosing the fastest outcome for each individual test case.
 
-Next, we measure the performance gain from contraction by plotting the mean time increase or decrease in cases where subgraph homeomorphisms are present. Similarly, we measure the performance gain from each method of pruning (pruning technique, filtering and application) compared to applying no pruning at all.
+We observe exponential behaviour with approximate complexity$O(e^{0.7*|V_S|})$ for $|V_T|=1\frac{1}{2}|V_S|$, $O(e^{1.0482*|V_S|})$ for $|V_T|=3|V_S|$ and $O(e^{1.133*|V_S|})$ for $|V_T|=5|V_S|$. Extrapolating this to the FPGA use case where $|V_T|=97|V_S|$ assuming a logarithmic trend, we get a scalability of $\pm O(e^{2.57442*|V_S|})$ for our FPGA use case without pruning or contraction.
+
+Next, we measure the performance gain from contraction by plotting the mean time increase or decrease in cases where subgraph homeomorphisms are present in Figure \ref{todo}. Similarly, we measure the performance gain from each method of pruning (pruning technique, filtering and application) compared to applying no pruning at all.
 
 Lastly, we take the optimal set of settings and measure for each path iteration method how long the algorithm on average takes to find a subgraph homeomorphism where one exists.
 
@@ -39,16 +41,327 @@ Lastly, we take the optimal set of settings and measure for each path iteration 
 
 
 %time to fail \ref{fig:plotfailiterators}
+%\begin{figure}
+%\centering
+%\begin{tikzpicture}
+%    \begin{axis}[
+%        xlabel=$|V_S|$,
+%        ylabel=$seconds$,
+%        ymin=0.01,
+%        ymode=log,
+%        xmin=4,
+%        xmax=20,
+%        legend style={at={(0.9,0.1)},anchor=south east},
+%        width=\textwidth,
+%    ]
+%    
+%\addplot[
+%        mark=none,
+%        black,
+%    ] plot coordinates {
+%        (4,600)
+%        (20,600)
+%};
+%    \addlegendentry{Timeout 10m}    
+%    
+%    
+%    \addplot[
+%        mark=+,
+%        green,
+%    ] plot coordinates {
+%        (4,0.009108628025032595) 
+%        (5,0.2620836802188065) 
+%        (6,0.9503740113943355)
+%        (7,6.596783503767442) 
+%        (8,14.764050718975609) 
+%        (9,54.765670739272736)
+%        (10,385.16296629500005) 
+%};
+%    \addlegendentry{CP}
+%    
+%    
+%    
+%    \addplot[
+%        mark=x,
+%        red,
+%    ] plot coordinates {
+%        (4,0.001716029672925713)
+%        (5,0.01702360071809101) 
+%        (6,0.04561513035914958) 
+%        (7,0.15251165322667018) 
+%        (8,0.24155461744973755) 
+%        (9,0.797513732268617) 
+%        (10,1.1835030509211046) 
+%        (11,3.2680702187065216)
+%        (12,5.661746851933962) 
+%        (13,12.798846733085105)
+%        (14,17.096358927307694)
+%        (15,65.64831186045454)
+%};
+%    \addlegendentry{DFS}
+%    
+%    
+%    
+%    \addplot[
+%        mark=asterisk,
+%        black,
+%    ] plot coordinates {
+%        (4,0.0043272421728668435) 
+%        (5,0.1078318674295203) 
+%        (6,0.3413335015273159)
+%        (7,1.5682172603423914)
+%        (8,2.249343766891791) 
+%        (9,7.395351140134146)
+%        (10,12.526694290867926)
+%        (11,145.27286338419998) 
+%        (12,289.503897899)
+%        (13,135.6942000877143) 
+%        (14,84.56603693766665)
+%};
+%    \addlegendentry{GDFS A IP}
+%    
+%    
+%    \addplot[
+%        mark=*,
+%        blue,
+%    ] plot coordinates {
+%        (4,0.004513287361457468) 
+%        (5,0.08689765890565003)
+%        (6,0.26278218619322824)
+%        (7,1.0640096504880734) 
+%        (8,1.9899295945868851)
+%        (9,9.064827074119401)
+%        (10,12.07097279138)
+%        (11,41.171574928875)
+%        (12,74.45223459277778)
+%        (13,72.3320726255)
+%        (14,147.87316945775) 
+%        (15,403.442499958)
+%};
+%    \addlegendentry{K-Path}
+%    
+%    \addplot[
+%        mark=o,
+%        purple,
+%    ] plot coordinates {
+%        (4,0.0027085184446120963) 
+%        (5,0.05864821291835853) 
+%        (6,0.19300624213070725) 
+%        (7,0.9348330173258064)
+%        (8,1.4939211758271604)
+%        (9,6.113139861699029)
+%        (10,9.11535311513433) 
+%        (11,80.54225475566666)
+%        (12,55.450854962)
+%        (13,55.5386134715)
+%        (14,60.892068884249994) 
+%        (15,381.159786211)
+%};
+%    \addlegendentry{GDFS O IP}
+%    
+%    
+%    \addplot[
+%        mark=star,
+%        gray,
+%    ] plot coordinates {
+%        (4,0.012242439615384614) 
+%        (5,0.032056864899625934) 
+%        (6,0.05582594232351259) 
+%        (7,0.15618683271269063) 
+%        (8,0.22630326749716662)
+%        (9,0.7229805422695548)
+%        (10,1.0152932454602368)
+%        (11,3.8780944653607596)
+%        (12,4.058766762371621)
+%        (13,12.724517174693878)
+%        (14,68.79296791008333)
+%        (15,64.49375942241666)
+%        (16,172.4802085922)
+%        (17,182.4329892165)
+%        (18,442.59586222949997)
+%        (19,320.441386005)
+%};
+%    \addlegendentry{GDFS C}
+%    \end{axis}
+%    \end{tikzpicture}
+%    \caption{A comparison of the speed of path iterators on directed graphs without a vertex disjoint subgraph homeomorphism. The time taken is measured of exploring the entire search tree without pruning or contraction and ``refuse longer paths" enabled. The source graph has average degree $3.0$ and the random target graph has $50\%$ more vertices and average degree $4.0$.}
+%    \label{fig:plotfailiterators}
+%\end{figure}
+
+%time to fail \ref{fig:plotfailiterators}
+%\begin{figure}
+%\centering
+%\begin{tikzpicture}
+%    \begin{axis}[
+%        xlabel=$|V_S|$,
+%        ylabel=$seconds$,
+%        ymin=0.01,
+%        ymode=log,
+%        xmin=4,
+%        xmax=21,
+%        legend style={at={(0.9,0.1)},anchor=south east},
+%        width=\textwidth,
+%    ]
+%    
+%\addplot[
+%        mark=none,
+%        black,
+%    ] plot coordinates {
+%        (4,600)
+%        (20,600)
+%};
+%    \addlegendentry{Timeout 10m}    
+%    
+%    \addplot[
+%        mark=+,
+%        green,
+%    ] plot coordinates {
+%        (4,0.011225772656529517)
+%        (5,0.1102545599566491)
+%        (6,0.44486458025072045)
+%        (7,3.042986867575269)
+%        (8,5.74977623)
+%        (9,35.525114357294115)
+%        (10,35.5281670255)
+%        (11,87.5656382282857)
+%        (12,351.30555866049997)
+%        (13,138.1412589595)
+%        (14,188.784530883)
+%};
+%    \addlegendentry{CP}
+%    
+%    \addplot[
+%        mark=o,
+%        purple,
+%    ] plot coordinates {
+%        (4,0.0017574030153561517)
+%        (5,0.016627272852321105)
+%        (6,0.05951097466196812)
+%        (7,0.31586978189748094)
+%        (8,0.5445968414204232)
+%        (9,1.842079320969419)
+%        (10,2.727486724117647)
+%        (11,11.645793994872726)
+%        (12,30.330513428250004)
+%        (13,38.8076894513125)
+%        (14,75.719160160875)
+%        (15,89.6788171538)
+%};
+%    \addlegendentry{GDFS O IP}
+%    
+%    \addplot[
+%        mark=*,
+%        blue,
+%    ] plot coordinates {
+%        (4,0.0025422386237516285)
+%        (5,0.022638101142943744)
+%        (6,0.0734345302556367)
+%        (7,0.3510897920750323)
+%        (8,0.6001774153137056)
+%        (9,1.7740936887558822)
+%        (10,2.712433360806167)
+%        (11,10.373501489465518)
+%        (12,31.40227594031818)
+%        (13,43.696226763999995)
+%        (14,83.08348835588889)
+%        (15,168.00605787019998)
+%};
+%    \addlegendentry{K-Path}
+%    
+%    \addplot[
+%        mark=asterisk,
+%        yellow,
+%    ] plot coordinates {
+%        (4,0.0025109829606700658)
+%        (5,0.026643974231709253)
+%        (6,0.09337968902815454)
+%        (7,0.4336080602865214)
+%        (8,0.7304999218364312)
+%        (9,2.0308082099898646)
+%        (10,2.8929847101298076)
+%        (11,10.985586681654546)
+%        (12,33.17703984786363)
+%        (13,38.036175942)
+%        (14,52.92116166808333)
+%        (15,137.5613253885)
+%        (16,360.68179355899997)
+%        (17,339.2709589685)
+%        (18,88.89462099425)
+%};
+%    \addlegendentry{GDFS A IP}
+%    
+%    \addplot[
+%        mark=star,
+%        gray,
+%    ] plot coordinates {
+%        (4,0.010814293411483253)
+%        (5,0.013247418663194444)
+%        (6,0.018136650490846524)
+%        (7,0.044871280226089896)
+%        (8,0.06975961715906405)
+%        (9,0.1641424184989053)
+%        (10,0.253489213402027)
+%        (11,0.6532397146760259)
+%        (12,1.5354695015253805)
+%        (13,2.959186464259804)
+%        (14,4.914401732717742)
+%        (15,26.6257452353)
+%        (16,28.346528123181823)
+%        (17,35.84909494664706)
+%        (18,36.33712715494118)
+%        (19,83.31132072587499)
+%        (20,24.872821897)
+%        (21,231.0657386335)
+%};
+%    \addlegendentry{GDFS C}
+%    
+%    \addplot[
+%        mark=x,
+%        red,
+%    ] plot coordinates {
+%        (4,5.741331169962661E-4)
+%        (5,0.0031486944433473107)
+%        (6,0.009334932808338796)
+%        (7,0.039730949068614435)
+%        (8,0.06759239543652791)
+%        (9,0.1760595743967742)
+%        (10,0.2751886341155433)
+%        (11,0.7801457321818182)
+%        (12,1.7678120634385965)
+%        (13,3.4430373055819206)
+%        (14,5.507068819963637)
+%        (15,22.482002219333335)
+%        (16,34.930044327454546)
+%        (17,43.10860792682353)
+%        (18,44.025957983176475)
+%        (19,87.41141809728572)
+%        (20,30.977993367750003)
+%        (21,277.99751084799993)
+%};
+%    \addlegendentry{DFS}
+%  
+%    \end{axis}
+%    \end{tikzpicture}
+%    \caption{A comparison of the speed of path iterators on directed graphs without a vertex disjoint subgraph homeomorphism. The time taken is measured of exploring the entire search tree without pruning or contraction and ``refuse longer paths" enabled. The source graph has average degree $2.429$ and the random target graph has $50\%$ more vertices and average degree $3.425$. Neither graphs have labels}
+%    \label{fig:plotfailiterators}
+%\end{figure}
+
+%time to fail \ref{fig:plotfailiterators}
+%\begin{figure}
+
+
 \begin{figure}
+\begin{subfigure}{.5\linewidth}
 \centering
+
 \begin{tikzpicture}
     \begin{axis}[
         xlabel=$|V_S|$,
         ylabel=$seconds$,
-        ymin=0.01,
+        ymin=0.0001,
         ymode=log,
         xmin=4,
-        xmax=20,
+        xmax=33,
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
     ]
@@ -58,142 +371,244 @@ Lastly, we take the optimal set of settings and measure for each path iteration 
         black,
     ] plot coordinates {
         (4,600)
-        (20,600)
+        (33,600)
 };
-    \addlegendentry{Timeout 10m}    
+ %   \addlegendentry{Timeout 10m} 
+    
+
+    
+   \addplot[
+        mark=o,
+        purple,
+    ] plot coordinates {
+        (4,0.0033354099999999996)
+        (5,0.001327198)
+        (6,0.0026972415)
+        (7,0.005420836)
+        (8,0.004050544)
+        (9,0.006470579)
+        (10,0.021485644)
+        (11,0.0548721365)
+        (12,0.0887547805)
+        (13,0.258150266)
+        (14,0.39556562399999995)
+        (15,1.0907645185)
+        (16,3.971699851282051)
+        (17,10.321538780851064)
+        (18,12.337433302040818)
+        (19,24.217103684000005)
+        (20,73.71199097)
+};
+%    \addlegendentry{GDFS O IP}
+    
     
     
     \addplot[
         mark=+,
         green,
     ] plot coordinates {
-        (4,0.009108628025032595) 
-        (5,0.2620836802188065) 
-        (6,0.9503740113943355)
-        (7,6.596783503767442) 
-        (8,14.764050718975609) 
-        (9,54.765670739272736)
-        (10,385.16296629500005) 
+        (4,0.0074964425000000005)
+        (5,0.008899364)
+        (6,0.021902257999999997)
+        (7,0.160471234)
+        (8,0.15263485899999998)
+        (9,0.561916418)
+        (10,1.833818564)
+        (11,4.52718843880597)
+        (12,12.26901466122449)
+        (13,55.44448909999999)
+        (14,75.0789921)
+        (15,40.98504065555555)
+        (16,59.94558265)
+        (17,196.817508975)
+        (18,428.4561328)
 };
-    \addlegendentry{CP}
-    
-    
-    
-    \addplot[
-        mark=x,
-        red,
-    ] plot coordinates {
-        (4,0.001716029672925713)
-        (5,0.01702360071809101) 
-        (6,0.04561513035914958) 
-        (7,0.15251165322667018) 
-        (8,0.24155461744973755) 
-        (9,0.797513732268617) 
-        (10,1.1835030509211046) 
-        (11,3.2680702187065216)
-        (12,5.661746851933962) 
-        (13,12.798846733085105)
-        (14,17.096358927307694)
-        (15,65.64831186045454)
-};
-    \addlegendentry{DFS}
-    
-    
-    
-    \addplot[
-        mark=asterisk,
-        black,
-    ] plot coordinates {
-        (4,0.0043272421728668435) 
-        (5,0.1078318674295203) 
-        (6,0.3413335015273159)
-        (7,1.5682172603423914)
-        (8,2.249343766891791) 
-        (9,7.395351140134146)
-        (10,12.526694290867926)
-        (11,145.27286338419998) 
-        (12,289.503897899)
-        (13,135.6942000877143) 
-        (14,84.56603693766665)
-};
-    \addlegendentry{GDFS A IP}
+ %   \addlegendentry{CP}
     
     
     \addplot[
         mark=*,
         blue,
     ] plot coordinates {
-        (4,0.004513287361457468) 
-        (5,0.08689765890565003)
-        (6,0.26278218619322824)
-        (7,1.0640096504880734) 
-        (8,1.9899295945868851)
-        (9,9.064827074119401)
-        (10,12.07097279138)
-        (11,41.171574928875)
-        (12,74.45223459277778)
-        (13,72.3320726255)
-        (14,147.87316945775) 
-        (15,403.442499958)
+        (4,0.0033891155)
+        (5,0.0011595824999999999)
+        (6,0.0017819205)
+        (7,0.0038146409999999997)
+        (8,0.0028014885)
+        (9,0.004467115)
+        (10,0.0098760425)
+        (11,0.019585361000000003)
+        (12,0.031251991)
+        (13,0.067427614)
+        (14,0.108922384)
+        (15,0.233365984)
+        (16,0.6713743385)
+        (17,1.3210855519999998)
+        (18,2.386009026)
+        (19,3.765988756140351)
+        (20,8.89447237352941)
+        (21,40.502501818750005)
+        (22,25.221025914285715)
+        (23,34.883353815384616)
+        (24,42.90160877142857)
+        (25,72.07346983333335)
 };
-    \addlegendentry{K-Path}
+%    \addlegendentry{K-Path}
     
     \addplot[
-        mark=o,
-        purple,
+        mark=asterisk,
+        magenta,
     ] plot coordinates {
-        (4,0.0027085184446120963) 
-        (5,0.05864821291835853) 
-        (6,0.19300624213070725) 
-        (7,0.9348330173258064)
-        (8,1.4939211758271604)
-        (9,6.113139861699029)
-        (10,9.11535311513433) 
-        (11,80.54225475566666)
-        (12,55.450854962)
-        (13,55.5386134715)
-        (14,60.892068884249994) 
-        (15,381.159786211)
+        (4,0.0033671915)
+        (5,0.001190538)
+        (6,0.0016191069999999998)
+        (7,0.0034239325)
+        (8,0.0024179585)
+        (9,0.0043627885)
+        (10,0.009817592)
+        (11,0.019897870499999998)
+        (12,0.0335268765)
+        (13,0.068505526)
+        (14,0.1189895675)
+        (15,0.2430346145)
+        (16,0.6879985279999999)
+        (17,1.4320328555000001)
+        (18,2.4644637565)
+        (19,3.615006598192771)
+        (20,10.072892529508197)
+        (21,41.85573263125)
+        (22,24.362516080952382)
+        (23,36.84446636538462)
+        (24,56.330943354545454)
+        (25,75.77811247500001)
 };
-    \addlegendentry{GDFS O IP}
+%    \addlegendentry{GDFS A IP}
     
+    \addplot[
+        mark=x,
+        red,
+    ] plot coordinates {
+        (4,0.003124064)
+        (5,7.913285000000001E-4)
+        (6,9.468475E-4)
+        (7,0.0017073364999999998)
+        (8,0.0011771495)
+        (9,0.0016255140000000002)
+        (10,0.0039480825)
+        (11,0.0077563585)
+        (12,0.0112181135)
+        (13,0.027106744)
+        (14,0.039854954500000005)
+        (15,0.1016730035)
+        (16,0.3102863915)
+        (17,0.567070922)
+        (18,1.1181295875)
+        (19,1.7503998269999999)
+        (20,4.263310112765957)
+        (21,13.087688980434784)
+        (22,12.664759238095238)
+        (23,22.604950978378376)
+        (24,22.215862426666664)
+        (25,21.221224975862068)
+        (26,200.80231476666665)
+        (27,69.01728853)
+        (28,120.91195150000003)
+        (29,77.2825083)
+        (30,201.28251479999994)
+        (31,358.3321691)
+        (32,219.1503222)
+        (33,184.9894481)
+};
+ %   \addlegendentry{DFS}
     
     \addplot[
         mark=star,
         gray,
     ] plot coordinates {
-        (4,0.012242439615384614) 
-        (5,0.032056864899625934) 
-        (6,0.05582594232351259) 
-        (7,0.15618683271269063) 
-        (8,0.22630326749716662)
-        (9,0.7229805422695548)
-        (10,1.0152932454602368)
-        (11,3.8780944653607596)
-        (12,4.058766762371621)
-        (13,12.724517174693878)
-        (14,68.79296791008333)
-        (15,64.49375942241666)
-        (16,172.4802085922)
-        (17,182.4329892165)
-        (18,442.59586222949997)
-        (19,320.441386005)
+        (4,0.0052584419999999995)
+        (5,0.0038800225)
+        (6,0.0045671005)
+        (7,0.005054851500000001)
+        (8,0.0036043110000000002)
+        (9,0.0044851380000000005)
+        (10,0.006500158000000001)
+        (11,0.010743765999999998)
+        (12,0.014813136499999999)
+        (13,0.032617665)
+        (14,0.045932047000000004)
+        (15,0.10862769200000001)
+        (16,0.32415647649999996)
+        (17,0.586893169)
+        (18,1.1500186795)
+        (19,1.772846179)
+        (20,4.554298787121212)
+        (21,14.077475467441861)
+        (22,12.78838592857143)
+        (23,22.725297256756754)
+        (24,22.44824257)
+        (25,21.37612426551724)
+        (26,203.35969063333334)
+        (27,69.08358688)
+        (28,123.07605716000003)
+        (29,70.88854776666666)
+        (30,170.599628675)
+        (31,361.26002704999996)
+        (32,217.99103095)
+        (33,191.6499955)
 };
-    \addlegendentry{GDFS C}
+%    \addlegendentry{GDFS C}
+    
+    \addplot[
+        mark=square,
+        orange,
+    ] plot coordinates {
+        (4,0.0026720765000000004)
+        (5,5.931255E-4)
+        (6,8.145884999999999E-4)
+        (7,0.0015716150000000002)
+        (8,0.001083881)
+        (9,0.0015602699999999999)
+        (10,0.0037946819999999997)
+        (11,0.0072780025)
+        (12,0.010769405999999999)
+        (13,0.026622686)
+        (14,0.039441741499999995)
+        (15,0.1005090725)
+        (16,0.3088769205)
+        (17,0.5658370635)
+        (18,1.114951387)
+        (19,1.7321635599999998)
+        (20,4.2505378978723405)
+        (21,13.068786297826087)
+        (22,12.589129547619047)
+        (23,22.530537545945947)
+        (24,22.130406946666668)
+        (25,21.19573636896552)
+        (26,199.31648383333334)
+        (27,68.44248519)
+        (28,120.89257580000003)
+        (29,70.80782896666666)
+        (30,169.777134475)
+        (31,356.8092052)
+        (32,217.99103095)
+        (33,184.9894481)
+};
+ %   \addlegendentry{portfolio}
+
     \end{axis}
     \end{tikzpicture}
-    \caption{A comparison of the speed of path iterators on directed graphs without a vertex disjoint subgraph homeomorphism. The time taken is measured of exploring the entire search tree without pruning or contraction and ``refuse longer paths" enabled. The source graph has average degree $3.0$ and the random target graph has $50\%$ more vertices and average degree $4.0$.}
-    \label{fig:plotfailiterators}
-\end{figure}
 
-%time to fail \ref{fig:plotfailiterators}
-\begin{figure}
+\caption{$|V_T|=1\frac{1}{2}|V_S|$}
+\label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\linewidth}
 \centering
+
 \begin{tikzpicture}
     \begin{axis}[
         xlabel=$|V_S|$,
         ylabel=$seconds$,
-        ymin=0.01,
+        ymin=0.0001,
         ymode=log,
         xmin=4,
         xmax=21,
@@ -206,156 +621,194 @@ Lastly, we take the optimal set of settings and measure for each path iteration 
         black,
     ] plot coordinates {
         (4,600)
-        (20,600)
+        (21,600)
 };
-    \addlegendentry{Timeout 10m}    
+ %   \addlegendentry{Timeout 10m} 
     
-    \addplot[
+
+\addplot[
         mark=+,
         green,
     ] plot coordinates {
-        (4,0.011225772656529517)
-        (5,0.1102545599566491)
-        (6,0.44486458025072045)
-        (7,3.042986867575269)
-        (8,5.74977623)
-        (9,35.525114357294115)
-        (10,35.5281670255)
-        (11,87.5656382282857)
-        (12,351.30555866049997)
-        (13,138.1412589595)
-        (14,188.784530883)
+        (4,0.017118874)
+        (5,0.042044554000000005)
+        (6,0.21861366149999997)
+        (7,1.7413124975)
+        (8,1.824231057)
+        (9,10.718911422807018)
+        (10,29.285856038095236)
+        (11,107.36171433333334)
+        (12,235.52224905)
 };
-    \addlegendentry{CP}
+%    \addlegendentry{CP}
+    
     
     \addplot[
         mark=o,
         purple,
     ] plot coordinates {
-        (4,0.0017574030153561517)
-        (5,0.016627272852321105)
-        (6,0.05951097466196812)
-        (7,0.31586978189748094)
-        (8,0.5445968414204232)
-        (9,1.842079320969419)
-        (10,2.727486724117647)
-        (11,11.645793994872726)
-        (12,30.330513428250004)
-        (13,38.8076894513125)
-        (14,75.719160160875)
-        (15,89.6788171538)
+        (4,5.229545E-4)
+        (5,0.0020221634999999997)
+        (6,0.014452913000000001)
+        (7,0.044465508)
+        (8,0.039038954)
+        (9,0.088448429)
+        (10,0.33017173499999997)
+        (11,1.7330093685)
+        (12,3.436815223163842)
+        (13,9.139001624999999)
+        (14,13.487728657446809)
+        (15,54.37308013571429)
+        (16,174.90209208000002)
+        (17,8.8468752)
 };
-    \addlegendentry{GDFS O IP}
-    
-    \addplot[
-        mark=*,
-        blue,
-    ] plot coordinates {
-        (4,0.0025422386237516285)
-        (5,0.022638101142943744)
-        (6,0.0734345302556367)
-        (7,0.3510897920750323)
-        (8,0.6001774153137056)
-        (9,1.7740936887558822)
-        (10,2.712433360806167)
-        (11,10.373501489465518)
-        (12,31.40227594031818)
-        (13,43.696226763999995)
-        (14,83.08348835588889)
-        (15,168.00605787019998)
-};
-    \addlegendentry{K-Path}
-    
-    \addplot[
-        mark=asterisk,
-        yellow,
-    ] plot coordinates {
-        (4,0.0025109829606700658)
-        (5,0.026643974231709253)
-        (6,0.09337968902815454)
-        (7,0.4336080602865214)
-        (8,0.7304999218364312)
-        (9,2.0308082099898646)
-        (10,2.8929847101298076)
-        (11,10.985586681654546)
-        (12,33.17703984786363)
-        (13,38.036175942)
-        (14,52.92116166808333)
-        (15,137.5613253885)
-        (16,360.68179355899997)
-        (17,339.2709589685)
-        (18,88.89462099425)
-};
-    \addlegendentry{GDFS A IP}
+%    \addlegendentry{GDFS O IP}
     
     \addplot[
         mark=star,
         gray,
     ] plot coordinates {
-        (4,0.010814293411483253)
-        (5,0.013247418663194444)
-        (6,0.018136650490846524)
-        (7,0.044871280226089896)
-        (8,0.06975961715906405)
-        (9,0.1641424184989053)
-        (10,0.253489213402027)
-        (11,0.6532397146760259)
-        (12,1.5354695015253805)
-        (13,2.959186464259804)
-        (14,4.914401732717742)
-        (15,26.6257452353)
-        (16,28.346528123181823)
-        (17,35.84909494664706)
-        (18,36.33712715494118)
-        (19,83.31132072587499)
-        (20,24.872821897)
-        (21,231.0657386335)
+        (4,0.00139258)
+        (5,0.002327794)
+        (6,0.004565538)
+        (7,0.0067396635000000005)
+        (8,0.0071890365)
+        (9,0.010737805)
+        (10,0.02400474)
+        (11,0.07292148550000001)
+        (12,0.12421214450000001)
+        (13,0.403000701)
+        (14,0.7163419985)
+        (15,2.1890222930000003)
+        (16,7.270705493975904)
+        (17,27.538684308695654)
+        (18,43.79655899583333)
+        (19,70.8624523888889)
+        (20,42.929491375)
+        (21,161.7936666)
 };
-    \addlegendentry{GDFS C}
+ %   \addlegendentry{GDFS C}
     
     \addplot[
         mark=x,
         red,
     ] plot coordinates {
-        (4,5.741331169962661E-4)
-        (5,0.0031486944433473107)
-        (6,0.009334932808338796)
-        (7,0.039730949068614435)
-        (8,0.06759239543652791)
-        (9,0.1760595743967742)
-        (10,0.2751886341155433)
-        (11,0.7801457321818182)
-        (12,1.7678120634385965)
-        (13,3.4430373055819206)
-        (14,5.507068819963637)
-        (15,22.482002219333335)
-        (16,34.930044327454546)
-        (17,43.10860792682353)
-        (18,44.025957983176475)
-        (19,87.41141809728572)
-        (20,30.977993367750003)
-        (21,277.99751084799993)
+        (4,2.463635E-4)
+        (5,4.17268E-4)
+        (6,0.001167168)
+        (7,0.002865959)
+        (8,0.0024855845)
+        (9,0.0055816305)
+        (10,0.016075872499999998)
+        (11,0.060558201)
+        (12,0.1081205275)
+        (13,0.358527165)
+        (14,0.6678748950000001)
+        (15,1.9833789535)
+        (16,8.623507047058824)
+        (17,23.20956361923077)
+        (18,38.53969741666666)
+        (19,45.70503912307693)
+        (20,88.00206148888888)
+        (21,145.2799635)
 };
-    \addlegendentry{DFS}
+%    \addlegendentry{DFS}
+    
+    
+    \addplot[
+        mark=asterisk,
+        magenta,
+    ] plot coordinates {
+        (4,4.3166750000000006E-4)
+        (5,0.0010404115)
+        (6,0.003709151)
+        (7,0.010290998499999999)
+        (8,0.009050423)
+        (9,0.0244776325)
+        (10,0.060524060500000004)
+        (11,0.177295532)
+        (12,0.36728383800000003)
+        (13,1.0505953314999998)
+        (14,2.158745016)
+        (15,5.232621873043478)
+        (16,15.130776390697672)
+        (17,100.89787280000002)
+        (18,78.64249841111112)
+        (19,113.64276582222222)
+        (20,75.4335271625)
+        (21,343.9340747)
+};
+%    \addlegendentry{GDFS A IP}
+    
+    \addplot[
+        mark=*,
+        blue,
+    ] plot coordinates {
+        (4,5.025650000000001E-4)
+        (5,0.0011748805)
+        (6,0.0038617564999999998)
+        (7,0.009955469500000001)
+        (8,0.008569285)
+        (9,0.022299932)
+        (10,0.054706759)
+        (11,0.158324873)
+        (12,0.317071005)
+        (13,0.9476776635)
+        (14,1.870529588)
+        (15,5.256302935245901)
+        (16,13.612862210869567)
+        (17,93.2565386888889)
+        (18,73.17322655555556)
+        (19,108.78198909999999)
+        (20,71.5219922)
+        (21,314.1443365)
+};
+%    \addlegendentry{K-Path}
+    
+    \addplot[
+        mark=square,
+        orange,
+    ] plot coordinates {
+        (4,2.01024E-4)
+        (5,3.8098600000000004E-4)
+        (6,0.001139124)
+        (7,0.0028233219999999996)
+        (8,0.00244008)
+        (9,0.0054960905)
+        (10,0.015953537)
+        (11,0.060388840000000006)
+        (12,0.107574184)
+        (13,0.358221664)
+        (14,0.662612554)
+        (15,1.9811704315)
+        (16,8.621956076470587)
+        (17,23.20956361923077)
+        (18,38.53969741666666)
+        (19,45.70503912307693)
+        (20,88.00206148888888)
+        (21,145.2799635)
+};
+ %   \addlegendentry{portfolio}
+    
+
   
     \end{axis}
     \end{tikzpicture}
-    \caption{A comparison of the speed of path iterators on directed graphs without a vertex disjoint subgraph homeomorphism. The time taken is measured of exploring the entire search tree without pruning or contraction and ``refuse longer paths" enabled. The source graph has average degree $2.429$ and the random target graph has $50\%$ more vertices and average degree $3.425$. Neither graphs have labels}
-    \label{fig:plotfailiterators}
-\end{figure}
 
-
-%time to fail \ref{fig:plotfailiterators}
-\begin{figure}
+\caption{$|V_T|=3|V_S|$}
+\label{fig:sub2}
+\end{subfigure}\\[1ex]
+\begin{subfigure}{0.5\linewidth}
 \centering
+
 \begin{tikzpicture}
     \begin{axis}[
         xlabel=$|V_S|$,
         ylabel=$seconds$,
-        ymin=0.01,
+        ymin=0.0001,
         ymode=log,
         xmin=4,
-        xmax=24,
+        xmax=17,
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
     ]
@@ -365,350 +818,839 @@ Lastly, we take the optimal set of settings and measure for each path iteration 
         black,
     ] plot coordinates {
         (4,600)
-        (21,600)
+        (17,600)
 };
-    \addlegendentry{Timeout 10m} 
+ %   \addlegendentry{Timeout 10m} 
     
-    
+
+
 \addplot[
         mark=+,
         green,
     ] plot coordinates {
-        (4,0.017645283460778257)
-        (5,0.1745025669049236)
-        (6,0.6467764244307692)
-        (7,4.3936975820079365)
-        (8,7.11164096066265)
-        (9,101.24022341533333)
-        (10,47.16174946961539)
-        (11,139.03254999680001)
-        (12,443.1012875685)
-        (13,52.476407638)
-        (14,443.226064629)
+        (4,0.22498123849999999)
+        (5,1.305544137)
+        (6,5.477192146428571)
+        (7,49.320910733333335)
+        (8,93.62391244)
 };
-    \addlegendentry{CP}    
-    
-    
-\addplot[
-        mark=*,
-        blue,
-    ] plot coordinates {
-        (4,0.004245233039689387)
-        (5,0.0353410251472124)
-        (6,0.10352824219112851)
-        (7,0.494772028137931)
-        (8,0.8074274628790761)
-        (9,2.482763904340164)
-        (10,3.865187535566879)
-        (11,14.701822322761906)
-        (12,36.7834641937647)
-        (13,41.14894272313333)
-        (14,107.03571004128571)
-        (15,215.65184701166672)
-};
-    \addlegendentry{K-Path}    
-    
-    
-    \addplot[
-        mark=o,
-        purple,
-    ] plot coordinates {
-        (4,0.0031029487463459762)
-        (5,0.027784547406359907)
-        (6,0.08514580346853275)
-        (7,0.43991854300324673)
-        (8,0.7373503581544208)
-        (9,2.278939361257576)
-        (10,3.45658676504023)
-        (11,11.952838503529412)
-        (12,33.783719041055555)
-        (13,50.946790028437505)
-        (14,85.95989917885716)
-        (15,149.7408208006)
-        (16,351.5839286225)
-        (17,400.122131196)
-};
-    \addlegendentry{GDFS O IP}    
+%    \addlegendentry{CP}
     
     
     \addplot[
         mark=star,
         gray,
     ] plot coordinates {
-        (4,0.002289455948737567)
-        (5,0.007236020123976148)
-        (6,0.015652985810045858)
-        (7,0.054020700995998)
-        (8,0.08337547635008447)
-        (9,0.209056387774216)
-        (10,0.3030974387306721)
-        (11,0.7875675544383203)
-        (12,1.644219920189041)
-        (13,3.643001555393939)
-        (14,5.349961422168142)
-        (15,23.886845752777777)
-        (16,25.046929197)
-        (17,43.009257770058824)
-        (18,49.047759668588235)
-        (19,86.01748153757141)
-        (20,86.336685817)
-        (21,319.579445304)
+        (4,0.003058187)
+        (5,0.0066316019999999995)
+        (6,0.013466777000000001)
+        (7,0.032822169)
+        (8,0.049183345)
+        (9,0.080513419)
+        (10,0.4200455685)
+        (11,1.3332708905000001)
+        (12,4.545143440151515)
+        (13,10.333796216470589)
+        (14,68.03150406)
+        (15,67.08428195454545)
+        (16,39.747431)
 };
-    \addlegendentry{GDFS C}
-    
-    
-    
-\addplot[
-        mark=asterisk,
-        black,
-    ] plot coordinates {
-        (4,0.00410556222445479)
-        (5,0.041251440622673434)
-        (6,0.127707921606185)
-        (7,0.5729701517108307)
-        (8,0.9202523525919003)
-        (9,2.692941223147982)
-        (10,3.8791306215677417)
-        (11,14.649771539219511)
-        (12,32.00752447142105)
-        (13,44.572142118375)
-        (14,80.03965758022223)
-        (15,113.27568379060003)
-        (16,275.7243762606667)
-        (17,443.98621448800003)
-        (18,196.12091688325)
-        (19,426.65293237649996)
-};
-    \addlegendentry{GDFS A IP}    
-    
+%    \addlegendentry{GDFS C}
     
     \addplot[
         mark=x,
         red,
     ] plot coordinates {
-        (4,9.900362214379085E-4)
-        (5,0.005275904246768833)
-        (6,0.013062854546030478)
-        (7,0.0523722458388398)
-        (8,0.08340171479040653)
-        (9,0.2230420780836742)
-        (10,0.32816638196391473)
-        (11,0.9360990630452419)
-        (12,1.9687118218131148)
-        (13,4.576157802333333)
-        (14,6.4191426771595745)
-        (15,31.937028336947368)
-        (16,31.767286549181815)
-        (17,51.43551289982353)
-        (18,57.67566447352941)
-        (19,102.93916266528572)
-        (20,107.0362526255)
-        (21,390.702236667)
+        (4,4.4261750000000003E-4)
+        (5,0.0014131274999999999)
+        (6,0.0072753685000000005)
+        (7,0.023372011)
+        (8,0.0344219615)
+        (9,0.0656533275)
+        (10,0.3738274895)
+        (11,1.183567724)
+        (12,8.084725380597014)
+        (13,9.105788104705884)
+        (14,54.59190611666667)
+        (15,56.45855956363636)
+        (16,33.2144619)
 };
-    \addlegendentry{DFS}
-       
+%    \addlegendentry{DFS}
     
-\addplot[
+    \addplot[
+        mark=*,
+        blue,
+    ] plot coordinates {
+        (4,0.001906137)
+        (5,0.005935332)
+        (6,0.0194225855)
+        (7,0.0768926385)
+        (8,0.103136142)
+        (9,0.228699563)
+        (10,1.062870499)
+        (11,3.1228105518134712)
+        (12,12.555450586)
+        (13,11.474581472222223)
+        (14,183.9983442333333)
+        (15,97.27099918571427)
+        (16,22.0919737)
+};
+%    \addlegendentry{K-Path}
+    
+    
+    \addplot[
+        mark=o,
+        purple,
+    ] plot coordinates {
+        (4,0.0038459365)
+        (5,0.020740273)
+        (6,0.20711417999999998)
+        (7,0.7947821999999999)
+        (8,1.565915889)
+        (9,2.396293172)
+        (10,18.270429463636365)
+        (11,54.59309324615385)
+        (12,170.3045068)
+        (13,125.79853659999999)
+        (14,425.516946)
+};
+%    \addlegendentry{GDFS O IP}
+    
+    
+    \addplot[
+        mark=asterisk,
+        magenta,
+    ] plot coordinates {
+        (4,0.0018444635000000001)
+        (5,0.006224887500000001)
+        (6,0.0201156265)
+        (7,0.0838507)
+        (8,0.11677660100000001)
+        (9,0.2631939955)
+        (10,1.195823311)
+        (11,3.358671161111111)
+        (12,12.508858883333334)
+        (13,12.832528379245282)
+        (14,115.64856344)
+        (15,100.09827916666666)
+        (16,308.21460745)
+        (17,130.7677965)
+};
+%    \addlegendentry{GDFS A IP}
+    
+    
+    \addplot[
         mark=square,
         orange,
     ] plot coordinates {
-        (4,9.636522461437909E-4)
-        (5,0.0051933914187284585)
-        (6,0.012574982413503794)
-        (7,0.04762603008989627)
-        (8,0.07439790702517936)
-        (9,0.19393763035365855)
-        (10,0.2845805616993431)
-        (11,0.7636504277874016)
-        (12,1.6163571265150685)
-        (13,3.6264127904121213)
-        (14,5.320849797115044)
-        (15,23.86788102222222)
-        (16,25.043475016749998)
-        (17,43.009257770058824)
-        (18,49.035688546705885)
-        (19,86.01748153757141)
-        (20,86.336685817)
-        (21,319.579445304)
+        (4,4.152115E-4)
+        (5,0.001389112)
+        (6,0.0071271165)
+        (7,0.023055476000000002)
+        (8,0.034188356)
+        (9,0.0634472525)
+        (10,0.370240898)
+        (11,1.1794381704999999)
+        (12,8.077388874626866)
+        (13,9.088254795294118)
+        (14,54.45241678333334)
+        (15,56.29606548181818)
+        (16,308.21460745)
+        (17,130.7677965)
 };
-    \addlegendentry{portfolio}
-  
-
+%    \addlegendentry{portfolio}
+    
   
     \end{axis}
     \end{tikzpicture}
-    \caption{A comparison of the speed of path iterators on directed graphs without a vertex disjoint subgraph homeomorphism. The time taken is measured of exploring the entire search tree without pruning or contraction and ``refuse longer paths" enabled. The source graph has average degree $2.429$ and the random target graph has $50\%$ more vertices and average degree $3.425$. The source and target graphs have the same labels and distribution of them as the use case models}
-    \label{fig:plotfailiterators}
+
+\caption{$|V_T|=5|V_S|$}
+\label{fig:sub3}
+\end{subfigure}
+\begin{subfigure} {0.5\linewidth}
+\centering
+
+\begin{tikzpicture} 
+    \begin{axis}[%
+    hide axis,
+    xmin=10,
+    xmax=50,
+    ymin=0,
+    ymax=0.4,
+    legend style={draw=white!15!black,legend cell align=left}
+    ]
+	\addlegendimage{black}
+    \addlegendentry{Timeout 10m}; 
+     
+    \addlegendimage{green, mark=+}
+    \addlegendentry{CP};
+    
+    \addlegendimage{red, mark=x}
+    \addlegendentry{DFS};
+    
+    \addlegendimage{gray, mark=star}
+    \addlegendentry{GDFS C};
+    
+    \addlegendimage{magenta, mark=asterisk}
+    \addlegendentry{GDFS A IP};
+    
+    \addlegendimage{purple, mark=o}
+    \addlegendentry{GDFS O IP};
+    
+    \addlegendimage{blue, mark=*}
+    \addlegendentry{K-Path};
+    
+    \addlegendimage{orange, mark=square}
+    \addlegendentry{Portfolio};
+    \end{axis}
+\end{tikzpicture}
+
+\end{subfigure}
+
+\caption{Performance of using different path iterators in test cases with present subgraph homeomorphisms. We include a portfolio method that takes the best performance rating for each individual test case.}	
+\label{fig:test}
 \end{figure}
+
+
+
+
+%\centering
+%\begin{tikzpicture}
+%    \begin{axis}[
+%        xlabel=$|V_S|$,
+%        ylabel=$seconds$,
+%        ymin=0.0001,
+%        ymode=log,
+%        xmin=4,
+%        xmax=154,
+%        legend style={at={(0.9,0.1)},anchor=south east},
+%        width=\textwidth,
+%    ]
+%    
+%    
+%    \addplot[
+%        mark=*,
+%        blue,
+%    ] plot coordinates {
+%        (4,0.001453558)
+%        (5,2.662845E-4)
+%        (6,2.692255E-4)
+%        (7,2.766865E-4)
+%        (8,2.85301E-4)
+%        (9,2.95161E-4)
+%        (10,2.62594E-4)
+%        (11,3.120675E-4)
+%        (12,3.0024450000000003E-4)
+%        (13,3.8988799999999996E-4)
+%        (14,3.98057E-4)
+%        (15,4.38608E-4)
+%        (16,5.407825E-4)
+%        (17,4.2873550000000003E-4)
+%        (18,4.97956E-4)
+%        (19,5.5585E-4)
+%        (20,5.752355E-4)
+%        (21,7.143774999999999E-4)
+%        (22,6.579855E-4)
+%        (23,7.275845E-4)
+%        (24,7.86211E-4)
+%        (25,8.5834E-4)
+%        (26,9.02515E-4)
+%        (27,9.85177E-4)
+%        (28,0.001070911)
+%        (29,0.0011007185)
+%        (30,0.0011748260000000001)
+%        (31,0.0013961960000000002)
+%        (32,0.001337548)
+%        (33,0.0015390924999999999)
+%        (34,0.001610745)
+%        (35,0.001603441)
+%        (36,0.0017608695)
+%        (37,0.0018374584999999999)
+%        (38,0.0019971715)
+%        (39,0.001988867)
+%        (40,0.0021071205000000003)
+%        (41,0.002299212)
+%        (42,0.0023479385)
+%        (43,0.0025216235)
+%        (44,0.0026287565)
+%        (45,0.0027482985)
+%        (46,0.0029241840000000002)
+%        (47,0.0030328865)
+%        (48,0.003001125)
+%        (49,0.0033098305)
+%        (50,0.00341402)
+%        (51,0.003456682)
+%        (52,0.0035689510000000003)
+%        (53,0.003724974)
+%        (54,0.003964841)
+%        (55,0.004148001)
+%        (56,0.0041462395)
+%        (57,0.004439741)
+%        (58,0.004803864)
+%        (59,0.0047600494999999994)
+%        (60,0.004885047)
+%        (61,0.0051423625)
+%        (62,0.005801905)
+%        (63,0.0058080555)
+%        (64,0.005837875)
+%        (65,0.0060842629999999995)
+%        (66,0.0058939644999999995)
+%        (67,0.006689764999999999)
+%        (68,0.006344105)
+%        (69,0.006680382499999999)
+%        (70,0.006976954)
+%        (71,0.007048449500000001)
+%        (72,0.006898754)
+%        (73,0.0075829124999999995)
+%        (74,0.007442074)
+%        (75,0.0077876275)
+%        (76,0.008074942)
+%        (77,0.0080991655)
+%        (78,0.008379599)
+%        (79,0.00874456)
+%        (80,0.008639861)
+%        (81,0.009265389)
+%        (82,0.009434129)
+%        (83,0.009594110500000001)
+%        (84,0.009608555)
+%        (85,0.009872137)
+%        (86,0.010385803499999999)
+%        (87,0.01062902)
+%        (88,0.0108560975)
+%        (89,0.010737672)
+%        (90,0.011210833)
+%        (91,0.0118001685)
+%        (92,0.01171153)
+%        (93,0.012064637)
+%        (94,0.0123413575)
+%        (95,0.012456216499999999)
+%        (96,0.013313942)
+%        (97,0.013196973)
+%        (98,0.013713651)
+%        (99,0.013467091499999998)
+%        (100,0.0140739155)
+%        (101,0.0145949875)
+%        (102,0.0147315415)
+%        (103,0.015095879999999999)
+%        (104,0.014955354999999998)
+%        (105,0.015345967)
+%        (106,0.016499721000000002)
+%        (107,0.016180731)
+%        (108,0.0165881175)
+%        (109,0.017206793)
+%        (110,0.017553430999999998)
+%        (111,0.0178276065)
+%        (112,0.01793235)
+%        (113,0.0185217045)
+%        (114,0.019131549)
+%        (115,0.0193583435)
+%        (116,0.0194724465)
+%        (117,0.0200064025)
+%        (118,0.0205588975)
+%        (119,0.020825203499999997)
+%        (120,0.021444926)
+%        (121,0.022597493000000003)
+%        (122,0.025429853)
+%        (123,0.024438607)
+%        (124,0.023428064000000002)
+%        (125,0.023900668500000003)
+%        (126,0.025059102000000003)
+%        (127,0.025008305)
+%        (128,0.0251174765)
+%        (129,0.025973405)
+%        (130,0.027299354)
+%        (131,0.028161115)
+%        (132,0.027549519999999997)
+%        (133,0.0283001935)
+%        (134,0.0282419815)
+%        (135,0.029244735)
+%        (136,0.028565097)
+%        (137,0.0299900245)
+%        (138,0.032137683)
+%        (139,0.03258433103448276)
+%        (140,0.0309644735)
+%        (141,0.032145942999999996)
+%        (142,0.032131891499999995)
+%        (143,0.03353229593495935)
+%        (144,0.032666537704918036)
+%        (145,0.03342298187134503)
+%        (146,0.033846469)
+%        (147,0.034949912068965514)
+%        (148,0.03325529607843137)
+%        (149,0.03422327)
+%        (150,0.03498731012658228)
+%        (151,0.036564767724867726)
+%        (152,0.0382647295)
+%        (153,0.03801780508474576)
+%        (154,0.038082844)
+%};
+%    \addlegendentry{K-Path}
+%    
+%   
+%  
+%    \end{axis}
+%    \end{tikzpicture}
+%    \caption{Time spent where}
+%    \label{fig:plotfailiterators}
+%\end{figure}
+
+
 
 
 
 %time to succeed \ref{fig:plotsucceediterators} TODO: run 10m each
+%\begin{figure}
+%\centering
+%\begin{tikzpicture}
+%    \begin{axis}[
+%        xlabel=$|V_S|$,
+%        ylabel=$seconds$,
+%        ymin=0.01,
+%        ymode=log,
+%        xmin=4,
+%        xmax=21,
+%        legend style={at={(0.9,0.1)},anchor=south east},
+%        width=\textwidth,
+%    ]
+%    
+%    \addplot[
+%        mark=none,
+%        black,
+%    ] plot coordinates {
+%        (4,600)
+%        (21,600)
+%};
+%    \addlegendentry{Timeout 10m}
+%
+%
+%\addplot[
+%        mark=*,
+%        blue,
+%        error bars/.cd, y dir=both, y explicit,
+%    ] plot coordinates {
+%        (4,0.0012667032822330576)
+%        (5,0.014450939583729977)
+%        (6,0.05591708867636635)
+%        (7,0.14911566497364495)
+%        (8,0.44854427304185357)
+%        (9,1.257458328264463)
+%        (10,4.882261796422765)
+%        (11,8.92112126069014)
+%        (12,53.879064942750006)
+%        (13,50.1927055715)
+%};
+%    \addlegendentry{K-Path}
+%    
+%    \addplot[
+%        mark=+,
+%        green,
+%        error bars/.cd, y dir=both, y explicit,
+%    ] plot coordinates {
+%        (4,0.0022598064731390965)
+%        (5,0.040788492474074574)
+%        (6,0.18285989427787933)
+%        (7,0.7438714740483271)
+%        (8,2.0661439080927835)
+%        (9,11.051631589785714)
+%        (10,26.467970115956522)
+%        (11,91.75283437071428)
+%        (12,114.154734211)
+%        (13,342.4216391745)
+%};
+%    \addlegendentry{CP}
+%    
+%    
+%    \addplot[
+%        mark=o,
+%        purple,
+%        error bars/.cd, y dir=both, y explicit,
+%    ] plot coordinates {
+%        (4,7.913821003220384E-4)
+%        (5,0.008231382983722117)
+%        (6,0.031882214566006595)
+%        (7,0.08963993490432053)
+%        (8,0.29087998969535783)
+%        (9,0.6738117268754134)
+%        (10,1.8639315102639753)
+%        (11,4.723388754421875)
+%        (12,19.076032830888888)
+%        (13,34.09402854616666)
+%        (14,56.448447976636366)
+%        (15,221.585912108)
+%        (16,271.705023368)
+%};
+%    \addlegendentry{GDFS O IP}
+%    
+%    
+%    \addplot[
+%        mark=x,
+%        red,
+%        error bars/.cd, y dir=both, y explicit,
+%    ] plot coordinates {
+%        (4,5.262049048412901E-4)
+%        (5,0.0037078367276320813)
+%        (6,0.011864989818313664)
+%        (7,0.024878632873617693)
+%        (8,0.06746086448666291)
+%        (9,0.1434635451083732)
+%        (10,0.42305252119181946)
+%        (11,0.8507154702662889)
+%        (12,2.2694573458389513)
+%        (13,4.062910206266234)
+%        (14,15.418462455714286)
+%        (15,88.48300721233333)
+%};
+%    \addlegendentry{DFS}
+%    
+%    
+%    \addplot[
+%        mark=asterisk,
+%        black,
+%        error bars/.cd, y dir=both, y explicit,
+%    ] plot coordinates {
+%        (4,0.0012375753780820582)
+%        (5,0.01386437069184402)
+%        (6,0.053590561273019845)
+%        (7,0.1357242449547409)
+%        (8,0.3913462516747066)
+%        (9,0.9992033137657806)
+%        (10,2.177200933823741)
+%        (11,5.359800497321429)
+%        (12,14.644324665268291)
+%        (13,39.5231686368125)
+%        (14,127.138527012)
+%        (15,40.69748180766667)
+%        (16,477.083996688)
+%};
+%    \addlegendentry{GDFS A IP}
+%    
+%    
+%    \addplot[
+%        mark=star,
+%        gray,
+%        error bars/.cd, y dir=both, y explicit,
+%    ] plot coordinates {
+%        (4,0.005644702207616498)
+%        (5,0.008692270720925143)
+%        (6,0.017174057391094375)
+%        (7,0.03073833753675828)
+%        (8,0.07604849509162437)
+%        (9,0.13615389069436876) 
+%        (10,0.38220422819426747)
+%        (11,0.6959524782169374)
+%        (12,1.95247773692233)
+%        (13,6.06748104474) 
+%        (14,9.499085503648649) 
+%        (15,17.829571026735294) 
+%        (16,59.15707016833334) 
+%        (17,39.30442401336364) 
+%        (18,77.68409019719999) 
+%        (19,85.162749429) 
+%        (20,223.46494652625)
+%        (21,113.76846415325) 
+%};
+%    \addlegendentry{GDFS C}
+%
+%
+%   
+%    \end{axis}
+%    \end{tikzpicture}
+%    \caption{A comparison of the speed of path iterators on directed graphs with a vertex disjoint subgraph homeomorphism. The time taken is measured of exploring the entire search tree without pruning or contraction and ``refuse longer paths" enabled. The source graph has average degree $3.0$ and the random target graph has $50\%$ more vertices and average degree $4.0$.}
+%    \label{fig:plotsucceediterators}
+%\end{figure}
+
+
+
+%contraction times factor 1.5 timeout 10m
+%\begin{figure}
+%\centering
+%\begin{tikzpicture}
+%    \begin{axis}[
+%        xlabel=$|V_S|$,
+%        ylabel=$seconds$,
+%        ymin=-100,
+%        ymax=100,
+%        xmin=4,
+%        xmax=35,
+%        legend style={at={(0.9,0.1)},anchor=south east},
+%        width=\textwidth,
+%        yticklabel={$\pgfmathprintnumber{\tick}\%$},
+%    ]
+%
+%
+%\addplot [mark=none, black] plot coordinates {
+%        (4,0) (35, 0)};
+%\addlegendentry{No contraction}
+%
+%
+%\addplot[
+%        mark=o,
+%        purple,
+%    ] plot coordinates {
+%        (4,123.73282219151496)
+%        (5,-15.920345499984956)
+%        (6,-52.37305659134008)
+%        (7,-65.61004822968585)
+%        (8,-65.7340938280165)
+%        (9,-25.285589142891307)
+%        (10,-68.62051421832805)
+%        (11,-80.95502536287958)
+%        (12,-73.99134383576952)
+%        (13,-80.98147897767203)
+%        (14,-73.55201926260625)
+%        (15,-78.95355041753565)
+%        (16,-81.53448492043376)
+%        (17,-86.511466028791)
+%        (18,-66.52994544259807)
+%        (19,-58.72920400909036)
+%        (20,-47.039151254147216)
+%        (21,-84.1600528625449)
+%        (22,-71.09729745327353)
+%        (23,-82.17729995308483)
+%};
+%    \addlegendentry{GDFS O IP}
+%  
+%
+%
+%\addplot[
+%        mark=+,
+%        green,
+%    ] plot coordinates {
+%        (4,-025.20219056936399)
+%        (5,-022.493453420382936)
+%        (6,-038.97463954937388)
+%        (7,-055.09778357966048)
+%        (8,-037.433492126378953)
+%        (9,-032.03325141432528)
+%        (10,-051.96689139278652)
+%        (11,-057.14050109835533)
+%        (12,-058.75023937798425)
+%        (13,-047.140986025169374)
+%        (14,-090.23397911753834)
+%        (15,239.8585596188363)
+%        (16,-049.057976977453943)
+%        (17,-098.51586058140065)
+%};
+%    \addlegendentry{CP}
+%    
+%    
+%    \addplot[
+%        mark=asterisk,
+%        yellow,
+%    ] plot coordinates {
+%        (4,104.32230154808875)
+%        (5,001.3100718127611488)
+%        (6,-012.62414524078096)
+%        (7,-037.8202125606379)
+%        (8,-024.350567006027835)
+%        (9,003.142150672347355)
+%        (10,-039.07757134579495)
+%        (11,-048.82593836023965)
+%        (12,-044.182147606506306)
+%        (13,-053.61037313840382)
+%        (14,-056.59671859613651)
+%        (15,-049.744416960439364)
+%        (16,-048.44972253467088)
+%        (17,-054.58078239119416)
+%        (18,-033.656157042382806)
+%        (19,-028.379096681296656)
+%        (20,-034.283862074351223)
+%        (21,-059.59967793745939)
+%        (22,-001.798229780964855)
+%        (23,-092.35029400370509)
+%        (24,-086.31485796364881)
+%        (25,-067.74926355062878)
+%        (26,-094.84247146483261)
+%        (27,-097.99256891572952)
+%        (28,-096.97865670660217)
+%        (29,-016.044463767008554)
+%        (30,-053.54445552007417)
+%        (31,-097.25503699400231)
+%};
+%    \addlegendentry{GDFS A IP}
+%    
+%    
+%    \addplot[
+%        mark=*,
+%        blue,
+%    ] plot coordinates {
+%        (4,168.43679566347465)
+%        (5,026.442489966216587)
+%        (6,-002.225130638006434)
+%        (7,-025.153452900976225)
+%        (8,-015.497750469129457)
+%        (9,017.423429164778614)
+%        (10,-026.24191043443711)
+%        (11,-032.430479287090885)
+%        (12,-021.048904390943224)
+%        (13,-038.76743561292725)
+%        (14,-045.36566245712572)
+%        (15,-028.920176244755447)
+%        (16,-030.40272084329029)
+%        (17,-033.608990208004486)
+%        (18,-009.674324307431459)
+%        (19,003.924445129779297)
+%        (20,-016.033797858120757)
+%        (21,-052.22128629074319)
+%        (22,024.260726237431385)
+%        (23,-090.45931913063434)
+%        (24,-084.34122719202735)
+%        (25,-051.94077123219644)
+%        (26,-094.08535824980668)
+%        (27,-097.92626199110588)
+%        (28,-095.96588266125698)
+%        (29,-046.47193982745663)
+%        (30,-044.42559644925941)
+%        (31,-097.18674546373528)
+%};
+%    \addlegendentry{K-Path}
+%    
+%    
+%    \addplot[
+%        mark=x,
+%        red,
+%    ] plot coordinates {
+%        (4,145.74288201398948)
+%        (5,023.590100009510784)
+%        (6,020.559035149385996)
+%        (7,010.006338541144788)
+%        (8,051.3310950749601)
+%        (9,130.73410526666702)
+%        (10,006.359679066853641)
+%        (11,-015.70413117521775)
+%        (12,-005.93144906987042)
+%        (13,-034.452080777339855)
+%        (14,-037.4983499537888)
+%        (15,-024.78591933478047)
+%        (16,-036.156546968784553)
+%        (17,-028.39745050978739)
+%        (18,-023.36065635058614)
+%        (19,-015.643925874671583)
+%        (20,-043.99928871595725)
+%        (21,-061.33973110766648)
+%        (22,022.841018680086767)
+%        (23,-091.35376669657393)
+%        (24,-079.92603408025085)
+%        (25,-046.120410300036896)
+%        (26,-091.27231419272499)
+%        (27,-096.07259933786477)
+%        (28,-083.75935288922367)
+%        (29,158.9756916506027)
+%        (30,-057.69659226493207)
+%        (31,-098.51434243131209)
+%        (32,-099.94784335719136)
+%        (33,-051.02543885749924)
+%        (34,-025.99547070749336)
+%};
+%    \addlegendentry{DFS}
+%    
+%    
+%    \addplot[
+%        mark=star,
+%        gray,
+%    ] plot coordinates {
+%        (4,239.941105252917)
+%        (5,071.15229717186846)
+%        (6,036.730285185821154)
+%        (7,006.1613749961845654)
+%        (8,003.793627194674065)
+%        (9,016.909679152992885)
+%        (10,-010.53244807095538)
+%        (11,-030.898248312359733)
+%        (12,-028.582837812180484)
+%        (13,-049.40914532675378)
+%        (14,-050.81645782291583)
+%        (15,-053.2318090474718)
+%        (16,-060.45571353433861)
+%        (17,-057.22988218928096)
+%        (18,-053.53324295775679)
+%        (19,-046.71770062217261)
+%        (20,-064.09412074839498)
+%        (21,-067.93950642114399)
+%        (22,-017.747465972450327)
+%        (23,-096.15557392514883)
+%        (24,-077.18833763705579)
+%        (25,-066.20231377739343)
+%        (26,-095.28781711900244)
+%        (27,-097.54987368150285)
+%        (28,-093.96006304153799)
+%        (29,-059.83758603184788)
+%        (30,-061.25671690568346)
+%        (31,-098.33086459795161)
+%        (32,-099.9913245774606)
+%        (33,-079.02405113835651)
+%        (34,-063.69394803292339)
+%        (35,1943.520257459911)
+%};
+%    \addlegendentry{GDFS C}
+%    
+%    
+%    \addplot[
+%        mark=square,
+%        orange,
+%    ] plot coordinates {
+%        (4,-035.18057819844859)
+%        (5,-039.07625593738285)
+%        (6,-045.56962725740414)
+%        (7,-060.65228722082426)
+%        (8,-063.1323457667123)
+%        (9,-060.7256583365869)
+%        (10,-070.19172476203214)
+%        (11,-067.39249160120488)
+%        (12,-064.17656627335265)
+%        (13,-072.45468048165767)
+%        (14,-065.09256151173232)
+%        (15,-070.35172278405152)
+%        (16,-070.34365027550014)
+%        (17,-059.50201450871458)
+%        (18,-065.21704112562756)
+%        (19,-064.41343850179483)
+%        (20,-060.00235109601747)
+%        (21,-057.59166958306023)
+%        (22,-034.158096253727355)
+%        (23,-077.52213868588044)
+%        (24,-080.41428261543347)
+%        (25,-073.93216920275777)
+%        (26,-082.62941996091215)
+%        (27,-098.46321740243816)
+%        (28,-078.42040881354694)
+%        (29,-059.83758603184788)
+%        (30,-062.08337850557739)
+%        (31,-073.59160791446231)
+%        (32,-099.9913245774606)
+%        (33,-079.43456610669396)
+%        (34,-042.56917398865643)
+%        (35,0.0)
+%};
+%    \addlegendentry{portfolio}
+%
+%
+%    \end{axis}
+%    \end{tikzpicture}
+%    \caption{Relative time consumption of contraction-enabled subgraph homeomorphism search compared to contraction-disabled for different path iteration methods.}
+%    \label{fig:contractionsmall}
+%\end{figure}
+
+
+%contraction times factor 1.5 timeout 30m
 \begin{figure}
 \centering
-\begin{tikzpicture}
-    \begin{axis}[
-        xlabel=$|V_S|$,
-        ylabel=$seconds$,
-        ymin=0.01,
-        ymode=log,
-        xmin=4,
-        xmax=21,
-        legend style={at={(0.9,0.1)},anchor=south east},
-        width=\textwidth,
-    ]
-    
-    \addplot[
-        mark=none,
-        black,
-    ] plot coordinates {
-        (4,600)
-        (21,600)
-};
-    \addlegendentry{Timeout 10m}
 
-
-\addplot[
-        mark=*,
-        blue,
-        error bars/.cd, y dir=both, y explicit,
-    ] plot coordinates {
-        (4,0.0012667032822330576)
-        (5,0.014450939583729977)
-        (6,0.05591708867636635)
-        (7,0.14911566497364495)
-        (8,0.44854427304185357)
-        (9,1.257458328264463)
-        (10,4.882261796422765)
-        (11,8.92112126069014)
-        (12,53.879064942750006)
-        (13,50.1927055715)
-};
-    \addlegendentry{K-Path}
-    
-    \addplot[
-        mark=+,
-        green,
-        error bars/.cd, y dir=both, y explicit,
-    ] plot coordinates {
-        (4,0.0022598064731390965)
-        (5,0.040788492474074574)
-        (6,0.18285989427787933)
-        (7,0.7438714740483271)
-        (8,2.0661439080927835)
-        (9,11.051631589785714)
-        (10,26.467970115956522)
-        (11,91.75283437071428)
-        (12,114.154734211)
-        (13,342.4216391745)
-};
-    \addlegendentry{CP}
-    
-    
-    \addplot[
-        mark=o,
-        purple,
-        error bars/.cd, y dir=both, y explicit,
-    ] plot coordinates {
-        (4,7.913821003220384E-4)
-        (5,0.008231382983722117)
-        (6,0.031882214566006595)
-        (7,0.08963993490432053)
-        (8,0.29087998969535783)
-        (9,0.6738117268754134)
-        (10,1.8639315102639753)
-        (11,4.723388754421875)
-        (12,19.076032830888888)
-        (13,34.09402854616666)
-        (14,56.448447976636366)
-        (15,221.585912108)
-        (16,271.705023368)
-};
-    \addlegendentry{GDFS O IP}
-    
-    
-    \addplot[
-        mark=x,
-        red,
-        error bars/.cd, y dir=both, y explicit,
-    ] plot coordinates {
-        (4,5.262049048412901E-4)
-        (5,0.0037078367276320813)
-        (6,0.011864989818313664)
-        (7,0.024878632873617693)
-        (8,0.06746086448666291)
-        (9,0.1434635451083732)
-        (10,0.42305252119181946)
-        (11,0.8507154702662889)
-        (12,2.2694573458389513)
-        (13,4.062910206266234)
-        (14,15.418462455714286)
-        (15,88.48300721233333)
-};
-    \addlegendentry{DFS}
-    
-    
-    \addplot[
-        mark=asterisk,
-        black,
-        error bars/.cd, y dir=both, y explicit,
-    ] plot coordinates {
-        (4,0.0012375753780820582)
-        (5,0.01386437069184402)
-        (6,0.053590561273019845)
-        (7,0.1357242449547409)
-        (8,0.3913462516747066)
-        (9,0.9992033137657806)
-        (10,2.177200933823741)
-        (11,5.359800497321429)
-        (12,14.644324665268291)
-        (13,39.5231686368125)
-        (14,127.138527012)
-        (15,40.69748180766667)
-        (16,477.083996688)
-};
-    \addlegendentry{GDFS A IP}
-    
-    
-    \addplot[
-        mark=star,
-        gray,
-        error bars/.cd, y dir=both, y explicit,
-    ] plot coordinates {
-        (4,0.005644702207616498)
-        (5,0.008692270720925143)
-        (6,0.017174057391094375)
-        (7,0.03073833753675828)
-        (8,0.07604849509162437)
-        (9,0.13615389069436876) 
-        (10,0.38220422819426747)
-        (11,0.6959524782169374)
-        (12,1.95247773692233)
-        (13,6.06748104474) 
-        (14,9.499085503648649) 
-        (15,17.829571026735294) 
-        (16,59.15707016833334) 
-        (17,39.30442401336364) 
-        (18,77.68409019719999) 
-        (19,85.162749429) 
-        (20,223.46494652625)
-        (21,113.76846415325) 
-};
-    \addlegendentry{GDFS C}
-
-
-   
-    \end{axis}
-    \end{tikzpicture}
-    \caption{A comparison of the speed of path iterators on directed graphs with a vertex disjoint subgraph homeomorphism. The time taken is measured of exploring the entire search tree without pruning or contraction and ``refuse longer paths" enabled. The source graph has average degree $3.0$ and the random target graph has $50\%$ more vertices and average degree $4.0$.}
-    \label{fig:plotsucceediterators}
+    \caption{Mean relative time consumption of contraction-enabled subgraph homeomorphism search compared to contraction-disabled for different path iteration methods. For data points below the reference line contraction saves time while for data points above it contraction costs extra time. We handled a maximum of 1000 test cases or 30 minutes per value of $|V_S|$ for each path iteration method.}
+    \label{fig:contractionsmall}
 \end{figure}
 
 
 
-%contraction times \ref{fig:contractionsmall} timeout 30m
+
+
+
+
+
 \begin{figure}
+\begin{subfigure}{.5\linewidth}
 \centering
+
 \begin{tikzpicture}
     \begin{axis}[
         xlabel=$|V_S|$,
@@ -716,7 +1658,7 @@ Lastly, we take the optimal set of settings and measure for each path iteration 
         ymin=-100,
         ymax=100,
         xmin=4,
-        xmax=18.5,
+        xmax=36,
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
         yticklabel={$\pgfmathprintnumber{\tick}\%$},
@@ -724,136 +1666,857 @@ Lastly, we take the optimal set of settings and measure for each path iteration 
 
 
 \addplot [mark=none, black] plot coordinates {
-        (4,0) (18.5, 0)};
-\addlegendentry{No contraction}
+        (4,0) (36, 0)};
+%\addlegendentry{No contraction}
+
+	\addplot[
+        mark=+,
+        green,
+    ] plot coordinates {
+        (4,-019.028527189512157)
+        (5,-030.25192923516027)
+        (6,-036.12234488804784)
+        (7,-048.91863488046392)
+        (8,-038.45177126999282)
+        (9,-038.21923761334758)
+        (10,-054.33324519228864)
+        (11,-047.547755426467386)
+        (12,-056.806644831689)
+        (13,-059.09081435394594)
+        (14,-021.327263504882932)
+        (15,-058.67875182259139)
+        (16,-049.3001091324349)
+        (17,-082.14873343042876)
+        (18,-098.31467685595259)
+};
+ %   \addlegendentry{CP}
+
 
 
 \addplot[
-        mark=x,
-        red,
+        mark=o,
+        purple,
     ] plot coordinates {
-        (4,80.0639718121736)
-        (5,96.74756032956975)
-        (6,85.93027987992004)
-        (7,71.19204504232561)
-        (8,64.39609801646697)
-        (9,56.97763471024175)
-        (10,51.87533481706046)
-        (11,47.05489584840168)
-        (12,44.21678810027809)
-        (13,39.569791771185003)
-        (14,32.726039289827535)
-        (15,32.80557115275271)
-        (16,31.47754240507572)
-        (17,31.21818699624346)
-        (18,27.21213387483876)
+        (4,054.65954055848148)
+        (5,-032.744171660463883)
+        (6,-058.60390418691592)
+        (7,-063.19669689064686)
+        (8,-063.47280582870363)
+        (9,-050.1474511864711)
+        (10,-073.9042497895158)
+        (11,-078.37573760180295)
+        (12,-073.17936692253391)
+        (13,-079.07166984385887)
+        (14,-073.54155246577117)
+        (15,-073.93249040184303)
+        (16,-084.80161769117286)
+        (17,-082.10107250885657)
+        (18,-076.11478111593005)
+        (19,-057.32811250097869)
+        (20,-080.01774999090278)
+        (21,-070.75335279803191)
+        (22,-003.275982219934692)
+        (23,-097.26395890399516)
+        (24,-099.92984902433498)
+        (25,026.72226912043596)
+        (26,-092.92124659300369)
+        (27,-097.73349432884091)
+        (28,-098.28587085466178)
+        (29,-075.94411156522536)
 };
-    \addlegendentry{DFS}
+%    \addlegendentry{GDFS O IP}
     
     
     \addplot[
         mark=star,
         gray,
     ] plot coordinates {
-        (4,6.763151039507043)
-        (5,43.40695134229975)
-        (6,67.29067931056587)
-        (7,66.4934852501972)
-        (8,68.99814660428696)
-        (9,63.0921700082232)
-        (10,61.94880170878829)
-        (11,57.41323075530105)
-        (12,52.5226764447092)
-        (13,49.65091482723598)
-        (14,43.11855278151966)
-        (15,39.055794743040106)
-        (16,37.422729143594413)
-        (17,37.575097447911454)
-        (18,30.578472392022116)
+        (4,201.03172170217087)
+        (5,070.08010826730877)
+        (6,031.85993107748495)
+        (7,006.512228449376734)
+        (8,003.135825983555818)
+        (9,001.9847433896466038)
+        (10,-017.021150293743137)
+        (11,-027.99507752590842)
+        (12,-022.5487665114657)
+        (13,-047.82050513257545)
+        (14,-048.503367049782886)
+        (15,-039.22983650456018)
+        (16,006.458044876518954)
+        (17,-057.88958618235016)
+        (18,-072.53124481813409)
+        (19,-046.53721482622398)
+        (20,-050.45082566294352)
+        (21,-075.29993129101334)
+        (22,-070.90401514371122)
+        (23,-093.31744322010344)
+        (24,-079.57574328985912)
+        (25,-078.93329352045435)
+        (26,-096.43342984609407)
+        (27,-098.10006997243418)
+        (28,-093.91869669470074)
+        (29,-097.53219553758022)
+        (30,-093.93035858171607)
+        (31,-098.39061825326137)
+        (32,-099.99260208791008)
+        (33,-078.67537084424849)
+        (34,-083.80084519064801)
+        (35,1849.048948725945)
+        (36,123.31192579992156)
 };
-    \addlegendentry{GDFS C}
+%    \addlegendentry{GDFS C}
+    
+    \addplot[
+        mark=x,
+        red,
+    ] plot coordinates {
+        (4,076.4570104072358)
+        (5,028.044724035376545)
+        (6,011.846118220854263)
+        (7,010.819375498777895)
+        (8,008.234551026363324)
+        (9,032.02304844536292)
+        (10,-012.336986492326485)
+        (11,154.5919815002013)
+        (12,003.528055687071663)
+        (13,-026.51415243931593)
+        (14,-021.50085712631985)
+        (15,-010.655254310235929)
+        (16,066.66025961560897)
+        (17,-028.275208648479)
+        (18,-049.05601774258874)
+        (19,-015.434028352389206)
+        (20,-019.542645614472853)
+        (21,-040.05320746029538)
+        (22,-053.23834777413219)
+        (23,-089.01356774186275)
+        (24,-083.81020567383822)
+        (25,-070.73736826556004)
+        (26,-090.69567319448149)
+        (27,-095.76646547412816)
+        (28,-083.49536496664992)
+        (29,-094.17161813521344)
+        (30,-093.1831098767423)
+        (31,-098.52979983418291)
+        (32,-099.9470787448263)
+        (33,-051.34113859408194)
+        (34,-067.24416267265394)
+        (35,5377.402524625391)
+};
+ %   \addlegendentry{DFS}
     
     
     \addplot[
         mark=asterisk,
-        black,
+        magenta,
     ] plot coordinates {
-        (4,20.599262919862138)
-        (5,11.824727491928422)
-        (6,8.568790888615974)
-        (7,6.375301142828871)
-        (8,5.5878263118061655)
-        (9,3.994395661968064)
-        (10,2.6508463153768647)
-        (11,3.4991208561607756)
-        (12,1.4400682941702048)
-        (13,3.992535085983229)
-        (14,1.1520782853142286)
-        (15,9.983258008152518)
+        (4,066.04963959561405)
+        (5,006.51196386902062)
+        (6,-016.86106381515019)
+        (7,-036.691684305846894)
+        (8,-029.74148710138388)
+        (9,-025.78872395075933)
+        (10,-048.54161216454749)
+        (11,-044.4641023775896)
+        (12,-043.04676233974706)
+        (13,-050.09644264739894)
+        (14,-055.1112604671506)
+        (15,-038.90443263790425)
+        (16,-030.34607247332707)
+        (17,-054.12604656280696)
+        (18,-060.15402852494773)
+        (19,-030.563712054361813)
+        (20,-045.836687899355966)
+        (21,-052.2241589867463)
+        (22,-070.96450650823098)
+        (23,-095.34760824870647)
+        (24,-085.12871141492218)
+        (25,-082.18052725849554)
+        (26,-095.50987774754321)
+        (27,-098.1838501698145)
+        (28,-091.59806126460494)
+        (29,-012.240165902025146)
+        (30,-054.57341768141609)
+        (31,-097.21041795763407)
+        (32,-099.99212195746162)
+        (33,-075.30870427638472)
+        (34,-070.55466764811218)
+        (35,1873.8338899024424)
 };
-    \addlegendentry{GDFS A IP}
-    
-    \addplot[
-        mark=o,
-        purple,
-    ] plot coordinates {
-        (4,35.34394168170103)
-        (5,20.74932501032638)
-        (6,14.847506848059044)
-        (7,9.694716501645906)
-        (8,8.046055080900727)
-        (9,5.749979492232593)
-        (10,3.927004747615315)
-        (11,5.842303317580022)
-        (12,2.5769837948081742)
-        (13,4.626233027987636)
-        (14,3.088983163609904)
-        (15,8.521927586351197)
-};
-   \addlegendentry{GDFS O IP}
-    
-    
-    \addplot[
-        mark=+,
-        green,
-    ] plot coordinates {
-        (4,15.716504611506243)
-        (5,3.762819020401342)
-        (6,2.8501027173163607)
-        (7,1.1517214510607499)
-        (8,1.855825885211826)
-        (9,0.4319273113644995)
-        (10,5.6614696776051465)
-        (11,0.12152230704798317)
-        (12,-0.5971501355915065)
-        (13,0.29963121178560037)
-};
-    \addlegendentry{CP}
-    
+ %   \addlegendentry{GDFS A IP}
     
     \addplot[
         mark=*,
         blue,
     ] plot coordinates {
-        (4,26.75629455612465)
-        (5,18.084403476795208)
-        (6,14.224013812167358)
-        (7,9.409389167231574)
-        (8,9.24644295567063)
-        (9,5.826999656137555)
-        (10,5.01891591604009)
-        (11,4.862506456034321)
-        (12,-2.0983188543545195)
-        (13,6.411342376455909)
+        (4,082.88452494372274)
+        (5,029.6842120241007)
+        (6,-009.876121812720429)
+        (7,-022.088776279760858)
+        (8,-013.503177690700596)
+        (9,-008.837348618780605)
+        (10,-035.72111606461943)
+        (11,-025.63774415781701)
+        (12,-024.503950206280378)
+        (13,-032.747062062153065)
+        (14,-040.070853743805246)
+        (15,-015.645301770829212)
+        (16,-017.271754033159936)
+        (17,-030.392864379911055)
+        (18,-044.1849013167929)
+        (19,006.263222779498845)
+        (20,-034.667039382259324)
+        (21,-035.12361889265524)
+        (22,-074.21966190499553)
+        (23,-093.94740529303988)
+        (24,-089.10873119224729)
+        (25,-070.19251038279304)
+        (26,-094.20399109689668)
+        (27,-097.47620403804104)
+        (28,-090.4517390974352)
+        (29,-044.13218375491972)
+        (30,-045.39929518543777)
+        (31,-097.16839846619534)
+        (32,-099.99280041462596)
+        (33,-064.00979136279865)
+        (34,-059.33534565229586)
+        (35,3725.888474739304)
 };
-    \addlegendentry{K-Path}
-
+%    \addlegendentry{K-Path}
+    
+    
+    
+%    \addplot[
+%        mark=square,
+%        orange,
+%    ] plot coordinates {
+%        (4,-032.09837188193615)
+%        (5,-040.49078555402427)
+%        (6,-049.349328752247257)
+%        (7,-061.54432897868635)
+%        (8,-063.13995716320486)
+%        (9,-062.96533763911463)
+%        (10,-068.08694904858069)
+%        (11,-069.12376559345541)
+%        (12,-066.973118626709)
+%        (13,-071.82449788114289)
+%        (14,-067.79922940223755)
+%        (15,-067.77247454790557)
+%        (16,-067.35055976741795)
+%        (17,-064.2884074471964)
+%        (18,-064.65816196842732)
+%        (19,-061.90198311865597)
+%        (20,-061.29261272768051)
+%        (21,-062.27583450896627)
+%        (22,-049.240998170458633)
+%        (23,-081.85962714231226)
+%        (24,-081.44434552326875)
+%        (25,-087.07882171164519)
+%        (26,-090.534145816807)
+%        (27,-096.16544726005092)
+%        (28,-079.33057618732118)
+%        (29,-086.88867195143728)
+%        (30,-079.98452780004053)
+%        (31,-073.81712295416276)
+%        (32,-099.99280041462596)
+%        (33,-078.96306720926047)
+%        (34,-062.37160834860096)
+%        (35,0.0)
+%        (36,0.0)
+%};
+%    \addlegendentry{portfolio}
+%    
 
     \end{axis}
     \end{tikzpicture}
-    \caption{Relative time consumption of contraction-enabled subgraph homeomorphism search compared to contraction-disabled for different path iteration methods.}
-    \label{fig:contractionsmall}
+
+
+\caption{$|V_T|=1\frac{1}{2}|V_S|$}
+\label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\linewidth}
+\centering
+
+\begin{tikzpicture}
+    \begin{axis}[
+        xlabel=$|V_S|$,
+        ylabel=$seconds$,
+        ymin=-100,
+        ymax=100,
+        xmin=4,
+        xmax=25,
+        legend style={at={(0.9,0.1)},anchor=south east},
+        width=\textwidth,
+        yticklabel={$\pgfmathprintnumber{\tick}\%$},
+    ]
+
+
+\addplot [mark=none, black] plot coordinates {
+        (4,0) (25, 0)};
+%\addlegendentry{No contraction}
+
+	
+	\addplot[
+        mark=+,
+        green,
+    ] plot coordinates {
+        (4,-037.482458794099693)
+        (5,-028.72645484371027)
+        (6,-046.150043510668637)
+        (7,-052.81385993237303)
+        (8,-024.12613569116454)
+        (9,-031.98880339048692)
+        (10,-024.209323489596557)
+        (11,-034.31233521287995)
+        (12,023.580979016569836)
+};
+%    \addlegendentry{CP}
+
+
+\addplot[
+        mark=o,
+        purple,
+    ] plot coordinates {
+        (4,-044.79369069538395)
+        (5,-068.32219833899418)
+        (6,-084.96030796040456)
+        (7,-075.48923259358586)
+        (8,-061.78646681381295)
+        (9,-068.91195784014956)
+        (10,-081.92212226256057)
+        (11,-067.00079589839594)
+        (12,-080.98742681842477)
+        (13,-075.52795921572997)
+        (14,-080.85604565843845)
+        (15,-033.727806561708473)
+        (16,-099.42664934879827)
+        (17,-099.96976132068294)
+};
+%    \addlegendentry{GDFS O IP}
+
+
+\addplot[
+        mark=*,
+        blue,
+    ] plot coordinates {
+        (4,024.19213216803755)
+        (5,-017.991786315255487)
+        (6,-042.347854835869636)
+        (7,-043.465315488685197)
+        (8,037.24712483006076)
+        (9,006.265518263037739)
+        (10,-017.722591929932163)
+        (11,267.3592263089413)
+        (12,032.212397552321215)
+        (13,470.0758822957509)
+        (14,259.895147489695)
+        (15,083.66783161451987)
+        (16,-047.32414623885125)
+        (17,-017.430419922127316)
+        (18,049.873280259276487)
+        (19,-091.68472463910365)
+        (20,-023.848931759516623)
+        (21,-077.72293187176874)
+};
+%    \addlegendentry{K-Path}
+
+
+\addplot[
+        mark=star,
+        gray,
+    ] plot coordinates {
+        (4,144.00816563321017)
+        (5,063.31972176650631)
+        (6,021.852903072354524)
+        (7,-004.533517077417881)
+        (8,072.81110583536781)
+        (9,-002.3021847642698767)
+        (10,-030.95057878147942)
+        (11,381.65643144177377)
+        (12,-032.166280343658193)
+        (13,301.1191995338261)
+        (14,-028.298262694832343)
+        (15,059.65119303548203)
+        (16,-076.3367723028285)
+        (17,-044.57509339850778)
+        (18,-069.41408833463423)
+        (19,-029.819022705193354)
+        (20,-072.12437720707379)
+        (21,013.44734954273632)
+        (22,-097.12446687982461)
+        (23,-092.2220857563268)
+};
+%    \addlegendentry{GDFS C}
+
+\addplot[
+        mark=asterisk,
+        magenta,
+    ] plot coordinates {
+        (4,002.1839422528152852)
+        (5,-028.178710291504616)
+        (6,-051.94824733977959)
+        (7,-056.8620737288803)
+        (8,013.97696105634021)
+        (9,-035.375372229801094)
+        (10,-050.15833430522365)
+        (11,131.91988060404114)
+        (12,-039.928033425618203)
+        (13,099.28831703649212)
+        (14,-040.02523205391888)
+        (15,137.02852860015766)
+        (16,-074.98281262891353)
+        (17,096.30317605318091)
+        (18,-021.347389829811247)
+        (19,-033.63642207185815)
+        (20,-056.97382948415033)
+        (21,-088.33370905865054)
+        (22,-096.26854543551864)
+        (23,-081.34521100889656)
+};
+%    \addlegendentry{GDFS A IP}
+	
+	
+\addplot[
+        mark=x,
+        red,
+    ] plot coordinates {
+        (4,017.32605514536567)
+        (5,019.69161885703179)
+        (6,017.854568124850867)
+        (7,-000.4512998694536141)
+        (8,252.5437510655584)
+        (9,044.92110968852605)
+        (10,074.7381055099775)
+        (11,122.70690506062127)
+        (12,028.539345855259635)
+        (13,142.38390071533145)
+        (14,033.239054976895344)
+        (15,090.53869795283003)
+        (16,-051.89295578520328)
+        (17,168.91054793334161)
+        (18,068.98544382126748)
+        (19,-005.4751514395669165)
+        (20,-021.014953988284513)
+        (21,-091.69152794903526)
+        (22,-098.91069230745575)
+        (23,-081.87472795326327)
+        (24,-094.27194091707216)
+        (25,444.3902225728544)
+};
+ %   \addlegendentry{DFS}	
+	
+	
+    \end{axis}
+    \end{tikzpicture}
+
+\caption{$|V_T|=3|V_S|$}
+\label{fig:sub2}
+\end{subfigure}\\[1ex]
+\begin{subfigure}{0.5\linewidth}
+\centering
+
+%third figure here
+
+\caption{$|V_T|=5|V_S|$}
+\label{fig:sub3}
+\end{subfigure}
+\begin{subfigure} {0.5\linewidth}
+\centering
+
+\begin{tikzpicture} 
+    \begin{axis}[%
+    hide axis,
+    xmin=10,
+    xmax=50,
+    ymin=0,
+    ymax=0.4,
+    legend style={draw=white!15!black,legend cell align=left}
+    ]
+	\addlegendimage{black}
+    \addlegendentry{Contraction-disabled performance}; 
+     
+    \addlegendimage{green, mark=+}
+    \addlegendentry{CP};
+    
+    \addlegendimage{red, mark=x}
+    \addlegendentry{DFS};
+    
+    \addlegendimage{gray, mark=star}
+    \addlegendentry{GDFS C};
+    
+    \addlegendimage{magenta, mark=asterisk}
+    \addlegendentry{GDFS A IP};
+    
+    \addlegendimage{purple, mark=o}
+    \addlegendentry{GDFS O IP};
+    
+    \addlegendimage{blue, mark=*}
+    \addlegendentry{K-Path};
+    
+    \end{axis}
+\end{tikzpicture}
+
+\end{subfigure}
+
+\caption{Performance of using different path iterators in test cases with present subgraph homeomorphisms. We include a portfolio method that takes the best performance rating for each individual test case.}	
+\label{fig:test}
 \end{figure}
+
+
+
+%contraction times factor 3.0 timeout 10m
+%\begin{figure}
+%\centering
+%\begin{tikzpicture}
+%    \begin{axis}[
+%        xlabel=$|V_S|$,
+%        ylabel=$seconds$,
+%        ymin=-100,
+%        ymax=100,
+%        xmin=4,
+%        xmax=21,
+%        legend style={at={(0.9,0.1)},anchor=south east},
+%        width=\textwidth,
+%        yticklabel={$\pgfmathprintnumber{\tick}\%$},
+%    ]
+%
+%
+%\addplot [mark=none, black] plot coordinates {
+%        (4,0) (21, 0)};
+%\addlegendentry{No contraction}
+%
+%
+%\addplot[
+%        mark=o,
+%        purple,
+%    ] plot coordinates {
+%        (4,-046.83958756478984)
+%        (5,-072.51730463247292)
+%        (6,-086.76626211027924)
+%        (7,-076.6215684739032)
+%        (8,-072.74550231007535)
+%        (9,-052.10987093449639)
+%        (10,-083.7884541334736)
+%        (11,-087.03289923708262)
+%        (12,-077.59103565368749)
+%        (13,-094.63115057040915)
+%        (14,-074.51331187130967)
+%        (15,-094.05621867695174)
+%        (16,-097.61054699830385)
+%};
+%    \addlegendentry{GDFS O IP}
+%    
+%    
+%    
+%    \addplot[
+%        mark=+,
+%        green,
+%    ] plot coordinates {
+%        (4,-015.354705963357018)
+%        (5,-035.13820062384496)
+%        (6,-051.44388808703058)
+%        (7,-053.46404217033909)
+%        (8,-001.3894900580478375)
+%        (9,014.871180187040833)
+%        (10,-036.06481747746879)
+%        (11,-087.44109600987879)
+%        (12,-082.51101857105521)
+%};
+%    \addlegendentry{CP}
+%    
+%    
+%    \addplot[
+%        mark=star,
+%        gray,
+%    ] plot coordinates {
+%        (4,118.44447608735953)
+%        (5,061.79292428954519)
+%        (6,019.1960039587866)
+%        (7,-006.76713704429085)
+%        (8,000.69638241968099646)
+%        (9,019.26440577784143)
+%        (10,-025.8849820118889)
+%        (11,-047.666704922916414)
+%        (12,021.623453097450485)
+%        (13,230.9513283655371)
+%        (14,-054.98754089035827)
+%        (15,174.97513145339334)
+%        (16,-086.5990957692601)
+%        (17,075.2124561259444)
+%        (18,-071.13743191967273)
+%        (19,-093.31984216459707)
+%        (20,-058.13002958743542)
+%};
+%    \addlegendentry{GDFS C}
+%    
+%    
+%    \addplot[
+%        mark=*,
+%        blue,
+%    ] plot coordinates {
+%        (4,035.69687086734745)
+%        (5,-024.50623694047005)
+%        (6,-047.0111257723851)
+%        (7,-048.26678478077253)
+%        (8,000.2013801387443115)
+%        (9,056.14905167099216)
+%        (10,-023.853794403141282)
+%        (11,-019.757351685868718)
+%        (12,127.7352970370027)
+%        (13,328.3058971504704)
+%        (14,745.967890260412)
+%        (15,193.40327563328885)
+%        (16,-082.39107489047269)
+%        (17,002.4374410102243838)
+%        (18,-049.894344710788097)
+%        (19,-086.84436498665694)
+%        (20,774.91391919059485)
+%};
+%    \addlegendentry{K-Path}
+%    
+%    
+%    \addplot[
+%        mark=x,
+%        red,
+%    ] plot coordinates {
+%        (4,014.90016372359244)
+%        (5,015.381077227358442)
+%        (6,034.290770302179574)
+%        (7,-009.722654345502146)
+%        (8,068.68995802907074)
+%        (9,100.71791853650165)
+%        (10,398.2337969172079)
+%        (11,-028.1968539377789)
+%        (12,078.45491521328034)
+%        (13,290.61364956969733)
+%        (14,-000.2621410237809041)
+%        (15,331.1994763164897)
+%        (16,-066.18779035018615)
+%        (17,111.37481710894623)
+%        (18,070.07308906556358)
+%        (19,-079.47744963901049)
+%        (20,068.00576846727184)
+%        (21,-091.29034919955146)
+%};
+%    \addlegendentry{DFS}
+%    
+%    \addplot[
+%        mark=asterisk,
+%        yellow,
+%    ] plot coordinates {
+%        (4,010.148126786642031)
+%        (5,-033.174366141583145)
+%        (6,-056.57303598900267)
+%        (7,-061.14790250482716)
+%        (8,-033.116263543067836)
+%        (9,-012.523604323828108)
+%        (10,-054.03846269554808)
+%        (11,-052.56613550447431)
+%        (12,-004.631547221706567)
+%        (13,065.23127793851704)
+%        (14,-052.80615715354685)
+%        (15,034.087280048885527)
+%        (16,-086.48223176735793)
+%        (17,-063.59878590350653)
+%        (18,039.75960389159796)
+%        (19,-090.46587790206849)
+%        (20,011.564519185208844)
+%};
+%    \addlegendentry{GDFS A IP}
+%
+%\addplot[
+%        mark=square,
+%        orange,
+%    ] plot coordinates {
+%        (4,-041.53541768570617)
+%        (5,-045.345408507415463)
+%        (6,-057.13058248313603)
+%        (7,-069.05471997903654)
+%        (8,-069.51505204496781)
+%        (9,-064.84809389101875)
+%        (10,-077.79586819011365)
+%        (11,-076.75004410479697)
+%        (12,-073.50619297881813)
+%        (13,-073.76355752752646)
+%        (14,-071.11314314482388)
+%        (15,-063.48297043548574)
+%        (16,-077.71143794596451)
+%        (17,-059.48214120453723)
+%        (18,-073.98647158439798)
+%        (19,-084.42871080116685)
+%        (20,-073.55234208814764)
+%        (21,-091.29034919955146)
+%};
+%    \addlegendentry{portfolio}
+%
+%
+%    \end{axis}
+%    \end{tikzpicture}
+%    \caption{Relative contraction 3.0}
+%    \label{fig:contractionsmall}
+%\end{figure}
+
+%contraction times factor 5.0 timeout 10m
+%\begin{figure}
+%\centering
+%\begin{tikzpicture}
+%    \begin{axis}[
+%        xlabel=$|V_S|$,
+%        ylabel=$seconds$,
+%        ymin=-100,
+%        ymax=100,
+%        xmin=4,
+%        xmax=16,
+%        legend style={at={(0.9,0.1)},anchor=south east},
+%        width=\textwidth,
+%        yticklabel={$\pgfmathprintnumber{\tick}\%$},
+%    ]
+%
+%
+%\addplot [mark=none, black] plot coordinates {
+%        (4,0) (16, 0)};
+%\addlegendentry{No contraction}
+%
+%
+%\addplot[
+%        mark=+,
+%        green,
+%    ] plot coordinates {
+%        (4,-062.06630200007305)
+%        (5,-006.793099543198322)
+%        (6,041.32008357681667)
+%        (7,-087.71237506328511)
+%        (8,-076.92835995605865)
+%        (9,330.58952646107436)
+%};
+%    \addlegendentry{CP}
+%    
+%    \addplot[
+%        mark=o,
+%        purple,
+%    ] plot coordinates {
+%        (4,-08.521160992056208)
+%        (5,-055.57768872380171)
+%        (6,175.37757042175475)
+%        (7,-079.53382735331258)
+%        (8,-099.14874585046948)
+%        (9,-081.55385670943424)
+%        (10,-096.12858789283681)
+%        (11,-088.34506748004438)
+%        (12,-099.991869734472)
+%        (13,-097.16402262125953)
+%};
+%    \addlegendentry{GDFS O IP}
+%    
+%    
+%    \addplot[
+%        mark=x,
+%        red,
+%    ] plot coordinates {
+%        (4,-014.36597794111475)
+%        (5,073.99078847217293)
+%        (6,6895.848728517761)
+%        (7,017.820866701235838)
+%        (8,-076.05092047714518)
+%        (9,-013.03607645468714)
+%        (10,172.3274670018856)
+%        (11,-036.64268210434891)
+%        (12,-091.10807140425967)
+%        (13,-036.639931105874557)
+%        (14,-095.18933040450558)
+%        (15,-029.77389882911837)
+%};
+%    \addlegendentry{DFS}
+%
+%\addplot[
+%        mark=asterisk,
+%        yellow,
+%    ] plot coordinates {
+%        (4,-032.100072316147654)
+%        (5,-011.266031140322774)
+%        (6,2564.3710371844158)
+%        (7,-032.35185777223262)
+%        (8,-092.63123994990794)
+%        (9,-038.945002818559593)
+%        (10,-004.9371777769504854)
+%        (11,-071.9322852762822)
+%        (12,-096.55666317906058)
+%        (13,-077.96178804279813)
+%        (14,-099.99341305332681)
+%        (15,080.0879415722102)
+%        (16,-053.64711361017458)
+%};
+%    \addlegendentry{GDFS A IP}
+%    
+%    
+%    \addplot[
+%        mark=star,
+%        gray,
+%    ] plot coordinates {
+%        (4,053.27325016344322)
+%        (5,011.969612414947184)
+%        (6,3307.462393691987)
+%        (7,018.139417555373938)
+%        (8,-057.50195559350693)
+%        (9,-020.502288773998045)
+%        (10,135.0034893844747)
+%        (11,-048.045062625678225)
+%        (12,-092.55361781002016)
+%        (13,-054.40665202474296)
+%        (14,-098.58127805529829)
+%        (15,-046.07332807147366)
+%};
+%    \addlegendentry{GDFS C}
+%    
+%    \addplot[
+%        mark=*,
+%        blue,
+%    ] plot coordinates {
+%        (4,-027.97507424388014)
+%        (5,006.571365346840685)
+%        (6,2506.0156547393888)
+%        (7,-013.899615610506733)
+%        (8,-091.97732186444016)
+%        (9,349.69437946744684)
+%        (10,209.80242058689598)
+%        (11,-045.117177615342385)
+%        (12,-094.54567414536438)
+%        (13,-063.51541329363739)
+%        (14,-099.99832728741573)
+%        (15,-098.10935508554787)
+%};
+%    \addlegendentry{K-Path}
+%    
+%    
+%    \addplot[
+%        mark=square,
+%        orange,
+%    ] plot coordinates {
+%        (4,-058.8159419487696)
+%        (5,-056.25085275581058)
+%        (6,-062.88475241750728)
+%        (7,-078.45655872700189)
+%        (8,-081.0771141796239)
+%        (9,-080.74428829313034)
+%        (10,-082.02148445019068)
+%        (11,-080.59663258471268)
+%        (12,-087.8803286211276)
+%        (13,-083.08448131265181)
+%        (14,-096.65173416635258)
+%        (15,-082.12335812697112)
+%        (16,-053.64711361017458)
+%};
+%    \addlegendentry{portfolio}
+%
+%    \end{axis}
+%    \end{tikzpicture}
+%    \caption{Relative contraction 5.0}
+%    \label{fig:contractionsmall}
+%\end{figure}
+
+
+
 
 %cached zero domain (no labels) times \ref{fig:contractionsmall} timeout 30m
 \begin{figure}
