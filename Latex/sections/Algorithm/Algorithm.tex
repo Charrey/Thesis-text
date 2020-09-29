@@ -6,14 +6,14 @@
 
 
 \section{Baseline: ndSHD2}
-In our research we will extend existing work on node disjoint subgraph isomorphism. In the literature we found two existing well-defined algorithms: Xiao's algorithm `ndSHD2'\cite{XIAONODEDISJOINT} and Lingas algorithm\cite{LINGAS2009464}. We choose to adapt Xiao's algorithm ndSHD2 as baseline over Lingas because it is easier to understand (thus easier to improve, saving valuable research time) and includes methods for vertex-on-vertex mapping. In comparison, Lingas' algorithm suggests attempting their edge-path mapping strategy on every possible vertex-on-vertex mapping. We will adapt Xiao's algorithm to compute paths on-the-fly instead of beforehand to avoid the exponential space requirement.
+In our research we will extend existing work on node disjoint subgraph isomorphism. In the literature we found two existing well-defined algorithms: Xiao's algorithm `ndSHD2' \cite{XIAONODEDISJOINT} and Lingas algorithm \cite{LINGAS2009464}. We choose to adapt Xiao's algorithm ndSHD2 as baseline over Lingas because it is simpler, includes a method for calculating a vertex-on-vertex mapping and has many similarities with subgraph isomorphism algorithms. In comparison, Lingas' algorithm suggests attempting their edge-path mapping strategy on every possible vertex-on-vertex mapping. We will adapt Xiao's algorithm to compute paths on-the-fly instead of beforehand to avoid the exponential space requirement.
 
 To understand ndSHD2 better, let us first examine what the output is supposed to be. The algorithm should, given two graphs, not just indicate whether the latter graph has a subgraph homeomorphism of the former, but also indicate what subgraph homeomorphism that is. More formally, we need to solve the \textit{certification} problem rather than the \textit{decision} problem. This certification indicates to which target graph vertex each source graph vertex is mapped and to which target graph path each source graph edge is mapped such that the entire mapped source graph is a subgraph of the target graph. This is what we will from now on refer to as the \textbf{mapping}. If, during the execution, the mapping is not yet complete, i.e. it does not have a target for some source graph vertex or edge, we refer to it as the \textbf{partial mapping}.
 
 \begin{algorithm}
 \SetAlgoLined
-\textbf{Inputs: } the current matching state $s$, the current node compatibility matrix $M$, the current independent path matrix $R$\\
-\textbf{Outputs: } \textit{found}, indicating whether a valid homeomorphism has been found.\\
+\textbf{Inputs: } the current vertex-vertex partial mapping $\mathit{vmap}$, the current edge-path $\mathit{emap}$ partial mapping\\
+\textbf{Outputs: } \textit{found}, indicating whether a valid subgraph homeomorphism has been found.\\
 \If{$s$ is dead state} {
 	\Return false\;
 } \ElseIf {$s$ is complete} {
@@ -24,14 +24,21 @@ $\mathit{found} \longleftarrow \mathit{false}$
 
  \While{$!\mathit{found} \land \exists$ valid node/edge-path mapping pair}{
   $m \longleftarrow \mathit{GetNextNodePair}()$\tcp*[h]{$m \longleftarrow \mathit{GetNextEdgePathPair}()$}\;
-  $s' \longleftarrow \mathit{BackupState}(s)$\; 
-  $\mathit{NodeMap}_s \longleftarrow \mathit{NodeMap}_s \cup \{m\}$\tcp*[h]{$\mathit{EdgePathMap}_s \longleftarrow \mathit{EdgePathMap}_s \cup \{m\}$}\;
-  $\mathit{Refine(M, R)}$\;
-  $\mathit{found} \longleftarrow \mathit{ndSHD2}(s, M, R)$\;
+  
+  \If{$\mathit{wouldPrune}(\mathit{vmap}, \mathit{emap}, m)$} {
+  	\textbf{continue}\;
+  }  
+  
+  $\mathit{vmap}' \longleftarrow \mathit{Backup}(\mathit{vmap})$\tcp*[h]{ 
+  $\mathit{emap}' \longleftarrow \mathit{Backup}(\mathit{emap})$}\; 
+  $\mathit{vmap} \longleftarrow \mathit{vmap} \cup \{m\}$\tcp*[h]{$\mathit{emap} \longleftarrow \mathit{emap} \cup \{m\}$}\;  
+  
+  $\mathit{found} \longleftarrow \mathit{ndSHD2}(s, \mathit{vmap}, \mathit{emap})$\;
   \If{found} {
   	\Return true\;
   }
-  $s \longleftarrow \mathit{RecoverState}(s')$\;
+  $\mathit{vmap} \longleftarrow \mathit{Recover}(\mathit{vmap})$\tcp*[h]{ 
+  $\mathit{emap}' \longleftarrow \mathit{Recover}(\mathit{emap})$}\;
  }
  \Return false\;
  \caption{ndSHD2}
@@ -40,7 +47,7 @@ $\mathit{found} \longleftarrow \mathit{false}$
 
 ndSHD2 Is shown in Algorithm \ref{algorithm:ndSHD2}. It is a form of depth first search in a partial mapping search space that attempts- and backtracks vertex-on-vertex mappings and edge-on-path mappings.
 
-In our literature study, we found that the core of many subgraph isomorphism algorithms\footnote{Ullman, VF, VF2, VF2+, VF2++, UI, Fast-ON, L2G, Cheng, QuickSI, GraphQL, ILF, TurboISO, Glassgow, CLF-Match, RI, RI-DS, McGregor, LAD, PathLAD} is a form of similar DFS state space exploration where the states consist of partial vertex-to-vertex mappings. In subgraph isomorphisms, the edge-to-edge mapping is elementary by performing the vertex mapping on the edge source and target to obtain the target edge. With the subgraph homeomorphism algorithm such as Xiao's, an additional mapping from $E_{source}$ to the path set of $G_{target}$ is needed.
+In our literature study, we found that the core of many subgraph isomorphism algorithms\footnote{Ullman, VF, VF2, VF2+, VF2++, UI, Fast-ON, L2G, Cheng, QuickSI, GraphQL, ILF, TurboISO, Glassgow, CLF-Match, RI, RI-DS, McGregor, LAD, PathLAD} is a form of similar DFS state space exploration where the states consist of partial vertex-to-vertex mappings. In subgraph isomorphisms, the edge-to-edge mapping is elementary by performing the vertex mapping on the edge source and target to obtain the target edge. With the subgraph homeomorphism algorithm such as Xiao's, an additional mapping from $E_S$ to the path set of $G_T$ is needed.
 
 The algorithm starts with an empty partial mapping, and starts mapping source graph vertices to target graph vertices. Whenever both vertices of a source graph edge have been matched, the algorithm finds an arbitrary path between the mapped edge source and target in the target graph that is internally disjoint from target graph vertices already used in the partial mapping. The algorithm prioritizes extending the matching with an edge-path pair over extending it with a vertex-vertex pair. Whenever no such path or vertex exists, the algorithm undoes (backtracks) the last matching step taken and tries a different alternative. Whenever a partial match is extended with a vertex-vertex pair or with an edge-path pair the search space is refined using a pruning strategy implemented by the $Refine(M,R)$ call. This method filters out future path candidates from a path storage and from a vertex storage according to zero-domain N-reachability pruning (see Chapter \ref{chapter:pruning} for definitions). This removes path candidates and vertex candidates that can provably not be part of any valid subgraph homeomorphism mapping.
 
@@ -93,7 +100,7 @@ The result of this ordering is that consequent vertices have many edges with ver
 
 The target graph vertex order is the order in which target graph vertices are added to the partial mapping. For example, if $t_1 \prec t_2$ in this ordering, then a pair with $t_2$ and some source graph vertex $s_x$ will only be added to the partial mapping if the pair $(s_x, t_1)$ was already proved unfeasible. Xiao does not describe a specific target graph vertex order.
 
-We found one subgraph isomorphism algorithm that describes a specific target graph vertex order, being Glasgow\cite{McCreesh2015}. In this algorithm, target graph vertices with higher degree are prioritized. Since this does not depend on the chosen source graph vertex or on the current partial matching, this order can be precomputed, introducing only linear complexity. Formally, when some source graph vertex $s$ needs to be matched, $x$ are chosen using the following metric, choosing vertices with lower metric values first:
+We found one subgraph isomorphism algorithm that describes a specific target graph vertex order, being Glasgow \cite{McCreesh2015}. In this algorithm, target graph vertices with higher degree are prioritized. Since this does not depend on the chosen source graph vertex or on the current partial matching, this order can be precomputed, introducing only linear complexity. Formally, when some source graph vertex $s$ needs to be matched, $x$ are chosen using the following metric, choosing vertices with lower metric values first:
 
 $$\mathit{metric}_\mathit{degree}(s, t)=-|\mathit{neighbours}(t)|$$
 
@@ -114,7 +121,7 @@ Here, $M$ is the current partial mapping and $\mu$ is the source graph vertex or
 In subgraph isomorphism, edge-on-edge mappings are trivial from vertex-on-vertex mappings. However, in subgraph homeomorphism a source graph edge may be mapped on many target graph path candidates (all starting- and ending at the same two vertices). Therefore, we cannot extract the order in which to try out paths from subgraph isomorphism. Instead, we implemented different methods to iterate over paths to try:
 
 \begin{itemize}
-\item \textbf{K-path -} Try all loopless paths from shortest to longest, avoiding unusable vertices in the existing partial mapping. We use Yen's algorithm\cite{YensAlgorithm} for this. Faster and more recent algorithms exist\cite{Hershberger, Brander1996} but lack public implementations.
+\item \textbf{K-path -} Try all loopless paths from shortest to longest, avoiding unusable vertices in the existing partial mapping. We use Yen's algorithm \cite{YensAlgorithm} for this. Faster and more recent algorithms exist \cite{Hershberger, Brander1996} but lack public implementations.
 
 \item \textbf{DFS -} Search for paths using depth first search from the start vertex, choosing arbitrary directions at each vertex and avoiding unusable vertices in the existing partial mapping.
 
@@ -154,7 +161,7 @@ $\exists p' \in P . first(p') = first(p) \land last(p') = last(p) \land intermed
 With this optimisation enabled, such paths are skipped by path iterators. Examples of this effect are shown in Figures \ref{fig:pathexamples-dfs} and \ref{fig:pathexamples-greedydfs}.
 
 \subsection{Runtime Pruning}
-Some subgraph isomorphism algorithms\cite{Cordella2004, McCreesh2015} prune the search space during the search using some detection method of dead search paths. In Chapter \ref{chapter:pruning} we will elaborate on the different techniques we implement for subgraph homeomorphism.
+Some subgraph isomorphism algorithms \cite{Cordella2004, McCreesh2015} prune the search space during the search using some detection method of dead search paths. In Chapter \ref{chapter:pruning} we will elaborate on the different techniques we implement for subgraph homeomorphism.
 
 \subsection{Contraction}
 The source graph of a homeomorphism case will often contain vertices that have exactly one incoming edge and one outgoing edge. In FPGAs, for example, these could be transistors or ports of components. These vertices do topologically nothing but serve as an edge; therefore they may also be thought of as an edge, where the edge source is the vertex' predecessor and the edge target is the vertex' successor. When we use the word contraction, we mean surpressing all such vertices and replacing them with a single edge, as illustrated in Figure \ref{fig:contraction-basic}. This process transforms the source graph $S$ into the smallest graph $S_{cont}$ that is topologically equivalent to $S$. This may be a multigraph or a graph that contains self-loops. If a subgraph homeomorphism exists from $S$ to some target graph $T$, then there also exists a subgraph homeomorphism from $S_{cont}$ to $T$ (a proof is given in Appendix \ref{proof:contractionHomeo}). The optimisation `contraction' searches for a homeomorphism between $S_{cont}$ and the $T$ instead of finding one between $S$ and $T$. Because this involves a smaller source graph, it also involves a smaller search space.
