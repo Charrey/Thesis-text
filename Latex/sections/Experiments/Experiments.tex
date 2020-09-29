@@ -29,7 +29,7 @@ Since vertex disjoint subgraph homeomorphisms are rare in random graphs, we cons
 
 Using this method we obtain random test cases that resemble the graphs of the FPGA use case as closely as possible while still introducing some randomness that allow us to benchmark our algorithm's performance under a variety of optimisations.
 
-Firstly, we compare the different methods of path iteration. The time taken to find a homeomorphism gives an indication of the overhead introduced by a path iterator and also taking the heuristic value of that path iterator into account. This comparison is shown in Figure \ref{TODO}. We used target graphs that were respectively 50\%, 200\% and 400\% larger than the souce graph\footnote{In the FPGA use case the target graph is $\pm$ 97 times larger than the souce graph. This, however, is too computationally expensive for our testing methodology.}. We also add the performance of a portfolio method: running the algorithm in parallel with each path iteration method and choosing the fastest outcome for each individual test case.
+Firstly, we compare the different methods of path iteration. The time taken to find a homeomorphism gives an indication of the overhead introduced by a path iterator and also taking the heuristic value of that path iterator into account. This comparison is shown in Figure \ref{TODO}. We compare the K-path, control point (CP), DFS, Greedy cached DFS (GDFS C), greedy in-place DFS using a distance metric (GDFS O IP) and greedy in-place DFS using a partial-mapping-aware distance metric (GDFS A IP) path iteration methods. We used target graphs that were respectively 50\%, 200\% and 400\% larger than the souce graph\footnote{In the FPGA use case the target graph is $\pm$ 97 times larger than the souce graph. This, however, is too computationally expensive for our testing methodology.}. We also add the performance of a portfolio method: running the algorithm in parallel with each path iteration method and choosing the fastest outcome for each individual test case.
 
 We observe exponential behaviour with approximate complexity$O(e^{0.7*|V_S|})$ for $|V_T|=1\frac{1}{2}|V_S|$, $O(e^{1.0482*|V_S|})$ for $|V_T|=3|V_S|$ and $O(e^{1.133*|V_S|})$ for $|V_T|=5|V_S|$. Extrapolating this to the FPGA use case where $|V_T|=97|V_S|$ assuming a logarithmic trend, we get a scalability of $\pm O(e^{2.57442*|V_S|})$ for our FPGA use case without pruning or contraction.
 
@@ -2116,7 +2116,144 @@ Lastly, we take the optimal set of settings and measure for each path iteration 
 \begin{subfigure}{0.5\linewidth}
 \centering
 
-%third figure here
+\begin{tikzpicture}
+    \begin{axis}[
+        xlabel=$|V_S|$,
+        ylabel=$seconds$,
+        ymin=-100,
+        ymax=100,
+        xmin=4,
+        xmax=17,
+        legend style={at={(0.9,0.1)},anchor=south east},
+        width=\textwidth,
+        yticklabel={$\pgfmathprintnumber{\tick}\%$},
+    ]
+
+
+\addplot [mark=none, black] plot coordinates {
+        (4,0) (17, 0)};
+%\addlegendentry{No contraction}
+
+	
+	\addplot[
+        mark=asterisk,
+        magenta,
+    ] plot coordinates {
+        (4,-043.30970981115877)
+        (5,-013.09481835245726)
+        (6,1540.156998152306)
+        (7,-022.955712145055251)
+        (8,-092.97183292421037)
+        (9,-054.24591157986913)
+        (10,-061.14066062835926)
+        (11,-068.91390982656678)
+        (12,-095.75159032732905)
+        (13,-047.34805389934108)
+        (14,-097.03967131357809)
+        (15,-012.374092037298179)
+        (16,-081.40786434972327)
+        (17,-057.71016196159336)
+};
+  %  \addlegendentry{GDFS A IP}
+  
+  \addplot[
+        mark=x,
+        red,
+    ] plot coordinates {
+        (4,-012.16992075038178)
+        (5,098.66466250704125)
+        (6,4523.915298831981)
+        (7,092.86013087935467)
+        (8,-077.8551121116117)
+        (9,-039.26119481146292)
+        (10,-005.005290587142219)
+        (11,-069.28486883795594)
+        (12,-079.81823651122439)
+        (13,-047.528570386444235)
+        (14,-091.75996428683743)
+        (15,033.316466949701584)
+        (16,-096.98460926507957)
+        (17,-021.818114497057617)
+};
+ %   \addlegendentry{DFS}
+ 
+ \addplot[
+        mark=star,
+        gray,
+    ] plot coordinates {
+        (4,062.71054568492918)
+        (5,020.193477215693867)
+        (6,2157.207288783596)
+        (7,060.714000055505)
+        (8,-058.86258884822542)
+        (9,-041.37832751703745)
+        (10,-023.625993888451968)
+        (11,-064.3626960477373)
+        (12,-082.71184860795275)
+        (13,-051.56618691402037)
+        (14,-095.31614533343228)
+        (15,051.40584943694408)
+        (16,-092.17657269633333)
+        (17,087.50942580464487)
+};
+%    \addlegendentry{GDFS C}
+
+
+\addplot[
+        mark=*,
+        blue,
+    ] plot coordinates {
+        (4,-039.701977158306)
+        (5,003.1694468176640234)
+        (6,1499.1061194154563)
+        (7,006.31904445554281)
+        (8,-091.9414910837713)
+        (9,201.9451686125926)
+        (10,-020.295824381348004)
+        (11,399.89707740161826)
+        (12,-093.32150042386843)
+        (13,-044.19878097874482)
+        (14,-091.25335220585404)
+        (15,006.729694329776126)
+        (16,-076.21130250025869)
+};
+   % \addlegendentry{K-Path}
+   
+   \addplot[
+        mark=+,
+        green,
+    ] plot coordinates {
+        (4,-072.39589311903867)
+        (5,-020.313377536016364)
+        (6,063.83115468640344)
+        (7,-042.52774721113902)
+        (8,-083.05293255667011)
+        (9,848.379348911334)
+        (10,-095.9623156068572)
+};
+    %\addlegendentry{CP}
+    
+    \addplot[
+        mark=o,
+        purple,
+    ] plot coordinates {
+        (4,-086.74647382962503)
+        (5,-065.98645678352921)
+        (6,079.04460456291511)
+        (7,-078.82708805701326)
+        (8,-099.06007527063889)
+        (9,-086.13590735992368)
+        (10,-084.04583277872815)
+        (11,-094.9402737921835)
+        (12,-095.78153593344385)
+        (13,-098.86713469883481)
+};
+  %  \addlegendentry{GDFS O IP}
+
+	
+	
+    \end{axis}
+    \end{tikzpicture}
 
 \caption{$|V_T|=5|V_S|$}
 \label{fig:sub3}
