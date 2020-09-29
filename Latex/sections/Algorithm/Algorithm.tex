@@ -45,6 +45,87 @@ $\mathit{found} \longleftarrow \mathit{false}$
  \label{algorithm:ndSHD2}
 \end{algorithm}
 
+
+\begin{algorithm}
+\SetAlgoLined
+\textbf{Inputs: } the current vertex-vertex partial mapping $\mathit{vmap}$, the current edge-path $\mathit{emap}$ partial mapping\\
+\textbf{Outputs: } \textit{found}, indicating whether a valid subgraph homeomorphism has been found.\\
+
+\If{contraction} {
+	$G_S, \mathit{chains} \longleftarrow \mathit{contract}(G_S)$
+}
+
+ \Return ndSHD3($\mathit{vmap}$, $\mathit{emap}$)\;
+ \caption{ndSHD3-contract}
+ \label{algorithm:ndSHD3}
+\end{algorithm}
+
+\begin{algorithm}
+\SetAlgoLined
+\textbf{Inputs: } the current vertex-vertex partial mapping $\mathit{vmap}$, the current edge-path $\mathit{emap}$ partial mapping\\
+\textbf{Outputs: } \textit{found}, indicating whether a valid subgraph homeomorphism has been found.\\
+
+\If {$s$ is complete} {
+	\Return true\;
+}
+
+$\mathit{found} \longleftarrow \mathit{false}$
+
+ \While{$!\mathit{found} \land \exists$ valid node/edge-path mapping pair}{
+
+\If{$\mathit{hasUnmatchedEdge}()$} {
+	$(e_S, p_T) \longleftarrow \mathit{GetNextEdgePathPair}()$\;
+	\If{$\mathit{wouldPrune}(\mathit{vmap}, \mathit{emap} \cup \{(e_S, p_T)\})$} {
+  		\textbf{continue}\;
+  	}
+  	$\mathit{emap} \longleftarrow \mathit{emap} \cup \{(e_S, p_T)\}$\;
+  	$\mathit{found} \longleftarrow \mathit{ndSHD3}(\mathit{vmap}, \mathit{emap})$\;
+  \If{found} {
+  	\Return true\;
+  }
+  $\mathit{emap} \longleftarrow \mathit{emap} \cap \{(e_S, p_T)\}$\;
+} \Else {
+	$(v_S, v_T) \longleftarrow \mathit{GetNextNodePair}()$\;
+	\If{$\mathit{wouldPrune}(\mathit{vmap} \cup \{(v_S, v_T)\}, \mathit{emap})$} {
+  		\textbf{continue}\;
+  	}
+  	$\mathit{vmap} \longleftarrow \mathit{vmap} \cup \{(v_S, v_T)\}$\;
+  	$\mathit{found} \longleftarrow \mathit{ndSHD3}(\mathit{vmap}, \mathit{emap})$\;
+  \If{found} {
+  	\Return true\;
+  }
+  	$\mathit{vmap} \longleftarrow \mathit{vmap} \cap \{(v_S, v_T)\}$\;
+}
+
+ }
+ \Return false\;
+ \caption{ndSHD3}
+ \label{algorithm:ndSHD3}
+\end{algorithm}
+
+
+
+
+\begin{algorithm}
+\SetAlgoLined
+\textbf{Inputs: } the current vertex-vertex partial mapping $\mathit{vmap}$, the current edge-path $\mathit{emap}$ partial mapping\\
+\textbf{Outputs: } whether pruning should be applied.\\
+$\mathit{domains} \longleftarrow \mathit{filterDomains}(\mathit{vmap}, \mathit{emap})$\;
+\If {ZeroDomain} {
+	\If {$\emptyset \in \mathit{values}(\mathit{domains})$} {
+		\Return false\;
+	}
+} \ElseIf {AllDifferent} {
+	\If {$\lnot \mathit{satisfiesAllDifferent}(\mathit{domains})$} {
+		\Return false\;
+	}
+}
+\Return true\;
+ \caption{wouldPrune}
+ \label{algorithm:ndSHD3}
+\end{algorithm}
+
+
 ndSHD2 Is shown in Algorithm \ref{algorithm:ndSHD2}. It is a form of depth first search in a partial mapping search space that attempts- and backtracks vertex-on-vertex mappings and edge-on-path mappings.
 
 In our literature study, we found that the core of many subgraph isomorphism algorithms\footnote{Ullman, VF, VF2, VF2+, VF2++, UI, Fast-ON, L2G, Cheng, QuickSI, GraphQL, ILF, TurboISO, Glassgow, CLF-Match, RI, RI-DS, McGregor, LAD, PathLAD} is a form of similar DFS state space exploration where the states consist of partial vertex-to-vertex mappings. In subgraph isomorphisms, the edge-to-edge mapping is elementary by performing the vertex mapping on the edge source and target to obtain the target edge. With the subgraph homeomorphism algorithm such as Xiao's, an additional mapping from $E_S$ to the path set of $G_T$ is needed.
