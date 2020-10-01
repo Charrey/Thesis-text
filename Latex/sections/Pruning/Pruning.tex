@@ -1,9 +1,17 @@
 \chapter{Pruning}
 \label{chapter:pruning}
 
-During the search for a complete matching, during which the algorithm only has \textit{partial} matchings, the algorithm will often explore branches of the search tree that will not eventually lead to a homeomorphism. We will call these branches \textit{dead branches}. Exploring an entire dead branch may be costly: its size is exponential\footnote{due to the NP-completeness of node disjoint subgraph homeomorphism} thus exploration costs an exponential amount of time. A solution to this is to implement methods of early detection of such dead branches, i.e. pruning methods. These methods can by nature not detect every dead branch efficiently\footnote{again, because of the NP-completeness of node disjoint subgraph homeomorphism.}. Therefore, there exists a tradeoff between strength, i.e. how many dead branches it can detect, and performance, i.e. how the number of instructions used by pruning scales with the size of the inputs. Xiao's algorithm uses various pruning methods, which we will implement for our algorithm. We implement these algorithms without precomputed paths, i.e. we run a pathfinding algorithm during the partial mapping search instead and optionally cache the results.
+During the search for a complete matching, during which the algorithm only has \textit{partial} matchings, the algorithm will often explore dead branches, i.e. branches of the search tree that will not eventually lead to a homeomorphism. Exploring an entire dead branch may be costly: its size is exponential\footnote{due to the NP-completeness of node disjoint subgraph homeomorphism} thus exploration costs an exponential amount of time. A solution to this is to implement methods of early detection of such dead branches, i.e. pruning methods. These methods can by nature not detect every dead branch efficiently\footnote{again, because of the NP-completeness of node disjoint subgraph homeomorphism.}. Therefore, there exists a tradeoff between strength, i.e. how many dead branches it can detect, and performance, i.e. how the number of instructions used by pruning scales with the size of the inputs. Xiao's algorithm uses cached zero-domain N-reachability, which we will implement for our algorithm. We will also implement diffent methods, each with different tradeoffs. We implement these algorithms without precomputed paths, i.e. we run a pathfinding algorithm during the partial mapping search instead and optionally cache the results.
 
-The input of these pruning methods comes down to an assignment of domains (sets of target graph vertices) to variables (source graph vertices). These domains represent the target graph vertex candidates for each source graph vertex in vertex-on-vertex matching. Source graph vertices that are already in the partial matching have a domain of size one: the target graph vertex they have been matched to. The other vertices have domains that can be calculated in different ways (see Section \ref{sec:domain-filtering}). The pruning method then decides whether the algorithm should continue the search in this branch (i.e. do not prune) or whether the algorithm should backtrack. The different methods of deciding this are elaborated in Section \ref{sec:pruningmethods}.
+The input of these pruning methods comes down to an assignment of domains (sets of target graph vertices) to variables (source graph vertices). These domains represent the target graph vertex candidates for each source graph vertex in vertex-on-vertex matching. See Figure \ref{fig:simplePruningExample} for an example. Source graph vertices that are already in the partial matching have a domain of size one: the target graph vertex they have been matched to. The other vertices have domains that can be calculated in different ways (see Section \ref{sec:domain-filtering}). The pruning method then decides whether the algorithm should continue the search in this branch (i.e. do not prune) or whether the algorithm should backtrack. The different methods of deciding this are elaborated in Section \ref{sec:pruningmethods}.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.6]{images/contraction/pruningExampleSimple.png}
+\caption{An example case. With an empty partial mapping, the domain of $s_1$ is $\{t_1, t_2\}$, every compatible vertex in the target graph. The domain of $s_2$ is initially $\{t_5, t_6\}$ and the domain of $s_3$ $\{t_3, t_4\}$. This holds for any filtering method mentioned in this chapter. When pairs are added to the partial mapping, the domain of each source graph vertex may be reduced.}
+\label{fig:simplePruningExample}
+\end{figure}
+
 
 \section{Domain filtering}
 \label{sec:domain-filtering}
@@ -39,7 +47,7 @@ $\mathit{compatible}_{\mathit{LABEL}}(s,t) := $&$t \not \in M$&$\land$\\
 \end{defn}
 \end{minipage}
 
-This method satisfies criterium 1 since every homeomorphism needs each source graph vertex $s$ to be matched with a target graph vertex $t$ that has at least the same label set as $s$, and the possibility of connecting with each mapped predecessor and successor of $s$. It has a low computational complexity per source-target pair ($O(|L_S|)$).
+This method satisfies criterium 1 since every homeomorphism needs each source graph vertex $s$ to be matched with a target graph vertex $t$ that has at least the same label set as $s$, and the possibility of connecting with each mapped predecessor and successor of $s$. It has a low average computational complexity per source-target pair ($O(|L_S|)$).
 
 \subsection{Free neighbours}
 A somewhat stronger and somewhat slower method to obtain domains in addition to label filtering is to compare the indegree- and outdegree of each unmatched source graph vertex $s$ to other unmatched source graph vertices to the in- and outdegree of the target graph vertex $t$ to other unmatched target graph vertices. The target graph vertex must have a larger or equal indegree and outdegree compared to the source graph vertex:
@@ -65,12 +73,11 @@ $\mathit{compatible}_{\mathit{FN}}(s,t) := $&$\mathit{compatible}_{\mathit{LABEL
 \end{defn}
 \end{minipage}
 
-This method satisfies criterium \ref{li:complete} since each unmatched neighbour must yet be matched with a target graph vertex that is (vertex disjointly) connected with the target graph vertex. For this purpose, unused connection to the vertex are required. It has a slightly higher computational complexity per source-target pair ($O(|L_S| + |E_S|/|V_S| + |E_T|/|V_T|)$)
+This method satisfies criterium \ref{li:complete} since each unmatched neighbour must yet be matched with a target graph vertex that is (vertex disjointly) connected with the target graph vertex. For this purpose, unused connection to the vertex are required. It has a slightly higher average computational complexity per source-target pair since (if no cached approach is chosen) each neighbour of $s$ and of $t$ needs to be counted: $O(|L_S| + |E_S|/|V_S| + |E_T|/|V_T|)$.
 
 
 \subsection{Reachability of matched vertices (M-filtering)}
-A strong (and computationally very expensive) method of filtering the domain we will use for some source graph vertex $s$ and some target graph vertex $v$ in addition to label- indegree and outdegree compability is to check that $v$ can reach the mapped vertices of successors of $s$ and that $v$ can be reached from the mapped vertices of predecessors of $s$, i.e. that candidate paths exist for the upcoming edge-path matching attempts. This pruning method does not check whether a set of paths exist that is vertex disjoint since that is the task of the main algorithm: it merely checks the existence of paths. If no path exists, then no vertex disjoint path exists and pruning is required. An example of a domain filtered by reachability can be found in Figure \ref{fig:reachability-filtered}. Formally:
-%An even stronger method would be to find paths that each have different second vertices and each have different second-last vertices, or even to check that no intermediate vertex is used multiple times (NP-complete). This is, however, out of scope for this research.
+A strong (and computationally very expensive) method of filtering the domain we will use to calculate whether a target vertex $t$ is in the domain of a source graph vertex $s$ in addition to label- indegree and outdegree compability is to check that $t$ can reach the mapped vertices of successors of $s$ and that $t$ can be reached from the mapped vertices of predecessors of $s$, i.e. that candidate paths exist for the upcoming edge-path matching attempts. This pruning method does not check whether a set of paths exist that is vertex disjoint since that is the task of the main algorithm: it merely checks the existence of paths. If no path exists, then no vertex disjoint path exists and pruning is required. An example of a domain filtered by reachability can be found in Figure \ref{fig:reachability-filtered}. Formally:
 
 \begin{minipage}{\textwidth}
 \begin{defn}[compatibility under reachability constraint]
@@ -110,44 +117,16 @@ $\mathit{compatible}_{\mathit{M-REACH, succ}}(s,t) := \forall s' \in (\mathit{su
 \end{defn}
 \end{minipage}
 
-If Dijkstra's algorithm is used to find $p$, the complexity per source-target pair is $O(|L_S| + (|E_T|+|V_T|*\mathit{log}(|V_T|))*|E_S|/|V_S|)$
+If Dijkstra's algorithm is used to find $p$, we have a complexity of $O(|E_T|+|V_T|*\mathit{log}(|V_T|))$ for each neighbour, resulting in a total average case complexity per source-target pair of $O(|L_S| + (|E_T|+|V_T|*\mathit{log}(|V_T|))*|E_S|/|V_S|)$
+
+%pruningExampleSimple.png
 
 
 \begin{figure}
 \centering
-\parbox{1.2in}{
 
-\begin{tikzpicture}
+\includegraphics[scale=0.6]{images/contraction/pruningExample.png}
 
-\node[circle, draw=green] at (0,0) (a) {$s_1$};
-\node[circle, draw=red, dotted, thick] at (-1.5,0) (b)  {$s_2$};
-\node[circle, draw=blue, dashed] at (1.5,0) (c)  {$s_3$};
-
-\draw[->] (a)->(b);
-\draw[->] (a)->(c);
-\end{tikzpicture}
-}
-\qquad\qquad
-\begin{minipage}{1.2in}%
-
-\begin{tikzpicture}
-\node[circle, draw=green] at (0,0) (blue) {$t_4$};
-\node[circle, draw=red, dotted, thick] at (-1,1) (green) {$t_2$};
-\node[circle, draw=blue, dashed] at (1,1) (yellowone) {$t_3$};
-\node[circle, draw=blue, dashed] at (-1,2.5) (yellowtwo) {$t_1$};
-\node at (-2,3.5) (redone) {$t_5$};
-\node at (-0,3.5) (redtwo) {$t_6$};
-
-\draw[->] (blue) -> (green);
-\draw[->] (blue) -> (yellowone);
-\draw[->] (yellowone) -> (green);
-\draw[->] (green) -> (yellowtwo);
-\draw[->] (redone) -> (yellowtwo);
-\draw[->] (yellowtwo) -> (redtwo);
-
-
-\end{tikzpicture}
-\end{minipage}
 \caption{After vertex placements $s_1 \to t_4$ and $s_2 \to t_2$, the domain for vertex $s_3$ would normally be $\{t_1, t_3\}$. However, by checking for reachability from $t_4$ we can reduce this to $\{t_3\}$. The numbers represent the matching order and the circle styles represent labels.}
 \label{fig:reachability-filtered}
 \end{figure}
@@ -190,8 +169,7 @@ $\mathit{ncomp}_{i, \mathit{succ}}(s, t) := $&\multicolumn{2}{l}{$\forall s' \in
 \section{Pruning methods}
 \label{sec:pruningmethods}
 \subsection{ZeroDomain pruning}
-%applicable to both isomorphism and homeomorphism
-The ZeroDomain pruning method decides to backtrack if and only if one of the domains is empty, i.e. there exists some source graph vertex that cannot be matched with any target graph vertex. A homeomorphism cannot be found in the current search branch as no potential match exists for this source graph vertex. An example of a domain assignment where ZeroDomain prunes the search space is shown in Table \ref{tab:zerodomain}.
+The ZeroDomain pruning method decides to backtrack if and only if one of the domains is empty, i.e. there exists some source graph vertex that cannot be matched with any target graph vertex. Since each source graph vertex must be matched with some target graph vertex in a subgraph homeomorphism, this implies the search is in a dead branch. A homeomorphism cannot be found in the current search branch as no potential match exists for this source graph vertex. An example of a domain assignment where ZeroDomain prunes the search space is shown in Table \ref{tab:zerodomain}.
 
 \label{sec:emptyDomain}
 \begin{table}
@@ -210,7 +188,7 @@ $s_4$                          & $\emptyset$                      \\ \hline
 
 \subsection{AllDifferent pruning}
 \label{sec:alldifferent}
-The AllDifferent constraint specifies that every variable should be able to have a different value. This is the case with some variable having an empty domain, but also in other cases (i.e. AllDifferent is stronger than ZeroDomain). Since a homeomorphism requires such an assignment, the AllDifferent pruning algorithm backtracks in this case. Alldifferent uses quadratic space since each domain needs to be known at the same time (in contrast with zero-domain, in which the knowledge of each domain separately is sufficient). An example of a domain assignment where AllDifferent prunes the search space but ZeroDomain does not is shown in Table \ref{tab:alldifferent}. 
+The AllDifferent constraint specifies that given some assignment of domains to variables, each variable should have a non-empty domain (i.e. AllDifferent is stronger than ZeroDomain) \textit{and} and some injective mapping exists from variables to values in their domains. Since a homeomorphism requires the vertex-vertex mapping to be injective (and extending a non-injective vertex-vertex mapping can never make it injective again), the AllDifferent pruning algorithm backtracks whenever no such injective mapping exists. Alldifferent uses quadratic space since each domain needs to be known at the same time (in contrast with zero-domain, in which the knowledge of each domain separately is sufficient). An example of a domain assignment where AllDifferent prunes the search space but ZeroDomain does not is shown in Table \ref{tab:alldifferent}. 
 
 \begin{table}
 \centering
