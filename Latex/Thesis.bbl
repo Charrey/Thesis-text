@@ -654,6 +654,47 @@
       \field{pages}{77\bibrangedash 88}
       \range{pages}{12}
     \endentry
+    \entry{cook}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=609a39905dc0e988c3b294dceecdb1e4}{%
+           family={Cook},
+           familyi={C\bibinitperiod},
+           given={Stephen\bibnamedelima A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Shaker Heights, Ohio, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{609a39905dc0e988c3b294dceecdb1e4}
+      \strng{fullhash}{609a39905dc0e988c3b294dceecdb1e4}
+      \strng{bibnamehash}{609a39905dc0e988c3b294dceecdb1e4}
+      \strng{authorbibnamehash}{609a39905dc0e988c3b294dceecdb1e4}
+      \strng{authornamehash}{609a39905dc0e988c3b294dceecdb1e4}
+      \strng{authorfullhash}{609a39905dc0e988c3b294dceecdb1e4}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the Third Annual ACM Symposium on Theory of Computing}
+      \field{isbn}{9781450374644}
+      \field{series}{STOC ’71}
+      \field{title}{The Complexity of Theorem-Proving Procedures}
+      \field{year}{1971}
+      \field{pages}{151\bibrangedash 158}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1145/800157.805047
+      \endverb
+      \verb{urlraw}
+      \verb https://doi-org.ezproxy2.utwente.nl/10.1145/800157.805047
+      \endverb
+      \verb{url}
+      \verb https://doi-org.ezproxy2.utwente.nl/10.1145/800157.805047
+      \endverb
+    \endentry
     \entry{906251}{inproceedings}{}
       \name{author}{4}{}{%
         {{hash=51503bb1f602ab2e80b1be23cc9a1f82}{%
@@ -1771,78 +1812,6 @@
       \verb http://www.sciencedirect.com/science/article/pii/0020025579900239
       \endverb
     \endentry
-    \entry{steinertree}{inproceedings}{}
-      \name{author}{4}{}{%
-        {{hash=3e81f657bfe13c54760ebfbfa55fd242}{%
-           family={Miyamoto},
-           familyi={M\bibinitperiod},
-           given={Masayuki},
-           giveni={M\bibinitperiod}}}%
-        {{hash=e181a011b4706148ab549f10ad8294a3}{%
-           family={Iwamura},
-           familyi={I\bibinitperiod},
-           given={Masakazu},
-           giveni={M\bibinitperiod}}}%
-        {{hash=faaab17cc1e530be67764e7490574c4f}{%
-           family={Kise},
-           familyi={K\bibinitperiod},
-           given={Koichi},
-           giveni={K\bibinitperiod}}}%
-        {{hash=1d6f1e89c6b568b7cd404293e609b2ca}{%
-           family={Gall},
-           familyi={G\bibinitperiod},
-           given={François\bibnamedelima Le},
-           giveni={F\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
-      }
-      \name{editor}{4}{}{%
-        {{hash=69c67a7835bae411a48cf54967c18f39}{%
-           family={Kim},
-           familyi={K\bibinitperiod},
-           given={Donghyun},
-           giveni={D\bibinitperiod}}}%
-        {{hash=16dea5f21437b305ee1fdf2424cd00b5}{%
-           family={Uma},
-           familyi={U\bibinitperiod},
-           given={R.\bibnamedelimi N.},
-           giveni={R\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
-        {{hash=32887024e9e5d2743d9caf6fe9112748}{%
-           family={Cai},
-           familyi={C\bibinitperiod},
-           given={Zhipeng},
-           giveni={Z\bibinitperiod}}}%
-        {{hash=3026a1e694e034f0ca608f650838f6e9}{%
-           family={Lee},
-           familyi={L\bibinitperiod},
-           given={Dong\bibnamedelima Hoon},
-           giveni={D\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
-      }
-      \list{location}{1}{%
-        {Cham}%
-      }
-      \list{publisher}{1}{%
-        {Springer International Publishing}%
-      }
-      \strng{namehash}{b9a1152b10c0687ec596b5710540a2d3}
-      \strng{fullhash}{0156efd4e04e3aa4974665e3b79e902f}
-      \strng{bibnamehash}{0156efd4e04e3aa4974665e3b79e902f}
-      \strng{authorbibnamehash}{0156efd4e04e3aa4974665e3b79e902f}
-      \strng{authornamehash}{b9a1152b10c0687ec596b5710540a2d3}
-      \strng{authorfullhash}{0156efd4e04e3aa4974665e3b79e902f}
-      \strng{editorbibnamehash}{16f0169f72aa0db5d1d231c9bccbfc1d}
-      \strng{editornamehash}{6a19d2f9cfa31659b48d3d0cc2afd36c}
-      \strng{editorfullhash}{16f0169f72aa0db5d1d231c9bccbfc1d}
-      \field{sortinit}{M}
-      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{A recent breakthrough by Ambainis, Balodis, Iraids, Kokainis, Prūsis and Vihrovs (SODA'19) showed how to construct faster quantum algorithms for the Traveling Salesman Problem and a few other NP-hard problems by combining in a novel way quantum search with classical dynamic programming. In this paper, we show how to apply this approach to the minimum Steiner tree problem, a well-known NP-hard problem, and construct the first quantum algorithm that solves this problem faster than the best known classical algorithms. More precisely, the complexity of our quantum algorithm is {\$}{\$}{\backslash}mathcal {\{}O{\}}(1.812^k{\backslash}mathrm {\{}poly{\}}(n)){\$}{\$}, where n denotes the number of vertices in the graph and k denotes the number of terminals. In comparison, the best known classical algorithm has complexity {\$}{\$}{\backslash}mathcal {\{}O{\}}(2^k{\backslash}mathrm {\{}poly{\}}(n)){\$}{\$}.}
-      \field{booktitle}{Computing and Combinatorics}
-      \field{isbn}{978-3-030-58150-3}
-      \field{title}{Quantum Speedup for the Minimum Steiner Tree Problem}
-      \field{year}{2020}
-      \field{pages}{234\bibrangedash 245}
-      \range{pages}{12}
-    \endentry
     \entry{Nawari2015}{inproceedings}{}
       \name{author}{4}{}{%
         {{hash=00c2cad88df2e9224dfd19b98a3a7714}{%
@@ -1890,6 +1859,21 @@
       \verb{doi}
       \verb 10.1109/WSCNIS.2015.7368282
       \endverb
+    \endentry
+    \entry{trellis}{manual}{}
+      \list{organization}{1}{%
+        {SymbiFlow Team}%
+      }
+      \list{publisher}{1}{%
+        {GitHub}%
+      }
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://github.com/YosysHQ/prjtrellis}}
+      \field{journaltitle}{GitHub repository}
+      \field{title}{Project Trellis}
+      \field{year}{2018}
     \endentry
     \entry{Regin1994362}{inproceedings}{}
       \name{author}{1}{}{%

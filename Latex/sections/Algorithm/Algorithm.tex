@@ -13,6 +13,7 @@ To understand ndSHD2 better, let us first examine what the output is supposed to
 %ndshd2 old
 \begin{algorithm}
 \SetAlgoLined
+\LinesNumbered
 \textbf{Inputs: } the current vertex-vertex partial mapping $\mathit{vmap}$, the current edge-path $\mathit{emap}$ partial mapping\\
 \textbf{Outputs: } \textit{found}, indicating whether a valid subgraph homeomorphism has been found.\\
 
@@ -58,6 +59,7 @@ $\mathit{found} \longleftarrow \mathit{false}$
 %wouldPrune old
 \begin{algorithm}
 \SetAlgoLined
+\LinesNumbered
 \textbf{Inputs: } the current vertex-vertex partial mapping $\mathit{vmap}$, the current edge-path $\mathit{emap}$ partial mapping\\
 \textbf{Outputs: } whether pruning should be applied.\\
 $\mathit{domains} \longleftarrow \mathit{filterDomains}(\mathit{vmap}, \mathit{emap})$\;
@@ -157,7 +159,7 @@ In subgraph isomorphism, edge-on-edge mappings can be trivially computed from ve
 
 These methods provide for each two vertices in a graph each path connecting them exactly once. The space requirements for each method are shown in Table \ref{tab:iterator-spacerequirements}, and examples of paths returned by them are shown in Appendix 2.
 
-\begin{table}[]
+\begin{table}
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -177,6 +179,7 @@ Control point          & $O(|V|)$                  \\ \hline
 Since our use case entails finding subgraph homeomorphisms in relatively large graphs, any optimisation possible improves our chances of finding FPGA emulation mappings within reasonable time. Therefore, in addition to implementing ordering parameters for the ndSHD2 algorithm, we implement some optimisations and individually evaluate them. The algorithm with optimisations implemented is shown in Algorithm \ref{algorithm:ndSHD2-prune}.
 
 \subsection{Refusing long paths}
+\label{sec:refusinglongerpaths}
 Since path iterators may provide any valid path to map an edge to during the matching process, they may also provide paths that take up unnecessarily many resources. Specifically, they take up so many resources that with a subset of the vertices and edges of that path, a shorter path can be formed. Formally, some path $t_0\dots t_n$ is ``unnecessarily long" iff:
 
 
@@ -190,6 +193,7 @@ With this optimisation, such paths are skipped by path iterators. Examples of th
 Some subgraph isomorphism algorithms \cite{Cordella2004, McCreesh2015} prune the search space during the search using some detection method of dead search paths. Xiao's algorithm does this as well. For our algorithm, we will implement Xiao's pruning methods and weaker (but more less computationally demanding) variants. In Chapter \ref{chapter:pruning} we will elaborate on these methods.
 
 \subsection{Contraction}
+\label{sec:contraction}
 The source graph of a homeomorphism case will often contain vertices that have exactly one incoming edge and one outgoing edge. In FPGAs, for example, these could be transistors or ports of components. These vertices do topologically nothing but serve as an edge; therefore they may also be thought of as an edge, where the edge source is the vertex' predecessor and the edge target is the vertex' successor. When we use the word contraction, we mean surpressing all such vertices in the virtual FPGA and replacing them with a single edge, as illustrated in Figure \ref{fig:contraction-basic}. This process transforms the source graph $S$ into the smallest graph $S_{cont}$ that is topologically equivalent to $S$. This may be a multigraph or a graph that contains self-loops. If a subgraph homeomorphism exists from $S$ to some target graph $T$, then there also exists a subgraph homeomorphism from $S_{cont}$ to $T$ (a proof is given in Appendix \ref{proof:contractionHomeo}). The optimisation `contraction' searches for a homeomorphism between $S_{cont}$ and the $T$ instead of finding one between $S$ and $T$. Because this involves a smaller source graph, it also involves a smaller search space. Note that we do not change/contract the target graph representing the concrete FPGA.
 
 The process of finding a homeomorphism from $S_{cont}$ to $T$ is slightly different from what normal. This is because while every homeomorphism from $S$ to $T$ can be deduced to a homeomorphism between $S_{cont}$ and $T$ (by contraction of vertices and concatenation of paths), not every homeomorphism from $S_{cont}$ and $T$ allow a homeomorphism from $S$ to $T$ to be inferred. An example is the case where $S_{cont}$ is isomorphic to $T$ and $S$ subdivides a single edge of $S_{cont}$: there exists a subgraph homeomorphism from $S_{cont}$ to $T$ since they are isomorphic, but there is no subgraph homeomorphism from $S$ to $T$. Because of this, we need to adapt the subgraph homeomorphism search process such that it only finds subgraph homeomorphisms from which we \textit{can} infer a subgraph homeomorphism from $S$ to $T$.
@@ -257,6 +261,7 @@ As mentioned in Chapter \ref{chapter:models}, the concrete FPGA may contain tran
 \end{figure}
 
 \subsection{Avoiding unintended current flow from/to paths}
+\label{sec:unintendedcurrent-path}
 Our first remedy is to avoid adding target graph vertices to the partial mapping that are connected to some path already present in the edge-path partial mapping through unconfigurable vertices. We do this by deleting those vertices and re-adding them whenever we backtrack the corresponding edge-path pair. More formally:
 
 Let $\mathit{unconfigurable}\in (V_T \times V_T)$ be the relation between two vertices if they are connected through a vertex representing a unconfigurable transistor, i.e:
@@ -266,47 +271,55 @@ Let $\mathit{unconfigurable}\in (V_T \times V_T)$ be the relation between two ve
 \begin{center}
 \begin{tabular}{ll}
 $\mathit{unconfigurable} := \{(t_1, t_2) \in (V_T \times V_T) | \exists u \in (V_T \setminus \{t_1, t_2\}) .$&$\mathtt{UNCONFIGURABLE} \in L(u) \land$\\
+&$\mathtt{CONFIGURABLE} \not \in L(u) \land$\\
 &$\{(t_1, u), (u, t_2)\} \subseteq E_T\}$
 \end{tabular}
 \end{center}
 
 \vspace{10pt}
-Let $\mathit{unconfigurable}^*$ be the symmetric closure of the transitive closure of $\mathit{unconfigurable}$. Then, whenenever we add an edge-path pair $(e, p)$ to the partial mapping, we delete each vertex $x$ for which $\exists v \in \mathit{intermediate}(p) . (x, v) \in \mathit{unconfigurable}^*$. Whenever the edge-path pair is removed from the partial mapping, each such vertex and their edges is added back to the target graph.
+Let $\mathit{unconfigurable}^*$ be the symmetric closure of the transitive closure of $\mathit{unconfigurable}$. Then, whenenever we add an edge-path pair $(e, p)$ to the partial mapping, we delete each vertex $x$ for which $\exists v \in \mathit{intermediate}(p) . (x, v) \in \mathit{unconfigurable}^*$. If some of the vertices to be deleted are already in the partial mapping, we instead backtrack the algorithm. If not, we continue.  Whenever the edge-path pair is later removed from the partial mapping, each such vertex and their edges is added back to the target graph.
 
 
 \subsection{Avoiding unintended current flow between mapped vertices}
-Our second remedy is to avoid adding target graph vertices to the partial mapping that are connected to some target graph vertex already present in the vertex-vertex partial mapping through unconfigurable vertices. We also do this by deleting those vertices and re-adding them whenever we backtrack the corresponding vertex-vertex pair. More formally, whenever we add a vertex-vertex pair $(s, t)$ to the partial mapping, we delete each vertex $x$ for which $(x, t) \in \mathit{unconfigurable}^*$. Whenever the vertex-vertex pair is removed from the partial mapping, each such vertex and their edges is added back to the target graph.
+\label{sec:unintendedcurrent-vertex}
+Our second remedy is to avoid adding target graph vertices to the partial mapping that are connected to some target graph vertex already present in the vertex-vertex partial mapping through unconfigurable vertices. We also do this by deleting those vertices and re-adding them whenever we backtrack the corresponding vertex-vertex pair. More formally, whenever we add a vertex-vertex pair $(s, t)$ to the partial mapping, we delete each vertex $x$ for which $(x, t) \in \mathit{unconfigurable}^*$. If some of the vertices to be deleted are already in the partial mapping, we instead backtrack the algorithm. Whenever the vertex-vertex pair is removed from the partial mapping, each such vertex and their edges is added back to the target graph.
 
 
 
-
-
-
-
-
+\newfloat{myalgo}{tbhp}{mya}
+\newenvironment{Algorithm}[2][tbh]%
+{\begin{myalgo}[#1]
+\centering
+\begin{minipage}{#2}
+\begin{algorithm}[H]}%
+{\end{algorithm}
+\end{minipage}
+\end{myalgo}}
 
 
 %ndshd2-contract
-\begin{algorithm}
+\begin{Algorithm}{20cm}
 \SetAlgoLined
+\LinesNumbered
 \textbf{Inputs: } the source graph $G_S$ and the target graph $G_T$\\
 \textbf{Outputs: } \textit{found}, indicating whether a valid subgraph homeomorphism has been found.\\
 \color{purple}
 \If{contraction} {
-	$G_S, \mathit{chains} \longleftarrow \mathit{contract}(G_S)$
+	$G_S, \mathit{chains} \longleftarrow \mathit{contract}(G_S)$ \color{black}\tcp*[h]{sec. \ref{sec:contraction}}\color{purple}
 }
 \color{black}
 
- \Return ndSHD2{\color{purple}-ext}($\mathit{vmap}$, $\mathit{emap}$)\;
+ \Return ndSHD2{\color{purple}-ext}($\mathit{vmap}$, $\mathit{emap}$)\tcp*[h]{\ref{algorithm:ndSHD2-ext}}\;
  \caption{ndSHD2-ext}
  \label{algorithm:ndSHD2-prune}
-\end{algorithm}
+\end{Algorithm}
 
 \mathchardef\mhyphen="2D % Define a "math hyphen"
 
 %ndshd2 new
-\begin{algorithm}
+\begin{Algorithm}[t]{20cm}
 \SetAlgoLined
+\LinesNumbered
 \textbf{Inputs: } the current vertex-vertex partial mapping $\mathit{vmap}$, the current edge-path $\mathit{emap}$ partial mapping\\
 \textbf{Outputs: } \textit{found}, indicating whether a valid subgraph homeomorphism has been found.\\
 
@@ -320,21 +333,21 @@ $\mathit{found} \longleftarrow \mathit{false}$
 
 \If{$\mathit{hasUnmatchedEdge}()$} {
 	$(e_S, p_T) \longleftarrow \mathit{GetNextEdgePathPair}()$\;
-	\If{{\color{purple}$\mathit{isUnnecessarilyLong}(p_T) \lor$} $\mathit{wouldPrune}${\color{purple}-ext}$(\mathit{vmap}, \mathit{emap} \cup \{(e_S, p_T)\})$} {
+	\If(\tcp*[h]{sec. \ref{sec:unintendedcurrent-path}}){{\color{purple}$\mathit{isUnnecessarilyLong}(p_T) \lor$} \tcp*[h]{sec. \ref{sec:refusinglongerpaths}} \newline $\mathit{wouldPrune}${\color{purple}-ext}$(\mathit{vmap}, \mathit{emap} \cup \{(e_S, p_T)\}) \lor$\tcp*[h]{See Algorithm \ref{algorithm:wouldPrune-ext}}\newline{\color{purple}$(\mathit{contraction} \land \lnot \mathit{chainsCompatible}(\mathit{emap}, \mathit{from}(e_S), \mathit{to}(e_S), p_T)) \lor$}\tcp*[h]{sec. \ref{sec:contraction}}\newline{\color{purple}$\mathit{unconfigurableCover}(\mathit{intermediate}(p_T)) \cap (\mathit{emap} \cup \mathit{vmap}) \neq \emptyset$}} {
   		\textbf{continue}\;
   	}\color{purple}
-  	\If{$\mathit{contraction} \land \lnot \mathit{chainsCompatible}(\mathit{emap}, \mathit{from}(e_S), \mathit{to}(e_S), p_T)$} {
-  		\textbf{continue}\;
-  	}\color{black}
+	$V_T \longleftarrow V_T \setminus \mathit{unconfigurableCover}(\mathit{intermediate}(p_T))$\color{black}\tcp*[h]{sec. \ref{sec:unintendedcurrent-path}}\;  	
+  	
   	$\mathit{emap} \longleftarrow \mathit{emap} \cup \{(e_S, p_T)\}$\;
   	$\mathit{found} \longleftarrow \mathit{ndSHD2} ${\color{purple}-ext}$(\mathit{vmap}, \mathit{emap})$\;
   \If{found} {
   	\Return true\;
   }
-  $\mathit{emap} \longleftarrow \mathit{emap} \cap \{(e_S, p_T)\}$\;
+  $\mathit{emap} \longleftarrow \mathit{emap} \cap \{(e_S, p_T)\}$\;\color{purple}
+  $V_T \longleftarrow V_T \cup \mathit{unconfigurableCover}(\mathit{intermediate}(p_T))$\color{black}  \tcp*[h]{sec. \ref{sec:unintendedcurrent-path}}\;	
 } \Else {
 	$(v_S, v_T) \longleftarrow \mathit{GetNextNodePair}()$\;
-	\If{$\mathit{wouldPrune}${\color{purple}-ext}$(\mathit{vmap} \cup \{(v_S, v_T)\}, \mathit{emap})$} {
+	\If{$\mathit{wouldPrune}${\color{purple}-ext}$(\mathit{vmap} \cup \{(v_S, v_T)\}, \mathit{emap})\lor$\newline\color{purple}$\mathit{unconfigurableCover}(v_T) \cap (\mathit{vmap} \cup \mathit{emap}) \neq \emptyset$} {
   		\textbf{continue}\;
   	}
   	$\mathit{vmap} \longleftarrow \mathit{vmap} \cup \{(v_S, v_T)\}$\;
@@ -349,12 +362,13 @@ $\mathit{found} \longleftarrow \mathit{false}$
  \Return false\;
  \caption{ndSHD2-ext}
  \label{algorithm:ndSHD2-ext}
-\end{algorithm}
+\end{Algorithm}
 
 
 %wouldPrune new
 \begin{algorithm}
 \SetAlgoLined
+\LinesNumbered
 \textbf{Inputs: } the current vertex-vertex partial mapping $\mathit{vmap}$, the current edge-path $\mathit{emap}$ partial mapping\\
 \textbf{Outputs: } whether pruning should be applied.\\
 
@@ -392,6 +406,7 @@ $\mathit{toPrune} \longleftarrow \text{false}$\;
 \SetKwFor{RepTimes}{repeat}{times}{end}
 \color{purple}
 \SetAlgoLined
+\LinesNumbered
 \textbf{Inputs: } the current edge-path $\mathit{emap}$ partial mapping, the source vertex $v_s$ and the target vertex $v_t$ of the edge to be added, the path to be associated with that edge $p$\\
 \textbf{Outputs: } Whether we need are safe to continue (true) or need to backtrack (false) due to contraction compatibility issues.\\
 $\mathit{labelsetSequences} \longleftarrow \mathit{chains}(v_s, v_t)$\;
@@ -418,6 +433,7 @@ $\mathit{edgesToGo} \longleftarrow |\{e \in E_S . e \not \in \mathit{emap} \land
 \begin{algorithm}
 \color{purple}
 \SetAlgoLined
+\LinesNumbered
 \textbf{Inputs: } A sequence of label sets $S_0 \dots S_m$, a path $v_0 \dots v_n$\\
 \textbf{Outputs: } Whether the path $v_0 \dots v_n$ is compatible with the label set sequence $S_0 \dots S_m$, i.e. is able to emulate it.\\
  \If {$v_0 \dots v_n=\top \lor S_0 \dots S_m=[]$} {
