@@ -95,7 +95,7 @@ Strategies 1 and 2, on the other hand, require only $O(|V_s|+|V_t|)$ heuristic c
 \label{sec:sourceOrder}
 The source graph vertex order is the order in which source graph vertices are added to the partial mapping. For example, if $s_1 \prec_M s_2$ in this ordering, then a pair with $s_2$ and some target graph vertex will only be added to the partial mapping if a pair with $s_1$ is already in it within the context of a partial matching $M$. If this ordering depends on $M$, it has to be calculated at run-time. If it does not, it only has to be precomputed once.
 
-Xiao does not specify a source graph vertex order. Instead, we will use a high-performance ordering technique from the subgraph \textit{isomorphism} domain. From performance comparisons (see Appendix \ref{app:algorithmHistory}) we extract that the best performing algorithm that adheres to partial mapping search for subgraph isomorphism is RI-DS. In our literature study, we found no evidence a faster algorithm exists. This ordering does not depend on $M$, and thus we will precompute the entire ordering.
+Xiao does not specify a source graph vertex order. Instead, we will use a high-performance ordering technique from the subgraph \textit{isomorphism} domain. From performance comparisons (see Appendix \ref{app:algorithmHistory}) we extract that the best performing algorithm that adheres to partial mapping search for subgraph isomorphism is RI-DS \cite{RIalgorithm}. In our literature study, we found no evidence a faster algorithm exists. This ordering does not depend on $M$, and thus we will precompute the entire ordering.
 
 To describe the ordering process of RI-DS, let us provide a few definitions:
 
@@ -347,15 +347,17 @@ $\mathit{found} \longleftarrow \mathit{false}$
   $V_T \longleftarrow V_T \cup \mathit{unconfigurableCover}(\mathit{intermediate}(p_T))$\color{black}  \tcp*[h]{sec. \ref{sec:unintendedcurrent-path}}\;	
 } \Else {
 	$(v_S, v_T) \longleftarrow \mathit{GetNextNodePair}()$\;
-	\If{$\mathit{wouldPrune}${\color{purple}-ext}$(\mathit{vmap} \cup \{(v_S, v_T)\}, \mathit{emap})\lor$\newline\color{purple}$\mathit{unconfigurableCover}(v_T) \cap (\mathit{vmap} \cup \mathit{emap}) \neq \emptyset$} {
+	\If(\tcp*[h]{sec. \ref{sec:unintendedcurrent-vertex}}){$\mathit{wouldPrune}${\color{purple}-ext}$(\mathit{vmap} \cup \{(v_S, v_T)\}, \mathit{emap})\lor$\tcp*[h]{See Algorithm \ref{algorithm:wouldPrune-ext}}\newline\color{purple}$\mathit{unconfigurableCover}(v_T) \cap (\mathit{vmap} \cup \mathit{emap}) \neq \emptyset$} {
   		\textbf{continue}\;
   	}
+  	\color{purple}$V_T \longleftarrow V_T \setminus \mathit{unconfigurableCover}(v_T)$\color{black}\tcp*[h]{sec. \ref{sec:unintendedcurrent-vertex}}\;  
   	$\mathit{vmap} \longleftarrow \mathit{vmap} \cup \{(v_S, v_T)\}$\;
   	$\mathit{found} \longleftarrow \mathit{ndSHD2}${\color{purple}-ext}$(\mathit{vmap}, \mathit{emap})$\;
   \If{found} {
   	\Return true\;
   }
   	$\mathit{vmap} \longleftarrow \mathit{vmap} \cap \{(v_S, v_T)\}$\;
+  	\color{purple}$V_T \longleftarrow V_T \cup \mathit{unconfigurableCover}(v_T)$\color{black}  \tcp*[h]{sec. \ref{sec:unintendedcurrent-vertex}}\;	
 }
 
  }

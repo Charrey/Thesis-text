@@ -1377,6 +1377,49 @@
       \verb 10.1145/1857927.1857937
       \endverb
     \endentry
+    \entry{KONDRAK1997365}{article}{}
+      \name{author}{2}{}{%
+        {{hash=5a3814d5f991bd83c1ca02f901fe6112}{%
+           family={Kondrak},
+           familyi={K\bibinitperiod},
+           given={Grzegorz},
+           giveni={G\bibinitperiod}}}%
+        {{hash=e156cd88a7babf6e65e7aa55f78427af}{%
+           family={{van Beek}},
+           familyi={v\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{46640161d0cec1be59514ba2301cb4e6}
+      \strng{fullhash}{46640161d0cec1be59514ba2301cb4e6}
+      \strng{bibnamehash}{46640161d0cec1be59514ba2301cb4e6}
+      \strng{authorbibnamehash}{46640161d0cec1be59514ba2301cb4e6}
+      \strng{authornamehash}{46640161d0cec1be59514ba2301cb4e6}
+      \strng{authorfullhash}{46640161d0cec1be59514ba2301cb4e6}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In recent years, many new backtracking algorithms for solving constraint satisfaction problems have been proposed. The algorithms are usually evaluated by empirical testing. This method, however, has its limitations. Our paper adopts a different, purely theoretical approach, which is based on characterizations of the sets of search tree nodes visited by the backtracking algorithms. A notion of inconsistency between instantiations and variables is introduced, and is shown to be a useful tool for characterizing such well-known concepts as backtrack, backjump, and domain annihilation. The characterizations enable us to: (a) prove the correctness of the algorithms, and (b) partially order the algorithms according to two standard performance measures: the number of nodes visited, and the number of consistency checks performed. Among other results, we prove the correctness of Backjumping and Conflict-Directed Backjumping, and show that Forward Checking never visits more nodes than Backjumping. Our approach leads us also to propose a modification to two hybrid backtracking algorithms, Backmarking with Backjumping (BMJ) and Backmarking with Conflict-Directed Backjumping (BM-CBJ), so that they always perform fewer consistency checks than the original algorithms.}
+      \field{issn}{0004-3702}
+      \field{journaltitle}{Artificial Intelligence}
+      \field{number}{1}
+      \field{title}{A theoretical evaluation of selected backtracking algorithms}
+      \field{volume}{89}
+      \field{year}{1997}
+      \field{pages}{365\bibrangedash 387}
+      \range{pages}{23}
+      \verb{doi}
+      \verb https://doi.org/10.1016/S0004-3702(96)00027-6
+      \endverb
+      \verb{urlraw}
+      \verb http://www.sciencedirect.com/science/article/pii/S0004370296000276
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/S0004370296000276
+      \endverb
+      \keyw{Backtracking,Constraint satisfaction}
+    \endentry
     \entry{Kotthoff2016}{book}{}
       \name{author}{3}{}{%
         {{hash=289278432bd9f679074636b47740fa2f}{%

@@ -1,1 +1,16 @@
 \chapter{Discussion}
+From our experiments, we found that in-place depth first search path iteration is (of the methods compared) the most efficient path iteration method to replace Xiao's structure with precomputed paths for our business case. We could not find enough data to make conclusions on how memory usage scales with each path iteration method; however, all path iteration methods (except for control point iteration) seem to scale approximately equally within our graph size range.
+
+Our experiments show that the GreatestConstrainedFirst source graph vertex ordering from RI-DS \cite{RIalgorithm} is indeed more efficient than the assumed random ordering of Xiao's algorithm. Moreover, the experiments show that ordering target vertices by degree introduced by Glasgow \cite{McCreesh2015} is on average more efficient than the assumed random ordering of Xiao's algorithm or the distance-based ordering we introduced.
+
+We compared each of our 24 pruning methods and conclude that cached AllDifferent pruning with N-filtering is the most computationally effective pruning method for our business case. This is partly in line with Xiao's algorithm, which uses cached ZeroDomain pruning with N-filtering.
+
+With regards to space usage, we see no reason to prefer one option over the other: the effect of the pruner choice has a minor effect on space usage, likely unnoticeable in a business environment.
+
+For applications of our algorithm outside of FPGA emulation, different settings may yield better performance. Our test cases are specifically designed to represent graphs that adhere to our FPGA graph model, and may have properties that graphs from a different domain do not have. Therefore, verifying the appropriate settings for a different business case is adviseable if computational requirements are relevant.
+
+{\color{red} TODO: extrapolate how much time is needed for business case. Is this acceptable?}
+
+A disadvantage of our approach is that it requires modelling the virtual FPGA into hardware components (wires, transistors et cetera). Some models might result in subgraph homeomorphisms being found, while some models might not. A possible technique to remedy this is to attempt several different models simultaneously, using heuristics to estimate the likeliness of each model to result in a subgraph homeomorphism being found.
+
+Even then, a subgraph homeomorphism may not be found even though a theoretical emulation exists: our methodology only looks for emulation of individual virtual components by individual concrete components and does not look for solutions where sets of virtual components are emulated by sets of virtual concrete components that may be composed of different component types. However, there might not be a solution to this: in general, an emulation mapping should map each possible function on the virtual FPGA to a semantically equivalent function on the concrete FPGA. Deciding whether two functions are semantically equivalent is an undecideable problem in general, only limited by the size of the FPGA. It is thus appriopriate to use a methodology that is most likely to find an emulation mapping where one exists, for which we provide a candidate with our methodology.

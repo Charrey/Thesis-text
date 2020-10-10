@@ -9,7 +9,7 @@
 
 
 \begin{abstract}
-FPGAs allow reconfiguration of its logic at any point after production. The result is that they are effective at prototyping application-specific integrated circuits, updating the internal logic while in the field and at low-cost low-quantity use cases. To optimise these processes, it is crucial to properly educate engineers in the implementation of FPGA programs and the FPGA compilation process. Traditional FPGA programming pipelines involve a computationally expensive (NP-hard) place \& route process that slows down iterations of FPGA programs and hinders the educational process. We propose a virtual environment in which place \& route is performed manually in which the student learns about the intricacies of place \& route and in which compilation is linear. To this end, we require emulation of a virtual FPGA on a physical, concrete FPGA. In the proposed research, we find such an emulation using an algorithm that solves a variant of subgraph isomorphism. This algorithm aims to find emulations in as many cases as possible. The expected result is a software package that computes emulators: programs whose output is a program for a concrete FPGA that emulates the provided input program for the virtual FPGA.
+FPGAs allow reconfiguration of its logic at any point after production. The result is that they are effective at prototyping application-specific integrated circuits, updating the internal logic while in the field and at low-cost low-quantity use cases. To optimise these processes, it is crucial to properly educate engineers in the implementation of FPGA programs and the FPGA compilation process. Traditional FPGA programming pipelines involve a computationally expensive (NP-hard) place \& route process that slows down iterations of FPGA programs and hinders the educational process. We propose a virtual environment in which place \& route is performed manually in which the student learns about the intricacies of place \& route and in which compilation is linear. To this end, we require emulation of a virtual FPGA on a physical, concrete FPGA. In this research, we establish a methodology for finding such emulation mappings. To this end, we adapt Xiao's algorithm for subgraph homeomorphism and optimize it for usage with graphs representing FPGAs. This algorithm aims to find an emulation in as many cases as possible, as quickly as possible. The result is a software package that computes emulators: programs whose output is a program for a concrete FPGA that emulates the provided input program for the virtual FPGA. Based on experiments run using this package, we evaluate different settings for our algorithm and make a recommendation.
 \end{abstract}
 
 \newpage
@@ -24,8 +24,8 @@ FPGAs allow reconfiguration of its logic at any point after production. The resu
 \include{sections/UseCase/UseCase}
 \include{sections/Experiments/Experiments}
 \include{sections/Software/Software}
-\include{sections/Conclusion/Conclusion}
 \include{sections/Discussion/Discussion}
+\include{sections/Conclusion/Conclusion}
 \include{sections/FutureResearch/FutureResearch}
 
 \begin{appendices}

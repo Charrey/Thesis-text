@@ -99,22 +99,20 @@ We use our algorithm with contraction enabled, meaning we will  preprocess our s
 \end{figure}
 
 \subsection{Running algorithm}
-We start with a partial mapping $(\mathit{vmap}, \mathit{emap})$ where $\mathit{vmap}$ and $\mathit{emap}$ are both empty.
-
-
+We start with a partial mapping $(\mathit{vmap}, \mathit{emap})$ where $\mathit{vmap}$ and $\mathit{emap}$ are both empty and run Algorithm \ref{algorithm:ndSHD2-ext}.
 
 \begin{longtable}{llp{15cm}}
-\bullet & (lines 8, 24) & There exists no unmatched edge, so retrieve the next node pair $(s_1, t_1)$. \\
+\bullet & (lines 8, 23) & There exists no unmatched edge, so retrieve the next node pair $(s_1, t_1)$. \\
 
-\bullet & (line 25)     & The pruner (which uses N-reachability filtering) obtains the domains: \newline $s_1 \to \{t_1\}$ \newline $ s_6 \to \{t_{17}, t_{21}\}$\newline$s_7 \to \{t_{16}, t_{18}, t_{19}, t_{20}\}$\newline$s_8 \to \{t_{16}, t_{18}, t_{19}, t_{20}\}$\newline$s_9 \to \{t_{17}, t_{21}\}$ \newline Since an injective mapping exists from this domain, we do not prune.  \\
+\bullet & (line 24)     & The pruner (which uses N-reachability filtering) obtains the domains: \newline $s_1 \to \{t_1\}$ \newline $ s_6 \to \{t_{17}, t_{21}\}$\newline$s_7 \to \{t_{16}, t_{18}, t_{19}, t_{20}\}$\newline$s_8 \to \{t_{16}, t_{18}, t_{19}, t_{20}\}$\newline$s_9 \to \{t_{17}, t_{21}\}$ \newline Since an injective mapping exists from this domain, we do not prune.  \\
 
 \bullet & (line 28) & We add $(s_1, t_1)$ to $\mathit{vmap}$, which is now $\{(s_1, t_1)\}$. \\ 
 
 \bullet & (line 29) & We enter a recursive call. \\ 
 
-\bullet & (lines 8, 24) & There exists no unmatched edge, so retrieve the next node pair. For briefness, we will omit attempts to match $s_6$ with $t_1 \dots t_{16}$: these will each result in being pruned in line 11 because of reachability and label compatibility problems, until we try $(s_6, t_{17})$. \\ 
+\bullet & (lines 8, 23) & There exists no unmatched edge, so retrieve the next node pair. For briefness, we will omit attempts to match $s_6$ with $t_1 \dots t_{16}$: these will each result in being pruned in line 11 because of reachability and label compatibility problems, until we try $(s_6, t_{17})$. \\ 
 
-\bullet & (line 25) & The pruner (which uses N-reachability filtering) obtains the domains: \newline $s_1 \to \{t_1\}$ \newline $s_6 \to \{t_{17}\}$ \newline $s_7 \to \{t_{16}, t_{18}, t_{19}, t_{20}\}$ \newline $s_8 \to \{t_{16}, t_{18}, t_{19}, t_{20}\}$ \newline $s_9 \to \{t_{21}\}$ \newline Since an injective mapping exists from this domain, we do not prune.\\ 
+\bullet & (line 24) & The pruner (which uses N-reachability filtering) obtains the domains: \newline $s_1 \to \{t_1\}$ \newline $s_6 \to \{t_{17}\}$ \newline $s_7 \to \{t_{16}, t_{18}, t_{19}, t_{20}\}$ \newline $s_8 \to \{t_{16}, t_{18}, t_{19}, t_{20}\}$ \newline $s_9 \to \{t_{21}\}$ \newline Since an injective mapping exists from this domain, we do not prune.\\ 
 
 \bullet & (line 28) & We add $(s_6, t_{17})$ to $\mathit{vmap}$, which is now $\{(s_1, t_1), (s_6, t_{17}))\}$.\\ 
 
@@ -126,15 +124,15 @@ We start with a partial mapping $(\mathit{vmap}, \mathit{emap})$ where $\mathit{
 
 \bullet & (line 10) & The pruner (which uses N-reachability filtering) obtains the domains: \newline $s_1 \to \{t_1\}$ \newline $ s_6 \to \{t_{17}\}$ \newline $s_7 \to \{t_{16}, t_{18}, t_{19}, t_{20}\}$ \newline $s_8 \to \{t_{16}, t_{18}, t_{19}, t_{20}\}$ \newline $ s_9 \to \{t_{21}\}$ \newline Since an injective mapping exists from this domain, we do not prune.\\ 
 
-\bullet & (line 13) & Contraction is enabled, and we find that the path $t_{17} \to t_9 \to t_1$ satisfies the requirements of having a single intermediate vertex with at least the label \texttt{PORT} (vertex $t_9$). Therefore, we do not prune.\\ 
+\bullet & (line 10) & Contraction is enabled, and we find that the path $t_{17} \to t_9 \to t_1$ satisfies the requirements of having a single intermediate vertex with at least the label \texttt{PORT} (vertex $t_9$). Therefore, we do not prune.\\ 
 
-\bullet & (line 16) & We add $(s_6\to s_1, t_{17} \to t_9 \to t_1)$ to $\mathit{emap}$, which is now $\{(s_6\to s_1, t_{17} \to t_9 \to t_1)\}$.\\ 
+\bullet & (line 14) & We add $(s_6\to s_1, t_{17} \to t_9 \to t_1)$ to $\mathit{emap}$, which is now $\{(s_6\to s_1, t_{17} \to t_9 \to t_1)\}$.\\ 
 
-\bullet & (line 17) & We enter a recursive call.\\ 
+\bullet & (line 15) & We enter a recursive call.\\ 
 
-\bullet & (lines 8, 24) & There exists no unmatched edge, so retrieve the next node pair $(s_7, t_{16})$. For briefness, we will omit attempts to match $s_7$ with $t_1 \dots t_{15}$: these will each result in being pruned in line 11 because of reachability and label compatibility problems, until we try $(s_7, t_{16})$.\\ 
+\bullet & (lines 8, 23) & There exists no unmatched edge, so retrieve the next node pair $(s_7, t_{16})$. For briefness, we will omit attempts to match $s_7$ with $t_1 \dots t_{15}$: these will each result in being pruned in line 11 because of reachability and label compatibility problems, until we try $(s_7, t_{16})$.\\ 
 
-\bullet & (line 25) & The pruner (which uses N-reachability filtering) obtains the domains: \newline $s_1 \to \{t_1\}$ \newline $s_6 \to \{t_{17}\}$ \newline $s_7 \to \{t_{16}\}$ \newline $s_8 \to \{t_{18}, t_{19}, t_{20}\}$ \newline $s_9 \to \{t_{21}\}$ \newline Since an injective mapping exists from this domain, we do not prune. \\ 
+\bullet & (line 24) & The pruner (which uses N-reachability filtering) obtains the domains: \newline $s_1 \to \{t_1\}$ \newline $s_6 \to \{t_{17}\}$ \newline $s_7 \to \{t_{16}\}$ \newline $s_8 \to \{t_{18}, t_{19}, t_{20}\}$ \newline $s_9 \to \{t_{21}\}$ \newline Since an injective mapping exists from this domain, we do not prune. \\ 
 
 \bullet & (line 28) & We add $(s_7, t_{16})$ to $\mathit{vmap}$, which is now $\{(s_1, t_1), (s_6, t_{17}), (s_7, t_{16}))\}$.\\ 
 
@@ -146,17 +144,17 @@ We start with a partial mapping $(\mathit{vmap}, \mathit{emap})$ where $\mathit{
 
 \bullet & (line 10) & The pruner (which uses N-reachability filtering) obtains the domains: \newline $s_1 \to \{t_1\}$ \newline $s_6 \to \{t_{17}\}$ \newline $s_7 \to \{t_{16}\}$ \newline  $s_8 \to \{t_{18}, t_{19}\}$ \newline $s_9 \to \{t_{21}\}$ \newline Since an injective mapping exists from this domain, we do not prune.\\ 
 
-\bullet & (line 13) & Contraction is enabled, and we find that the path $t_1 \to t_5 \to t_8 \to t_4 \to t_2 \to t_{15} \to t_{16}$ satisfies the requirements of having a single intermediate vertex with at least the label \texttt{PORT} (vertex $t_5$). Therefore, we do not prune.\\ 
+\bullet & (line 10) & Contraction is enabled, and we find that the path $t_1 \to t_5 \to t_8 \to t_4 \to t_2 \to t_{15} \to t_{16}$ satisfies the requirements of having a single intermediate vertex with at least the label \texttt{PORT} (vertex $t_5$). Therefore, we do not prune.\\ 
 
-\bullet & (line TODO) & Since vertex $t_{20}$ is in the cover reachable by vertices from this path through unconfigurable transistors, we delete it from the graph until this path is backtracked.\\ 
+\bullet & (line 13) & Since vertex $t_{20}$ is in the cover reachable by vertices from this path through unconfigurable transistors, we delete it from the graph until this path is backtracked.\\ 
 
-\bullet & (line 16) & We add $(s_1\to s_7, t_1 \to t_5 \to t_8 \to t_4 \to t_2 \to t_{15} \to t_{16})$ to $\mathit{emap}$, which is now $\{(s_6\to s_1, t_{17} \to t_9 \to t_1), (s_1\to s_7, t_1 \to t_5 \to t_8 \to t_4 \to t_2 \to t_{15} \to t_{16})\}$.\\ 
+\bullet & (line 14) & We add $(s_1\to s_7, t_1 \to t_5 \to t_8 \to t_4 \to t_2 \to t_{15} \to t_{16})$ to $\mathit{emap}$, which is now $\{(s_6\to s_1, t_{17} \to t_9 \to t_1), (s_1\to s_7, t_1 \to t_5 \to t_8 \to t_4 \to t_2 \to t_{15} \to t_{16})\}$.\\ 
 
-\bullet & (line 17) & We enter a recursive call.\\ 
+\bullet & (line 15) & We enter a recursive call.\\ 
 
-\bullet & (lines 8, 24) & There exists no unmatched edge, so retrieve the next node pair $(s_8, t_{18})$. For briefness, we will omit attempts to match $s_7$ with $t_1 \dots t_{17}$: these will each result in being pruned in line 11 because of reachability and label compatibility problems, until we try $(s_8, t_{18})$.\\ 
+\bullet & (lines 8, 23) & There exists no unmatched edge, so retrieve the next node pair $(s_8, t_{18})$. For briefness, we will omit attempts to match $s_7$ with $t_1 \dots t_{17}$: these will each result in being pruned in line 11 because of reachability and label compatibility problems, until we try $(s_8, t_{18})$.\\ 
 
-\bullet & (line 25) & The pruner (which uses N-reachability filtering) obtains the domains: \newline $s_1 \to \{t_1\}$ \newline $s_6 \to \{t_{17}\}$ \newline $s_7 \to \{t_{16}\}$ \newline $s_8 \to \{t_{18}\}$ \newline $s_9 \to \{t_{21}\}$ \newline Since an injective mapping exists from this domain, we do not prune.\\ 
+\bullet & (line 24) & The pruner (which uses N-reachability filtering) obtains the domains: \newline $s_1 \to \{t_1\}$ \newline $s_6 \to \{t_{17}\}$ \newline $s_7 \to \{t_{16}\}$ \newline $s_8 \to \{t_{18}\}$ \newline $s_9 \to \{t_{21}\}$ \newline Since an injective mapping exists from this domain, we do not prune.\\ 
 
 \bullet & (line 28) & We add $(s_8, t_{18})$ to $\mathit{vmap}$, which is now $\{(s_1, t_1), (s_6, t_{17}), (s_7, t_{16}), (s_8, t_{18})\}$.\\ 
 
@@ -168,17 +166,17 @@ We start with a partial mapping $(\mathit{vmap}, \mathit{emap})$ where $\mathit{
 
 \bullet & (line 10) & The pruner (which uses N-reachability filtering) obtains the domains: \newline $s_1 \to \{t_1\}$ \newline $s_6 \to \{t_{17}\}$ \newline $s_7 \to \{t_{16}\}$ \newline $s_8 \to \{t_{18}\}$ \newline $s_9 \to \{t_{21}\}$ \newline Since an injective mapping exists from this domain, we do not prune.\\ 
 
-\bullet & (line 13) & Contraction is enabled, and we find that the path $t_1 \to t_7 \to t_{10} \to t_{11} \to t_3 \to t_{14} \to t_{18}$ satisfies the requirements of having a single intermediate vertex with at least the label \texttt{PORT} (vertex $t_7$). Therefore, we do not prune.\\ 
+\bullet & (line 10) & Contraction is enabled, and we find that the path $t_1 \to t_7 \to t_{10} \to t_{11} \to t_3 \to t_{14} \to t_{18}$ satisfies the requirements of having a single intermediate vertex with at least the label \texttt{PORT} (vertex $t_7$). Therefore, we do not prune.\\ 
 
-\bullet & (line TODO) & Since vertex $t_{19}$ is in the cover reachable by vertices from this path through unconfigurable transistors, we delete it from the graph until this path is backtracked.\\ 
+\bullet & (line 13) & Since vertex $t_{19}$ is in the cover reachable by vertices from this path through unconfigurable transistors, we delete it from the graph until this path is backtracked.\\ 
 
-\bullet & (line 16) & We add $(s_1\to s_7, t_1 \to t_5 \to t_8 \to t_4 \to t_2 \to t_{15} \to t_{16})$ to $\mathit{emap}$, which is now:\newline $\{(s_6\to s_1, t_{17} \to t_9 \to t_1),$\newline$(s_1\to s_7, t_1 \to t_5 \to t_8 \to t_4 \to t_2 \to t_{15} \to t_{16}),$\newline$(s_1 \to s_8, t_1 \to t_7 \to t_{10} \to t_{11} \to t_3 \to t_{14} \to t_{18})\}$.\\ 
+\bullet & (line 14) & We add $(s_1\to s_7, t_1 \to t_5 \to t_8 \to t_4 \to t_2 \to t_{15} \to t_{16})$ to $\mathit{emap}$, which is now:\newline $\{(s_6\to s_1, t_{17} \to t_9 \to t_1),$\newline$(s_1\to s_7, t_1 \to t_5 \to t_8 \to t_4 \to t_2 \to t_{15} \to t_{16}),$\newline$(s_1 \to s_8, t_1 \to t_7 \to t_{10} \to t_{11} \to t_3 \to t_{14} \to t_{18})\}$.\\ 
 
-\bullet & (line 17) & We enter a recursive call.\\ 
+\bullet & (line 15) & We enter a recursive call.\\ 
 
-\bullet & (lines 8, 24) & There exists no unmatched edge, so retrieve the next node pair. For briefness, we will omit attempts to match $s_6$ with $t_1 \dots t_{20}$: these will each result in being pruned in line 11 because of reachability and label compatibility problems, until we try $(s_9, t_{21})$.\\ 
+\bullet & (lines 8, 23) & There exists no unmatched edge, so retrieve the next node pair. For briefness, we will omit attempts to match $s_6$ with $t_1 \dots t_{20}$: these will each result in being pruned in line 11 because of reachability and label compatibility problems, until we try $(s_9, t_{21})$.\\ 
 
-\bullet & (line 25) & The pruner (which uses N-reachability filtering) obtains the domains: \newline $s_1 \to \{t_1\}$ \newline $s_6 \to \{t_{17}\}$ \newline $s_7 \to \{t_{16}\}$ \newline $s_8 \to \{t_{18}\}$ \newline $s_9 \to \{t_{21}\}$ \newline Since an injective mapping exists from this domain, we do not prune.\\ 
+\bullet & (line 24) & The pruner (which uses N-reachability filtering) obtains the domains: \newline $s_1 \to \{t_1\}$ \newline $s_6 \to \{t_{17}\}$ \newline $s_7 \to \{t_{16}\}$ \newline $s_8 \to \{t_{18}\}$ \newline $s_9 \to \{t_{21}\}$ \newline Since an injective mapping exists from this domain, we do not prune.\\ 
 
 
 \bullet & (line 28) & We add $(s_9, t_{21})$ to $\mathit{vmap}$, which is now $\{(s_1, t_1), (s_6, t_{17}), (s_7, t_{16}), (s_8, t_{18}), (s_9, t_{21})\}$.\\ 
@@ -191,30 +189,30 @@ We start with a partial mapping $(\mathit{vmap}, \mathit{emap})$ where $\mathit{
 
 \bullet & (line 10) & The pruner (which uses N-reachability filtering) obtains the domains: \newline $s_1 \to \{t_1\}$ \newline $s_6 \to \{t_{17}\}$ \newline $s_7 \to \{t_{16}\}$ \newline $s_8 \to \{t_{18}\}$ \newline $s_9 \to \{t_{21}\}$ \newline Since an injective mapping exists from this domain, we do not prune.\\ 
 
-\bullet & (line 13) & Contraction is enabled, and we find that the path $t_{21} \to t_6 \to t_1$ satisfies the requirements of having a single intermediate vertex with at least the label \texttt{PORT} (vertex $t_6$). Therefore, we do not prune.\\ 
+\bullet & (line 10) & Contraction is enabled, and we find that the path $t_{21} \to t_6 \to t_1$ satisfies the requirements of having a single intermediate vertex with at least the label \texttt{PORT} (vertex $t_6$). Therefore, we do not prune.\\ 
 
-\bullet & (line 16) & We add $(s_9 \to s_1, t_{21} \to t_6 \to t_1)$ to $\mathit{emap}$, which is now:\newline $\{(s_6\to s_1, t_{17} \to t_9 \to t_1),$\newline$(s_1\to s_7, t_1 \to t_5 \to t_8 \to t_4 \to t_2 \to t_{15} \to t_{16}),$\newline$(s_1 \to s_8, t_1 \to t_7 \to t_{10} \to t_{11} \to t_3 \to t_{14} \to t_{18}),$\newline$(s_9 \to s_1, t_{21} \to t_6 \to t_1)\}$.\\ 
+\bullet & (line 14) & We add $(s_9 \to s_1, t_{21} \to t_6 \to t_1)$ to $\mathit{emap}$, which is now:\newline $\{(s_6\to s_1, t_{17} \to t_9 \to t_1),$\newline$(s_1\to s_7, t_1 \to t_5 \to t_8 \to t_4 \to t_2 \to t_{15} \to t_{16}),$\newline$(s_1 \to s_8, t_1 \to t_7 \to t_{10} \to t_{11} \to t_3 \to t_{14} \to t_{18}),$\newline$(s_9 \to s_1, t_{21} \to t_6 \to t_1)\}$.\\ 
 
 
-\bullet & (line 17) & We enter a recursive call.\\ 
+\bullet & (line 15) & We enter a recursive call.\\ 
 
 \bullet & (line 4) & Since the partial mapping is complete, we return true.\\ 
 
 \bullet & (line 31) & We return true from the recursive call, along with $(\mathit{vmap}, \mathit{emap})$\\ 
 
-\bullet & (line 19) & We return true from the recursive call, along with $(\mathit{vmap}, \mathit{emap})$\\
+\bullet & (line 17) & We return true from the recursive call, along with $(\mathit{vmap}, \mathit{emap})$\\
 
 \bullet & (line 31) & We return true from the recursive call, along with $(\mathit{vmap}, \mathit{emap})$\\ 
 
-\bullet & (line 19) & We return true from the recursive call, along with $(\mathit{vmap}, \mathit{emap})$\\ 
+\bullet & (line 17) & We return true from the recursive call, along with $(\mathit{vmap}, \mathit{emap})$\\ 
 
 \bullet & (line 31) & We return true from the recursive call, along with $(\mathit{vmap}, \mathit{emap})$\\ 
 
-\bullet & (line 19) & We return true from the recursive call, along with $(\mathit{vmap}, \mathit{emap})$\\
+\bullet & (line 17) & We return true from the recursive call, along with $(\mathit{vmap}, \mathit{emap})$\\
 
 \bullet & (line 31) & We return true from the recursive call, along with $(\mathit{vmap}, \mathit{emap})$\\ 
 
-\bullet & (line 19) & We return true from the recursive call, along with $(\mathit{vmap}, \mathit{emap})$\\ 
+\bullet & (line 17) & We return true from the recursive call, along with $(\mathit{vmap}, \mathit{emap})$\\ 
 
 \bullet & (line 31) & We return true from the recursive call, along with $(\mathit{vmap}, \mathit{emap})$\\ 
 
@@ -268,4 +266,5 @@ Following these rules and the obtained subgraph homeomorphism, we establish the 
 \item virtual output 2 $=$ concrete output 4
 \end{itemize}
 
+Now, whenever a student creates a configuration consisting of values $v_1 \dots v_5$ for the virtual FPGA, a configuration is also defined by the values $c_1 \dots c_9$ for the concrete FPGA that has the same semantics.
 

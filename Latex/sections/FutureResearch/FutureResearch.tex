@@ -1,13 +1,15 @@
 \chapter{Future Research}
+Through our research we encountered multiple opportunities for further research, both in our algorithm and in the general problem of FPGA emulation. 
 
-\begin{enumerate}
-\item concurrent tree exploration
-\item concurrent tree with different threads using different limits.
-\item Backmarking and backjumping
-\item choose target graph vertices based on some location heuristic, e.g. tiles
-\item use hierachy: e.g. when a component has been matched with some pattern Q, immediately match the next component with an isomorphic pattern Q', allowing for backtracking
-\item pruning does not take contracted vertices into account
-\item multigraph introduces repetition, remove it
+We improved Xiao's algorithm and optimized it for finding subgraph homeomorphisms between FPGA models. There are, however, techniques that we have not implemented but could yield performance gains of the algorithm.
+\begin{itemize}
+\item Since our algorithm is a form of search space exploration, exploration of different branches of the search tree could be performed in parallel. This has the potential of speeding up the algorithm by a factor of the number of computing cores used in parallel.
+\item Secondly, our algorithm could be improved by adding backmarking and backjumping \cite{KONDRAK1997365}. This technique improves the pruner by recognising which addition of the partial mapping caused the pruner to kick-in, backtracking potentially several steps instead of one. This technique was already implemented in Glassgow \cite{McCreesh2015}, a subgraph isomorphism algorithm that is as of now not shown to be superceded by a better performing algorithm (See Appendix \ref{app:algorithmHistory}).
+\item The contraction optimisation has room for improvement. Whenever a duplicate edge appears due to contraction of some transistor or port, the algorithm attempts to find appropriate paths for the two edges independently. An optimisation would be to avoid mapping them with a set of paths if some mapping from those edges to the same set of paths has already been attempted before. Furthermore, we observe that contraction sometimes results in a performance deficit. If we can somehow find out which specific contracted vertices cause this behaviour, we can refrain from contracting them resulting in an overall better performance.
+\item The pruner currently has no knowledge of contracted vertices or limitations of mapping edges with contracted vertices to paths. Taking this into account in the pruner could result in some speedup.
+\item Our algorithm could take hierarchy into account. Whenever the source graph contains some graph pattern multiple times, it may be easier to find matches in the target graph for these repetitions after one instance is completely included in the partial mapping.
+\item Lastly, if one is able to retrieve information about the physical location of components of the concrete FPGA, this information can be used as heuristic for vertex orderings.
+\end{itemize}
 
+There are other areas of research possible as well. One of the problems of our methodology is that it requires a 1-to-1 mapping of physical components. If we build a repository of component structures along with structures that can emulate them, we could move away from subgraph homeomorphism to a more general variant that allows mapping groups of components on other groups. Lastly, we observe that, contrary to placement \& routing algorithms, our algorithm performs best when the sizes of the two inputs are close together. Combining our research with research on placement \& routing algorithms has the potential of resulting in an approach that works well with approximately equal input sizes and with widely different input sizes.
 
-\end{enumerate}
