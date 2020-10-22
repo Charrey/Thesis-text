@@ -2,13 +2,13 @@
 To illustrate the process documented in this thesis, we provide an end-to-end example on a small use case. This entails the process from modeling FPGAs all the way up to applying an emulation mapping on configurations of the virtual FPGA.
 
 \section{FPGAs}
-We introduce the virtual FPGA \textit{VirSample}. This simple FPGA has two inputs, has a 2-input-1-ouput LUT and two outputs (one of which is always zero). Figure \ref{fig:virboardconfigs} shows the layout and different configurations of this virtual FPGA.
+We introduce the virtual FPGA \textit{VirSample}. This simple FPGA has two inputs, has a 2-input-1-ouput LUT and two outputs (one of which is always zero). Figure \ref{fig:virsampleconfigs} shows the layout and different configurations of this virtual FPGA.
 
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{images/endToEnd/exampleFPGA.png}
 \caption{Both configurations of VirSample. The left configuration is specified by configuration bit $v_5=0$ while the right configuration is specified by $v_5=1$.}
-\label{fig:virboardconfigs}
+\label{fig:visampleconfigs}
 \end{figure}
 
 Suppose we want to emulate configurations of VirSample on a real, physical FPGA ConcreteSample (shown in Figure \ref{fig:conboardconfigs}). This FPGA has a 2-input-2-output logic cell, a register and a multiplexer (a component that selects one of its two input sets as output depending on its configuration). Intuitively, we may find an emulation mapping by hand:
@@ -46,7 +46,7 @@ We will show that a similar emulation mapping will also be the result of applyin
 
 \section{Graph models}
 \label{sec:example-graphmodels}
-We model our FPGAs using the model specified in Chapter \ref{chapter:models}, with one addition: we model LUTs with a new label \texttt{LOGIC}. Since we only model physical structures (i.e. wires, transistors and logical components) instead of semantics, we need to think of ways that VirSample could have been implemented using these physical structures. After all, this FPGA does not physically exist. Some implementations of VirSample will yield graph models that have subgraph homeomorphism embeddings in ConcreteSample's graph while some will not. In this example, we will make a single compact graph model, although for practical use we recommend trying out different models. This graph model is shown in Figure \ref{fig:example-virtualGraph}. This model assumes that the physicl implementation of VirSample uses a 2-input-2-output LUT, with the limitation that for each input combination in the LUT, at least one output should be configured to be zero, depending on $v_5$.
+We model our FPGAs using the model specified in Chapter \ref{chapter:models}, with one addition: we model LUTs with a new label \texttt{LOGIC}. Since we only model physical structures (i.e. wires, transistors and logical components) instead of semantics, we need to think of ways that VirSample could have been implemented using these physical structures. After all, this FPGA does not physically exist. Some implementations of VirSample will yield graph models that have subgraph homeomorphism embeddings in ConcreteSample's graph while some will not. In this example, we will make a single compact graph model, although for practical use we recommend trying out different models. This graph model is shown in Figure \ref{fig:example-virtualGraph}. This model assumes that the physical implementation of VirSample uses a 2-input-2-output LUT, with the limitation that for each input combination in the LUT, at least one output should be configured to be zero, depending on $v_5$.
 
 \begin{figure}[t]
 \centering
@@ -83,7 +83,7 @@ by degree to obtain the graph shown in Figure \ref{fig:example-virtualGraphOrder
 \centering
 \includegraphics[width=0.8\textwidth]{images/endToEnd/concreteFPGAGraphOrdered.png}
 \caption{Graph model of the concrete FPGA with vertices ordered by degree.}
-\label{fig:example-virtualGraphOrdered}
+\label{fig:example-concreteGraphOrdered}
 \end{figure}
 
 

@@ -1,0 +1,423 @@
+
+\begin{figure}
+\begin{subfigure}{.5\linewidth}
+\centering
+
+\begin{tikzpicture}
+        \begin{axis}[
+        xlabel=$|V_S|$,
+        ylabel=relative time spent,
+        ymode=log,
+        legend style={at={(0.9,0.1)},anchor=south east},
+        width=\textwidth,
+		y tick label style={/pgf/number format/sci},
+    ]
+\addplot [mark=none, black] plot coordinates {
+        (4,1) (14, 1)};
+
+    
+   
+
+\addplot[
+        mark=x,
+        red,
+    ] plot coordinates {
+        (4,5.202946551261944)
+        (5,3.756162046192574)
+        (6,2.9549254023879072)
+        (7,1.8872742557474473)
+        (8,1.9880582223277101)
+        (9,2.1847812854733193)
+        (10,1.8028559351037163)
+        (11,2.6436531391416507)
+        (12,2.1539273359082483)
+};
+%    \addlegendentry{DFS}
+
+
+\addplot[
+        mark=o,
+        purple,
+    ] plot coordinates {
+        (4,2.9414858115997387)
+        (5,2.120863031356877)
+        (6,1.7804930224229873)
+        (7,1.0400701807728874)
+        (8,0.9003554054490217)
+        (9,1.0937936596519373)
+        (10,0.9019831415298204)
+        (11,1.0734764108654673)
+        (12,1.2767276824510232)
+};
+%    \addlegendentry{GDFS O IP}
+
+
+\addplot[
+        mark=star,
+        gray,
+    ] plot coordinates {
+        (4,1.1382355278673217)
+        (5,1.198063456290179)
+        (6,1.3042425098741526)
+        (7,1.5233183009320665)
+        (8,1.8148828000886499)
+        (9,2.189451318312936)
+        (10,1.9518249758925157)
+        (11,2.639768817120566)
+        (12,2.1154918845964863)
+        (13,2.7952098947822313)
+        (14,3.4210781907374623)
+};
+%    \addlegendentry{GDFS C}
+
+
+\addplot[
+        mark=*,
+        blue,
+    ] plot coordinates {
+        (4,3.6819210072894446)
+        (5,2.896400619358773)
+        (6,2.3852188316658136)
+        (7,1.4756755823523737)
+        (8,1.5098085945063882)
+        (9,1.7097753943529064)
+        (10,1.490937989140139)
+        (11,1.8438583447137513)
+        (12,1.635315159939935)
+};
+%    \addlegendentry{K-Path}
+
+
+\addplot[
+        mark=+,
+        green,
+    ] plot coordinates {
+        (4,2.1359021980392736)
+        (5,2.923428609692478)
+        (6,3.0304568963312812)
+        (7,1.4225695726266137)
+        (8,1.0506565420981449)
+        (9,2.212314905046649)
+};
+%    \addlegendentry{CP}
+
+
+\addplot[
+        mark=asterisk,
+        magenta,
+    ] plot coordinates {
+        (4,3.2242822734185275)
+        (5,2.5950345747500103)
+        (6,2.0014242504647624)
+        (7,1.3303134982815363)
+        (8,1.4062726411755775)
+        (9,1.6024494454371436)
+        (10,1.4559250035524376)
+        (11,1.7288683972843149)
+        (12,1.5973164420401704)
+};
+%    \addlegendentry{GDFS A IP}
+
+
+    \end{axis}
+    \end{tikzpicture}
+
+
+\caption{serial}
+
+\end{subfigure}%
+\begin{subfigure}{.5\linewidth}
+\centering
+
+\begin{tikzpicture}
+    \begin{axis}[
+        xlabel=$|V_S|$,
+        ylabel=relative time spent,
+        ymode=log,
+        legend style={at={(0.9,0.1)},anchor=south east},
+        width=\textwidth,
+		y tick label style={/pgf/number format/sci},
+    ]
+\addplot [mark=none, black] plot coordinates {
+        (4,1) (14, 1)};
+
+
+
+\addplot[
+        mark=x,
+        red,
+    ] plot coordinates {
+        (4,1.0341963936340537)
+        (5,0.5872212498317262)
+        (6,0.3150252343592421)
+        (7,0.5489328540502025)
+        (8,0.4691563660507788)
+        (9,1.3659267214920254)
+        (10,0.5829158055427053)
+        (11,0.8675410228213514)
+        (12,2.8804215346851567)
+        (13,0.48622042850802205)
+        (14,1.139249103225921)
+};
+%    \addlegendentry{DFS}
+
+
+\addplot[
+        mark=o,
+        purple,
+    ] plot coordinates {
+        (4,0.7446160731342548)
+        (5,0.3760872484757529)
+        (6,0.20395691063619348)
+        (7,0.4116723120141347)
+        (8,0.2765761366043523)
+        (9,3.277702486377702)
+        (10,0.45345557621451693)
+        (11,0.6529131347050375)
+        (12,2.253102642969394)
+};
+%    \addlegendentry{GDFS O IP}
+
+
+\addplot[
+        mark=star,
+        gray,
+    ] plot coordinates {
+        (4,0.986998285923268)
+        (5,0.990456016904658)
+        (6,0.9676159305638337)
+        (7,0.7569661999435013)
+        (8,0.5726394480903727)
+        (9,1.6935978244098564)
+        (10,0.5939935948858152)
+        (11,0.8819548932880411)
+        (12,2.250262287942807)
+        (13,0.5098016055539938)
+        (14,1.0382537813550197)
+};
+%    \addlegendentry{GDFS C}
+
+
+\addplot[
+        mark=*,
+        blue,
+    ] plot coordinates {
+        (4,1.350280192589271)
+        (5,1.0083990021448497)
+        (6,0.6346349881535795)
+        (7,0.6865130883699138)
+        (8,0.5401179927275145)
+        (9,1.5384974483498595)
+        (10,0.6218905966067542)
+        (11,0.9136191743894921)
+        (12,2.5263424220943915)
+        (13,0.4895304853304312)
+        (14,1.025493765853684)
+};
+%    \addlegendentry{K-Path}
+
+
+\addplot[
+        mark=+,
+        green,
+    ] plot coordinates {
+        (4,1.316795353041837)
+        (5,0.9532402532500417)
+        (6,0.8191487199612747)
+        (7,0.5596281163603946)
+        (8,0.3792225987672416)
+        (9,1.9471981919246635)
+};
+%    \addlegendentry{CP}
+
+
+\addplot[
+        mark=asterisk,
+        magenta,
+    ] plot coordinates {
+        (4,1.0472612442074125)
+        (5,0.718669879592718)
+        (6,0.4172863346749811)
+        (7,0.5909828175058394)
+        (8,0.48615922809785606)
+        (9,1.4337866356743774)
+        (10,0.5877303758542455)
+        (11,0.9788108288373746)
+        (12,4.589963118304846)
+        (13,0.4155118413601153)
+};
+%    \addlegendentry{GDFS A IP}
+
+	
+	
+    \end{axis}
+    \end{tikzpicture}
+
+\caption{cached}
+
+\end{subfigure}\\[1ex]
+\begin{subfigure}{0.5\linewidth}
+\centering
+
+\begin{tikzpicture}
+    \begin{axis}[
+        xlabel=$|V_S|$,
+        ylabel=relative time spent,
+        ymode=log,
+        legend style={at={(0.9,0.1)},anchor=south east},
+        width=\textwidth,
+		y tick label style={/pgf/number format/sci},
+    ]
+\addplot [mark=none, black] plot coordinates {
+        (4,1) (14, 1)};
+
+
+
+\addplot[
+        mark=x,
+        red,
+    ] plot coordinates {
+        (4,5.202946551261944)
+        (5,3.756162046192574)
+        (6,2.9549254023879072)
+        (7,1.8872742557474473)
+        (8,1.9880582223277101)
+        (9,2.1847812854733193)
+        (10,1.8028559351037163)
+        (11,2.6436531391416507)
+        (12,2.1539273359082483)
+};
+%    \addlegendentry{DFS}
+
+
+\addplot[
+        mark=o,
+        purple,
+    ] plot coordinates {
+        (4,2.9414858115997387)
+        (5,2.120863031356877)
+        (6,1.7804930224229873)
+        (7,1.0400701807728874)
+        (8,0.9003554054490217)
+        (9,1.0937936596519373)
+        (10,0.9019831415298204)
+        (11,1.0734764108654673)
+        (12,1.2767276824510232)
+};
+%    \addlegendentry{GDFS O IP}
+
+
+\addplot[
+        mark=star,
+        gray,
+    ] plot coordinates {
+        (4,1.1382355278673217)
+        (5,1.198063456290179)
+        (6,1.3042425098741526)
+        (7,1.5233183009320665)
+        (8,1.8148828000886499)
+        (9,2.189451318312936)
+        (10,1.9518249758925157)
+        (11,2.639768817120566)
+        (12,2.1154918845964863)
+        (13,2.7952098947822313)
+        (14,3.4210781907374623)
+};
+%    \addlegendentry{GDFS C}
+
+
+\addplot[
+        mark=*,
+        blue,
+    ] plot coordinates {
+        (4,3.6819210072894446)
+        (5,2.896400619358773)
+        (6,2.3852188316658136)
+        (7,1.4756755823523737)
+        (8,1.5098085945063882)
+        (9,1.7097753943529064)
+        (10,1.490937989140139)
+        (11,1.8438583447137513)
+        (12,1.635315159939935)
+};
+%    \addlegendentry{K-Path}
+
+
+\addplot[
+        mark=+,
+        green,
+    ] plot coordinates {
+        (4,2.1359021980392736)
+        (5,2.923428609692478)
+        (6,3.0304568963312812)
+        (7,1.4225695726266137)
+        (8,1.0506565420981449)
+        (9,2.212314905046649)
+};
+%    \addlegendentry{CP}
+
+
+\addplot[
+        mark=asterisk,
+        magenta,
+    ] plot coordinates {
+        (4,3.2242822734185275)
+        (5,2.5950345747500103)
+        (6,2.0014242504647624)
+        (7,1.3303134982815363)
+        (8,1.4062726411755775)
+        (9,1.6024494454371436)
+        (10,1.4559250035524376)
+        (11,1.7288683972843149)
+        (12,1.5973164420401704)
+};
+%    \addlegendentry{GDFS A IP}
+
+	
+    \end{axis}
+    \end{tikzpicture}
+
+\caption{parallel}
+
+\end{subfigure}
+\begin{subfigure} {0.5\linewidth}
+\centering
+
+\begin{tikzpicture} 
+    \begin{axis}[%
+    hide axis,
+    xmin=10,
+    xmax=50,
+    ymin=0,
+    ymax=0.4,
+    legend style={draw=white!15!black,legend cell align=left}
+    ]
+	\addlegendimage{black}
+    \addlegendentry{Contraction-disabled performance}; 
+     
+    \addlegendimage{green, mark=+}
+    \addlegendentry{CP};
+    
+    \addlegendimage{red, mark=x}
+    \addlegendentry{DFS};
+    
+    \addlegendimage{gray, mark=star}
+    \addlegendentry{GDFS C};
+    
+    \addlegendimage{magenta, mark=asterisk}
+    \addlegendentry{GDFS A IP};
+    
+    \addlegendimage{purple, mark=o}
+    \addlegendentry{GDFS O IP};
+    
+    \addlegendimage{blue, mark=*}
+    \addlegendentry{K-Path};
+    
+    \end{axis}
+\end{tikzpicture}
+
+\end{subfigure}
+
+\caption{Performance of our algorithm with \textbf{ZeroDomain} pruning using \textbf{`N-Filtering'} filtering relative to the performance of the algorithm without pruning. We avoid unnecessarily long paths, do not perform contraction and use the degree-based target graph vertex ordering. Data points above the black reference line denote that the pruning method introduces more delay, and data points below the reference line denote that the pruning method saves time. Note the logarithmic y-axis.}	
+\label{fig:zerodomainnfiltering}
+\end{figure}

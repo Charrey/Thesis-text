@@ -1,4 +1,5 @@
 \chapter{Algorithm}
+\label{chapter:algorithm}
 
 \tikzstyle{decision} = [diamond, align=center, draw=black]
 
@@ -262,7 +263,11 @@ As mentioned in Chapter \ref{chapter:models}, the concrete FPGA may contain tran
 
 \subsection{Avoiding unintended current flow from/to paths}
 \label{sec:unintendedcurrent-path}
-Our first remedy is to avoid adding target graph vertices to the partial mapping that are connected to some path already present in the edge-path partial mapping through unconfigurable vertices. We do this by deleting those vertices and re-adding them whenever we backtrack the corresponding edge-path pair. More formally:
+Our first remedy is to avoid adding target graph vertices to the partial mapping that are connected to some path already present in the edge-path partial mapping through unconfigurable vertices. 
+
+These vertices can get electrical currents whenever it flows though the path, possibly breaking the program's semantics. Therefore, we avoid adding these vertices to the partial mapping by deleting them from the graph in search branches that include the corresponding paths. Deleting them prevents us from adding them to the partial mapping and having our semantics changed. 
+
+More formally:
 
 Let $\mathit{unconfigurable}\in (V_T \times V_T)$ be the relation between two vertices if they are connected through a vertex representing a unconfigurable transistor, i.e:
 
@@ -277,14 +282,14 @@ $\mathit{unconfigurable} := \{(t_1, t_2) \in (V_T \times V_T) | \exists u \in (V
 \end{center}
 
 \vspace{10pt}
-Let $\mathit{unconfigurable}^*$ be the symmetric closure of the transitive closure of $\mathit{unconfigurable}$. Then, whenenever we add an edge-path pair $(e, p)$ to the partial mapping, we delete each vertex $x$ for which $\exists v \in \mathit{intermediate}(p) . (x, v) \in \mathit{unconfigurable}^*$. If some of the vertices to be deleted are already in the partial mapping, we instead backtrack the algorithm. If not, we continue.  Whenever the edge-path pair is later removed from the partial mapping, each such vertex and their edges is added back to the target graph.
+Let $\mathit{unconfigurable}^*$ be the symmetric closure of the transitive closure of $\mathit{unconfigurable}$. Then, whenenever we add an edge-path pair $(e, p)$ to the partial mapping, we delete each vertex $x$ for which $\exists v \in \mathit{intermediate}(p) . (x, v) \in \mathit{unconfigurable}^*$.  Whenever $(e, p)$ is later removed from the partial mapping, each such vertex and their edges is added back to the target graph. After all, these vertices \textit{are} allowed to be in our mapping if $p$ is not.
 
 
 \subsection{Avoiding unintended current flow between mapped vertices}
 \label{sec:unintendedcurrent-vertex}
-Our second remedy is to avoid adding target graph vertices to the partial mapping that are connected to some target graph vertex already present in the vertex-vertex partial mapping through unconfigurable vertices. We also do this by deleting those vertices and re-adding them whenever we backtrack the corresponding vertex-vertex pair. More formally, whenever we add a vertex-vertex pair $(s, t)$ to the partial mapping, we delete each vertex $x$ for which $(x, t) \in \mathit{unconfigurable}^*$. If some of the vertices to be deleted are already in the partial mapping, we instead backtrack the algorithm. Whenever the vertex-vertex pair is removed from the partial mapping, each such vertex and their edges is added back to the target graph.
+Our second remedy is to avoid adding target graph vertices to the partial mapping that are connected to some target graph vertex already present in the vertex-vertex partial mapping through unconfigurable vertices. Allowing this could result in wires in the concrete FPGA receiving an electrical current that is not part of the program's semantics.
 
-
+We also do this by deleting vertices: this time, whenever we add a vertex-vertex pair $(s, t)$ to the partial mapping, we delete each vertex $x$ for which $(x, t) \in \mathit{unconfigurable}^*$. Whenever $(s, t)$ is later removed from the partial mapping, each such vertex and their edges is added back to the target graph.
 
 \newfloat{myalgo}{tbhp}{mya}
 \newenvironment{Algorithm}[2][tbh]%

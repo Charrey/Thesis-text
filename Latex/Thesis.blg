@@ -1,17 +1,15 @@
 [0] Config.pm:312> INFO - This is Biber 2.15 (beta)
 [0] Config.pm:315> INFO - Logfile is 'Thesis.blg'
-[146] biber-MSWIN64:330> INFO - === 
-[188] Biber.pm:415> INFO - Reading 'Thesis.bcf'
-[294] Biber.pm:952> INFO - Found 68 citekeys in bib section 0
-[310] Biber.pm:4334> INFO - Processing section 0
-[331] Biber.pm:4523> INFO - Looking for bibtex format file 'sources.bib' for section 0
-[354] bibtex.pm:1682> INFO - LaTeX decoding ...
-[559] bibtex.pm:1494> INFO - Found BibTeX data source 'sources.bib'
-[964] Utils.pm:395> WARN - I didn't find a database entry for 'todo' (section 0)
-[1053] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[1053] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[1053] Biber.pm:4162> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
-[1053] Biber.pm:4168> INFO - No sort tailoring available for locale 'en-US'
-[1152] bbl.pm:651> INFO - Writing 'Thesis.bbl' with encoding 'UTF-8'
-[1193] bbl.pm:754> INFO - Output to Thesis.bbl
-[1197] Biber.pm:128> INFO - WARNINGS: 1
+[114] biber-MSWIN64:330> INFO - === 
+[132] Biber.pm:415> INFO - Reading 'Thesis.bcf'
+[243] Biber.pm:952> INFO - Found 67 citekeys in bib section 0
+[260] Biber.pm:4334> INFO - Processing section 0
+[275] Biber.pm:4523> INFO - Looking for bibtex format file 'sources.bib' for section 0
+[290] bibtex.pm:1682> INFO - LaTeX decoding ...
+[503] bibtex.pm:1494> INFO - Found BibTeX data source 'sources.bib'
+[963] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[963] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[964] Biber.pm:4162> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[964] Biber.pm:4168> INFO - No sort tailoring available for locale 'en-US'
+[1045] bbl.pm:651> INFO - Writing 'Thesis.bbl' with encoding 'UTF-8'
+[1088] bbl.pm:754> INFO - Output to Thesis.bbl

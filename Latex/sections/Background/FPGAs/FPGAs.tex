@@ -129,7 +129,7 @@ The computing hardware most people are familiar with is CPUs. Manufacturers inco
 
 FPGAs are different from CPUs, as they do not store the programs they execute in RAM- they instead configure them in the (highly parallel) logic of the circuit itself. Configuring an FPGA to execute a specific program entails loading a configuration file onto the hardware and restarting the FPGA such that it reconfigures its logic. The hardware will then perform the configured logic on the input it receives via IO pins. 
 
-Because each logic cell performs logic independently, FPGAs can perform computations highly parallel and without delays from sequentially loading instructions. This computation process implies that FPGAs are very efficient at executing concurrent programs. Reconfiguring an FPGA is, however, a relatively expensive operation. Therefore, FPGAs are unsuitable for changing from program to program, as a CPU does when running an operating system. Moreover, FPGAs be slower than CPUs for nonparallel applications since its longer critical path length (i.e. distance an electric current has to travel each clock cycle) results in a lower clock speed. Lastly, the different structure of an FPGA requires programs for them to be developed in specialized HDL languages instead of CPU-based programming languages, although efforts are being made to bring these domains closer together.
+Because each logic cell performs logic independently, FPGAs can perform computations highly parallel and without delays from sequentially loading instructions. This computation process implies that FPGAs are very efficient at executing concurrent programs. Reconfiguring an FPGA is, however, a relatively expensive operation. Therefore, FPGAs are unsuitable for changing from program to program, as a CPU does when running an operating system. Moreover, FPGAs can be slower than CPUs for nonparallel applications since its longer critical path length (i.e. distance an electric current has to travel each clock cycle) results in a lower clock speed. Lastly, the different structure of an FPGA requires programs for them to be developed in specialized HDL languages instead of CPU-based programming languages, although efforts are being made to bring these domains closer together.
 
 FPGAs perform execution using components such as lookup tables, registers, and special-purpose modules\footnote{These modules are used for efficient storage or calculation of specific functions. We will disregard them in this research.}. These components are physical structures on the circuit. In the next sections, we will discuss these modules.
 \subsection{Lookup tables}
@@ -305,11 +305,10 @@ The last step in the compilation process is \textbf{routing}. State-of-the-art F
 
 \begin{minipage}{\textwidth}
 \begin{important}
-Note that place \& route of an FPGA \textit{program} as described here is a very similar problem to the placement of an unconfigured virtual FPGA. Place \& route of an FPGA program has significant amounts of existing research, whilst placement of a virtual FPGA does not and is part of this research. The two problems are on different levels of abstraction: an FPGA program does not have the concept of unconfigured components or routing switches, while a virtual FPGA does.
+Note that place \& route of an FPGA \textit{program} as described here is a very similar problem to the emulation an unconfigured virtual FPGA to a concrete FPGA (this research). However, it is important to note that these are different problems: with place \& route, a mapping is obtained from a model of an \textit{FPGA program} to the concrete FPGA. In our research, we obtain a mapping from a model of a \textit{virtual FPGA} to the concrete FPGA. The two problems are on different levels of abstraction: an FPGA program does not have the concept of unconfigured components or transistors while a virtual FPGA does.
 
-Placement of FPGA programs using place \& route could theoretically also work on a higher abstraction level, i.e. including unconfigured components. The problem with this approach is twofold: state-of-the art place \& route pipelines perform these algorithms sequentially: they perform placement based on speed- and routeability heuristics without a guarantee that the placement can indeed be routed\cite{alhyari2019}. With the placement of FPGA programs, this is not a problem. Entire FPGAs, however, can have dense collections of components that can severely impact routeability. Secondly, it requires the virtual components to be compatible with the concrete components, which is not guaranteed.
-
-Not using well-founded placement algorithms based on heuristics will undoubtedly have an adverse impact on the speed of our placement. However, we expect that we can use the hierarchical structure of an FPGA for significant improvements that could not be obtained with the placement of FPGA programs.
+\vspace{.6cm}
+Placement of FPGA programs using place \& route could theoretically also work on a higher abstraction level, i.e. including unconfigured components. The problem with this approach is that state-of-the art place \& route pipelines perform these algorithms sequentially: they perform placement based on speed- and routeability heuristics without a guarantee that the placement can indeed be routed \cite{alhyari2019}. With the placement of FPGA programs, this is not a problem. They are usually modular with components that have relatively few interconnecting wires. FPGAs, however, can consist of densely connected components that can severely impact routeability. We leave the analysis of place \& route algorithms for compatibility with FPGA-on-FPGA emulation for future research.
 \end{important}
 \end{minipage}
 
@@ -317,6 +316,61 @@ Not using well-founded placement algorithms based on heuristics will undoubtedly
 \begin{figure}
     \centering
 \begin{tikzpicture}
+    \draw (0,0) rectangle (3,2);
+    \draw (2, 0) -- (2, 2);
+    \draw[thick,->] (-1.2,0.5) node[anchor=north west] {in\_2} -- (0,0.5);
+    \draw[thick,->] (-1.2,1.5) node[anchor=north west] {in\_1} -- (0,1.5);
+    
+    \draw[thick,->] (3,1)  -- (4,1) node[anchor=north] {out\_1};
+    
+    \draw[draw=white] (1,1.5)     node[anchor=south] {00};
+    \draw[draw=white] (1,1)       node[anchor=south] {01};
+    \draw[draw=white] (1,0.5)     node[anchor=south] {10};
+    \draw[draw=white] (1,0)       node[anchor=south] {11};
+    
+    
+    \draw[draw=white] (2.5,1.5)    node[anchor=south] {$x_0$};
+    \draw[draw=white] (2.5,1)      node[anchor=south] {$x_1$};
+    \draw[draw=white] (2.5,0.5)    node[anchor=south] {$x_2$};
+    \draw[draw=white] (2.5,0)      node[anchor=south] {$x_3$};
+    
+    
+
+     \draw (8,-1) rectangle (11,3);
+    \draw (10, -1) -- (10, 3);
+    \draw[thick,->] (6.8,0) node[anchor=north west] {in\_2} -- (8,0);
+    \draw[thick,->] (6.8,1) node[anchor=north west] {N/A} -- (8,1);    
+    \draw[thick,->] (6.8,2) node[anchor=north west] {in\_1} -- (8,2);
+    
+    \draw[thick,->] (11,1.5)  -- (12,1.5) node[anchor=north] {out\_1};
+    \draw[thick,->] (11,0.5)  -- (12,0.5) node[anchor=north] {0};
+    
+	\draw[draw=white] (9,2.5)        node[anchor=south] {000};
+    \draw[draw=white] (9,2)          node[anchor=south] {001};    
+    \draw[draw=white] (9,1.5)        node[anchor=south] {010};
+    \draw[draw=white] (9,1)          node[anchor=south] {011};
+    \draw[draw=white] (9,0.5)        node[anchor=south] {100};
+    \draw[draw=white] (9,0)          node[anchor=south] {101};
+    \draw[draw=white] (9,-0.5)        node[anchor=south] {110};
+    \draw[draw=white] (9,-1)          node[anchor=south] {111};
+    
+    
+    \draw[draw=white] (10.5,2.5)         node[anchor=south] {$x_0 0$};
+    \draw[draw=white] (10.5,2)           node[anchor=south] {$x_1 0$};    
+    \draw[draw=white] (10.5,1.5)         node[anchor=south] {$x_0 0$};
+    \draw[draw=white] (10.5,1)           node[anchor=south] {$x_1 0$};
+    \draw[draw=white] (10.5,0.5)         node[anchor=south] {$x_2 0$};
+    \draw[draw=white] (10.5,0)           node[anchor=south] {$x_3 0$};
+    \draw[draw=white] (10.5,-0.5)         node[anchor=south] {$x_2 0$};
+    \draw[draw=white] (10.5,-1)           node[anchor=south] {$x_3 0$};
+    
+    \draw[vecArrow] (5.5,1) -- (6.5,1);
+
+\end{tikzpicture}
+    \caption{Emulation of an FPGA: the configuration of the virtual FPGA is reflected in the configuration of the concrete FPGA. Any extra inputs and outputs are unused.}
+    \label{fig:emulation}
+    \vspace{1cm}
+    \begin{tikzpicture}
     \draw (0,0) rectangle (3,2);
     \draw (2, 0) -- (2, 2);
     \draw[thick,->] (-1.2,0.5) node[anchor=north west] {in\_2} -- (0,0.5);
@@ -372,19 +426,9 @@ Not using well-founded placement algorithms based on heuristics will undoubtedly
     \draw[vecArrow] (5.5,1) -- (6.5,1);
 
 \end{tikzpicture}
-    \caption{Simulation of an FPGA: the programming of the virtual FPGA is reflected in additional input of the actual FPGA. The value of $x$ in the simulation is identical to the configuration of the program to be simulated.}
+    \caption{Simulation of an FPGA: the programming of the virtual FPGA is reflected in \textit{additional input} of the actual FPGA originating from some sort of explicit configuration source, e.g. RAM or a storage device connected to the concrete FPGA's input pins. The configuration of the concrete FPGA does \textit{not} depend on the configuration of the virtual FPGA and additional logic- and storage resources are used.}
     \label{fig:simulation}
 \end{figure}
-
-\subsection{Literature}
-Yosys\cite{wolf2016yosys} is a free, open-source tool that performs general synthesis. These attributes make it highly usable in education. It can perform modular optimisations and transformations on netlists depending on a script, and outputs netlists in BLIF\cite{Brayton} format. It divides synthesis into three steps:
-\begin{itemize}
-\item Behavioural synthesis - converting an HDL program to Register Transfer Level (RTL): a netlist graph of high-level modules such as adders, multiplexers et cetera.
-\item RTL synthesis - converting an RTL netlist to a netlist graph of low-level logic gates and simple registers. 
-\item Logic synthesis - converting a netlist graph of logic gates to a netlist graph of components available on specific hardware, such as LUTs and larger registers.
-\end{itemize}
-
-Much literature exists on FPGA synthesis. The proposed research resembles logic synthesis, but does not involve the application of synthesis techniques. These techniques rely on the absence of unconfigured components and an input that resembles an FPGA configuration, which we both do not have.
 
 \section{FPGA simulation}
 \label{sec:simulation}
@@ -394,63 +438,7 @@ To instead simulate the synthesized program, the engineer can also program a gen
 
 Although engineers could use simulation to execute FPGA programs on FPGA hardware that the FPGA software was not compiled for, it introduces a considerable delay in execution. After all, many more dynamic components on the FPGA need to be used to store and execute the configuration of the same program.	
 
-\begin{figure}
-    \centering
-\begin{tikzpicture}
-    \draw (0,0) rectangle (3,2);
-    \draw (2, 0) -- (2, 2);
-    \draw[thick,->] (-1.2,0.5) node[anchor=north west] {in\_2} -- (0,0.5);
-    \draw[thick,->] (-1.2,1.5) node[anchor=north west] {in\_1} -- (0,1.5);
-    
-    \draw[thick,->] (3,1)  -- (4,1) node[anchor=north] {out\_1};
-    
-    \draw[draw=white] (1,1.5)     node[anchor=south] {00};
-    \draw[draw=white] (1,1)       node[anchor=south] {01};
-    \draw[draw=white] (1,0.5)     node[anchor=south] {10};
-    \draw[draw=white] (1,0)       node[anchor=south] {11};
-    
-    
-    \draw[draw=white] (2.5,1.5)    node[anchor=south] {$x_0$};
-    \draw[draw=white] (2.5,1)      node[anchor=south] {$x_1$};
-    \draw[draw=white] (2.5,0.5)    node[anchor=south] {$x_2$};
-    \draw[draw=white] (2.5,0)      node[anchor=south] {$x_3$};
-    
-    
 
-     \draw (8,-1) rectangle (11,3);
-    \draw (10, -1) -- (10, 3);
-    \draw[thick,->] (6.8,0) node[anchor=north west] {in\_2} -- (8,0);
-    \draw[thick,->] (6.8,1) node[anchor=north west] {N/A} -- (8,1);    
-    \draw[thick,->] (6.8,2) node[anchor=north west] {in\_1} -- (8,2);
-    
-    \draw[thick,->] (11,1.5)  -- (12,1.5) node[anchor=north] {out\_1};
-    \draw[thick,->] (11,0.5)  -- (12,0.5) node[anchor=north] {0};
-    
-	\draw[draw=white] (9,2.5)        node[anchor=south] {000};
-    \draw[draw=white] (9,2)          node[anchor=south] {001};    
-    \draw[draw=white] (9,1.5)        node[anchor=south] {010};
-    \draw[draw=white] (9,1)          node[anchor=south] {011};
-    \draw[draw=white] (9,0.5)        node[anchor=south] {100};
-    \draw[draw=white] (9,0)          node[anchor=south] {101};
-    \draw[draw=white] (9,-0.5)        node[anchor=south] {110};
-    \draw[draw=white] (9,-1)          node[anchor=south] {111};
-    
-    
-    \draw[draw=white] (10.5,2.5)         node[anchor=south] {$y_0 0$};
-    \draw[draw=white] (10.5,2)           node[anchor=south] {$y_1 0$};    
-    \draw[draw=white] (10.5,1.5)         node[anchor=south] {$y_0 0$};
-    \draw[draw=white] (10.5,1)           node[anchor=south] {$y_1 0$};
-    \draw[draw=white] (10.5,0.5)         node[anchor=south] {$y_2 0$};
-    \draw[draw=white] (10.5,0)           node[anchor=south] {$y_3 0$};
-    \draw[draw=white] (10.5,-0.5)         node[anchor=south] {$y_2 0$};
-    \draw[draw=white] (10.5,-1)           node[anchor=south] {$y_3 0$};
-    
-    \draw[vecArrow] (5.5,1) -- (6.5,1);
-
-\end{tikzpicture}
-    \caption{Emulation of an FPGA: the programming of the virtual FPGA is reflected in the programming of the actual FPGA. In this example, $y_i$ takes the value of $x_i$. Any extra inputs and outputs are unused.}
-    \label{fig:emulation}
-\end{figure}
 
 \section{FPGA emulation}
-Instead, our research entails finding out how we can perform \textit{emulation}. With this, we mean the execution of a program on a different FPGA \textit{such that no extra input is required.} Instead, the emulator software inspects the program for the virtual FPGA and generates what program on the concrete FPGA would have the same semantics given the same inputs as the source FPGA. Figure \ref{fig:emulation} shows the emulation counterpart of Figure \ref{fig:simulation}. Since the target FPGA has the same LUT type in this example, the emulation converts the LUT configuration to an identical configuration on the target FPGA. We aim to find out how we can perform this kind of emulation with any program with any fixed source- and destination FPGA whenever such emulation is possible.
+Instead, our research entails finding out how we can perform \textit{emulation}. With this, we mean the execution of a program on a different FPGA \textit{such that no extra input is required.} Instead, the emulator software inspects the program for the virtual FPGA and generates what program on the concrete FPGA would have the same semantics given the same inputs as the source FPGA. Figure \ref{fig:emulation} shows the emulation counterpart of Figure \ref{fig:simulation} with a smaller LUT. Since the target FPGA has one more input than the virtual FPGA, that input remains unused. Similary, since it has one more output, that output remains unused (i.e. always outputs 0). The configuration of the LUT is such that it has the same semantics as the virtual LUT with these constraints in mind. We aim to find out how we can perform this kind of emulation with any program with any fixed source- and destination FPGA whenever such emulation is possible.

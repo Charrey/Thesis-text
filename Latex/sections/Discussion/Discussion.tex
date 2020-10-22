@@ -1,15 +1,16 @@
 \chapter{Discussion}
+\label{chapter:discussion}
 From our experiments, we found that in-place depth first search path iteration is (of the methods compared) the most efficient path iteration method to replace Xiao's structure with precomputed paths for our business case. We could not find enough data to make conclusions on how memory usage scales with each path iteration method; however, all path iteration methods (except for control point iteration) seem to scale approximately equally within our graph size range.
 
 Our experiments show that the GreatestConstrainedFirst source graph vertex ordering from RI-DS \cite{RIalgorithm} is indeed more efficient than the assumed random ordering of Xiao's algorithm. Moreover, the experiments show that ordering target vertices by degree introduced by Glasgow \cite{McCreesh2015} is on average more efficient than the assumed random ordering of Xiao's algorithm or the distance-based ordering we introduced.
 
 We compared each of our 24 pruning methods and conclude that cached AllDifferent pruning with N-filtering is the most computationally effective pruning method for our business case. This is partly in line with Xiao's algorithm, which uses cached ZeroDomain pruning with N-filtering.
 
-With regards to space usage, we see no reason to prefer one option over the other: the effect of the pruner choice has a minor effect on space usage, likely unnoticeable in a business environment.
+With regards to space usage, we observe that the fastest pruning method (i.e. cached AllDifferent pruning with N-filtering) saves space, even though it requires caching the domains obtained through N-filtering. This could be the result of the pruner pruning search space branches in which many resources are being used and would require much memory.
 
 For applications of our algorithm outside of FPGA emulation, different settings may yield better performance. Our test cases are specifically designed to represent graphs that adhere to our FPGA graph model, and may have properties that graphs from a different domain do not have. Therefore, verifying the appropriate settings for a different business case is adviseable if computational requirements are relevant.
 
-{\color{red} TODO: extrapolate how much time is needed for business case. Is this acceptable?}
+The performance of our set of optimal configurations performs well enough for our FPGA business case. From the test results we estimated to require 6 days of computation for our business case or cases of comparable size. Computing this once for each pair of virtual FPGA and concrete FPGA is reasonable.
 
 A disadvantage of our approach is that it requires modelling the virtual FPGA into hardware components (wires, transistors et cetera). Some models might result in subgraph homeomorphisms being found, while some models might not. A possible technique to remedy this is to attempt several different models simultaneously, using heuristics to estimate the likeliness of each model to result in a subgraph homeomorphism being found.
 
