@@ -2,9 +2,9 @@
 \label{chapter:discussion}
 From our experiments, we found that in-place depth first search path iteration is (of the methods compared) the most efficient path iteration method to replace Xiao's structure with precomputed paths for our business case. We could not find enough data to make conclusions on how memory usage scales with each path iteration method; however, all path iteration methods (except for control point iteration) seem to scale approximately equally within our graph size range.
 
-Our experiments show that the GreatestConstrainedFirst source graph vertex ordering from RI-DS \cite{RIalgorithm} is indeed more efficient than the assumed random ordering of Xiao's algorithm. Moreover, the experiments show that ordering target vertices by degree introduced by Glasgow \cite{McCreesh2015} is on average more efficient than the assumed random ordering of Xiao's algorithm or the distance-based ordering we introduced.
+Our experiments show that the GreatestConstrainedFirst source graph vertex ordering from RI-DS \cite{RIalgorithm} is indeed more efficient than a random ordering. Moreover, the experiments show that ordering target vertices by degree introduced by Glasgow \cite{McCreesh2015} is on average more efficient than a random ordering or the distance-based ordering we introduced.
 
-We compared each of our 24 pruning methods and conclude that cached AllDifferent pruning with N-filtering is the most computationally effective pruning method for our business case. This is partly in line with Xiao's algorithm, which uses cached ZeroDomain pruning with N-filtering.
+We compared each of our 24 pruning methods and conclude that cached AllDifferent pruning with N-filtering is the most computationally effective pruning method for our business case. This is partly in line with Xiao's algorithm, which uses a very similar form of pruning.
 
 With regards to space usage, we observe that the fastest pruning method (i.e. cached AllDifferent pruning with N-filtering) saves space, even though it requires caching the domains obtained through N-filtering. This could be the result of the pruner pruning search space branches in which many resources are being used and would require much memory.
 

@@ -6,13 +6,18 @@
 \tikzstyle{block} = [rectangle, minimum width=2.5cm, minimum height=1cm, align=left, draw=black]
 
 
-\section{Baseline: ndSHD2}
-In our research we will extend existing work on node disjoint subgraph isomorphism. In the literature we found two existing well-defined algorithms: Xiao's algorithm `ndSHD2' \cite{XIAONODEDISJOINT} and Lingas algorithm \cite{LINGAS2009464}. We choose to adapt Xiao's algorithm ndSHD2 as baseline over Lingas because it is simpler, includes a method for calculating a vertex-on-vertex mapping and has many similarities with subgraph isomorphism algorithms. In comparison, Lingas' algorithm suggests attempting their edge-path mapping strategy on every possible vertex-on-vertex mapping. We will adapt Xiao's algorithm to compute paths on-the-fly instead of beforehand to avoid the exponential space requirement.
+\section{Basis}
+In our research we will extend existing work on subgraph homeomorphism. In the literature we found two existing well-defined algorithms: Xiao's algorithm `ndSHD2' \cite{XIAONODEDISJOINT} and Lingas algorithm \cite{LINGAS2009464}. Xiao's algorithm ndSHD2 is subjectively simpler: it is a depth first search in partial subgraph homeomorphism mappings (with many similarities with subgraph isomorphism algorithms) using precomputed paths. It combines attempting vertex-on-vertex mappings with attempting edge-on-path mappings. This algorithm speicifically solves the $(l,h)$ subgraph homeomorphism problem, which is the same as regular subgraph homeomorphism with the extra constraint that edges in the source graph are mapped to paths of at least $l$ edges and no more than $h$ edges. In our use case, a valid emulation mapping may have edges of any length (i.e. $l=1$ and $h=\infty$). 
 
-To understand ndSHD2 better, let us first examine what the output is supposed to be. The algorithm should, given two graphs, not just indicate whether the latter graph has a subgraph homeomorphism of the former, but also indicate what subgraph homeomorphism that is. More formally, we need to solve the \textit{certification} problem rather than the \textit{decision} problem. This certification indicates to which target graph vertex each source graph vertex is mapped and to which target graph path each source graph edge is mapped such that the entire mapped source graph is a subgraph of the target graph. This is what we will from now on refer to as the \textbf{mapping}. If, during the execution, the mapping is not yet complete, i.e. it does not have a target for some source graph vertex or edge, we refer to it as the \textbf{partial mapping}.
+In comparison, Lingas' algorithm suggests attempting their edge-path mapping strategy on every possible vertex-on-vertex mapping, without indication of which vertex-on-vertex mappings are likely to result in finding subgrapp homeomorphim.
+
+Because Xiao's algorithm's simplicity and coverage of each aspect of the algorithm's process, it is suitable for FPGA use cases and optimisations. However, because of the algorithm's exponential space requirements, we will devise a similar (less space-demanding) algorithm using Xiao's algorithm as inspiration. In this algorithm we will compute paths at runtime instead of as precomputation, and as such call it RTSH (Run Time Subgraph Homeomorphism).
+
+To understand our algorithm better, let us first examine what the output is supposed to be. The algorithm should, given two graphs, not just indicate whether the latter graph has a subgraph homeomorphism of the former, but also indicate what subgraph homeomorphism that is. More formally, we need to solve the \textit{certification} problem rather than the \textit{decision} problem. This certification indicates to which target graph vertex each source graph vertex is mapped and to which target graph path each source graph edge is mapped such that the entire mapped source graph is a subgraph of the target graph. This is what we will from now on refer to as the \textbf{mapping}. If, during the execution, the mapping is not yet complete, i.e. it does not have a target for some source graph vertex or edge, we refer to it as the \textbf{partial mapping}.
 
 %ndshd2 old
 \begin{algorithm}
+\DontPrintSemicolon
 \SetAlgoLined
 \LinesNumbered
 \textbf{Inputs: } the current vertex-vertex partial mapping $\mathit{vmap}$, the current edge-path $\mathit{emap}$ partial mapping\\
@@ -28,22 +33,16 @@ $\mathit{found} \longleftarrow \mathit{false}$
 
 \If{$\mathit{hasUnmatchedEdge}()$} {
 	$(e_S, p_T) \longleftarrow \mathit{GetNextEdgePathPair}()$\;
-	\If{$\mathit{wouldPrune}(\mathit{vmap}, \mathit{emap} \cup \{(e_S, p_T)\})$} {
-  		\textbf{continue}\;
-  	}
   	$\mathit{emap} \longleftarrow \mathit{emap} \cup \{(e_S, p_T)\}$\;
-  	$\mathit{found} \longleftarrow \mathit{ndSHD3}(\mathit{vmap}, \mathit{emap})$\;
+  	$\mathit{found} \longleftarrow \mathit{RTSH}(\mathit{vmap}, \mathit{emap})$\;
   \If{found} {
   	\Return true\;
   }
   $\mathit{emap} \longleftarrow \mathit{emap} \cap \{(e_S, p_T)\}$\;
 } \Else {
 	$(v_S, v_T) \longleftarrow \mathit{GetNextNodePair}()$\;
-	\If{$\mathit{wouldPrune}(\mathit{vmap} \cup \{(v_S, v_T)\}, \mathit{emap})$} {
-  		\textbf{continue}\;
-  	}
   	$\mathit{vmap} \longleftarrow \mathit{vmap} \cup \{(v_S, v_T)\}$\;
-  	$\mathit{found} \longleftarrow \mathit{ndSHD3}(\mathit{vmap}, \mathit{emap})$\;
+  	$\mathit{found} \longleftarrow \mathit{RTSH}(\mathit{vmap}, \mathit{emap})$\;
   \If{found} {
   	\Return true\;
   }
@@ -52,32 +51,22 @@ $\mathit{found} \longleftarrow \mathit{false}$
 
  }
  \Return false\;
- \caption{ndSHD2}
+ \caption{Basis of RTSH}
  \label{algorithm:ndSHD2Old}
 \end{algorithm}
 
 
-%wouldPrune old
-\begin{algorithm}
-\SetAlgoLined
-\LinesNumbered
-\textbf{Inputs: } the current vertex-vertex partial mapping $\mathit{vmap}$, the current edge-path $\mathit{emap}$ partial mapping\\
-\textbf{Outputs: } whether pruning should be applied.\\
-$\mathit{domains} \longleftarrow \mathit{filterDomains}(\mathit{vmap}, \mathit{emap})$\;
-	\Return $\emptyset \in \mathit{values}(\mathit{domains})$\;
- \caption{wouldPrune}
- \label{algorithm:wouldPrune}
-\end{algorithm}
 
 
 
-ndSHD2 Is shown in Algorithm \ref{algorithm:ndSHD2Old}. It is a form of depth first search in a partial mapping search space that attempts- and backtracks vertex-on-vertex mappings and edge-on-path mappings.
 
-In our literature study, we found that the core of many subgraph isomorphism algorithms\footnote{Ullman, VF, VF2, VF2+, VF2++, UI, Fast-ON, L2G, Cheng, QuickSI, GraphQL, ILF, TurboISO, Glassgow, CLF-Match, RI, RI-DS, McGregor, LAD, PathLAD} is a form of similar DFS state space exploration where the states consist of partial vertex-to-vertex mappings. In subgraph isomorphisms, the edge-to-edge mapping is elementary by performing the vertex mapping on the edge source and target to obtain the target edge. With the subgraph homeomorphism algorithm such as Xiao's, an additional mapping from $E_S$ to the path set of $G_T$ is needed.
+Our base algorithm is shown in Algorithm \ref{algorithm:ndSHD2Old}. It is a form of depth first search in a partial mapping search space that attempts- and backtracks vertex-on-vertex mappings and edge-on-path mappings.
 
-The algorithm starts with an empty partial mapping, and starts mapping source graph vertices to target graph vertices. Whenever both vertices of a source graph edge have been matched, the algorithm finds an arbitrary path between the mapped edge source and target in the target graph that is internally disjoint from target graph vertices already used in the partial mapping. The algorithm prioritizes extending the matching with an edge-path pair over extending it with a vertex-vertex pmair. Whenever no such path or vertex exists, the algorithm undoes (backtracks) the last matching step taken and tries a different alternative. Whenever a partial match is extended with a vertex-vertex pair or with an edge-path pair the search space is refined using a pruning strategy implemented by the $wouldPrune$ call. This method filters out future path candidates from a path storage and from a vertex storage according to zero-domain N-reachability pruning (see Chapter \ref{chapter:pruning} for definitions). This removes path candidates and vertex candidates that can provably not be part of any valid subgraph homeomorphism mapping.
+In our literature study, we found that the core of many subgraph isomorphism algorithms\footnote{Ullman, VF, VF2, VF2+, VF2++, UI, Fast-ON, L2G, Cheng, QuickSI, GraphQL, ILF, TurboISO, Glassgow, CLF-Match, RI, RI-DS, McGregor, LAD, PathLAD} is a form of similar DFS state space exploration where the states consist of partial vertex-to-vertex mappings. In subgraph isomorphisms, the edge-to-edge mapping is elementary by performing the vertex mapping on the edge source and target to obtain the target edge. With the subgraph homeomorphism algorithm such as ours and Xiao's, an additional mapping from $E_S$ to the path set of $G_T$ is needed.
 
-The algorithm as specified in Xiao's paper leaves out some specific ordering details. Because these orderings are unknown, we specify our own orderings in Sections \ref{sec:sourceOrder}, \ref{sec:targetOrder}. We will explain what ordering of paths we use in Section \ref{sec:pathIterationShort}. We will introduce some optimisations to the algorithm in Section \ref{sec:optimisations}.
+The algorithm starts with an empty partial mapping, and starts mapping source graph vertices to target graph vertices. Whenever both vertices of a source graph edge have been matched, the algorithm finds some path (according to some path iteration method) between the mapped edge source and target in the target graph that is internally disjoint from target graph vertices already used in the partial mapping. The algorithm prioritizes extending the matching with an edge-path pair over extending it with a vertex-vertex pair. Whenever no such path or vertex exists, the algorithm undoes (backtracks) the last matching step taken and tries a different alternative. %Whenever a partial match is extended with a vertex-vertex pair or with an edge-path pair the search space is refined using a pruning strategy implemented by the $wouldPrune$ call. This method filters out future path candidates from a path storage and from a vertex storage according to zero-domain N-reachability pruning (see Chapter \ref{chapter:pruning} for definitions). This removes path candidates and vertex candidates that can provably not be part of any valid subgraph homeomorphism mapping.
+
+The algorithm in Xiao's paper is comparable to our base algorithm we present here, and leaves out some specific ordering details that may be relevant for the algorithm's performance. We specify our own orderings in Sections \ref{sec:sourceOrder}, \ref{sec:targetOrder}. We will explain what ordering of paths we use in Section \ref{sec:pathIterationShort}. We will introduce some optimisations to the algorithm in Section \ref{sec:optimisations}.
 
 \section{How to choose vertex-vertex pairs}
 There are different ways to choose which vertex-vertex pair to try adding to the partial mapping first, and which only to try adding after other attempts have failed. These methods can be divided into three categories:
@@ -124,7 +113,7 @@ The result of this ordering is that consequent vertices have many edges with ver
 \section{Target graph vertex order}
 \label{sec:targetOrder}
 
-The target graph vertex order is the order in which target graph vertices are added to the partial mapping. For example, if $t_1 \prec t_2$ in this ordering, then a pair with $t_2$ and some source graph vertex $s_x$ will only be added to the partial mapping if the pair $(s_x, t_1)$ was already proved unfeasible. Xiao does not describe a specific target graph vertex order.
+The target graph vertex order is the order in which target graph vertices are added to the partial mapping. For example, if $t_1 \prec t_2$ in this ordering, then a pair with $t_2$ and some source graph vertex $s_x$ will only be added to the partial mapping if the pair $(s_x, t_1)$ was already proved infeasible. Xiao does not describe a specific target graph vertex order.
 
 We found one subgraph isomorphism algorithm that describes a specific target graph vertex order, being Glasgow \cite{McCreesh2015}. In this algorithm, target graph vertices with higher degree are prioritized. Since this does not depend on the chosen source graph vertex or on the current partial matching, this order can be precomputed, introducing only linear complexity. Formally, when some source graph vertex $s$ needs to be matched, target graph vertices are chosen using the following metric, choosing vertices with lower metric values first:
 
@@ -170,7 +159,7 @@ DFS                    & $O(|V|)$                  \\ \hline
 Greedy DFS             & $O(|V|^2)$                \\ \hline
 Control point          & $O(|V|)$                  \\ \hline
 \end{tabular}
-\caption{Worst-case space complexity of each path iteration strategy. The computational requirements of each method change in different ways for subsequent calls.}
+\caption{Worst-case \textbf{space} complexity of each path iteration strategy. The \textbf{computational} requirements of each method change in different ways for subsequent calls.}
 \label{tab:iterator-spacerequirements}
 \end{table}
 
@@ -191,7 +180,7 @@ With this optimisation, such paths are skipped by path iterators. Examples of th
  and \ref{fig:pathexamples-greedydfs}.
 
 \subsection{Runtime Pruning}
-Some subgraph isomorphism algorithms \cite{Cordella2004, McCreesh2015} prune the search space during the search using some detection method of dead search paths. Xiao's algorithm does this as well. For our algorithm, we will implement Xiao's pruning methods and weaker (but more less computationally demanding) variants. In Chapter \ref{chapter:pruning} we will elaborate on these methods.
+Some subgraph isomorphism algorithms \cite{Cordella2004, McCreesh2015} prune the search space during the search using some detection method of dead search paths. Xiao's algorithm does this as well. For our algorithm, we will implement different types of pruning methods of varying strength (dead search branch detection capability) and computational requirements..
 
 \subsection{Contraction}
 \label{sec:contraction}
@@ -303,107 +292,104 @@ We also do this by deleting vertices: this time, whenever we add a vertex-vertex
 
 
 %ndshd2-contract
-\begin{Algorithm}{20cm}
+\begin{Algorithm}{18cm}
+\DontPrintSemicolon
 \SetAlgoLined
 \LinesNumbered
 \textbf{Inputs: } the source graph $G_S$ and the target graph $G_T$\\
-\textbf{Outputs: } \textit{found}, indicating whether a valid subgraph homeomorphism has been found.\\
-\color{purple}
+\textbf{Outputs: } Whether a valid subgraph homeomorphism has been found.\\
 \If{contraction} {
-	$G_S, \mathit{chains} \longleftarrow \mathit{contract}(G_S)$ \color{black}\tcp*[h]{sec. \ref{sec:contraction}}\color{purple}
+	$G_S, \mathit{chains} \longleftarrow \mathit{contract}(G_S)$ \tcp*[hr]{sec. \ref{sec:contraction}}
 }
-\color{black}
-
- \Return ndSHD2{\color{purple}-ext}($\mathit{vmap}$, $\mathit{emap}$)\tcp*[h]{\ref{algorithm:ndSHD2-ext}}\;
- \caption{ndSHD2-ext}
+ \Return $\mathit{RTSH*}(\mathit{vmap}$, $\mathit{emap}$)\tcp*[hr]{Algorithm \ref{algorithm:ndSHD2-ext}}\;
+ \caption{RTSH}
  \label{algorithm:ndSHD2-prune}
 \end{Algorithm}
 
 \mathchardef\mhyphen="2D % Define a "math hyphen"
 
 %ndshd2 new
-\begin{Algorithm}[t]{20cm}
+\begin{Algorithm}[t]{18cm}
+\DontPrintSemicolon
 \SetAlgoLined
 \LinesNumbered
 \textbf{Inputs: } the current vertex-vertex partial mapping $\mathit{vmap}$, the current edge-path $\mathit{emap}$ partial mapping\\
-\textbf{Outputs: } \textit{found}, indicating whether a valid subgraph homeomorphism has been found.\\
+\textbf{Outputs: } \textit{found}, indicating whether a valid subgraph homeomorphism has been found. \color{red}if has unmatched edge: \ref{line:ifHasUnmatchedEdge} unnecessarily long \ref{line:unneccesarilyLong} contraction check \ref{line:contractionCheck} get next edge path pair \ref{line:getNextEdgePathPair} get next vertex pair \ref{line:getNextVertexPair} prune path \ref{line:prunePath} prune vertex \ref{line:pruneVertex} recursive call path \ref{line:recursivePath} recursive call vertex \ref{line:recursiveVertex} add to emap \ref{line:addToEmap} add to vmap \ref{line:addToVmap} return true recursive path \ref{line:returnRecursivePath} return true recursive vertex \ref{line:returnRecursiveVertex} remove from cover path \ref{line:removeFromCoverPath} return true first time \ref{line:returnTrueFirstTime}\color{black}\\
 
 \If {$s$ is complete} {
-	\Return true\;
+	\Return true\label{line:returnTrueFirstTime}\;
 }
 
 $\mathit{found} \longleftarrow \mathit{false}$
 
  \While{$!\mathit{found} \land \exists$ valid node/edge-path mapping pair}{
 
-\If{$\mathit{hasUnmatchedEdge}()$} {
-	$(e_S, p_T) \longleftarrow \mathit{GetNextEdgePathPair}()$\;
-	\If(\tcp*[h]{sec. \ref{sec:unintendedcurrent-path}}){{\color{purple}$\mathit{isUnnecessarilyLong}(p_T) \lor$} \tcp*[h]{sec. \ref{sec:refusinglongerpaths}} \newline $\mathit{wouldPrune}${\color{purple}-ext}$(\mathit{vmap}, \mathit{emap} \cup \{(e_S, p_T)\}) \lor$\tcp*[h]{See Algorithm \ref{algorithm:wouldPrune-ext}}\newline{\color{purple}$(\mathit{contraction} \land \lnot \mathit{chainsCompatible}(\mathit{emap}, \mathit{from}(e_S), \mathit{to}(e_S), p_T)) \lor$}\tcp*[h]{sec. \ref{sec:contraction}}\newline{\color{purple}$\mathit{unconfigurableCover}(\mathit{intermediate}(p_T)) \cap (\mathit{emap} \cup \mathit{vmap}) \neq \emptyset$}} {
-  		\textbf{continue}\;
-  	}\color{purple}
-	$V_T \longleftarrow V_T \setminus \mathit{unconfigurableCover}(\mathit{intermediate}(p_T))$\color{black}\tcp*[h]{sec. \ref{sec:unintendedcurrent-path}}\;  	
-  	
-  	$\mathit{emap} \longleftarrow \mathit{emap} \cup \{(e_S, p_T)\}$\;
-  	$\mathit{found} \longleftarrow \mathit{ndSHD2} ${\color{purple}-ext}$(\mathit{vmap}, \mathit{emap})$\;
-  \If{found} {
-  	\Return true\;
-  }
-  $\mathit{emap} \longleftarrow \mathit{emap} \cap \{(e_S, p_T)\}$\;\color{purple}
-  $V_T \longleftarrow V_T \cup \mathit{unconfigurableCover}(\mathit{intermediate}(p_T))$\color{black}  \tcp*[h]{sec. \ref{sec:unintendedcurrent-path}}\;	
-} \Else {
-	$(v_S, v_T) \longleftarrow \mathit{GetNextNodePair}()$\;
-	\If(\tcp*[h]{sec. \ref{sec:unintendedcurrent-vertex}}){$\mathit{wouldPrune}${\color{purple}-ext}$(\mathit{vmap} \cup \{(v_S, v_T)\}, \mathit{emap})\lor$\tcp*[h]{See Algorithm \ref{algorithm:wouldPrune-ext}}\newline\color{purple}$\mathit{unconfigurableCover}(v_T) \cap (\mathit{vmap} \cup \mathit{emap}) \neq \emptyset$} {
+\If{\label{line:ifHasUnmatchedEdge}$\mathit{hasUnmatchedEdge}()$} {
+	$(e_S, p_T) \longleftarrow \mathit{GetNextEdgePathPair}()$\label{line:getNextEdgePathPair}\;
+	\If(\tcp*[f]{sec. \ref{sec:contraction}}){$\mathit{isUnnecessarilyLong}(p_T) \lor$ \label{line:unneccesarilyLong} \tcp*[r]{sec. \ref{sec:refusinglongerpaths}} $\mathit{wouldPrune}(\mathit{vmap}, \mathit{emap} \cup \{(e_S, p_T)\}) \lor$\label{line:prunePath}\tcp*[r]{algo. \ref{algorithm:wouldPrune-ext}}$(\mathit{contraction} \land \lnot \mathit{chainsCompatible}(\mathit{emap}, \mathit{from}(e_S), \mathit{to}(e_S), p_T))$\label{line:contractionCheck}} {
   		\textbf{continue}\;
   	}
-  	\color{purple}$V_T \longleftarrow V_T \setminus \mathit{unconfigurableCover}(v_T)$\color{black}\tcp*[h]{sec. \ref{sec:unintendedcurrent-vertex}}\;  
-  	$\mathit{vmap} \longleftarrow \mathit{vmap} \cup \{(v_S, v_T)\}$\;
-  	$\mathit{found} \longleftarrow \mathit{ndSHD2}${\color{purple}-ext}$(\mathit{vmap}, \mathit{emap})$\;
+	$V_T \longleftarrow V_T \setminus \mathit{unconfigurableCover}(\mathit{intermediate}(p_T))$\label{line:removeFromCoverPath}\hspace{3.72cm}\tcp*[f]{sec. \ref{sec:unintendedcurrent-path}}\;  	
+  	
+  	$\mathit{emap} \longleftarrow \mathit{emap} \cup \{(e_S, p_T)\}$\label{line:addToEmap}\;
+  	$\mathit{found} \longleftarrow \mathit{RTSH*}(\mathit{vmap}, \mathit{emap})$\label{line:recursivePath}\;
   \If{found} {
-  	\Return true\;
+  	\Return true\label{line:returnRecursivePath}\;
+  }
+  $\mathit{emap} \longleftarrow \mathit{emap} \cap \{(e_S, p_T)\}$\;
+  $V_T \longleftarrow V_T \cup \mathit{unconfigurableCover}(\mathit{intermediate}(p_T))$\hspace{3.65cm}\tcp*[f]{sec. \ref{sec:unintendedcurrent-path}}\;	
+} \Else {
+	$(v_S, v_T) \longleftarrow \mathit{GetNextNodePair}()$\label{line:getNextVertexPair}\;
+	\If(\tcp*[f]{algo. \ref{algorithm:wouldPrune-ext}}){\label{line:pruneVertex}$\mathit{wouldPrune}(\mathit{vmap} \cup \{(v_S, v_T)\}, \mathit{emap})$} {
+  		\textbf{continue}\;
+  	}
+  	$V_T \longleftarrow V_T \setminus \mathit{unconfigurableCover}(v_T)$\hspace{6.3cm}\tcp*[f]{sec. \ref{sec:unintendedcurrent-vertex}}\;  
+  	$\mathit{vmap} \longleftarrow \mathit{vmap} \cup \{(v_S, v_T)\}$\label{line:addToVmap}\;
+  	$\mathit{found} \longleftarrow \mathit{RTSH*}(\mathit{vmap}, \mathit{emap})$\label{line:recursiveVertex}\;
+  \If{found} {
+  	\Return true\label{line:returnRecursiveVertex}\;
   }
   	$\mathit{vmap} \longleftarrow \mathit{vmap} \cap \{(v_S, v_T)\}$\;
-  	\color{purple}$V_T \longleftarrow V_T \cup \mathit{unconfigurableCover}(v_T)$\color{black}  \tcp*[h]{sec. \ref{sec:unintendedcurrent-vertex}}\;	
+  	$V_T \longleftarrow V_T \cup \mathit{unconfigurableCover}(v_T)$\hspace{6.3cm}\tcp*[f]{sec. \ref{sec:unintendedcurrent-vertex}}\;	
 }
 
  }
  \Return false\;
- \caption{ndSHD2-ext}
+ \caption{RTSH*}
  \label{algorithm:ndSHD2-ext}
 \end{Algorithm}
 
 
 %wouldPrune new
 \begin{algorithm}
+\DontPrintSemicolon
 \SetAlgoLined
 \LinesNumbered
 \textbf{Inputs: } the current vertex-vertex partial mapping $\mathit{vmap}$, the current edge-path $\mathit{emap}$ partial mapping\\
 \textbf{Outputs: } whether pruning should be applied.\\
 
-\color{purple}
 \If {$\mathit{serialPruning} \lor (\mathit{parallelPruning} \land \mathit{pruningThreadFailed})$} {
-	\color{black}
 	$\mathit{domains} \longleftarrow \mathit{filterDomains}(\mathit{vmap}, \mathit{emap})$\;
 } \ElseIf {$\mathit{cachedPruning}$} {
 	$\mathit{domains} \longleftarrow \mathit{updateDomains}(\mathit{vmap}, \mathit{emap})$\;
 } \Else {
 	\Return false\;
 }
-\color{black}
 $\mathit{toPrune} \longleftarrow \text{false}$\;
-\color{purple}
-\If {ZeroDomain} {\color{black}
-	$\mathit{toPrune} \longleftarrow \emptyset \in \mathit{values}(\mathit{domains})$\;
+\If {ZeroDomain} {
+	$\mathit{toPrune} \longleftarrow \emptyset \in \mathit{values}(\mathit{domains})$\hspace{6cm}\tcp*[f]{sec. \ref{sec:zerodomainpruning}}\;
 } \ElseIf {AllDifferent} {
-	$\mathit{toPrune} \longleftarrow \lnot \mathit{satisfiesAllDifferent}(\mathit{domains})$\;
+	$\mathit{toPrune} \longleftarrow \lnot \mathit{satisfiesAllDifferent}(\mathit{domains})$\hspace{4.2cm}\tcp*[f]{sec. \ref{sec:alldifferent}}\;
 }
 
 \If {$\mathit{parallelPruning} \land \lnot \mathit{toPrune}$} {
 	$\mathit{pruningThreadFailed} \longleftarrow \text{false}$\;
+	\tcc{Set to \textbf{true} by pruning thread whenever it would prune the partial mapping that it queried from the main thread.}
 }
 
 \color{black}
 \Return $\mathit{toPrune}$\;
- \caption{wouldPrune-ext}
+ \caption{wouldPrune}
  \label{algorithm:wouldPrune-ext}
 \end{algorithm}
 
@@ -411,7 +397,6 @@ $\mathit{toPrune} \longleftarrow \text{false}$\;
 %chainsCompatible
 \begin{algorithm}
 \SetKwFor{RepTimes}{repeat}{times}{end}
-\color{purple}
 \SetAlgoLined
 \LinesNumbered
 \textbf{Inputs: } the current edge-path $\mathit{emap}$ partial mapping, the source vertex $v_s$ and the target vertex $v_t$ of the edge to be added, the path to be associated with that edge $p$\\
@@ -438,7 +423,6 @@ $\mathit{edgesToGo} \longleftarrow |\{e \in E_S . e \not \in \mathit{emap} \land
 
 %containsSubSequence
 \begin{algorithm}
-\color{purple}
 \SetAlgoLined
 \LinesNumbered
 \textbf{Inputs: } A sequence of label sets $S_0 \dots S_m$, a path $v_0 \dots v_n$\\
