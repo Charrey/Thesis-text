@@ -1,0 +1,341 @@
+
+\begin{figure}
+\begin{subfigure}{.5\linewidth}
+\centering
+
+\begin{tikzpicture}
+    \begin{axis}[
+        xlabel=$|V_S|$,
+        ylabel=relative space usage,
+        legend style={at={(0.1,0.9)},anchor=north west},
+        width=\textwidth,
+		%y tick label style={/pgf/number format/sci},
+    ]
+\addplot [mark=none, black] plot coordinates {
+        (4,1) (14,1)};
+%\addlegendentry{Reference line}
+   
+
+\addplot[
+        mark=x,
+        red,
+    ] plot coordinates {
+        (4,1.0)
+        (5,1.0)
+        (6,1.0008086253369273)
+        (7,0.9975341851602779)
+        (8,0.9963076923076923)
+        (9,0.9998171804657328)
+        (10,1.0236041090978125)
+        (11,1.1370680303734697)
+        (12,0.9944165907019143)
+        (13,1.0099017162974915)
+        %(14,2.861963190184049)
+        (15,1.0)
+};
+ %   \addlegendentry{LD}
+    
+    \addplot[
+        mark=o,
+        blue,
+    ] plot coordinates {
+        (4,1.0)
+        (5,1.000192455735181)
+        (6,1.001854939328026)
+        (7,0.9974287737647763)
+        (8,0.9932518433988764)
+        (9,1.0023201333513538)
+        (10,1.0033080634045486)
+        (11,0.989867941712204)
+        (12,0.9350055432372506)
+        (13,1.0)
+};
+  %  \addlegendentry{UD}
+    
+    \addplot[
+        mark=+,
+        gray,
+    ] plot coordinates {
+        (4,1.0)
+        (5,1.0)
+        (6,1.0)
+        (7,0.9929850390802607)
+        (8,0.9865379786223537)
+        (9,0.993666081241856)
+        (10,0.9468915807388127)
+        (11,0.9250496626518961)
+        (12,0.9160539215686274)
+        (13,0.7993076257332435)
+        (14,1.0228401191658392)
+        (15,1.0)
+};
+ %   \addlegendentry{MR}
+    
+    \addplot[
+        mark=square,
+        orange,
+    ] plot coordinates {
+        (4,1.0)
+        (5,1.0007563850687622)
+        (6,1.001752541184718)
+        (7,0.9947195310227552)
+        (8,0.9898637912708066)
+        (9,1.0054052614761955)
+        (10,0.9893635571054926)
+        (11,0.9048488874128197)
+        (12,0.89453125)
+        (13,1.0)
+};
+%    \addlegendentry{NR}
+
+
+   
+
+    \end{axis}
+    \end{tikzpicture}
+
+
+\caption{Serial}
+
+\end{subfigure}%
+\begin{subfigure}{.5\linewidth}
+\centering
+
+\begin{tikzpicture}
+    \begin{axis}[
+        xlabel=$|V_S|$,
+        ylabel=relative space used,
+        %ymode=log,
+        %legend style={at={(0.1,0.9)},anchor=north west},
+        width=\textwidth,
+		%y tick label style={/pgf/number format/sci},
+    ]
+\addplot [mark=none, black] plot coordinates {
+        (4,1) (14, 1)};
+
+\addplot[
+        mark=x,
+        red,
+    ] plot coordinates {
+        (4,0.999928430480436)
+        (5,1.0)
+        (6,1.0)
+        (7,0.9958670495083964)
+        (8,0.9975102278086714)
+        (9,1.0175731299050546)
+        (10,1.0216915264995239)
+        (11,1.029824102063647)
+        (12,1.071836555360281)
+        (13,1.0098388464800678)
+        (14,1.0521739130434782)
+        (15,1.0)
+};
+   % \addlegendentry{LD}
+    
+    \addplot[
+        mark=o,
+        blue,
+    ] plot coordinates {
+        (4,1.0)
+        (5,1.0)
+        (6,1.0)
+        (7,0.9943489351112585)
+        (8,0.9928195559655338)
+        (9,1.026644703167025)
+        (10,1.0047241493227619)
+        (11,0.9991760679427051)
+        (12,1.0079504388229221)
+        (13,1.045074577938043)
+        (14,1.1611611611611612)
+        (15,1.0)
+};
+  %  \addlegendentry{UD}
+    
+    \addplot[
+        mark=+,
+        gray,
+    ] plot coordinates {
+        (4,1.0)
+        (5,1.0)
+        (6,1.0)
+        (7,0.9929463485050634)
+        (8,0.9875093068998856)
+        (9,0.995357119447661)
+        (10,0.9416818415277584)
+        (11,0.9369854109490106)
+        (12,0.9105351170568562)
+        (13,0.8347534705600765)
+        (14,0.8038674033149171)
+        (15,1.0)
+};
+  %  \addlegendentry{MR}
+    
+    \addplot[
+        mark=square,
+        orange,
+    ] plot coordinates {
+        (4,1.0)
+        (5,1.0)
+        (6,1.0)
+        (7,0.9945878700238177)
+        (8,0.9979836086899961)
+        (9,1.0143389889649759)
+        (10,1.033467985157835)
+        (11,1.0214646464646464)
+        (12,1.0658935732090604)
+        (13,0.9907955292570677)
+        (14,0.9722222222222222)
+        (15,1.0)
+};
+ %   \addlegendentry{NR}
+  
+
+	
+    \end{axis}
+    \end{tikzpicture}
+
+\caption{Cached}
+
+\end{subfigure}\\[1ex]
+\begin{subfigure}{0.5\linewidth}
+\centering
+
+\begin{tikzpicture}
+    \begin{axis}[
+        xlabel=$|V_S|$,
+        ylabel=relative space used,
+        %ymode=log,
+        %legend style={at={(0.9,0.1)},anchor=south east},
+        width=\textwidth,
+		%y tick label style={/pgf/number format/sci},
+    ]
+\addplot [mark=none, black] plot coordinates {
+        (4,1) (14, 1)};
+
+
+	
+\addplot[
+        mark=x,
+        red,
+    ] plot coordinates {
+        (4,1.0)
+        (5,1.0001904399162065)
+        (6,1.0013133482040484)
+        (7,1.0159900757990155)
+        (8,1.0206869865460173)
+        (9,1.0115232477105642)
+        (10,1.0823951179231033)
+        (11,1.1303060475841107)
+        (12,1.176277543366151)
+        (13,1.1936803354126189)
+        (14,1.117056856187291)
+        (15,1.0)
+};
+%    \addlegendentry{DFS}
+
+\addplot[
+        mark=o,
+        blue,
+    ] plot coordinates {
+        (4,1.0)
+        (5,1.0000880540064574)
+        (6,1.0011826486990865)
+        (7,1.0113600304626515)
+        (8,1.0185300983825245)
+        (9,1.0124323261182364)
+        (10,1.051892371377883)
+        (11,1.1070111731843575)
+        (12,1.1055776892430278)
+        (13,1.1740801757276222)
+        (14,1.296523517382413)
+        (15,1.0)
+};
+  %  \addlegendentry{DFS}
+  
+  
+  \addplot[
+        mark=+,
+        gray,
+    ] plot coordinates {
+        (4,1.0)
+        (5,1.0)
+        (6,1.0)
+        (7,0.9927715704183524)
+        (8,0.9885445342331942)
+        (9,1.000010955782462)
+        (10,0.9809973265723645)
+        (11,0.9884822308100326)
+        (12,0.9104830953613967)
+        (13,0.8997552518866)
+        (14,0.9779482262703739)
+        (15,1.0)
+};
+   % \addlegendentry{DFS}
+    
+    \addplot[
+        mark=square,
+        orange,
+    ] plot coordinates {
+        (4,1.0)
+        (5,1.0003353784844837)
+        (6,1.0043297956199375)
+        (7,0.9994021219236455)
+        (8,0.9945835131635736)
+        (9,1.0044146536277876)
+        (10,1.002508900623641)
+        (11,0.9870741887707015)
+        (12,1.0598691519565486)
+        (13,1.112794612794613)
+};
+%    \addlegendentry{DFS}
+
+
+
+
+	
+	
+    \end{axis}
+    \end{tikzpicture}
+
+\caption{Parallel}
+
+\end{subfigure}
+\begin{subfigure}{.5\linewidth}
+\centering
+
+\begin{tikzpicture} 
+    \begin{axis}[%
+    hide axis,
+    xmin=10,
+    xmax=50,
+    ymin=0,
+    ymax=0.4,
+    legend style={draw=white!15!black,legend cell align=left}
+    ]
+	\addlegendimage{black}
+    \addlegendentry{Pruning-disabled memory}; 
+     
+    \addlegendimage{red, mark=x}
+    \addlegendentry{Labels and Degrees};
+    
+    \addlegendimage{blue, mark=o}
+    \addlegendentry{Free neighbours};
+    
+    \addlegendimage{gray, mark=+}
+    \addlegendentry{M-Filtering};
+    
+    \addlegendimage{orange, mark=square}
+    \addlegendentry{N-Filtering};
+    
+    
+    \end{axis}
+\end{tikzpicture}
+
+
+\caption{Serial}
+
+\end{subfigure}%
+
+\caption{Memory usage of our algorithm with \textbf{ZeroDomain} pruning using various filtering methods compared to memory usage without pruning. We avoid unnecessarily long paths, do not perform contraction, use the degree-based target vertex ordering and use DFS path iteration. Data points above the black reference line denote that the pruning method increases memory usage and data points below the reference line denote that the pruning method saves memory.}	
+\label{fig:spaceZeroDomain}
+\end{figure}

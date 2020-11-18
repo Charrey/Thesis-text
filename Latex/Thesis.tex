@@ -1,4 +1,4 @@
-\include{sections/Preamble/Preamble}
+	\include{sections/Preamble/Preamble}
 \usepackage[backend=biber, style=bibstyle/lncs]{biblatex}
 \addbibresource{sources.bib}
 
@@ -9,7 +9,7 @@
 
 
 \begin{abstract}
-FPGAs allow reconfiguration of its logic at any point after production. The result is that they are effective at prototyping application-specific integrated circuits, updating the internal logic while in the field and at low-cost low-quantity use cases. To optimise these processes, it is crucial to properly educate engineers in the implementation of FPGA programs and the FPGA compilation process. Traditional FPGA programming pipelines involve a computationally expensive (NP-hard) place \& route process that slows down iterations of FPGA programs and hinders the educational process. We propose a virtual environment in which place \& route is performed manually in which the student learns about the intricacies of place \& route and in which compilation is linear. To this end, we require emulation of a virtual FPGA on a physical, concrete FPGA. In this research, we establish a methodology for finding such emulation mappings. To this end, we create an algorithm for subgraph homeomorphism and optimize it for usage with graphs representing FPGAs. This algorithm aims to find an emulation in as many cases as possible, as quickly as possible. Based on experiments run using this algorithm, we evaluate different settings for our algorithm and establish an optimal configuration set for FPGA emulation graphs. Using this configuration set we show that subgraph homeomorphism is computationally and space-wise feasible for FPGA emulation problems. The result is a software package that computes FPGA emulators: programs whose output is a program for a concrete FPGA that emulates the provided input program for the virtual FPGA. 
+FPGAs allow reconfiguration of its logic at any point after production. The result is that they are effective at prototyping application-specific integrated circuits, updating the internal logic while in the field and at low-cost low-quantity use cases. To optimise these processes, it is crucial to properly educate engineers in the implementation of FPGA programs and the FPGA compilation process. Traditional FPGA programming pipelines involve a computationally expensive (NP-hard) place \& route process that slows down iterations of FPGA programs and hinders the educational process. We propose a virtual environment in which the students perform place \& route manually such that the student learns about the intricacies of place \& route and in which compilation is linear. To this end, we require emulation of a virtual FPGA on a physical, concrete FPGA. In this research, we establish a methodology for finding such emulation mappings. To this end, we create an algorithm for subgraph homeomorphism and optimize it for usage with graphs representing FPGAs. This algorithm aims to find an emulation in as many cases as possible, as quickly as possible. Based on experiments run using this algorithm, we evaluate different settings for our algorithm and establish an optimal configuration set for FPGA emulation graphs. Using this configuration set, we show that subgraph homeomorphism is computationally and space-wise feasible for FPGA emulation problems. The result is a software package that computes FPGA emulators: programs whose output is a program for a concrete FPGA that emulates the provided input program for the virtual FPGA. 
 \end{abstract}
 
 \newpage
@@ -24,7 +24,7 @@ FPGAs allow reconfiguration of its logic at any point after production. The resu
 \include{sections/Examples/StartToEndExample}
 \include{sections/UseCase/UseCase}
 \include{sections/Experiments/Experiments}
-\include{sections/Software/Software}
+%\include{sections/Software/Software}
 \include{sections/Discussion/Discussion}
 \include{sections/Conclusion/Conclusion}
 \include{sections/FutureResearch/FutureResearch}

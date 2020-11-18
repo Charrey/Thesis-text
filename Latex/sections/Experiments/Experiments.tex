@@ -2,12 +2,12 @@
 \label{chapter:experiments}
 Using a machine with an AMD Ryzen 5 3600 CPU @ 3.7GHz and 32GB 3200MHz memory\footnote{Comparitive experiments were sometimes run on a machine with different specifications} we conduct several experiments with different inputs and settings. For this purpose, we generate random pairs of source graph- and target graph that have subgraph homeomorphisms in them and random pairs that do not.
 
-Firstly, we pose a method for generating random graphs representing virtual FPGAs that adhere to our FPGA modeling methodology:
+Firstly, we pose a method for generating random graphs representing virtual FPGAs that adhere to our FPGA modelling methodology:
 
 \begin{enumerate}
 \item From $|V|$ we establish how many wires, transistors, logic cells and ports it needs to have the same distribution as the virtual FPGA.
 \item We apply the appropriate labels to the vertex set as specified in Chapter \ref{chapter:models}.
-\item We connect each port to a random logic cell in a random direction (except the \texttt{CE} port which has to be an input). If the graph is so small there is no logic cell, we add a single one.
+\item We connect each port to a random logic cell in a random direction (except the \texttt{CE} port which has to be an input). We add a single one if the graph is so small that there is no logic cell.
 \item We connect each port to a random wire in the appropriate direction.
 \item We connect each transistor vertex to two different random wire vertices (one with an incoming edge and the other with an outgoing edge).
 \end{enumerate}
@@ -16,16 +16,16 @@ Since vertex disjoint subgraph homeomorphisms are rare in random graph pairs, we
 
 \begin{enumerate}
 \item First, we generate a random source graph with $V_S$ vertices using the 5-step method described above.
-\item Then, we establish a distribution of $|V_T|$ wires, transistors, logic cells and ports we need to add to resemble the FPGA use case target graph distribution as closely as possible, and add missing vertices to the source graph such that the total vertex set encompasses the established distribution.
+\item Then, we establish a distribution of $|V_T|$ wires, transistors, logic cells and ports we need to add to resemble the FPGA use case target graph distribution as closely as possible and add missing vertices to the source graph such that the total vertex set encompasses the established distribution.
 \item We apply the appropriate labels to these extra vertices as specified in Chapter \ref{chapter:models}.
-\item We connect each new port vertex to a random logic cell vertex, prioritizing new logic cell vertices over existing ones while the new logic cell vertices have a lower average degree. Furthermore, we connect each new port vertex to a random wire in the appriopriate direction.
+\item We connect each new port vertex to a random logic cell vertex, prioritising new logic cell vertices over existing ones while the new logic cell vertices have a lower average degree. Furthermore, we connect each new port vertex to a random wire in the appropriate direction.
 \item We use half of the extra wires to intersect existing connections. With each intersection equally likely, we intersect a $(\mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE})$-connection into a $(\mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE})$-connection, intersect a $(\mathtt{PORT} \to \mathtt{WIRE})$-connection into a $(\mathtt{PORT} \to \mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE})$-connection or intersect a  $(\mathtt{WIRE} \to \mathtt{PORT})$-connection into a $(\mathtt{WIRE} \to \mathtt{ARC} \to \mathtt{WIRE} \to \mathtt{PORT})$-connection.
 \item We connect each remaining transistor vertex to two different random wire vertices (one with an incoming edge and the other with an outgoing edge), connecting with at least one new wire vertex while the new wire vertices have a lower average degree.
 \end{enumerate}
 
 Using this method we obtain random test cases that resemble the graphs of the FPGA use case as closely as possible while still introducing some randomness that allow us to benchmark our algorithm's performance under a variety of optimisations.
 
-Firstly, we compare the different methods of path iteration. The time taken to find a homeomorphism gives an indication of the overhead introduced by a path iterator and also taking the heuristic value of that path iterator into account. This comparison is shown in Figure \ref{fig:pathiterator-performance}. We compare the K-path, control point (CP), DFS, Greedy cached DFS (GDFS C), greedy in-place DFS using a distance metric (GDFS O IP) and greedy in-place DFS using a partial-mapping-aware distance metric (GDFS A IP) path iteration methods. We used target graphs that were respectively 50\%, 200\% and 400\% larger than the souce graph\footnote{In the FPGA use case the target graph is $\pm$ 97 times larger than the souce graph. This, however, is too computationally expensive for our testing methodology.}. We also add the performance of a portfolio method: running the algorithm in parallel with each path iteration method and choosing the fastest outcome for each individual test case. We measure the space usage of each path iterator, the results of which are shown in Figure \ref{fig:spaceusage-pathiterators}.
+Firstly, we compare the different methods of path iteration. The time taken to find a homeomorphism gives an indication of the overhead introduced by a path iterator and also taking the heuristic value of that path iterator into account. This comparison is shown in Figure \ref{fig:pathiterator-performance}. We compare the K-path, control point (CP), DFS, Greedy cached DFS (GDFS C), greedy in-place DFS using a distance metric (GDFS O IP) and greedy in-place DFS using a partial-mapping-aware distance metric (GDFS A IP) path iteration methods. We used target graphs that were respectively 50\%, 200\% and 400\% larger than the source graph\footnote{In the FPGA business case, the target graph is $\pm$ 97 times larger than the source graph. This, however, is too computationally expensive for our testing methodology.}. We also add the performance of a portfolio method: running the algorithm in parallel with each path iteration method and choosing the fastest outcome for each individual test case. We measure the space usage of each path iterator, the results of which are shown in Figure \ref{fig:spaceusage-pathiterators}.
 
 Without optimisations, we observe exponential behaviour with approximate complexity$O(e^{0.7*|V_S|})$ for $|V_T|=1\frac{1}{2}|V_S|$, $O(e^{1.0482*|V_S|})$ for $|V_T|=3|V_S|$ and $O(e^{1.133*|V_S|})$ for $|V_T|=5|V_S|$. Extrapolating this to the FPGA use case where $|V_T|=97|V_S|$ assuming a logarithmic trend, we get a scalability of $\pm O(e^{2.57442*|V_S|})$ for our FPGA use case without pruning or contraction.
 
@@ -33,7 +33,7 @@ We measure the performance difference between using GreatestConstrainedFirst as 
 
 Next, we measure the performance gain from contraction by plotting the mean time increase or decrease in cases where subgraph homeomorphisms are present in Figure \ref{fig:contraction-performance}. Similarly, we measure the performance gain from each method of pruning (pruning technique, filtering and application) compared to applying no pruning at all in Figures \ref{fig:zerodomainlabelsneighbours} through \ref{fig:alldifferentNfiltering} and measure its impact on space usage in Figures \ref{fig:spaceZeroDomain} and \ref{fig:spaceAllDifferent}.
 
-Lastly, we take the optimal set of settings and measure method how long the algorithm on average takes to find a subgraph homeomorphism where one exists, the results of which are shown in Figure \ref{fig:highperformance}. The results for $|V_T|=97|V_S|$ can be approximated with the exponential formula $t=0.0064e^{0.6204*|V_S|}$; this gives us an estimation for the business case with $|V_S|=30$ of $\pm$ 6 days of computation time.
+Lastly, we take the optimal set of settings and measure method how long the algorithm on average takes to find a subgraph homeomorphism where one exists, the results of which are shown in Figure \ref{fig:highperformance} (and separately measured the space requirements in Figure \ref{fig:highperformancespace}. The results for $|V_T|=97|V_S|$ can be approximated with the exponential formula $t=1.4706e^{0.2456*|V_S|}$; this gives us an estimation for the business case with $|V_S|=30$ of $\pm$ 39 minutes of computation time.
 
 
 \input{sections/Experiments/pathIteratorsCompared}
@@ -41,6 +41,7 @@ Lastly, we take the optimal set of settings and measure method how long the algo
 \input{sections/Experiments/greatestConstrainedFirstVsRandom}
 \input{sections/Experiments/distanceVsDegree}
 \input{sections/Experiments/degreeVsRandom}
+\input{sections/Experiments/contractionRefuseLongerPaths}
 \input{sections/Experiments/contraction}
 
 
@@ -58,5 +59,6 @@ Lastly, we take the optimal set of settings and measure method how long the algo
 \input{sections/Experiments/pruning/AllDifferentSpace}
 
 \input{sections/Experiments/highPerformance}
+\input{sections/Experiments/highPerformanceSpace}
 
 
