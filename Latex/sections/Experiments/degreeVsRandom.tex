@@ -12,6 +12,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 
 
@@ -128,7 +130,7 @@
     \end{tikzpicture}
 
 
-\caption{$|V_T|=1\frac{1}{2}|V_S|$}
+\caption{$|V_T|=1\frac{1}{2}*|V_S|$}
 \end{subfigure}%
 \begin{subfigure}{.5\linewidth}
 \centering
@@ -141,6 +143,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 
 \addplot[
@@ -246,7 +250,7 @@
     \end{axis}
     \end{tikzpicture}
 
-\caption{$|V_T|=3|V_S|$}
+\caption{$|V_T|=3*|V_S|$}
 \end{subfigure}\\[1ex]
 \begin{subfigure}{0.5\linewidth}
 \centering
@@ -259,6 +263,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 
 
@@ -336,7 +342,7 @@
     \end{axis}
     \end{tikzpicture}
 
-\caption{$|V_T|=5|V_S|$}
+\caption{$|V_T|=5*|V_S|$}
 \end{subfigure}
 \begin{subfigure} {0.5\linewidth}
 \centering
@@ -376,6 +382,6 @@
 
 \end{subfigure}
 
-\caption{Performance of our algorithm with the degree-based target graph vertex order relative to the performance of the algorithm with a random target graph vertex order. We avoid unnecessarily long paths, do not perform contraction and use no pruning. Data points above the black reference line denote the degree-based ordering introduces more delay, and data points below the reference line denote that it saves time. Note the logarithmic y-axis.}	
+\caption{Performance of our algorithm with the degree-based target graph vertex order relative to the performance of the algorithm with a random target graph vertex order. ``refuse longer paths" and contraction are disabled and we use no pruning. Data points above the black reference line denote the degree-based ordering introduces more delay, and data points below the reference line denote that it saves time. Note the logarithmic y-axis.}	
 \label{fig:greatestDegreeVersusRandom}
 \end{figure}

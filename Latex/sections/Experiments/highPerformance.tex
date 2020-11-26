@@ -12,6 +12,8 @@
         legend cell align={left},
         xmin=4,
         xmax=87,
+        ymajorgrids,
+        xmajorgrids,
     ]
     
     \addplot[
@@ -23,15 +25,7 @@
 };
     \addlegendentry{Timeout 10m} 
     
-        \addplot[
-        mark=none,
-        black,
-        dotted,
-        forget plot,
-    ] plot coordinates {
-        (4,1)
-        (87,1)
-};
+
       \addplot[
         mark=none,
         black,
@@ -41,7 +35,7 @@
         (4,60)
         (87,60)
 };
-    \node[] at (axis cs: 80,1) {1 second};
+
     \node[] at (axis cs: 80,60) {1 minute};
 
 
@@ -134,7 +128,7 @@
         (86,300.0)
         (87,600.0)
     };
-    \addlegendentry{$|V_T|=1\frac{1}{2}|V_S|$}
+    \addlegendentry{$|V_T|=1\frac{1}{2}*|V_S|$}
     
     
 \addplot[
@@ -210,7 +204,7 @@
         (70,300.0)
         (71,600.0)
 };
-    \addlegendentry{$|V_T|=3|V_S|$}
+    \addlegendentry{$|V_T|=3*|V_S|$}
    
 \addplot[
         mark=+,
@@ -245,7 +239,7 @@
         (30,100.0)
 
 };
-    \addlegendentry{$|V_T|=5|V_S|$}
+    \addlegendentry{$|V_T|=5*|V_S|$}
     
  \addplot[
         mark=square,
@@ -269,12 +263,12 @@
         (19,300.0)
         (20,600.0)
 };
-     \addlegendentry{$|V_T|=97|V_S|$}
+     \addlegendentry{$|V_T|=97*|V_S|$}
 
     \end{axis}
     \end{tikzpicture}
 
 
-\caption{Performance of our algorithm $\mathit{RTSH}$ using the configurations that individually perform best: DFS path iteration, avoiding unnecessarily long paths and N-reachability AllDifferent pruning. Contraction is disabled. We use 10 minutes worth of tests for each data point and stop testing when that is not enough for finding a homeomorphism in a single test case.}
+\caption{Performance of our algorithm $\mathit{RTSH}$ using the configurations that individually perform best: DFS path iteration, N-reachability AllDifferent pruning and a portfolio of (avoiding unnecessarily long paths and contraction). We use 10 minutes worth of tests for each data point and stop testing when that is not enough for finding a homeomorphism in a single test case.}
 \label{fig:highperformance}
 \end{figure}

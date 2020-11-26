@@ -10,6 +10,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 \addplot [mark=none, black] plot coordinates {
         (4,1) (14,1)};
@@ -132,7 +134,7 @@
 
     \end{axis}
     \end{tikzpicture}
-\caption{uncached 1.5}
+\caption{$|V_T|=1\frac{1}{2}*|V_S|$ (no caching)}
 \end{subfigure}%
 }
 \resizebox{0.28\textheight}{!}{
@@ -145,6 +147,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 \addplot [mark=none, black] plot coordinates {
         (4,1) (14, 1)};
@@ -265,7 +269,7 @@
     \end{axis}
     \end{tikzpicture}
 
-\caption{cached 1.5}
+\caption{$|V_T|=1\frac{1}{2}*|V_S|$ (cached)}
 \end{subfigure}
 }
 \newline
@@ -280,6 +284,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 \addplot [mark=none, black] plot coordinates {
         (4,1) (12, 1)};
@@ -390,7 +396,8 @@
     \end{axis}
     \end{tikzpicture}
 
-\caption{uncached 3.0}
+\caption{$|V_T|=3*|V_S|$ (no caching)}
+
 \end{subfigure}
 }
 \resizebox{0.28\textheight}{!}{
@@ -404,6 +411,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 \addplot [mark=none, black] plot coordinates {
         (4,1) (11, 1)};
@@ -503,7 +512,7 @@
 	
     \end{axis}
     \end{tikzpicture}
-    \caption{cached 3.0}
+\caption{$|V_T|=3*|V_S|$ (cached)}
 
 \end{subfigure}
 }
@@ -519,6 +528,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 \addplot [mark=none, black] plot coordinates {
         (4,1) (8, 1)};
@@ -602,7 +613,7 @@
 	
     \end{axis}
     \end{tikzpicture}
-    \caption{uncached 5.0}
+\caption{$|V_T|=5*|V_S|$ (no caching)}
 
 \end{subfigure}
 }
@@ -617,6 +628,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 \addplot [mark=none, black] plot coordinates {
         (4,1) (7, 1)};
@@ -693,12 +706,12 @@
 	
     \end{axis}
     \end{tikzpicture}
-    \caption{cached 5.0}
+\caption{$|V_T|=5*|V_S|$ (cached)}
 
 \end{subfigure}
 }
 
-\caption{Performance of our algorithm with the distance based target graph vertex order relative to the performance of the algorithm with the degree-based target graph vertex order. We avoid unnecessarily long paths, do not perform contraction and use no pruning. Data points above the black reference line denote that this ordering introduces more delay, and data points below the reference line denote that this ordering saves time. Note the logarithmic y-axis.}		
+\caption{Performance of our algorithm with the distance based target graph vertex order relative to the performance of the algorithm with the degree-based target graph vertex order. ``refuse longer paths" and contraction are disabled and we use no pruning. Data points above the black reference line denote that this ordering introduces more delay, and data points below the reference line denote that this ordering saves time. Note the logarithmic y-axis.}		
 \label{fig:DistanceVersusDegree}
 \end{figure}
 

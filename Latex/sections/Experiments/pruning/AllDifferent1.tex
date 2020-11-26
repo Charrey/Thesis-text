@@ -12,6 +12,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 \addplot [mark=none, black] plot coordinates {
         (4,1) (14, 1)};
@@ -147,6 +149,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 \addplot [mark=none, black] plot coordinates {
         (4,1) (14, 1)};
@@ -277,6 +281,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 \addplot [mark=none, black] plot coordinates {
         (4,1) (14, 1)};
@@ -434,6 +440,6 @@
 
 \end{subfigure}
 
-\caption{Performance of our algorithm with \textbf{AllDifferent} pruning using \textbf{`Labels and neighbours'} filtering relative to the performance of the algorithm without pruning. We avoid unnecessarily long paths, do not perform contraction and use the degree-based target graph vertex ordering. Data points above the black reference line denote that the pruning method introduces more delay, and data points below the reference line denote that the pruning method saves time. Note the logarithmic y-axis.}	
+\caption{Performance of our algorithm with \textbf{AllDifferent} pruning using \textbf{`Labels and neighbours'} filtering relative to the performance of the algorithm without pruning. $|V_T|=1\frac{1}{2}*|V_S|$, ``refuse longer paths" and contraction are disabled and we use the degree-based target graph vertex ordering. Data points above the black reference line denote that the pruning method introduces more delay, and data points below the reference line denote that the pruning method saves time. Note the logarithmic y-axis.}	
 \label{fig:alldifferentlabelsneighbours}
 \end{figure}

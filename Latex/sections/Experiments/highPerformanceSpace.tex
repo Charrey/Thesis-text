@@ -11,6 +11,8 @@
         width=\textwidth,
         legend cell align={left},
         xmax=90,
+        ymajorgrids,
+        xmajorgrids,
     ]
 	\addplot[
         mark=x,
@@ -103,7 +105,7 @@
 
     \end{axis}
     \end{tikzpicture}
-\caption{$|V_T|=1\frac{1}{2}|V_S|$}
+\caption{$|V_T|=1\frac{1}{2}*|V_S|$}
 \end{subfigure}%
 \begin{subfigure} {0.5\linewidth}
 \centering
@@ -117,6 +119,8 @@
         legend cell align={left},
 		%y tick label style={/pgf/number format/sci},
         xmax=90,
+        ymajorgrids,
+        xmajorgrids,        
     ]
 	\addplot[
         mark=x,
@@ -217,7 +221,7 @@
     };
     \end{axis}
     \end{tikzpicture}
-\caption{$|V_T|=3|V_S|$}
+\caption{$|V_T|=3*|V_S|$}
 \end{subfigure}\\[1ex]
 \begin{subfigure} {0.5\linewidth}
 \centering
@@ -230,6 +234,8 @@
         width=\textwidth,
         legend cell align={left},
 		%y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
     \addplot[
         mark=x,
@@ -265,7 +271,7 @@
     };
     \end{axis}
     \end{tikzpicture}
-\caption{$|V_T|=5|V_S|$}
+\caption{$|V_T|=5*|V_S|$}
 \end{subfigure}
 \begin{subfigure} {0.5\linewidth}
 \centering
@@ -278,6 +284,8 @@
         width=\textwidth,
         legend cell align={left},
 		%y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 	\addplot[
         mark=x,
@@ -304,8 +312,8 @@
 
     \end{axis}
     \end{tikzpicture}
-\caption{$|V_T|=97|V_S|$}
+\caption{$|V_T|=97*|V_S|$}
 \end{subfigure}
-\caption{Space usage of our algorithm $\mathit{RTSH}$ using the configurations that individually perform best: DFS path iteration, avoiding unnecessarily long paths and N-reachability AllDifferent pruning. Contraction is disabled. We use 10 minutes worth of tests for each data point and stop testing when that is not enough for finding a homeomorphism in a single test case.}
+\caption{Space usage of our algorithm $\mathit{RTSH}$ using the configurations that individually perform best: DFS path iteration, N-reachability AllDifferent pruning and a portfolio of ``refuse longer paths" and contraction. We use 10 minutes worth of tests for each data point and stop testing when that is not enough for finding a homeomorphism in a single test case.}
 \label{fig:highperformancespace}
 \end{figure}

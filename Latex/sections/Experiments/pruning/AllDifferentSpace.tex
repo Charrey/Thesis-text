@@ -10,6 +10,8 @@
         legend style={at={(0.1,0.9)},anchor=north west},
         width=\textwidth,
 		%y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 \addplot [mark=none, black] plot coordinates {
         (4,1) (15,1)};
@@ -112,6 +114,8 @@
         %legend style={at={(0.1,0.9)},anchor=north west},
         width=\textwidth,
 		%y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 \addplot [mark=none, black] plot coordinates {
         (4,1) (12, 1)};
@@ -217,6 +221,8 @@
         %legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		%y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 \addplot [mark=none, black] plot coordinates {
         (4,1) (12, 1)};
@@ -350,6 +356,6 @@
 
 \end{subfigure}%
 
-\caption{Memory usage of our algorithm with \textbf{AllDifferent} pruning using various filtering methods compared to memory usage without pruning. We avoid unnecessarily long paths, do not perform contraction, use the degree-based target vertex ordering and use DFS path iteration. Data points above the black reference line denote that the pruning method increases memory usage and data points below the reference line denote that the pruning method saves memory.}	
+\caption{Memory usage of our algorithm with \textbf{AllDifferent} pruning using various filtering methods compared to memory usage without pruning. $|V_T|=1\frac{1}{2}*|V_S|$, ``refuse longer paths" and contraction are disabled and we use the degree-based target vertex ordering and use DFS path iteration. Data points above the black reference line denote that the pruning method increases memory usage and data points below the reference line denote that the pruning method saves memory.}	
 \label{fig:spaceAllDifferent}
 \end{figure}

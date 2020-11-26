@@ -8,6 +8,8 @@
         legend style={at={(1,0)},anchor=south west},
         width=0.7\textwidth,
 		%y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 
 %    \node[] at (axis cs: 9,1.1) {Awaiting test results (CAES server)};
@@ -126,7 +128,7 @@
 	
     \end{axis}
     \end{tikzpicture}
-    \caption{Space usage of the algorithm with each path iterator. Source vertices are ordered by GreatestConstrainedFirst, target vertices are ordered by degree, contraction is disabled and no pruning is used.}
+    \caption{Space usage of the algorithm with each path iterator. $|V_T|=1\frac{1}{2}*|V_S|$, source vertices are ordered by GreatestConstrainedFirst, target vertices are ordered by degree, contraction is disabled, ``refusing longer paths" and no pruning is used.}
     \label{fig:spaceusage-pathiterators}
 
 \end{figure}

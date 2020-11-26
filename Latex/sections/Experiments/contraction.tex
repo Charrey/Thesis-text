@@ -12,6 +12,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 
 
@@ -399,7 +401,7 @@
     \end{tikzpicture}
 
 
-\caption{$|V_T|=1\frac{1}{2}|V_S|$}
+\caption{$|V_T|=1\frac{1}{2}*|V_S|$}
 \end{subfigure}%
 \begin{subfigure}{.5\linewidth}
 \centering
@@ -412,6 +414,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 
 
@@ -703,7 +707,7 @@
     \end{axis}
     \end{tikzpicture}
 
-\caption{$|V_T|=3|V_S|$}
+\caption{$|V_T|=3*|V_S|$}
 \end{subfigure}\\[1ex]
 \begin{subfigure}{0.5\linewidth}
 \centering
@@ -716,6 +720,8 @@
         legend style={at={(0.9,0.1)},anchor=south east},
         width=\textwidth,
 		y tick label style={/pgf/number format/sci},
+        ymajorgrids,
+        xmajorgrids,		
     ]
 
 
@@ -956,7 +962,7 @@
     \end{axis}
     \end{tikzpicture}
 
-\caption{$|V_T|=5|V_S|$}
+\caption{$|V_T|=5*|V_S|$}
 \end{subfigure}
 \begin{subfigure} {0.5\linewidth}
 \centering
@@ -996,6 +1002,6 @@
 
 \end{subfigure}
 
-\caption{Mean relative time consumption of contraction-enabled subgraph homeomorphism search compared to contraction-disabled for different path iteration methods. For data points below the reference line contraction saves time while for data points above it contraction costs extra time. We handled a maximum of 1000 test cases or 10 minutes per value of $|V_S|$ for each path iteration method.}	
+\caption{Mean relative time consumption of contraction-enabled subgraph homeomorphism search compared to contraction-disabled for different path iteration methods. For data points below the reference line contraction saves time while for data points above it contraction costs extra time. ``refuse longer paths" is disabled and no pruning is used. We handled a maximum of 1000 test cases or 10 minutes per value of $|V_S|$ for each path iteration method.}	
 \label{fig:contraction-performance}
 \end{figure}

@@ -8,7 +8,7 @@ We introduce the virtual FPGA \textit{VirSample}. This simple FPGA has two input
 \centering
 \includegraphics[width=0.8\textwidth]{images/endToEnd/exampleFPGA.png}
 \caption{Both configurations of VirSample. The left configuration is specified by configuration bit $v_5=0$ while the right configuration is specified by $v_5=1$.}
-\label{fig:visampleconfigs}
+\label{fig:virsampleconfigs}
 \end{figure}
 
 Suppose we want to emulate configurations of VirSample on a real, physical FPGA ConcreteSample (shown in Figure \ref{fig:conboardconfigs}). This FPGA has a 2-input-2-output logic cell, a register and a multiplexer (a component that selects one of its two input sets as output depending on its configuration). Intuitively, we may find an emulation mapping by hand:

@@ -77,7 +77,7 @@ There are different ways to choose which vertex-vertex pair to try adding to the
 \item Choose a source vertex-target vertex with high heuristic first, then attempt all other pairs.
 \end{enumerate}
 
-While the strategy used does not affect the vertex-on-vertex mapping state space, it can affect the average-case performance. Strategy 3, for example, uses combined heuristics that may be more powerful. The disadvantage of it requires $O(|V_s|*|V_t|)$ heuristic computations before the first pair is obtained. If these computations are done beforehand, the heuristic cannot take the current partial mapping into account and is likely to be weak. If this computation is done at each step in the search process, it introduces considerable delay.
+While the strategy used does not affect the vertex-on-vertex mapping state space, it can affect the average-case performance. Strategy 3, for example, uses combined heuristics that may be more powerful. The disadvantage of it requires $O(|V_s|*|V_t|)$ heuristic computations before the first pair is obtained. If these computations are done beforehand, the heuristic cannot take the current partial mapping into account and is likely to be weak. If this computation is done at each step in the search process, it introduces delay.
 
 Strategies 1 and 2, on the other hand, require only $O(|V_s|+|V_t|)$ heuristic calculations to be made before obtaining a candidate pair. We choose strategy 1 with a source graph vertex heuristic that is precomputed and provide two heuristics for target graph vertices, one of which is precomputed and one of which is calculated runtime.
 
